@@ -39,6 +39,10 @@ docs/
     └── index.html
 ```
 
+## Desain Antarmuka
+
+Antarmuka di folder `docs/` memakai design system ringan yang terinspirasi dari Cal.com: kanvas putih, CTA hitam, kartu abu-abu lembut, border halus, radius 8-12px, whitespace lega, dan footer gelap. Font utama menggunakan Inter dari Google Fonts dengan fallback system font.
+
 ## Pengembangan Lokal
 
 ```bash

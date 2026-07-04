@@ -5,53 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Journals Toolkit</title>
     <meta name="description" content="Kumpulan alat bantu publik untuk pengelola jurnal." />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2710%27 fill=%27%231d4ed8%27/%3E%3Cpath d=%27M18 18h28v6H18zm0 11h28v6H18zm0 11h18v6H18z%27 fill=%27white%27/%3E%3C/svg%3E" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2710%27 fill=%27%23111111%27/%3E%3Cpath d=%27M18 18h28v6H18zm0 11h28v6H18zm0 11h18v6H18z%27 fill=%27white%27/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/toolkit.css" />
   </head>
   <body class="toolkit-page">
     <div class="toolkit-topbar">
-  <div class="toolkit-topbar-inner">
-    <div class="toolkit-brand">
-      <strong>Journals Toolkit</strong>
-      <span>Alat bantu publik untuk pengelola jurnal</span>
+      <div class="toolkit-topbar-inner">
+        <div class="toolkit-brand">
+          <strong>Journals Toolkit</strong>
+          <span>Alat bantu publik untuk pengelola jurnal</span>
+        </div>
+        <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
+          <a href="." aria-current="page">Portal</a>
+          <a href="./oai-pmh/">OAI-PMH</a>
+          <a href="./arjuna-2021/">Arjuna 2021</a>
+          <a href="./pra-nilai-arjuna/">Pra Nilai Arjuna</a>
+          <a href="./doaj-precheck/">DOAJ Precheck</a>
+          <a href="./evaluasi-diri-jurnal/">Evaluasi Diri</a>
+        </nav>
+      </div>
     </div>
-    <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
-      <a href="." aria-current="page">Portal</a><a href="./oai-pmh/">OAI-PMH</a><a href="./arjuna-2021/">Arjuna 2021</a><a href="./pra-nilai-arjuna/">Pra Nilai Arjuna</a><a href="./doaj-precheck/">DOAJ Precheck</a><a href="./evaluasi-diri-jurnal/">Evaluasi Diri</a>
-    </nav>
-  </div>
-</div>
 
     <main class="toolkit-portal">
       <section class="toolkit-hero">
-        <h1>Journals Toolkit</h1>
-        <p>Kumpulan aplikasi statis untuk membantu pengelola jurnal memeriksa OAI-PMH, menyiapkan pra-akreditasi Arjuna, mensimulasikan skor Arjuna 2021, melakukan precheck DOAJ, dan menyusun roadmap evaluasi diri jurnal.</p>
+        <div>
+          <p class="toolkit-kicker">Toolkit pengelolaan jurnal</p>
+          <h1>Alat praktis untuk memeriksa kesiapan jurnal.</h1>
+          <p>Kumpulan aplikasi statis untuk membantu pengelola jurnal memeriksa OAI-PMH, menyiapkan pra-akreditasi Arjuna, melakukan precheck DOAJ, dan menyusun roadmap evaluasi diri jurnal.</p>
+        </div>
+        <div class="toolkit-hero-artifact" aria-label="Ringkasan aplikasi toolkit">
+          <div class="toolkit-window-bar"><span></span><span></span><span></span></div>
+          <div class="toolkit-artifact-row">
+            <div class="toolkit-artifact-icon">O</div>
+            <div><strong>OAI-PMH</strong><span>Endpoint, metadata, dan rekomendasi harvest.</span></div>
+            <div class="toolkit-artifact-badge">Validasi</div>
+          </div>
+          <div class="toolkit-artifact-row">
+            <div class="toolkit-artifact-icon">A</div>
+            <div><strong>Arjuna</strong><span>Simulasi nilai dan pemeriksaan data awal.</span></div>
+            <div class="toolkit-artifact-badge">Skor</div>
+          </div>
+          <div class="toolkit-artifact-row">
+            <div class="toolkit-artifact-icon">D</div>
+            <div><strong>DOAJ & Evaluasi Diri</strong><span>Checklist, readiness, roadmap, dan rencana kerja.</span></div>
+            <div class="toolkit-artifact-badge">Roadmap</div>
+          </div>
+        </div>
       </section>
+
       <section class="toolkit-card-grid" aria-label="Daftar aplikasi">
         <article class="toolkit-card">
-  <h2>Validator OAI-PMH Jurnal OJS</h2>
-  <p>Temukan endpoint OAI-PMH, validasi Identify/ListRecords, dan lihat rekomendasi teknis untuk harvester.</p>
-  <a href="oai-pmh/">Buka aplikasi</a>
-</article>
-<article class="toolkit-card">
-  <h2>Simulasi Penilaian Arjuna 2021</h2>
-  <p>Isi indikator Arjuna 2021, hitung skor total, subtotal manajemen/substansi, dan cetak ringkasan.</p>
-  <a href="arjuna-2021/">Buka aplikasi</a>
-</article>
-<article class="toolkit-card">
-  <h2>Pra Nilai Arjuna</h2>
-  <p>Kumpulkan data awal akreditasi, URL edisi, dan URL PDF artikel sampel untuk ringkasan pemeriksaan.</p>
-  <a href="pra-nilai-arjuna/">Buka aplikasi</a>
-</article>
-<article class="toolkit-card">
-  <h2>DOAJ Precheck</h2>
-  <p>Checklist required/recommended, status kesiapan, reset, dan print.</p>
-  <a href="doaj-precheck/">Buka aplikasi</a>
-</article>
-<article class="toolkit-card">
-  <h2>Evaluasi Diri Jurnal</h2>
-  <p>Kuesioner mandiri untuk skor kapasitas jurnal, prioritas roadmap, rencana 12 bulan, salin hasil, TXT, dan cetak.</p>
-  <a href="evaluasi-diri-jurnal/">Buka aplikasi</a>
-</article>
+          <div><h2>Validator OAI-PMH Jurnal OJS</h2><p>Temukan endpoint OAI-PMH, validasi Identify/ListRecords, dan lihat rekomendasi teknis untuk harvester.</p></div>
+          <a href="oai-pmh/">Buka aplikasi</a>
+        </article>
+        <article class="toolkit-card">
+          <div><h2>Simulasi Penilaian Arjuna 2021</h2><p>Isi indikator Arjuna 2021, hitung skor total, subtotal manajemen/substansi, dan cetak ringkasan.</p></div>
+          <a href="arjuna-2021/">Buka aplikasi</a>
+        </article>
+        <article class="toolkit-card">
+          <div><h2>Pra Nilai Arjuna</h2><p>Kumpulkan data awal akreditasi, URL edisi, dan URL PDF artikel sampel untuk ringkasan pemeriksaan.</p></div>
+          <a href="pra-nilai-arjuna/">Buka aplikasi</a>
+        </article>
+        <article class="toolkit-card">
+          <div><h2>DOAJ Precheck</h2><p>Checklist required/recommended, status kesiapan, reset, dan print.</p></div>
+          <a href="doaj-precheck/">Buka aplikasi</a>
+        </article>
+        <article class="toolkit-card">
+          <div><h2>Evaluasi Diri Jurnal</h2><p>Kuesioner mandiri untuk skor kapasitas jurnal, prioritas roadmap, rencana 12 bulan, salin hasil, TXT, dan cetak.</p></div>
+          <a href="evaluasi-diri-jurnal/">Buka aplikasi</a>
+        </article>
       </section>
     </main>
     <footer class="toolkit-attribution">Toolkit ini dikembangkan oleh Ikhwan Arief (ikhwan[at]unand.ac.id)</footer>

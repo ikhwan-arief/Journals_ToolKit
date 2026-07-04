@@ -1,0 +1,2008 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Ikhwan Arief">
+  <meta name="copyright" content="Copyright (c) 2026 Ikhwan Arief">
+  <title>Evaluasi Diri Roadmap Jurnal</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f4;
+      --panel: #ffffff;
+      --panel-soft: #eef3ef;
+      --ink: #1d2523;
+      --muted: #65736d;
+      --line: #d9e0db;
+      --accent: #2f6f5e;
+      --accent-dark: #214f44;
+      --blue: #255f85;
+      --amber: #b7652d;
+      --red: #a83f3f;
+      --shadow: 0 18px 50px rgba(29, 37, 35, 0.08);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(238, 243, 239, 0.9), rgba(246, 247, 244, 0.95) 260px),
+        var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px clamp(18px, 4vw, 56px);
+      border-bottom: 1px solid rgba(217, 224, 219, 0.8);
+      background: rgba(246, 247, 244, 0.92);
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid rgba(47, 111, 94, 0.24);
+      border-radius: 50%;
+      color: var(--accent-dark);
+      background: #fff;
+      font-size: 15px;
+    }
+
+    .topbar .meta {
+      color: var(--muted);
+      font-size: 14px;
+      text-align: right;
+    }
+
+    .page {
+      width: min(1480px, 100%);
+      margin: 0 auto;
+      padding: 34px clamp(18px, 4vw, 56px) 54px;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: clamp(24px, 4vw, 58px);
+      align-items: end;
+      padding: 20px 0 34px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 760;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(36px, 7vw, 88px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .intro-copy {
+      max-width: 760px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 20px);
+    }
+
+    .scale-panel {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--shadow);
+    }
+
+    .scale-panel h2,
+    .side-panel h2,
+    .question-section h2,
+    .result-block h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .scale-panel p,
+    .side-panel p,
+    .question-section > p,
+    .result-block > p {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .scale-list {
+      display: grid;
+      gap: 8px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .scale-list li {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 10px;
+      align-items: start;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .scale-number {
+      display: grid;
+      height: 28px;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--panel-soft);
+      color: var(--accent-dark);
+      font-weight: 760;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(270px, 330px) minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .side {
+      position: sticky;
+      top: 84px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .side-panel,
+    .question-section,
+    .result-block,
+    .empty-state {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .side-panel {
+      padding: 18px;
+    }
+
+    .field-group {
+      margin: 18px 0 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .field-group legend {
+      margin-bottom: 10px;
+      color: var(--ink);
+      font-weight: 760;
+    }
+
+    .field-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .field-card {
+      position: relative;
+      display: block;
+      min-height: 92px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      cursor: pointer;
+      transition: border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+    }
+
+    .field-card:hover {
+      border-color: rgba(47, 111, 94, 0.42);
+      transform: translateY(-1px);
+    }
+
+    .field-card input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .field-card strong {
+      display: block;
+      color: var(--ink);
+      font-size: 17px;
+    }
+
+    .field-card span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .field-card:has(input:checked) {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(47, 111, 94, 0.12);
+      background: #f8fbf8;
+    }
+
+    .input-block {
+      margin-top: 16px;
+    }
+
+    .input-block label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 720;
+    }
+
+    .text-input {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .text-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(47, 111, 94, 0.12);
+    }
+
+    .progress-wrap {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .progress-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .progress-track {
+      overflow: hidden;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--panel-soft);
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--blue));
+      transition: width 180ms ease;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      background: var(--accent);
+      color: #fff;
+      font-weight: 760;
+      cursor: pointer;
+      transition: background 150ms ease, transform 150ms ease, border-color 150ms ease;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn.secondary {
+      border-color: var(--line);
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .btn.secondary:hover {
+      border-color: rgba(47, 111, 94, 0.42);
+      background: #f8fbf8;
+    }
+
+    .btn.warning {
+      border-color: rgba(183, 101, 45, 0.22);
+      background: #fff7ef;
+      color: #7c431d;
+    }
+
+    .btn.warning:hover {
+      background: #fff1e5;
+    }
+
+    .main-column {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .empty-state {
+      padding: clamp(24px, 4vw, 46px);
+      min-height: 280px;
+      display: grid;
+      align-content: center;
+    }
+
+    .empty-state h2 {
+      max-width: 620px;
+      margin: 0;
+      font-size: clamp(26px, 4vw, 44px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .empty-state p {
+      max-width: 720px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .question-section {
+      overflow: hidden;
+    }
+
+    .section-head {
+      padding: 22px clamp(18px, 3vw, 28px);
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfa;
+    }
+
+    .question-list {
+      display: grid;
+      gap: 0;
+    }
+
+    .question-row {
+      display: grid;
+      grid-template-columns: minmax(230px, 0.9fr) minmax(340px, 1.1fr);
+      gap: clamp(16px, 2.4vw, 32px);
+      align-items: start;
+      padding: 22px clamp(18px, 3vw, 28px);
+      border-top: 1px solid var(--line);
+    }
+
+    .question-row:first-child {
+      border-top: 0;
+    }
+
+    .question-text {
+      margin: 0;
+      font-weight: 720;
+      line-height: 1.35;
+    }
+
+    .question-help {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .score-options {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(52px, 1fr));
+      gap: 8px;
+    }
+
+    .score-options label {
+      position: relative;
+      display: grid;
+      min-height: 58px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color 150ms ease, background 150ms ease, color 150ms ease, transform 150ms ease;
+    }
+
+    .score-options label:hover {
+      border-color: rgba(47, 111, 94, 0.42);
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    .score-options input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .score-options span {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .score-options small {
+      display: block;
+      margin-top: 2px;
+      font-size: 11px;
+      font-weight: 680;
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .score-options label:has(input:checked) {
+      border-color: var(--accent);
+      background: #eaf3ee;
+      color: var(--accent-dark);
+      box-shadow: inset 0 0 0 1px rgba(47, 111, 94, 0.12);
+    }
+
+    .message {
+      display: none;
+      padding: 13px 14px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(168, 63, 63, 0.28);
+      background: #fff1f1;
+      color: #7f2f2f;
+      font-weight: 700;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .result-block {
+      display: none;
+      overflow: hidden;
+    }
+
+    .result-block.show {
+      display: block;
+      animation: riseIn 220ms ease both;
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      padding: clamp(22px, 3vw, 32px);
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfa;
+    }
+
+    .score-circle {
+      display: grid;
+      width: 136px;
+      height: 136px;
+      place-items: center;
+      border-radius: 50%;
+      border: 10px solid rgba(47, 111, 94, 0.15);
+      background: #fff;
+      color: var(--accent-dark);
+      box-shadow: inset 0 0 0 1px var(--line);
+    }
+
+    .score-circle strong {
+      display: block;
+      font-size: 38px;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .score-circle span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .result-content {
+      display: grid;
+      gap: 22px;
+      padding: clamp(20px, 3vw, 32px);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .output-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid rgba(47, 111, 94, 0.24);
+      border-radius: var(--radius);
+      background: #f8fbf8;
+    }
+
+    .output-panel h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .output-panel p {
+      margin: 5px 0 0;
+      color: var(--muted);
+    }
+
+    .output-panel .result-actions {
+      margin-top: 0;
+      justify-content: flex-end;
+    }
+
+    .summary-item {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .summary-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 680;
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .bar-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(160px, 240px) minmax(0, 1fr) 48px;
+      gap: 12px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .bar-row strong {
+      line-height: 1.25;
+    }
+
+    .bar-track {
+      overflow: hidden;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--panel-soft);
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--amber), var(--accent));
+    }
+
+    .priority-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .priority-item {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .priority-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    .priority-head h3 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.25;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #eaf3ee;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .priority-item p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    .priority-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .detail-box {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfcfa;
+    }
+
+    .detail-box strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .detail-box ul,
+    .timeline ul,
+    .weak-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .detail-box li,
+    .timeline li,
+    .weak-list li {
+      margin: 4px 0;
+      color: var(--muted);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .timeline-step {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfcfa;
+    }
+
+    .timeline-step h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .copy-status {
+      min-height: 20px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 760;
+    }
+
+    .site-footer {
+      width: min(1480px, 100%);
+      margin: 0 auto;
+      padding: 0 clamp(18px, 4vw, 56px) 44px;
+    }
+
+    .site-footer p {
+      margin: 0;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .print-only {
+      display: none;
+    }
+
+    @media (max-width: 1080px) {
+      .intro,
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .side {
+        position: static;
+      }
+
+      .side-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .timeline,
+      .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .topbar .meta {
+        text-align: left;
+      }
+
+      .page {
+        padding-top: 22px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .field-options,
+      .side-grid,
+      .summary-grid,
+      .output-panel,
+      .priority-details,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .output-panel .result-actions {
+        justify-content: stretch;
+      }
+
+      .question-row {
+        grid-template-columns: 1fr;
+      }
+
+      .score-options {
+        grid-template-columns: repeat(5, minmax(44px, 1fr));
+      }
+
+      .score-options small {
+        display: none;
+      }
+
+      .result-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .score-circle {
+        width: 118px;
+        height: 118px;
+      }
+
+      .bar-row {
+        grid-template-columns: 1fr 48px;
+      }
+
+      .bar-row .bar-track {
+        grid-column: 1 / -1;
+        order: 3;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .topbar,
+      .intro,
+      .side,
+      #questionMount,
+      .message,
+      .actions,
+      .result-actions {
+        display: none !important;
+      }
+
+      .page,
+      .workspace {
+        display: block;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      .result-block {
+        display: block !important;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .result-hero,
+      .result-content,
+      .priority-item,
+      .summary-item,
+      .timeline-step,
+      .detail-box {
+        break-inside: avoid;
+      }
+
+      .print-only {
+        display: block;
+      }
+    }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2710%27 fill=%27%231d4ed8%27/%3E%3Cpath d=%27M18 18h28v6H18zm0 11h28v6H18zm0 11h18v6H18z%27 fill=%27white%27/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../assets/toolkit.css" />
+
+<style id="toolkit-font-override">
+  body { font-size:16px; line-height:1.5; }
+  h1 { font-size:1.5rem; line-height:1.2; letter-spacing:0; }
+  h2 { font-size:1.1rem; line-height:1.25; }
+  h3 { font-size:1rem; line-height:1.3; }
+  p, li, label, input, button, select, textarea, table { font-size:0.9rem; }
+  .subtitle, .intro-copy, .sub, .muted, .question-help, .panel p, .scale-panel p, .side-panel p, .question-section > p, .result-block > p { font-size:0.9rem; }
+  .badge, .hint, .field label, .summary-item span, .copy-status, .toolkit-attribution { font-size:0.85rem; }
+  .toolkit-hero h1, .empty-state h2 { font-size:1.5rem; line-height:1.2; }
+  .toolkit-hero p, .toolkit-card p { font-size:0.9rem; }
+  .toolkit-card h2 { font-size:1.1rem; }
+  .side .score, .score-circle strong { font-size:2rem; }
+</style>
+
+
+<style id="toolkit-evaluasi-override">
+  :root {
+    --bg:#f8fafc;
+    --panel:#ffffff;
+    --panel-soft:#eef2f7;
+    --ink:#111827;
+    --muted:#4b5563;
+    --line:#dbe3ef;
+    --accent:#1d4ed8;
+    --accent-dark:#1e40af;
+    --blue:#1d4ed8;
+    --amber:#b45309;
+    --red:#b91c1c;
+    --shadow:none;
+    --radius:8px;
+  }
+  body { background:var(--bg); color:var(--ink); }
+  .page { width:min(1180px, 100%); padding:24px clamp(18px, 4vw, 56px) 48px; }
+  .intro { align-items:start; padding:20px 0 28px; }
+  .eyebrow { color:var(--accent-dark); font-size:0.8rem; letter-spacing:0.04em; }
+  .intro-copy { max-width:760px; margin:0.5rem 0 0; color:var(--muted); }
+  .scale-panel, .side-panel, .question-section, .result-block, .empty-state, .summary-item, .priority-item, .timeline-step, .detail-box, .output-panel { border-radius:8px; box-shadow:none; }
+  .scale-panel, .side-panel, .question-section, .result-block, .empty-state { border:1px solid var(--line); background:#ffffff; }
+  .question-row { padding:18px clamp(18px, 3vw, 28px); }
+  .question-text { font-size:0.95rem; }
+  .score-options span { font-size:1rem; }
+  .btn { border-radius:6px; background:var(--accent); }
+  .btn:hover { background:var(--accent-dark); }
+  .btn.secondary { color:var(--ink); border-color:var(--line); background:#ffffff; }
+  .btn.warning { background:#fff7ed; color:#9a3412; }
+  .site-footer { display:none; }
+  @media (max-width:720px) { h1 { font-size:1.5rem; } }
+</style>
+
+</head>
+<body>
+<div class="toolkit-topbar">
+  <div class="toolkit-topbar-inner">
+    <div class="toolkit-brand">
+      <strong>Journals Toolkit</strong>
+      <span>Alat bantu publik untuk pengelola jurnal</span>
+    </div>
+    <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
+      <a href="../">Portal</a><a href="../oai-pmh/">OAI-PMH</a><a href="../arjuna-2021/">Arjuna 2021</a><a href="../pra-nilai-arjuna/">Pra Nilai Arjuna</a><a href="../doaj-precheck/">DOAJ Precheck</a><a href="../evaluasi-diri-jurnal/" aria-current="page">Evaluasi Diri</a>
+    </nav>
+  </div>
+</div>
+
+<main class="page">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Alat evaluasi mandiri</p>
+        <h1 id="page-title">Roadmap menuju jurnal internasional bereputasi</h1>
+        <p class="intro-copy">Isi kuesioner sesuai kondisi nyata jurnal. Hasilnya berupa prioritas pengembangan, kegiatan aktual, komponen biaya, calon mitra, indikator terukur, dan rencana kerja 12 bulan.</p>
+      </div>
+      <aside class="scale-panel" aria-labelledby="scale-title">
+        <h2 id="scale-title">Skala penilaian</h2>
+        <p>Gunakan bukti kerja yang sudah berjalan, bukan hanya rencana.</p>
+        <ul class="scale-list">
+          <li><span class="scale-number">0</span><span>Belum tersedia atau belum ada bukti.</span></li>
+          <li><span class="scale-number">1</span><span>Ada secara informal dan belum stabil.</span></li>
+          <li><span class="scale-number">2</span><span>Terdokumentasi sebagian, tetapi belum konsisten.</span></li>
+          <li><span class="scale-number">3</span><span>Berjalan konsisten dengan penanggung jawab jelas.</span></li>
+          <li><span class="scale-number">4</span><span>Terukur, dievaluasi, dan menunjukkan perbaikan.</span></li>
+        </ul>
+      </aside>
+    </section>
+
+    <form id="assessmentForm" novalidate>
+      <div class="workspace">
+        <aside class="side" aria-label="Panel pengaturan evaluasi">
+          <div class="side-grid">
+            <section class="side-panel">
+              <h2>Identitas jurnal</h2>
+              <p>Nama jurnal bersifat opsional dan hanya dipakai untuk judul laporan di halaman ini.</p>
+              <div class="input-block">
+                <label for="journalName">Nama jurnal</label>
+                <input class="text-input" id="journalName" name="journalName" type="text" autocomplete="off" placeholder="Contoh: Jurnal Ilmu ...">
+              </div>
+              <div class="input-block">
+                <label for="evaluationDate">Tanggal evaluasi</label>
+                <input class="text-input" id="evaluationDate" name="evaluationDate" type="date">
+              </div>
+              <fieldset class="field-group">
+                <legend>Bidang kajian</legend>
+                <div class="field-options">
+                  <label class="field-card">
+                    <input type="radio" name="field" value="SosHum">
+                    <strong>SosHum</strong>
+                    <span>Sosial, humaniora, hukum, pendidikan, seni, dan kajian sejenis.</span>
+                  </label>
+                  <label class="field-card">
+                    <input type="radio" name="field" value="SainTek">
+                    <strong>SainTek</strong>
+                    <span>Sains, teknologi, kesehatan, rekayasa, pangan, lingkungan, dan kajian sejenis.</span>
+                  </label>
+                </div>
+              </fieldset>
+            </section>
+
+            <section class="side-panel">
+              <h2>Status pengisian</h2>
+              <p id="fieldHint">Pilih bidang kajian untuk memunculkan kuesioner.</p>
+              <div class="progress-wrap" aria-label="Progres pengisian">
+                <div class="progress-meta">
+                  <span id="progressLabel">0 dari 0 terisi</span>
+                  <strong id="progressPercent">0%</strong>
+                </div>
+                <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+              </div>
+              <div class="actions">
+                <button class="btn" type="submit">Hitung Rekomendasi</button>
+                <button class="btn secondary" type="button" id="copyBtn">Salin Hasil</button>
+                <button class="btn secondary" type="button" id="saveBtn">Simpan Hasil (.txt)</button>
+                <button class="btn secondary" type="button" id="printBtn">Cetak</button>
+                <button class="btn warning" type="reset">Reset</button>
+              </div>
+              <div class="copy-status" id="copyStatus" role="status" aria-live="polite"></div>
+            </section>
+          </div>
+        </aside>
+
+        <div class="main-column">
+          <div class="message" id="message" role="alert"></div>
+          <div id="questionMount">
+            <section class="empty-state">
+              <h2>Pilih bidang kajian jurnal untuk mulai menilai kapasitas saat ini.</h2>
+              <p>Jurnal multidisiplin dapat memilih rumpun terdekat. Pertanyaan akan menyesuaikan bidang yang dipilih agar rekomendasi roadmap lebih terarah.</p>
+            </section>
+          </div>
+
+          <section class="result-block" id="resultBlock" aria-labelledby="resultTitle">
+            <div class="result-hero">
+              <div>
+                <p class="eyebrow">Hasil evaluasi mandiri</p>
+                <h2 id="resultTitle">Rekomendasi roadmap jurnal</h2>
+                <p id="resultLead">Isi kuesioner untuk melihat ringkasan kesiapan dan prioritas pengembangan.</p>
+                <div class="result-actions" aria-label="Opsi keluaran hasil evaluasi">
+                  <button class="btn secondary" type="button" id="resultCopyBtn">Salin Hasil</button>
+                  <button class="btn secondary" type="button" id="resultSaveBtn">Simpan Hasil (.txt)</button>
+                  <button class="btn secondary" type="button" id="resultPrintBtn">Cetak</button>
+                  <button class="btn warning" type="reset">Reset</button>
+                </div>
+                <div class="copy-status" id="resultStatus" role="status" aria-live="polite"></div>
+              </div>
+              <div class="score-circle" aria-label="Skor kesiapan">
+                <div>
+                  <strong id="scoreValue">0.0</strong>
+                  <span>dari 4.0</span>
+                </div>
+              </div>
+            </div>
+            <div class="result-content" id="resultContent"></div>
+          </section>
+        </div>
+      </div>
+    </form>
+  </main>
+<script>
+    const scaleShort = ["Belum", "Informal", "Sebagian", "Konsisten", "Terukur"];
+
+    const dimensions = {
+      governance: {
+        title: "Tata kelola editorial",
+        rationale: "Jurnal internasional bereputasi dibangun dari keputusan editorial yang dapat dijelaskan, konsisten, dan tidak bergantung pada satu orang.",
+        activities: [
+          "Susun matriks peran editor, section editor, managing editor, dan editor teknis.",
+          "Tetapkan alur keputusan editorial, batas waktu setiap tahap, dan format catatan keputusan.",
+          "Adakan rapat editorial bulanan berbasis data naskah masuk, naskah tertahan, dan alasan penolakan."
+        ],
+        costs: ["honor rapat editorial", "lokakarya tata kelola", "pengembangan SOP dan formulir kerja", "alat pemantauan alur naskah"],
+        partners: ["editor senior lintas institusi", "pengelola jurnal bereputasi", "asosiasi bidang keilmuan"],
+        metrics: ["SOP editorial disahkan", "100% keputusan memiliki catatan alasan", "median waktu keputusan awal turun", "rapat evaluasi berjalan minimal 10 kali setahun"]
+      },
+      transparency: {
+        title: "Transparansi kebijakan jurnal",
+        rationale: "Pembaca, penulis, reviewer, dan calon mitra harus dapat memeriksa standar jurnal tanpa meminta penjelasan tambahan.",
+        activities: [
+          "Audit seluruh halaman kebijakan jurnal dari perspektif penulis, reviewer, pembaca, dan editor.",
+          "Perbarui informasi ruang lingkup, biaya, lisensi, arsip, keluhan, konflik kepentingan, dan koreksi artikel.",
+          "Buat halaman kebijakan yang ringkas, saling terhubung, dan mudah ditemukan dari menu utama."
+        ],
+        costs: ["penyuntingan kebijakan", "penerjemahan profesional bila diperlukan", "review kepatuhan etika publikasi", "perbaikan halaman website"],
+        partners: ["pakar etika publikasi", "editor bahasa", "pengelola platform jurnal"],
+        metrics: ["semua kebijakan utama tampil di website", "panduan penulis dan reviewer diperbarui", "waktu klarifikasi penulis berkurang", "audit kebijakan dilakukan dua kali setahun"]
+      },
+      peerReview: {
+        title: "Mutu peer review",
+        rationale: "Artikel yang kuat lahir dari proses review yang selektif, relevan bidang, bebas konflik, dan menghasilkan komentar substantif.",
+        activities: [
+          "Bangun database reviewer dengan bidang, metode, afiliasi, rekam jejak, dan performa review.",
+          "Gunakan formulir review yang menilai kontribusi, metode, etika, argumentasi, kebaruan, dan keterbacaan.",
+          "Evaluasi mutu komentar reviewer dan buat daftar reviewer prioritas untuk topik strategis."
+        ],
+        costs: ["honor reviewer prioritas", "pelatihan reviewer", "kurasi database reviewer", "administrasi undangan dan pengingat review"],
+        partners: ["asosiasi akademik", "program studi/pusat riset", "jejaring editor internasional"],
+        metrics: ["database reviewer aktif bertambah", "minimal dua reviewer relevan per artikel riset", "median durasi review turun", "skor mutu komentar reviewer meningkat"]
+      },
+      articleQuality: {
+        title: "Mutu artikel",
+        rationale: "Kenaikan reputasi tidak cukup melalui promosi; artikel harus memiliki kontribusi, metode, argumen, dan relevansi yang layak dirujuk.",
+        activities: [
+          "Terapkan desk review ketat untuk kontribusi, metode, struktur, relevansi literatur, dan kejelasan temuan.",
+          "Buat klinik artikel untuk naskah potensial sebelum diterima final.",
+          "Rancang tema terbitan yang memiliki pertanyaan riset kuat dan pembaca internasional yang jelas."
+        ],
+        costs: ["honor editor substansi", "klinik penulisan artikel", "penyuntingan bahasa akademik", "review statistik atau metodologi"],
+        partners: ["peneliti bereputasi", "editor bahasa akademik", "ahli metodologi", "komunitas riset bidang"],
+        metrics: ["tingkat penolakan desk review lebih selektif", "proporsi artikel dengan kontribusi eksplisit naik", "artikel prioritas memiliki abstrak dan judul yang diperbaiki", "sitasi artikel terpilih mulai tumbuh"]
+      },
+      ethics: {
+        title: "Etika publikasi",
+        rationale: "Kepercayaan internasional menuntut pencegahan plagiarisme, manipulasi sitasi, konflik kepentingan, dan keputusan editorial yang tidak transparan.",
+        activities: [
+          "Terapkan pemeriksaan kesamaan, konflik kepentingan, authorship, data, pendanaan, dan izin etik sebelum keputusan.",
+          "Buat prosedur koreksi, pencabutan, keluhan, dan banding yang dapat dijalankan.",
+          "Latih editor untuk mengenali paper mill, peer review palsu, manipulasi sitasi, dan data bermasalah."
+        ],
+        costs: ["alat pemeriksaan kesamaan", "pelatihan etika publikasi", "konsultasi kasus etik", "administrasi investigasi naskah"],
+        partners: ["komite etik institusi", "pakar integritas akademik", "pengelola jurnal berpengalaman"],
+        metrics: ["100% naskah diperiksa sebelum review atau penerimaan", "log kasus etik tersedia", "kebijakan koreksi dan pencabutan tampil jelas", "tidak ada keluhan tanpa tindak lanjut"]
+      },
+      websiteMetadata: {
+        title: "Website dan metadata",
+        rationale: "Website dan metadata menentukan apakah artikel dapat ditemukan, dibaca, dirayapi, dikutip, dan dipercaya oleh pembaca internasional.",
+        activities: [
+          "Audit struktur website, navigasi, halaman artikel, arsip, informasi editorial, dan panduan penulis.",
+          "Lengkapi metadata artikel: DOI, ORCID, afiliasi, abstrak, kata kunci, referensi, lisensi, dan funding.",
+          "Perbaiki konsistensi template artikel, landing page artikel, file PDF, dan tampilan mobile."
+        ],
+        costs: ["pengembang website", "editor metadata", "pembaruan template artikel", "validasi DOI dan referensi"],
+        partners: ["pengelola platform jurnal", "pustakawan metadata", "penyedia DOI", "tim teknologi informasi"],
+        metrics: ["metadata lengkap untuk seluruh artikel baru", "error tautan dan metadata menurun", "halaman artikel ramah mobile", "arsip dan kebijakan mudah ditemukan dalam dua klik"]
+      },
+      visibilityCitation: {
+        title: "Visibilitas dan sitasi",
+        rationale: "Sitasi yang sehat lahir dari artikel yang relevan, mudah ditemukan, aktif didiseminasikan, dan masuk dalam percakapan akademik bidangnya.",
+        activities: [
+          "Pilih artikel unggulan berdasarkan topik, kualitas, dan potensi rujukan, lalu buat rencana diseminasi.",
+          "Bangun kanal diseminasi akademik melalui penulis, asosiasi, repositori, seminar, dan komunitas riset.",
+          "Pantau unduhan, asal pembaca, kata kunci, tautan masuk, dan sitasi untuk menentukan tema berikutnya."
+        ],
+        costs: ["produksi materi diseminasi akademik", "pengelolaan kanal komunikasi", "registrasi seminar atau forum bidang", "analitik website"],
+        partners: ["asosiasi bidang", "komunitas peneliti", "perpustakaan", "pusat kajian", "penulis artikel unggulan"],
+        metrics: ["daftar artikel unggulan tersedia", "kampanye diseminasi berjalan per terbitan", "kunjungan artikel prioritas naik", "sitasi artikel prioritas dipantau setiap triwulan"]
+      },
+      internationalNetwork: {
+        title: "Jejaring internasional",
+        rationale: "Jurnal perlu keterlibatan nyata editor, reviewer, penulis, dan komunitas akademik lintas negara agar tidak hanya bersifat lokal.",
+        activities: [
+          "Petakan calon editor, reviewer, guest editor, dan penulis dari jejaring konferensi atau asosiasi bidang.",
+          "Bangun kerja sama special issue atau call for papers dengan tema lintas negara.",
+          "Libatkan mitra internasional dalam review tematik, editorial note, webinar ilmiah, atau klinik artikel."
+        ],
+        costs: ["honor guest editor", "webinar internasional", "korespondensi dan administrasi mitra", "penyuntingan bahasa untuk naskah undangan"],
+        partners: ["asosiasi internasional bidang", "pusat riset luar negeri", "editor jurnal mitra", "jejaring alumni doktoral"],
+        metrics: ["mitra aktif tercatat dengan kontribusi nyata", "reviewer internasional aktif bertambah", "call for papers tematik diluncurkan", "artikel lintas negara meningkat"]
+      },
+      sustainability: {
+        title: "Keberlanjutan operasional",
+        rationale: "Roadmap hanya berjalan jika ada anggaran, jadwal, pembagian kerja, dan regenerasi tim yang realistis.",
+        activities: [
+          "Susun kalender kerja 12 bulan untuk penerimaan, review, produksi, diseminasi, dan evaluasi.",
+          "Tetapkan anggaran minimum per fungsi: editorial, reviewer, website, metadata, bahasa, dan promosi akademik.",
+          "Bangun cadangan peran untuk editor teknis, copyeditor, layout, dan pengelola komunikasi."
+        ],
+        costs: ["honor tim operasional", "pelatihan pengelola", "langganan layanan teknis", "anggaran evaluasi triwulan"],
+        partners: ["fakultas atau lembaga penerbit", "perpustakaan", "unit teknologi informasi", "asosiasi pengelola jurnal"],
+        metrics: ["kalender kerja disahkan", "anggaran 12 bulan tersedia", "ketergantungan pada satu orang turun", "evaluasi triwulan menghasilkan tindak lanjut"]
+      },
+      soshumContribution: {
+        title: "Kontribusi teoretik dan konseptual",
+        rationale: "Artikel SosHum perlu menunjukkan argumen, konsep, dan posisi keilmuan yang melampaui laporan kasus atau deskripsi lokal.",
+        activities: [
+          "Tambahkan kriteria desk review untuk posisi teori, kebaruan argumen, dan kontribusi konseptual.",
+          "Adakan klinik abstrak dan pendahuluan agar penulis menyatakan kontribusi secara eksplisit.",
+          "Rancang tema terbitan yang menghubungkan kasus lokal dengan perdebatan regional atau global."
+        ],
+        costs: ["honor editor substansi SosHum", "klinik penulisan argumen", "penyuntingan bahasa akademik", "kurasi tema terbitan"],
+        partners: ["asosiasi keilmuan SosHum", "pakar teori bidang", "pusat kajian", "peneliti lintas negara"],
+        metrics: ["abstrak artikel menyatakan kontribusi", "naskah deskriptif murni berkurang", "tema terbitan memiliki pertanyaan konseptual", "artikel mulai dirujuk oleh kajian sejenis"]
+      },
+      soshumLiterature: {
+        title: "Mutu literatur dan posisi argumen",
+        rationale: "Artikel SosHum lebih mudah masuk percakapan internasional jika literatur, konsep, dan implikasi disusun dengan posisi yang jelas.",
+        activities: [
+          "Buat checklist literatur inti: klasik, mutakhir, regional, dan global sesuai bidang.",
+          "Perkuat penilaian koherensi argumen, metode kualitatif/interpretatif, dan implikasi kajian.",
+          "Tingkatkan kualitas judul, abstrak, dan kata kunci agar mudah ditemukan oleh pembaca lintas negara."
+        ],
+        costs: ["akses basis literatur", "workshop literature positioning", "review metode SosHum", "penyuntingan judul dan abstrak"],
+        partners: ["pustakawan riset", "pakar metodologi SosHum", "editor bahasa", "komunitas penulis bidang"],
+        metrics: ["referensi inti lebih relevan", "kata kunci artikel lebih presisi", "reviewer menilai posisi argumen", "artikel unggulan memiliki materi diseminasi akademik"]
+      },
+      soshumNetwork: {
+        title: "Jejaring SosHum dan forum kebijakan",
+        rationale: "Sebagian artikel SosHum memperoleh dampak melalui asosiasi keilmuan, forum kebijakan, diskusi publik akademik, dan kajian lintas konteks.",
+        activities: [
+          "Bangun daftar asosiasi, pusat kajian, forum kebijakan, dan konferensi yang sesuai dengan scope jurnal.",
+          "Selenggarakan diskusi artikel tematik bersama penulis, reviewer, dan komunitas pengguna ilmu.",
+          "Kembangkan undangan naskah tematik yang membandingkan konteks Indonesia dengan negara atau kawasan lain."
+        ],
+        costs: ["webinar tematik", "honor narasumber", "komunikasi mitra", "produksi ringkasan akademik atau policy brief"],
+        partners: ["asosiasi profesi", "pusat studi", "lembaga kebijakan", "komunitas akademik regional"],
+        metrics: ["minimal dua forum tematik per tahun", "mitra SosHum aktif bertambah", "artikel tematik memperoleh pembaca baru", "naskah lintas konteks meningkat"]
+      },
+      saintekMethod: {
+        title: "Ketepatan metode dan validitas data",
+        rationale: "Artikel SainTek perlu dapat diperiksa ulang dari sisi rancangan metode, data, instrumen, analisis, dan batasan hasil.",
+        activities: [
+          "Tambahkan checklist metode sesuai jenis studi: eksperimental, komputasional, klinis, lingkungan, pangan, rekayasa, atau survei teknis.",
+          "Libatkan reviewer metodologi atau statistik untuk naskah berisiko tinggi.",
+          "Bangun standar pelaporan alat, bahan, parameter, dataset, prosedur, dan analisis."
+        ],
+        costs: ["honor reviewer metodologi/statistik", "pelatihan standar pelaporan", "penyuntingan tabel dan gambar ilmiah", "validasi data pendukung"],
+        partners: ["laboratorium/pusat riset", "ahli statistik", "metodolog bidang", "komunitas data atau komputasi"],
+        metrics: ["checklist metode dipakai pada artikel baru", "catatan reviewer teknis meningkat", "koreksi metode sebelum terbit berkurang", "artikel memiliki batasan studi yang jelas"]
+      },
+      saintekRepro: {
+        title: "Reproducibility dan ketersediaan data",
+        rationale: "Keterbukaan data, kode, protokol, atau material pendukung meningkatkan kepercayaan dan peluang artikel digunakan kembali.",
+        activities: [
+          "Tetapkan kebijakan data availability sesuai risiko dan karakter bidang.",
+          "Sediakan panduan repository, lampiran teknis, kode, protokol, atau material pendukung.",
+          "Latih editor untuk memeriksa konsistensi data, tabel, gambar, metode, dan pernyataan ketersediaan data."
+        ],
+        costs: ["kurasi data pendukung", "pelatihan repository", "validasi tabel dan gambar", "penyuntingan pernyataan data availability"],
+        partners: ["pustakawan data", "repository institusi", "laboratorium", "komunitas open science"],
+        metrics: ["artikel baru memiliki pernyataan data availability", "lampiran teknis lebih lengkap", "tautan data/kode valid", "permintaan koreksi data menurun"]
+      },
+      saintekMetadata: {
+        title: "Metadata teknis dan artikel strategis",
+        rationale: "Bidang SainTek sangat bergantung pada metadata presisi, referensi bersih, identitas penulis, dan artikel strategis seperti review, methods, atau data paper.",
+        activities: [
+          "Validasi DOI, ORCID, afiliasi, funding, lisensi, referensi, dan metadata gambar/tabel pada setiap artikel.",
+          "Rancang artikel review, methods paper, atau data paper pada tema yang sedang tumbuh.",
+          "Perbaiki tampilan artikel agar abstrak, grafis, data pendukung, dan referensi cepat dipahami pembaca."
+        ],
+        costs: ["editor metadata", "validasi referensi", "produksi graphical abstract bila relevan", "kurasi artikel review atau methods"],
+        partners: ["pustakawan metadata", "penyedia DOI", "pusat riset bidang", "editor tamu teknis"],
+        metrics: ["metadata artikel baru lengkap", "referensi tanpa error mayor", "artikel review/methods terbit sesuai rencana", "kunjungan dan unduhan artikel strategis meningkat"]
+      }
+    };
+
+    const questionGroups = {
+      common: [
+        {
+          id: "governance",
+          title: "Tata kelola dan keputusan editorial",
+          description: "Nilai kesiapan struktur kerja editorial, pembagian peran, dan konsistensi keputusan.",
+          questions: [
+            ["g1", "governance", "Dewan editor memiliki peran terdokumentasi, pembagian tugas, dan komitmen waktu yang jelas.", "Bukti dapat berupa SK, matriks peran, agenda kerja, atau catatan rapat."],
+            ["g2", "governance", "Kebijakan editor, mitra bestari, dan penulis tersedia jelas serta diterapkan pada setiap naskah.", "Nilai tinggi jika kebijakan benar-benar dipakai dalam alur editorial."],
+            ["g3", "governance", "Proses keputusan editorial memiliki catatan alasan, batas waktu, dan tanggung jawab final.", "Catatan keputusan membantu konsistensi dan akuntabilitas."]
+          ]
+        },
+        {
+          id: "transparency",
+          title: "Transparansi kebijakan",
+          description: "Nilai keterbukaan informasi yang dibutuhkan penulis, reviewer, pembaca, dan calon mitra.",
+          questions: [
+            ["t1", "transparency", "Informasi ruang lingkup, biaya, lisensi, arsip, kontak, dan kepemilikan jurnal mudah ditemukan.", "Pembaca seharusnya tidak perlu menebak aturan dasar jurnal."],
+            ["t2", "transparency", "Panduan penulis mencantumkan struktur artikel, standar sitasi, persyaratan etika, dan proses editorial.", "Panduan yang baik mengurangi revisi administratif berulang."],
+            ["t3", "transparency", "Kebijakan koreksi, pencabutan, konflik kepentingan, keluhan, dan banding tersedia serta dapat dijalankan.", "Nilai tinggi jika ada alur kerja dan penanggung jawab."]
+          ]
+        },
+        {
+          id: "peer-review",
+          title: "Mutu peer review",
+          description: "Nilai apakah review membantu memilih dan memperbaiki artikel secara substantif.",
+          questions: [
+            ["p1", "peerReview", "Pemilihan reviewer sesuai bidang naskah, bebas konflik, dan didukung database reviewer aktif.", "Database yang baik memuat keahlian, afiliasi, performa, dan riwayat review."],
+            ["p2", "peerReview", "Durasi review dipantau dan ada tindak lanjut untuk reviewer yang lambat atau tidak relevan.", "Waktu review yang terukur membantu menjaga jadwal terbit."],
+            ["p3", "peerReview", "Mutu komentar reviewer dievaluasi oleh editor sebelum menjadi dasar keputusan.", "Komentar harus membahas kontribusi, metode, argumen, dan perbaikan substansi."]
+          ]
+        },
+        {
+          id: "article-quality",
+          title: "Mutu artikel",
+          description: "Nilai kemampuan jurnal menaikkan kualitas substansi artikel sebelum diterbitkan.",
+          questions: [
+            ["a1", "articleQuality", "Desk review menilai kontribusi baru, metode, argumentasi, relevansi literatur, dan kesesuaian scope.", "Seleksi awal yang kuat menaikkan mutu artikel yang masuk review."],
+            ["a2", "articleQuality", "Editor memberi arahan perbaikan substansi untuk naskah potensial sebelum keputusan akhir.", "Nilai tinggi jika ada catatan editorial, bukan hanya koreksi format."],
+            ["a3", "articleQuality", "Terbitan memiliki tema, target pembaca, dan komposisi artikel yang jelas.", "Terbitan yang terarah lebih mudah dipromosikan dan dirujuk."]
+          ]
+        },
+        {
+          id: "ethics",
+          title: "Etika publikasi dan integritas naskah",
+          description: "Nilai kemampuan jurnal mencegah masalah integritas sebelum artikel diterbitkan.",
+          questions: [
+            ["e1", "ethics", "Pemeriksaan kesamaan, plagiarisme, konflik kepentingan, dan authorship berjalan sebelum keputusan.", "Nilai tinggi jika pemeriksaan tercatat, bukan hanya dilakukan sewaktu-waktu."],
+            ["e2", "ethics", "Kebijakan data, koreksi, pencabutan, dan keluhan diterapkan secara konsisten.", "Kebijakan perlu bisa dijalankan pada kasus nyata."],
+            ["e3", "ethics", "Editor mampu mengenali risiko paper mill, reviewer palsu, manipulasi sitasi, dan data bermasalah.", "Kemampuan deteksi risiko harus menjadi bagian dari kompetensi editor."]
+          ]
+        },
+        {
+          id: "website",
+          title: "Website dan metadata",
+          description: "Nilai kesiapan website dan metadata untuk ditemukan, dibaca, dan dipercaya.",
+          questions: [
+            ["w1", "websiteMetadata", "Website mudah dinavigasi pada halaman fokus jurnal, dewan editor, arsip, panduan, dan kontak.", "Informasi inti sebaiknya dapat ditemukan dalam dua klik."],
+            ["w2", "websiteMetadata", "Metadata artikel lengkap: judul, abstrak, kata kunci, afiliasi, DOI, referensi, lisensi, dan funding bila ada.", "Metadata lengkap membuat artikel lebih mudah ditemukan dan dikutip."],
+            ["w3", "websiteMetadata", "Halaman artikel mendukung keterbacaan, akses arsip, tautan aktif, dan tampilan mobile.", "Periksa halaman artikel sebagai pembaca, bukan hanya sebagai admin."]
+          ]
+        },
+        {
+          id: "visibility",
+          title: "Visibilitas, sitasi, dan diseminasi",
+          description: "Nilai apakah jurnal punya cara aktif agar artikel bermutu masuk percakapan akademik.",
+          questions: [
+            ["v1", "visibilityCitation", "Jurnal memiliki daftar artikel unggulan yang dipromosikan berdasarkan tema dan potensi sitasi.", "Tidak semua artikel dipromosikan dengan cara yang sama."],
+            ["v2", "visibilityCitation", "Strategi diseminasi dilakukan melalui kanal akademik, repositori, asosiasi, penulis, dan komunitas riset.", "Promosi akademik berfokus pada pembaca yang mungkin memakai artikel."],
+            ["v3", "visibilityCitation", "Data sitasi, unduhan, asal pembaca, kata kunci, dan tautan masuk dipantau untuk keputusan editorial.", "Data membantu menentukan tema, kanal, dan artikel prioritas berikutnya."]
+          ]
+        },
+        {
+          id: "network",
+          title: "Jejaring internasional",
+          description: "Nilai keterlibatan nyata mitra lintas negara dalam editorial, review, penulisan, dan diseminasi.",
+          questions: [
+            ["n1", "internationalNetwork", "Editor, reviewer, atau author internasional aktif berkontribusi, bukan hanya tercantum di website.", "Kontribusi dapat berupa review, editorial, guest editing, atau diseminasi."],
+            ["n2", "internationalNetwork", "Jurnal membangun kolaborasi dengan asosiasi, konferensi, laboratorium, pusat kajian, atau jejaring akademik.", "Kolaborasi sebaiknya terkait tema artikel dan pembaca sasaran."],
+            ["n3", "internationalNetwork", "Special issue atau call for papers dibangun dari isu lintas negara atau lintas institusi.", "Tema lintas konteks membantu memperluas pembaca dan penulis."]
+          ]
+        },
+        {
+          id: "sustainability",
+          title: "Keberlanjutan operasional",
+          description: "Nilai apakah roadmap dapat dijalankan dengan SDM, waktu, dan anggaran yang realistis.",
+          questions: [
+            ["s1", "sustainability", "Jadwal terbit, anggaran, SDM teknis, dan cadangan editor tersedia untuk 12 bulan.", "Rencana harus dapat dijalankan ketika ada editor yang berhalangan."],
+            ["s2", "sustainability", "Proses produksi naskah punya alur kerja dan standar mutu yang tidak bergantung pada satu orang.", "Ketergantungan tunggal menjadi risiko utama keberlanjutan."],
+            ["s3", "sustainability", "Pelatihan editor, reviewer, copyeditor, dan pengelola website dijadwalkan rutin.", "Kapasitas tim perlu tumbuh mengikuti target reputasi."]
+          ]
+        }
+      ],
+      SosHum: [
+        {
+          id: "soshum-contribution",
+          title: "Kekuatan kontribusi SosHum",
+          description: "Nilai apakah artikel mampu berbicara pada debat konsep, teori, kebijakan, atau praktik sosial yang lebih luas.",
+          questions: [
+            ["sh1", "soshumContribution", "Artikel menunjukkan posisi teoretik atau konseptual yang jelas dan bukan hanya deskripsi kasus.", "Kontribusi sebaiknya terlihat sejak judul, abstrak, dan pendahuluan."],
+            ["sh2", "soshumContribution", "Manuskrip menghubungkan temuan lokal dengan percakapan keilmuan regional atau global.", "Konteks lokal perlu diubah menjadi kontribusi yang dapat dibandingkan."],
+            ["sh3", "soshumContribution", "Topik terbitan dibangun dari isu yang bisa dibandingkan lintas konteks, kelompok, atau wilayah.", "Tema komparatif membantu memperluas pembaca dan calon sitasi."]
+          ]
+        },
+        {
+          id: "soshum-literature",
+          title: "Literatur, argumen, dan keterbacaan",
+          description: "Nilai mutu literatur, koherensi argumen, serta kemampuan artikel ditemukan pembaca luar negeri.",
+          questions: [
+            ["sl1", "soshumLiterature", "Referensi inti mencakup literatur internasional mutakhir dan klasik yang relevan dengan bidang.", "Bukan sekadar banyak referensi, tetapi tepat untuk posisi argumen."],
+            ["sl2", "soshumLiterature", "Abstrak, kata kunci, dan judul menjelaskan kontribusi artikel kepada pembaca lintas negara.", "Judul dan abstrak adalah pintu masuk pembaca dan calon pengutip."],
+            ["sl3", "soshumLiterature", "Editor menilai koherensi argumen, kerangka teori, metode, dan implikasi kajian.", "Penilaian substansi lebih penting daripada koreksi format semata."]
+          ]
+        },
+        {
+          id: "soshum-network",
+          title: "Jejaring SosHum dan dampak akademik",
+          description: "Nilai kemampuan jurnal membangun pembaca melalui asosiasi, forum kebijakan, dan komunitas kajian.",
+          questions: [
+            ["sn1", "soshumNetwork", "Jurnal memiliki jejaring dengan asosiasi bidang, forum kebijakan, komunitas riset, atau pusat kajian.", "Jejaring harus relevan dengan scope jurnal dan tema artikel."],
+            ["sn2", "soshumNetwork", "Agenda diseminasi artikel diarahkan ke seminar, diskusi akademik, dan komunitas internasional bidang.", "Diseminasi sebaiknya membuat artikel masuk percakapan bidang."],
+            ["sn3", "soshumNetwork", "Naskah potensial diberi pendampingan bahasa, argumentasi, atau literature positioning sebelum diterbitkan.", "Pendampingan diarahkan pada artikel yang paling mungkin memberi dampak."]
+          ]
+        }
+      ],
+      SainTek: [
+        {
+          id: "saintek-method",
+          title: "Metode, validitas data, dan standar pelaporan",
+          description: "Nilai apakah artikel SainTek cukup kuat dari sisi rancangan, data, analisis, dan pelaporan teknis.",
+          questions: [
+            ["st1", "saintekMethod", "Artikel menampilkan rancangan metode, alat, bahan, dataset, parameter, atau protokol yang cukup untuk dinilai ulang.", "Kejelasan metode menentukan kepercayaan pembaca teknis."],
+            ["st2", "saintekMethod", "Validasi hasil, analisis statistik, dan batasan penelitian diperiksa sebelum keputusan akhir.", "Naskah berisiko tinggi memerlukan review metodologi yang lebih ketat."],
+            ["st3", "saintekMethod", "Editor melibatkan reviewer teknis sesuai metode, instrumen, bahan, data, atau komputasi yang digunakan.", "Reviewer umum sering tidak cukup untuk isu teknis yang spesifik."]
+          ]
+        },
+        {
+          id: "saintek-repro",
+          title: "Reproducibility dan data availability",
+          description: "Nilai kesiapan jurnal mendukung pemeriksaan ulang, penggunaan ulang, dan kepercayaan terhadap hasil riset.",
+          questions: [
+            ["sr1", "saintekRepro", "Kebijakan ketersediaan data, kode, material, atau protokol dijelaskan kepada penulis.", "Tidak semua data harus terbuka, tetapi status dan alasan harus jelas."],
+            ["sr2", "saintekRepro", "Artikel mendorong penggunaan repository, lampiran teknis, atau dokumen pendukung.", "Lampiran teknis membantu pembaca menilai dan memakai ulang hasil."],
+            ["sr3", "saintekRepro", "Standar pelaporan sesuai jenis studi dipakai dalam checklist editorial.", "Checklist mengurangi risiko metode penting terlewat."]
+          ]
+        },
+        {
+          id: "saintek-metadata",
+          title: "Metadata teknis dan artikel strategis",
+          description: "Nilai kesiapan metadata, identitas penulis, referensi, dan tipe artikel yang potensial disitasi.",
+          questions: [
+            ["sm1", "saintekMetadata", "Metadata teknis artikel lengkap untuk DOI, ORCID, referensi, afiliasi, funding, dan lisensi.", "Metadata yang rapi memudahkan pelacakan artikel dan penulis."],
+            ["sm2", "saintekMetadata", "Artikel review, methods paper, atau data paper dirancang sebagai bagian strategi sitasi.", "Tipe artikel strategis harus tetap melewati standar mutu ketat."],
+            ["sm3", "saintekMetadata", "Website menampilkan abstrak, grafis, data pendukung, dan referensi secara rapi serta mudah ditemukan.", "Pembaca teknis perlu cepat melihat inti metode, data, dan hasil."]
+          ]
+        }
+      ]
+    };
+
+    const form = document.getElementById("assessmentForm");
+    const questionMount = document.getElementById("questionMount");
+    const message = document.getElementById("message");
+    const resultBlock = document.getElementById("resultBlock");
+    const resultContent = document.getElementById("resultContent");
+    const resultLead = document.getElementById("resultLead");
+    const scoreValue = document.getElementById("scoreValue");
+    const fieldHint = document.getElementById("fieldHint");
+    const progressLabel = document.getElementById("progressLabel");
+    const progressPercent = document.getElementById("progressPercent");
+    const progressBar = document.getElementById("progressBar");
+    const copyBtn = document.getElementById("copyBtn");
+    const saveBtn = document.getElementById("saveBtn");
+    const printBtn = document.getElementById("printBtn");
+    const resultCopyBtn = document.getElementById("resultCopyBtn");
+    const resultSaveBtn = document.getElementById("resultSaveBtn");
+    const resultPrintBtn = document.getElementById("resultPrintBtn");
+    const copyStatus = document.getElementById("copyStatus");
+    const resultStatus = document.getElementById("resultStatus");
+    const evaluationDateInput = document.getElementById("evaluationDate");
+
+    let activeQuestions = [];
+    let latestReportText = "";
+    let latestFileName = "";
+
+    function todayString() {
+      const today = new Date();
+      const localDate = new Date(today.getTime() - today.getTimezoneOffset() * 60000);
+      return localDate.toISOString().slice(0, 10);
+    }
+
+    function setDefaultEvaluationDate() {
+      evaluationDateInput.value = todayString();
+    }
+
+    function getEvaluationDate() {
+      return evaluationDateInput.value || todayString();
+    }
+
+    function getField() {
+      const checked = form.querySelector("input[name='field']:checked");
+      return checked ? checked.value : "";
+    }
+
+    function getGroups(field) {
+      if (!field) return [];
+      return [...questionGroups.common, ...questionGroups[field]];
+    }
+
+    function flattenQuestions(groups) {
+      return groups.flatMap((group) => group.questions.map((q) => ({
+        id: q[0],
+        dimension: q[1],
+        text: q[2],
+        help: q[3],
+        groupId: group.id,
+        groupTitle: group.title
+      })));
+    }
+
+    function renderQuestions(field) {
+      const groups = getGroups(field);
+      activeQuestions = flattenQuestions(groups);
+      resultBlock.classList.remove("show");
+      clearMessage();
+
+      if (!field) {
+        questionMount.innerHTML = `
+          <section class="empty-state">
+            <h2>Pilih bidang kajian jurnal untuk mulai menilai kapasitas saat ini.</h2>
+            <p>Jurnal multidisiplin dapat memilih rumpun terdekat. Pertanyaan akan menyesuaikan bidang yang dipilih agar rekomendasi roadmap lebih terarah.</p>
+          </section>
+        `;
+        fieldHint.textContent = "Pilih bidang kajian untuk memunculkan kuesioner.";
+        updateProgress();
+        return;
+      }
+
+      fieldHint.textContent = `${field} dipilih. Jawab ${activeQuestions.length} pertanyaan untuk menghasilkan rekomendasi.`;
+      questionMount.innerHTML = groups.map((group, index) => `
+        <section class="question-section" aria-labelledby="${group.id}-title">
+          <div class="section-head">
+            <p class="eyebrow">Dimensi ${index + 1}</p>
+            <h2 id="${group.id}-title">${group.title}</h2>
+            <p>${group.description}</p>
+          </div>
+          <div class="question-list">
+            ${group.questions.map((question) => renderQuestion(question)).join("")}
+          </div>
+        </section>
+      `).join("");
+      updateProgress();
+    }
+
+    function renderQuestion(question) {
+      const [id, dimension, text, help] = question;
+      return `
+        <div class="question-row" data-question="${id}" data-dimension="${dimension}">
+          <div>
+            <p class="question-text">${text}</p>
+            <p class="question-help">${help}</p>
+          </div>
+          <div class="score-options" role="radiogroup" aria-label="${text}">
+            ${scaleShort.map((label, value) => `
+              <label title="${value} - ${label}">
+                <input type="radio" name="${id}" value="${value}" aria-label="${value} - ${label}">
+                <span>${value}</span>
+                <small>${label}</small>
+              </label>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function updateProgress() {
+      const total = activeQuestions.length;
+      const answered = activeQuestions.filter((q) => form.querySelector(`input[name="${q.id}"]:checked`)).length;
+      const percent = total ? Math.round((answered / total) * 100) : 0;
+      progressLabel.textContent = `${answered} dari ${total} terisi`;
+      progressPercent.textContent = `${percent}%`;
+      progressBar.style.width = `${percent}%`;
+    }
+
+    function clearMessage() {
+      message.textContent = "";
+      message.classList.remove("show");
+    }
+
+    function showMessage(text) {
+      message.textContent = text;
+      message.classList.add("show");
+      message.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function setActionStatus(text) {
+      copyStatus.textContent = text;
+      resultStatus.textContent = text;
+    }
+
+    function collectAnswers() {
+      const answers = {};
+      const missing = [];
+      for (const question of activeQuestions) {
+        const checked = form.querySelector(`input[name="${question.id}"]:checked`);
+        if (!checked) {
+          missing.push(question);
+        } else {
+          answers[question.id] = Number(checked.value);
+        }
+      }
+      return { answers, missing };
+    }
+
+    function average(values) {
+      if (!values.length) return 0;
+      return values.reduce((sum, value) => sum + value, 0) / values.length;
+    }
+
+    function statusFor(score) {
+      if (score <= 1.4) {
+        return {
+          label: "Fondasi perlu dibangun",
+          tone: "Prioritas utama adalah membangun bukti dasar, alur kerja, dan penanggung jawab."
+        };
+      }
+      if (score <= 2.4) {
+        return {
+          label: "Fondasi ada, perlu distabilkan",
+          tone: "Prioritas utama adalah membuat praktik yang sudah ada menjadi konsisten dan terdokumentasi."
+        };
+      }
+      if (score <= 3.2) {
+        return {
+          label: "Siap akselerasi terbatas",
+          tone: "Prioritas utama adalah memilih tema dan kegiatan yang paling berdampak pada reputasi dan sitasi."
+        };
+      }
+      return {
+        label: "Siap akselerasi reputasi",
+        tone: "Prioritas utama adalah memperluas jejaring, memperkuat artikel strategis, dan menunjukkan hasil terukur."
+      };
+    }
+
+    function computeScores(answers) {
+      const byDimension = {};
+      for (const question of activeQuestions) {
+        if (!byDimension[question.dimension]) byDimension[question.dimension] = [];
+        byDimension[question.dimension].push(answers[question.id]);
+      }
+
+      const dimensionScores = Object.entries(byDimension).map(([dimension, values]) => ({
+        dimension,
+        title: dimensions[dimension].title,
+        score: average(values),
+        values
+      })).sort((a, b) => a.score - b.score);
+
+      const overall = average(Object.values(answers));
+      return { overall, dimensionScores };
+    }
+
+    function listItems(items) {
+      return `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+    }
+
+    function recommendationIntro(score) {
+      if (score <= 1.4) return "Bangun fondasi terlebih dahulu melalui SOP, bukti kerja, penanggung jawab, dan indikator sederhana.";
+      if (score <= 2.4) return "Stabilkan praktik yang sudah ada agar konsisten, terdokumentasi, dan tidak bergantung pada orang tertentu.";
+      if (score <= 3.2) return "Akselerasikan kegiatan yang paling berdampak dan ukur hasilnya secara triwulanan.";
+      return "Pertajam keunggulan yang sudah berjalan dan arahkan pada kolaborasi serta artikel strategis yang lebih kuat.";
+    }
+
+    function renderPriority(item, index) {
+      const profile = dimensions[item.dimension];
+      return `
+        <article class="priority-item">
+          <div class="priority-head">
+            <h3>${index + 1}. ${profile.title}</h3>
+            <span class="badge">Skor ${item.score.toFixed(1)}</span>
+          </div>
+          <p><strong>Rasional:</strong> ${profile.rationale} ${recommendationIntro(item.score)}</p>
+          <div class="priority-details">
+            <div class="detail-box">
+              <strong>Kegiatan aktual</strong>
+              ${listItems(profile.activities)}
+            </div>
+            <div class="detail-box">
+              <strong>Komponen biaya</strong>
+              ${listItems(profile.costs)}
+            </div>
+            <div class="detail-box">
+              <strong>Mitra kerja</strong>
+              ${listItems(profile.partners)}
+            </div>
+            <div class="detail-box">
+              <strong>Indikator terukur</strong>
+              ${listItems(profile.metrics)}
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderBars(dimensionScores) {
+      const sortedForDisplay = [...dimensionScores].sort((a, b) => a.title.localeCompare(b.title));
+      return `
+        <div class="bar-list">
+          ${sortedForDisplay.map((item) => `
+            <div class="bar-row">
+              <strong>${item.title}</strong>
+              <div class="bar-track"><div class="bar-fill" style="width: ${(item.score / 4) * 100}%"></div></div>
+              <span>${item.score.toFixed(1)}</span>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function buildTimeline(priorities, field) {
+      const titles = priorities.map((item) => dimensions[item.dimension].title);
+      const first = titles[0] || "dimensi prioritas";
+      const second = titles[1] || "mutu artikel";
+      const third = titles[2] || "visibilitas";
+      const fieldFocus = field === "SosHum"
+        ? "perkuat posisi argumen, kontribusi konseptual, dan jejaring SosHum"
+        : "perkuat validitas metode, data availability, dan metadata teknis";
+
+      return [
+        {
+          period: "0-3 bulan",
+          items: [
+            `Audit bukti kerja untuk ${first}.`,
+            "Tetapkan penanggung jawab, SOP ringkas, baseline skor, dan indikator triwulan.",
+            "Perbaiki halaman kebijakan, panduan penulis, dan daftar artikel prioritas."
+          ]
+        },
+        {
+          period: "4-6 bulan",
+          items: [
+            `Jalankan pelatihan atau klinik untuk ${second}.`,
+            "Bangun database reviewer, mitra, dan artikel unggulan.",
+            `Mulai ${fieldFocus}.`
+          ]
+        },
+        {
+          period: "7-9 bulan",
+          items: [
+            `Luncurkan kegiatan kolaboratif untuk ${third}.`,
+            "Adakan call for papers atau diskusi artikel tematik dengan mitra terpilih.",
+            "Pantau data pembaca, unduhan, review, dan sitasi awal."
+          ]
+        },
+        {
+          period: "10-12 bulan",
+          items: [
+            "Evaluasi capaian indikator dan bandingkan dengan baseline.",
+            "Pilih kegiatan yang terbukti berdampak untuk dilanjutkan.",
+            "Susun roadmap tahun berikutnya berbasis bukti, bukan asumsi."
+          ]
+        }
+      ];
+    }
+
+    function renderTimeline(priorities, field) {
+      return `
+        <div class="timeline">
+          ${buildTimeline(priorities, field).map((step) => `
+            <div class="timeline-step">
+              <h3>${step.period}</h3>
+              ${listItems(step.items)}
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function sanitizeFilePart(value) {
+      const cleaned = (value || "evaluasi-jurnal")
+        .normalize("NFKD")
+        .replace(/[^\w\s-]/g, "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
+      return cleaned || "evaluasi-jurnal";
+    }
+
+    function buildFileName(journalName, evaluationDate) {
+      return `${sanitizeFilePart(journalName)}_${evaluationDate}_evaluasi-diri.txt`;
+    }
+
+    function buildReportText(data) {
+      const { journalName, evaluationDate, field, overall, status, weak, dimensionScores, priorities } = data;
+      const lines = [];
+      lines.push("Evaluasi Diri Roadmap Jurnal");
+      lines.push("================================");
+      lines.push(`Jurnal: ${journalName || "Tanpa nama"}`);
+      lines.push(`Tanggal evaluasi: ${evaluationDate}`);
+      lines.push(`Bidang: ${field}`);
+      lines.push(`Skor kesiapan: ${overall.toFixed(2)} dari 4.00`);
+      lines.push(`Status: ${status.label}`);
+      lines.push("");
+      lines.push("Dimensi terlemah:");
+      weak.forEach((item, index) => lines.push(`${index + 1}. ${item.title} - ${item.score.toFixed(2)}`));
+      lines.push("");
+      lines.push("Skor per dimensi:");
+      [...dimensionScores]
+        .sort((a, b) => a.title.localeCompare(b.title))
+        .forEach((item) => lines.push(`- ${item.title}: ${item.score.toFixed(2)}`));
+      lines.push("");
+      lines.push("Prioritas roadmap:");
+      priorities.forEach((item, index) => {
+        const profile = dimensions[item.dimension];
+        lines.push("");
+        lines.push(`${index + 1}. ${profile.title} - skor ${item.score.toFixed(2)}`);
+        lines.push(`   Rasional: ${profile.rationale} ${recommendationIntro(item.score)}`);
+        lines.push("   Kegiatan aktual:");
+        profile.activities.forEach((activity) => lines.push(`   - ${activity}`));
+        lines.push("   Komponen biaya:");
+        profile.costs.forEach((cost) => lines.push(`   - ${cost}`));
+        lines.push("   Mitra kerja:");
+        profile.partners.forEach((partner) => lines.push(`   - ${partner}`));
+        lines.push("   Indikator terukur:");
+        profile.metrics.forEach((metric) => lines.push(`   - ${metric}`));
+      });
+      lines.push("");
+      lines.push("Rencana 12 bulan:");
+      buildTimeline(priorities, field).forEach((step) => {
+        lines.push("");
+        lines.push(step.period);
+        step.items.forEach((item) => lines.push(`- ${item}`));
+      });
+      return lines.join("\n");
+    }
+
+    function renderResults() {
+      clearMessage();
+      const field = getField();
+      if (!field) {
+        showMessage("Pilih bidang kajian terlebih dahulu.");
+        return;
+      }
+
+      const { answers, missing } = collectAnswers();
+      if (missing.length) {
+        const firstMissing = document.querySelector(`[data-question="${missing[0].id}"]`);
+        showMessage(`Masih ada ${missing.length} pertanyaan yang belum dijawab. Lengkapi semua pertanyaan agar rekomendasi terukur.`);
+        if (firstMissing) firstMissing.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+
+      const journalName = document.getElementById("journalName").value.trim();
+      const evaluationDate = getEvaluationDate();
+      const { overall, dimensionScores } = computeScores(answers);
+      const status = statusFor(overall);
+      const weak = dimensionScores.slice(0, 3);
+      const priorities = dimensionScores.slice(0, 5);
+      const strongest = [...dimensionScores].sort((a, b) => b.score - a.score)[0];
+
+      scoreValue.textContent = overall.toFixed(1);
+      resultLead.textContent = `${journalName ? journalName + " " : ""}berada pada status "${status.label}". ${status.tone}`;
+
+      const summaryHtml = `
+        <section class="output-panel">
+          <div>
+            <h2>Opsi hasil</h2>
+            <p>Unduhan tidak otomatis. Klik simpan untuk mengunduh laporan TXT terstruktur.</p>
+          </div>
+          <div class="result-actions" aria-label="Opsi simpan hasil evaluasi">
+            <button class="btn secondary" type="button" data-action="copy-report">Salin Hasil</button>
+            <button class="btn" type="button" data-action="save-report">Simpan Hasil (.txt)</button>
+            <button class="btn secondary" type="button" data-action="print-report">Cetak</button>
+          </div>
+        </section>
+        <section>
+          <div class="summary-grid">
+            <div class="summary-item">
+              <span>Bidang kajian</span>
+              <strong>${field}</strong>
+            </div>
+            <div class="summary-item">
+              <span>Status kesiapan</span>
+              <strong>${status.label}</strong>
+            </div>
+            <div class="summary-item">
+              <span>Dimensi terkuat</span>
+              <strong>${strongest.title} (${strongest.score.toFixed(1)})</strong>
+            </div>
+          </div>
+        </section>
+      `;
+
+      const weakHtml = `
+        <section>
+          <h2>Dimensi terlemah</h2>
+          <p>Dimensi berikut sebaiknya menjadi dasar pemilihan kegiatan roadmap karena skornya paling rendah.</p>
+          <ul class="weak-list">
+            ${weak.map((item) => `<li><strong>${item.title}</strong> - skor ${item.score.toFixed(1)}. ${statusFor(item.score).label}.</li>`).join("")}
+          </ul>
+        </section>
+      `;
+
+      const barsHtml = `
+        <section>
+          <h2>Skor per dimensi</h2>
+          <p>Gunakan grafik ini untuk melihat celah kapasitas antar area kerja jurnal.</p>
+          ${renderBars(dimensionScores)}
+        </section>
+      `;
+
+      const priorityHtml = `
+        <section>
+          <h2>5 prioritas roadmap utama</h2>
+          <p>Prioritas diurutkan dari skor terendah agar kegiatan awal berfokus pada celah paling penting.</p>
+          <div class="priority-list">
+            ${priorities.map((item, index) => renderPriority(item, index)).join("")}
+          </div>
+        </section>
+      `;
+
+      const timelineHtml = `
+        <section>
+          <h2>Rencana 12 bulan</h2>
+          <p>Gunakan fase berikut sebagai kerangka kerja. Setiap jurnal dapat menyesuaikan beban kegiatan dengan SDM dan anggaran yang tersedia.</p>
+          ${renderTimeline(priorities, field)}
+        </section>
+      `;
+
+      resultContent.innerHTML = summaryHtml + weakHtml + barsHtml + priorityHtml + timelineHtml;
+      resultBlock.classList.add("show");
+      resultBlock.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      latestReportText = buildReportText({ journalName, evaluationDate, field, overall, status, weak, dimensionScores, priorities });
+      latestFileName = buildFileName(journalName, evaluationDate);
+      setActionStatus("Hasil siap disalin, disimpan, atau dicetak.");
+    }
+
+    form.addEventListener("change", (event) => {
+      if (event.target.name === "field") {
+        renderQuestions(event.target.value);
+      }
+      updateProgress();
+      setActionStatus("");
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      renderResults();
+    });
+
+    form.addEventListener("reset", () => {
+      window.setTimeout(() => {
+        activeQuestions = [];
+        latestReportText = "";
+        latestFileName = "";
+        setDefaultEvaluationDate();
+        renderQuestions("");
+        resultBlock.classList.remove("show");
+        clearMessage();
+        setActionStatus("");
+      }, 0);
+    });
+
+    async function copyReport() {
+      if (!latestReportText) {
+        showMessage("Hitung rekomendasi terlebih dahulu sebelum menyalin hasil.");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(latestReportText);
+        setActionStatus("Hasil evaluasi sudah disalin.");
+      } catch (error) {
+        const textArea = document.createElement("textarea");
+        textArea.value = latestReportText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        setActionStatus("Hasil evaluasi sudah disalin.");
+      }
+    }
+
+    function saveReport() {
+      if (!latestReportText) {
+        showMessage("Hitung rekomendasi terlebih dahulu sebelum menyimpan hasil.");
+        return;
+      }
+
+      const blob = new Blob([latestReportText], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = latestFileName || buildFileName(document.getElementById("journalName").value.trim(), getEvaluationDate());
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      setActionStatus(`File TXT disiapkan: ${link.download}`);
+    }
+
+    function printReport() {
+      if (!latestReportText) {
+        showMessage("Hitung rekomendasi terlebih dahulu sebelum mencetak hasil.");
+        return;
+      }
+      window.print();
+    }
+
+    copyBtn.addEventListener("click", copyReport);
+    saveBtn.addEventListener("click", saveReport);
+    resultCopyBtn.addEventListener("click", copyReport);
+    resultSaveBtn.addEventListener("click", saveReport);
+    printBtn.addEventListener("click", printReport);
+    resultPrintBtn.addEventListener("click", printReport);
+    resultContent.addEventListener("click", (event) => {
+      const actionButton = event.target.closest("[data-action]");
+      if (!actionButton) return;
+      const action = actionButton.dataset.action;
+      if (action === "copy-report") copyReport();
+      if (action === "save-report") saveReport();
+      if (action === "print-report") printReport();
+    });
+
+    setDefaultEvaluationDate();
+    updateProgress();
+  </script>
+<div class="toolkit-attribution">Toolkit ini dikembangkan oleh Ikhwan Arief (ikhwan[at]unand.ac.id)</div>
+</body>
+</html>

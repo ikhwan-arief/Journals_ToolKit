@@ -61,14 +61,6 @@ Jika Pages belum aktif, buka **Settings > Pages**, pilih branch `main`, folder `
 - Folder `OAI_PMH/` adalah repo lama/sumber terpisah dan sengaja diabaikan oleh `.gitignore` repo ini.
 - Validator OAI-PMH versi statis berjalan dari browser. Akses endpoint tertentu dapat dipengaruhi kebijakan CORS server jurnal.
 
-## Catatan Lisensi dan Atribusi
-
-Toolkit ini mengadaptasi halaman dari `ejournal.unand.ac.id` dengan izin pemilik. Lisensi masing-masing aplikasi dipertahankan di halaman terkait:
-
-- Simulasi Arjuna 2021: catatan asli CC BY.
-- DOAJ Precheck: copyright Ikhwan Arief, CC BY-NC-ND, dengan izin adaptasi.
-- Pra Nilai Arjuna: atribusi sumber `ejournal.unand.ac.id`.
-- OAI-PMH: mengikuti catatan lisensi dari proyek `ojs-oai-pmh-checker`.
 
 Kode integrasi toolkit dan layout bersama menggunakan MIT License sesuai `LICENSE`, dengan tetap menghormati catatan lisensi konten aplikasi di atas.
 

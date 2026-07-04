@@ -1,6 +1,6 @@
 # Status Journals_ToolKit
 
-Terakhir diperbarui: 2026-07-04 19:15 WIB
+Terakhir diperbarui: 2026-07-04 19:04 WIB
 
 ## Ringkasan
 
@@ -22,9 +22,9 @@ Status umum:
 | GitHub Pages | `built` |
 | Pages source | `main` / `/docs` |
 | HTTPS | Aktif dan enforced |
-| Working tree repo induk setelah push redesign | Bersih |
-| Perubahan lokal setelah dokumen ini dibuat | `?? STATUS.md` |
-| Commit terbaru | `5cd32bd Apply Cal.com inspired toolkit redesign` |
+| Working tree repo induk setelah push DOI XML Repair | Bersih sebelum pembaruan dokumen status ini |
+| Perubahan lokal setelah dokumen ini dibuat | Tidak ada perubahan aplikasi; dokumen ini diperbarui setelah verifikasi publik |
+| Commit aplikasi DOI XML Repair | `8c1043c Add DOI XML Repair to toolkit` |
 
 ## Status Repo GitHub
 
@@ -41,6 +41,7 @@ Metadata GitHub saat pengecekan:
 Riwayat commit terakhir:
 
 ```text
+8c1043c Add DOI XML Repair to toolkit
 5cd32bd Apply Cal.com inspired toolkit redesign
 54cf273 Add evaluation self-assessment tool
 d93fec6 Remove license and attribution section from README
@@ -75,7 +76,7 @@ Semua URL berikut sudah diverifikasi dengan request HEAD dan mengembalikan `HTTP
 | Simulasi Arjuna 2021 | `https://ikhwan-arief.github.io/Journals_ToolKit/arjuna-2021/` | `200` |
 | Pra Nilai Arjuna | `https://ikhwan-arief.github.io/Journals_ToolKit/pra-nilai-arjuna/` | `200` |
 | DOAJ Precheck | `https://ikhwan-arief.github.io/Journals_ToolKit/doaj-precheck/` | `200` |
-| DOI XML Repair | `https://ikhwan-arief.github.io/Journals_ToolKit/doi-xml-repair/` | Belum diverifikasi publik setelah perubahan lokal |
+| DOI XML Repair | `https://ikhwan-arief.github.io/Journals_ToolKit/doi-xml-repair/` | `200` |
 | Evaluasi Diri Jurnal | `https://ikhwan-arief.github.io/Journals_ToolKit/evaluasi-diri-jurnal/` | `200` |
 
 ## Daftar Aplikasi
@@ -134,8 +135,8 @@ Status smoke test terakhir:
 | Path | `docs/doi-xml-repair/index.html` |
 | URL | `/doi-xml-repair/` |
 | Fungsi | Perbaikan XML Crossref dengan mempertahankan DOI artikel lama |
-| Status akses publik | Belum dipush setelah perubahan lokal |
-| Verifikasi terakhir | Belum diverifikasi publik setelah perubahan lokal |
+| Status akses publik | Aktif |
+| Verifikasi terakhir | HTTP 200 setelah deploy commit `8c1043c` |
 | Desain | Sudah disiapkan memakai gaya Cal.com-inspired |
 
 Fungsi yang dipertahankan:
@@ -333,7 +334,7 @@ cal.com-DESIGN.md
 
 ## Verifikasi Lokal Terakhir
 
-Verifikasi lokal yang sudah dilakukan sebelum sync terakhir:
+Verifikasi lokal yang sudah dilakukan sebelum deploy DOI XML Repair:
 
 - `git diff --check`: passed.
 - Local static server: `python3 -m http.server 8765 --directory docs`.
@@ -353,6 +354,16 @@ Hasil ringkas:
 | Horizontal overflow | Tidak ditemukan pada smoke test |
 | CTA utama | Hitam pada halaman utama dan tombol utama aplikasi |
 | Footer | Gelap dan seragam |
+
+## Verifikasi Publik Setelah DOI XML Repair
+
+Verifikasi setelah commit `8c1043c` dipush ke `main`:
+
+- GitHub Pages API: `built`.
+- Portal publik: `https://ikhwan-arief.github.io/Journals_ToolKit/` mengembalikan `HTTP/2 200`.
+- DOI XML Repair: `https://ikhwan-arief.github.io/Journals_ToolKit/doi-xml-repair/` mengembalikan `HTTP/2 200`.
+- Portal publik sudah memuat link `DOI XML Repair`.
+- Halaman DOI XML Repair publik sudah memuat markup aplikasi, termasuk tombol `generateButton` dan script lokal aplikasi.
 
 ## Status Repo Lama `OAI_PMH`
 
@@ -377,7 +388,7 @@ M docs/screenshot.png
 Catatan penting:
 
 - Perubahan lokal di `OAI_PMH` tidak dihapus dan tidak direvert.
-- Repo induk `Journals_ToolKit` dalam kondisi bersih setelah push terakhir; setelah dokumen ini dibuat ada perubahan lokal baru berupa `STATUS.md`.
+- Repo induk `Journals_ToolKit` sudah disinkronkan ke GitHub; dokumen status ini ikut dipush sebagai pembaruan dokumentasi deploy.
 - GitHub Pages toolkit memakai repo induk dan folder `/docs`, bukan folder `OAI_PMH/`.
 
 ## Catatan Operasional

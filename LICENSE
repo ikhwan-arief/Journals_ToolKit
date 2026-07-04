@@ -1,0 +1,17 @@
+Mixed License Notice
+
+Copyright (c) 2026 Ikhwan Arief
+
+This repository combines multiple journal-support tools with different licensing notes:
+
+1. Toolkit integration code, shared layout, and repository documentation are provided under the MIT License unless a page states otherwise.
+2. The Arjuna 2021 simulation page keeps its CC BY attribution note.
+3. The DOAJ Precheck page keeps its CC BY-NC-ND attribution note and is adapted here with permission from the copyright holder.
+4. The Pra Nilai Arjuna page is adapted from ejournal.unand.ac.id with attribution.
+5. The OAI-PMH validator keeps the licensing terms from the original ojs-oai-pmh-checker project.
+
+MIT License for toolkit integration code:
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of the toolkit integration code and associated documentation files, to deal in the toolkit integration code without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the toolkit integration code, subject to the notices above for adapted application content.
+
+THE TOOLKIT INTEGRATION CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.

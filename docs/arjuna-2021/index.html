@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulasi Kalkulasi Penilaian Arjuna 2021</title>
+<style>
+  :root {
+    --bg: #f4f7ff;
+    --card: #ffffff;
+    --muted: #2f3b66;
+    --text: #0b0e15;
+    --accent: #2343ff;
+    --border: #e5e9ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    line-height: 1.45;
+  }
+  header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(8px);
+    z-index: 50;
+  }
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h1 {
+    margin: 0;
+    font-size: 22px;
+  }
+  .sub {
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 330px;
+    gap: 18px;
+    padding: 18px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 10px 20px rgba(20,40,140,0.06);
+  }
+  h2 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+  }
+  h3 {
+    margin: 6px 0;
+    font-size: 15px;
+    color: #30407a;
+  
+    font-weight: normal;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 10px;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .row:last-child { border-bottom: 0; }
+  .label { font-size: 14px; }
+  select, input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    background: #f8faff;
+    color: var(--text);
+    border: 1px solid #d9e2ff;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .side .score {
+    font-size: 44px;
+    font-weight: 800;
+    margin: 4px 0;
+    color: #142366;
+  }
+  .side .rank {
+    font-size: 15px;
+    color: #30407a;
+  }
+  .meter {
+    height: 10px;
+    background: #f1f4ff;
+    border: 1px solid #e0e7ff;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 10px 0 6px 0;
+  }
+  .meter > div {
+    height: 100%;
+    background: linear-gradient(90deg, #6ea8ff, #2ed573);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  button {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #d9e2ff;
+    background: #f8faff;
+    color: #142366;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  button:hover { background: #eef3ff; }
+  .legend table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .legend th, .legend td {
+    text-align: left;
+    padding: 8px 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .baris-kosong { height: 18px; }
+  /* Sticky result card */
+  #hasil-card { position: sticky; top: 84px; }
+
+  footer {
+    color: #5e6aa3;
+    font-size: 11px;
+    padding: 6px 20px 20px;
+    
+  }
+
+  /* Print styles */
+  #print-summary { display: none; }
+  #pdf-footer { display: none; }
+  @media print {
+    #id-jurnal { display: none !important; }
+    @page { size: A4 landscape; margin: 14mm 12mm 18mm 12mm; }
+    header, .grid, footer { display: none !important; }
+    #print-summary { display: block !important; }
+    body { background: white; color: #111; }
+    .print-card {
+      border: 0;
+      box-shadow: none;
+      padding: 0;
+    }
+    .print-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    .print-table th, .print-table td {
+      border: 1px solid #bbb;
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    /* Repeat footer text at bottom of each printed page */
+    #pdf-footer {
+      display: block !important;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-size: 10px;
+      color: #666;
+      padding: 4px 12mm;
+      
+    }
+  }
+</style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231d4ed8'/%3E%3Cpath d='M18 18h28v6H18zm0 11h28v6H18zm0 11h18v6H18z' fill='white'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../assets/toolkit.css" />
+  
+<style>
+  :root { --bg:#f8fafc; --card:#ffffff; --muted:#4b5563; --text:#111827; --accent:#1d4ed8; --border:#dbe3ef; }
+  body { background: var(--bg); }
+  header { position: static; background:#ffffff; border-bottom:1px solid var(--border); }
+  .card { border-radius:8px; box-shadow:none; }
+  select, input[type="text"] { border-radius:6px; background:#ffffff; border-color:#cbd5e1; }
+  button { border-radius:6px; }
+</style>
+
+</head>
+<body>
+<div class="toolkit-topbar">
+  <div class="toolkit-topbar-inner">
+    <div class="toolkit-brand">
+      <strong>Journals Toolkit</strong>
+      <span>Alat bantu publik untuk pengelola jurnal</span>
+    </div>
+    <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
+      <a href="../">Portal</a><a href="../oai-pmh/">OAI-PMH</a><a href="../arjuna-2021/" aria-current="page">Arjuna 2021</a><a href="../pra-nilai-arjuna/">Pra Nilai Arjuna</a><a href="../doaj-precheck/">DOAJ Precheck</a>
+    </nav>
+  </div>
+</div>
+
+  <header>
+    <div class="wrap">
+      <h1>Simulasi Kalkulasi Penilaian Arjuna 2021</h1>
+      <div class="sub">Isi identitas jurnal, lalu pilih indikator pada setiap sub unsur. Nilai total dan peringkat dihitung otomatis.</div>
+    </div>
+  </header>
+
+  <!-- Top form for journal identity -->
+  <section id="id-jurnal" class="wrap" style="padding: 18px;">
+  <div class="card">
+    <h2>Identitas Jurnal</h2>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:8px;">
+      <!-- Row 1 -->
+      <div class="row" style="grid-template-columns: 180px 1fr;">
+        <label class="label" for="nama-jurnal">Nama jurnal</label>
+        <input type="text" id="nama-jurnal" placeholder="contoh: jurnal optimasi sistem industri">
+      </div>
+      <div class="row" style="grid-template-columns: 180px 1fr;">
+        <label class="label" for="penerbit">Nama penerbit</label>
+        <input type="text" id="penerbit" placeholder="contoh: lppm universitas andalas">
+      </div>
+      <!-- Row 2 -->
+      <div class="row" style="grid-template-columns: 180px 1fr;">
+        <label class="label" for="issn-cetak">ISSN cetak</label>
+        <input type="text" id="issn-cetak" placeholder="contoh: 1412-1234">
+      </div>
+      <div class="row" style="grid-template-columns: 180px 1fr;">
+        <label class="label" for="issn-elektronik">ISSN elektronik</label>
+        <input type="text" id="issn-elektronik" placeholder="contoh: 2614-5678">
+      </div>
+    </div>
+  </div>
+</section>
+
+  <main class="wrap grid">
+    <section id="form-area">
+      <!-- Groups and sub-unsur will be injected here -->
+    </section>
+    <aside class="side">
+  <div class="card legend">
+    <h2>Rentang Peringkat</h2>
+    <table>
+      <thead>
+        <tr><th>Peringkat</th><th>Nilai</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Peringkat 1</td><td>85 sampai 100</td></tr>
+        <tr><td>Peringkat 2</td><td>70 sampai 84.9</td></tr>
+        <tr><td>Peringkat 3</td><td>60 sampai 69.9</td></tr>
+        <tr><td>Peringkat 4</td><td>50 sampai 59.9</td></tr>
+        <tr><td>Peringkat 5</td><td>40 sampai 49.9</td></tr>
+        <tr><td>Peringkat 6</td><td>30 sampai 39.9</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="baris-kosong"></div>
+  <div class="card" id="hasil-card">
+    <h2>Hasil</h2>
+    <div class="score" id="total-score">0.0</div>
+    <div class="meter"><div id="meter-bar"></div></div>
+    <div class="rank" id="rank-label">Peringkat belum ditentukan</div>
+    <div style="margin-top:8px; font-size:14px; color:#30407a;">
+      <div>Subtotal Manajemen: <strong><span id="subtotal-manajemen">0.0</span></strong></div>
+      <div>Subtotal Substansi: <strong><span id="subtotal-substansi">0.0</span></strong></div>
+<div id="note-subs" style="margin-top:6px; font-size:14px; color:#cc0000; display:none;"></div>
+    </div>
+    <div class="btns">
+      <button id="reset-btn" type="button">Reset pilihan</button>
+      <button id="pdf-btn" type="button">Cetak/Unduh PDF</button>
+    </div>
+  </div>
+</aside>
+  </main>
+
+  <!-- Print-only summary -->
+  <section id="print-summary" class="wrap">
+    <div class="print-card">
+      <h2>Ringkasan Simulasi Penilaian Arjuna 2021</h2>
+      <table class="print-table" style="margin-bottom:10px;">
+        <tbody>
+          <tr><th style="width:170px;">Nama jurnal</th><td id="p-nama"></td></tr>
+          <tr><th>ISSN cetak</th><td id="p-issn-cetak"></td></tr>
+          <tr><th>ISSN elektronik</th><td id="p-issn-elektronik"></td></tr>
+          <tr><th>Nama penerbit</th><td id="p-penerbit"></td></tr>
+          <tr><th>Waktu cetak</th><td id="p-waktu"></td></tr>
+          <tr><th>Total nilai</th><td id="p-total"></td></tr>
+          <tr><th>Sub total nilai manajemen</th><td id="p-subtotal-manajemen"></td></tr>
+          <tr><th>Sub total nilai substansi</th><td id="p-subtotal-substansi"></td></tr>
+          <tr><th>Peringkat</th><td id="p-rank"></td></tr>
+</tbody>
+      </table>
+      <table class="print-table" id="print-table">
+        <thead>
+          <tr>
+            <th>Kelompok</th>
+            <th>Sub Unsur</th>
+            <th>Indikator yang dipilih</th>
+            <th>Nilai</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Print footer repeated on each page -->
+  <div id="pdf-footer">Untuk simulasi pra akreditasi jurnal. Bukan hasil akreditasi. Disediakan oleh PPJS LPPM Universitas Andalas. Lisensi: CC BY</div>
+
+  <footer class="wrap">
+    Untuk simulasi pra akreditasi jurnal. Bukan hasil akreditasi. Disediakan oleh PPJS LPPM Universitas Andalas. Lisensi: CC BY
+  </footer>
+
+<script>
+const DATA = {"Manajemen": {"Alamat/Identitas Unik Artikel": [{"text": "Memiliki DOI tiap artikel","value": 1.0},{"text": "Memiliki alamat laman yang permanen setiap artikel","value": 0.5},{"text": "Tidak memiliki DOI ataupun alamat laman permanen","value": 0.0}],"Desain Tampilan Laman (Website) dan Desain Sampul": [{"text": "Berciri khas dan informatif","value": 1.0},{"text": "Tidak berciri khas dan tidak informatif","value": 0.0}],"Indeks Pencarian pada Mesin Pencari Jurnal": [{"text": "Berindeks subjek dan berindeks pengarang yang terinci dan mesin pencari berfungsi dengan baik","value": 1.0},{"text": "Berindeks subjek saja atau berindeks pengarang saja dan mesin pencari kurang berfungsi dengan baik","value": 0.5},{"text": "Tidak berindeks atau mesin pencari tidak berfungsi","value": 0.0}],"Jadwal terbit": [{"text": ">80% terbitan sesuai dengan periode yang ditentukan","value": 1.0},{"text": "40-80 % terbitan sesuai dengan periode yang ditentukan","value": 0.5},{"text": "<40% terbitan sesuai dengan periode yang ditentukan","value": 0.0}],"Jumlah Halaman per terbitan": [{"text": ">= 100 halaman","value": 2.0},{"text": "25-99 halaman","value": 1.0},{"text": "<25 halaman","value": 0.0}],"Jumlah kunjungan unik ke laman": [{"text": ">50 kunjungan unik ke laman rerata per hari untuk jurnal yang terbit","value": 3.0},{"text": "10-50 kunjungan unik ke laman rerata per hari untuk jurnal yang terbit","value": 2.0},{"text": "<10 kunjungan unik ke laman rerata per hari untuk jurnal yang terbit","value": 1.0}],"Kelembagaan Penerbit": [{"text": "Organisasi profesi ilmiah bekerjasama dengan perguruan tinggi dan/atau lembaga penelitian dan pengembangan/ Kementerian/Non Kementerian","value": 4.0},{"text": "Organisasi profesi ilmiah atau perguruan tinggi atau lembaga penelitian dan pengembangan","value": 3.0},{"text": "Penerbit selain a dan b","value": 1.0}],"Kualifikasi Dewan Penyunting": [{"text": "Lebih dari 50% (dari total Dewan Penyunting) penyunting berkualifikasi internasional dan berasal dari 4 negara atau lebih","value": 5.0},{"text": "Kurang dari 50% (dari total Dewan Penyunting) penyunting berkualifikasi internasional dan berasal dari 2 hingga 3 negara","value": 3.0},{"text": "Lainnya yang belum berpengalaman menulis artikel di jurnal ilmiah internasional dan berasal dari 2 institusi berbeda","value": 1.0}],"Manajemen jurnal ilmiah": [{"text": "Menggunakan manajemen penyuntingan secara daring penuh","value": 2.0},{"text": "Menggunakan manajemen penyuntingan secara kombinasi antara daring dan surat elektronik","value": 1.0},{"text": "Menggunakan manajemen penyuntingan melalui surat elektronik saja","value": 0.5}],"Mutu Penyuntingan Gaya dan Format": [{"text": "Baik sekali dan sangat konsisten antar terbitan dan antar artikel","value": 2.0},{"text": "Kurang baik dan kurang konsisten antar terbitan dan antar artikel","value": 1.0},{"text": "Tidak baik atau tidak konsisten antar terbitan dan antar artikel","value": 0.0}],"Mutu Penyuntingan Substansi": [{"text": "Baik sekali. Mitra bestari secara ketat menilai naskah, memberikan catatan dan saran perbaikan secara substantif, sehingga mutu isi artikel jurnal terjaga","value": 3.0},{"text": "Baik. Mitra bestari membantu menilai naskah, memberikan catatan, dan saran perbaikan seperlunya","value": 2.0},{"text": "Tidak baik. Mitra bestari tidak nyata dampak kinerjanya atau catatan saran perbaikan hanya masalah bahasa dan layout saja","value": 0.0}],"Pelibatan Mitra Bebestari": [{"text": "Melibatkan mitra bestari berkualifikasi internasional >50% (dari total mitra bestari) dan berasal dari 4 negara atau lebih","value": 6.0},{"text": "Melibatkan mitra bestari berkualifikasi nasional >50% (dari total mitra bestari) dan berasal dari 2 hingga 3 negara","value": 4.0},{"text": "Melibatkan mitra bestari berkualifikasi nasional >50% (dari total mitra bestari) dan berasal dari beberapa institusi dalam negeri","value": 2.0},{"text": "Melibatkan mitra bestari setempat (dari institusi yang sama)","value": 1.0},{"text": "Tidak melibatkan (tidak ada) mitra bestari","value": 0.0}],"Penamaan Jurnal Ilmiah": [{"text": "Spesifik sehingga mencerminkan super spesialisasi atau spesialisasi disiplin ilmu tertentu","value": 2.0},{"text": "Kurang spesifik dan bersifat umum","value": 1.0},{"text": "Tidak spesifik dan/atau memakai nama lembaga/institusi lokal","value": 0.5}],"Pencantuman di Lembaga Pengindeks": [{"text": "Tercantum di lembaga pengindeks internasional bereputasi","value": 8.0},{"text": "Tercantum dalam lembaga pengindeks internasional","value": 6.0},{"text": "Tercantum dalam lembaga pengindeks nasional","value": 4.0}],"Penomoran Halaman": [{"text": "Berurut dalam satu volume","value": 1.0},{"text": "Tidak berurut dalam satu volume","value": 0.0}],"Penomoran terbitan": [{"text": "Baku dan bersistem","value": 1.0},{"text": "Tidak baku tetapi bersistem","value": 0.5},{"text": "Tidak bersistem dan tidak baku","value": 0.0}],"Petunjuk Penulisan bagi Penulis": [{"text": "Terinci, lengkap, dan jelas secara substantif, sistematis dan tersedia contoh atau template","value": 1.0},{"text": "Kurang lengkap dan kurang jelas","value": 0.5},{"text": "Tidak ada","value": 0.0}],"Resolusi Dokumen": [{"text": "Konsisten dan bermutu resolusi tinggi","value": 1.0},{"text": "Tidak konsisten atau berkualitas resolusi rendah","value": 0.5}],"Tata Letak": [{"text": "Konsisten antar artikel dan antar terbitan","value": 1.0},{"text": "Kurang konsisten","value": 0.5},{"text": "Tidak konsisten","value": 0.0}],"Tipografi": [{"text": "Konsisten antar artikel dan antar terbitan","value": 1.0},{"text": "Kurang konsisten","value": 0.5},{"text": "Tidak konsisten","value": 0.0}],"Ukuran bidang Tulisan": [{"text": "Konsisten berukuran A4 (210x297 mm)","value": 1.0},{"text": "Tidak konsisten","value": 0.5}]},"Substansi": {"Abstrak": [{"text": "Abstrak yang jelas dan ringkas dalam Bahasa Inggris dan/atau Bahasa Indonesia","value": 2.0},{"text": "Abstrak kurang jelas dan ringkas dalam Bahasa Inggris dan/atau Bahasa Indonesia","value": 1.0},{"text": "Abstrak tidak jelas dan bahasa tidak baku","value": 0.5}],"Analisis dan sintesis": [{"text": "Sangat baik dan sangat mendalam","value": 5.0},{"text": "Cukup baik dan cukup mendalam","value": 3.0},{"text": "Kurang baik dan kurang mendalam","value": 1.0}],"Aspirasi Wawasan": [{"text": "Distribusi asal penulis lebih dari 5 negara (rerata per tahun)","value": 8.0},{"text": "Distribusi asal penulis dari 3 hingga 5 negara (rerata per tahun)","value": 6.0},{"text": "Distribusi asal penulis dari 2 negara (rerata per tahun)","value": 3.0},{"text": "Distribusi asal penulis dari 1 negara (rerata per tahun)","value": 1.0}],"Cakupan Keilmuan": [{"text": "Semua (100%) artikel sesuai dengan fokus dan skop jurnal","value": 4.0},{"text": "Sebagian artikel kurang sesuai dengan fokus dan skop jurnal","value": 3.0},{"text": "Sebagian besar artikel dari berbagai bidang ilmu tidak sejenis atau bunga rampai","value": 1.0}],"Dampak Ilmiah": [{"text": "Jumlah sitasi 3 tahun terakhir: >30","value": 8.0},{"text": "Jumlah sitasi 3 tahun terakhir: 15-30","value": 6.0},{"text": "Jumlah sitasi 3 tahun terakhir: 8-14","value": 4.0},{"text": "Jumlah sitasi 3 tahun terakhir: 3-7","value": 2.0},{"text": "Jumlah sitasi 3 tahun terakhir: 1-2","value": 1.0}],"Derajat kemutakhiran pustaka acuan": [{"text": "> 80 % dari jumlah daftar rujukan","value": 3.0},{"text": "40-80 % dari jumlah daftar rujukan","value": 2.0},{"text": "< 40 % dari jumlah daftar rujukan","value": 1.0}],"Kata Kunci": [{"text": "Ada, konsisten dan mencerminkan konsep penting dalam artikel","value": 1.0},{"text": "Ada tetapi kurang konsisten atau kurang mencerminkan konsep penting dalam artikel","value": 0.5},{"text": "Tidak ada","value": 0.0}],"Keefektifan judul artikel": [{"text": "Lugas dan informatif","value": 1.0},{"text": "Lugas tetapi kurang informatif atau sebaliknya","value": 0.5},{"text": "Tidak lugas dan tidak informatif","value": 0.0}],"Kepioniran / orisinalitas karya": [{"text": "Memuat artikel yang berisi karya orisinal dan mempunyai kebaruan/memberikan kontribusi ilmiah sangat tinggi","value": 6.0},{"text": "Memuat artikel yang berisi karya orisinal dan mempunyai kebaruan/memberikan kontribusi ilmiah tinggi","value": 4.0},{"text": "Memuat artikel yang berisi karya orisinal dan mempunyai kebaruan/memberikan kontribusi ilmiah cukup","value": 2.0},{"text": "Memuat artikel yang berisi karya tidak orisinal dan/atau tidak mempunyai kebaruan/memberikan kontribusi ilmiah","value": 0.5}],"Makna sumbangan bagi kemajuan ilmu": [{"text": "Sangat nyata","value": 1.0},{"text": "Nyata","value": 0.5},{"text": "Kurang nyata","value": 0.0}],"Nisbah pustaka acuan primer terhadap pustaka acuan lainnya": [{"text": "> 80 % dari jumlah daftar rujukan","value": 3.0},{"text": "40-80 % dari jumlah daftar rujukan","value": 2.0},{"text": "< 40 % dari jumlah daftar rujukan","value": 1.0}],"Pemanfaatan instrumen pendukung": [{"text": "Informatif dan komplementer","value": 1.0},{"text": "Kurang informatif atau komplementer","value": 0.5},{"text": "Tidak termanfaatkan","value": 1.0}],"Pencantuman Nama Penulis dan Lembaga Penulis": [{"text": "Lengkap dan konsisten","value": 1.0},{"text": "Lengkap tetapi tidak konsisten","value": 0.5},{"text": "Tidak lengkap dan tidak konsisten","value": 0.0}],"Penggunaan istilah dan kebahasaan": [{"text": "Berbahasa Indonesia atau berbahasa resmi PBB yang baik dan benar","value": 2.0},{"text": "Berbahasa Indonesia atau berbahasa resmi PBB yang cukup baik dan benar","value": 1.0},{"text": "Berbahasa yang buruk","value": 0.0}],"Penyimpulan": [{"text": "Sangat baik","value": 3.0},{"text": "Baik","value": 2.0},{"text": "Cukup","value": 1.0}],"Penyusunan daftar pustaka": [{"text": "Baku dan konsisten, dan menyarankan menggunakan aplikasi pengutipan standar","value": 1.0},{"text": "Baku dan konsisten, tetapi tidak menyarankan menggunakan aplikasi pengutipan standar","value": 0.5},{"text": "Tidak baku dan tidak konsisten","value": 0.0}],"Sistem pengacuan pustaka dan pengutipan": [{"text": "Baku dan konsisten, dan menyarankan menggunakan aplikasi pengutipan standar","value": 1.0},{"text": "Baku dan konsisten, tetapi tidak menyarankan menggunakan aplikasi pengutipan standar","value": 0.5},{"text": "Tidak baku dan tidak konsisten","value": 0.0}],"Sistematika penulisan artikel": [{"text": "Lengkap dan bersistem baik","value": 1.0},{"text": "Lengkap tetapi tidak bersistem baik","value": 0.5},{"text": "Kurang lengkap dan tidak bersistem","value": 0.0}]}};
+const ORDER = {"Manajemen": ["Penamaan Jurnal Ilmiah", "Kelembagaan Penerbit", "Penyuntingan dan Manajemen Jurnal", "Pelibatan Mitra Bebestari", "Mutu Penyuntingan Substansi", "Kualifikasi Dewan Penyunting", "Petunjuk Penulisan bagi Penulis", "Mutu Penyuntingan Gaya dan Format", "Manajemen jurnal ilmiah", "Substansi Artikel", "Ukuran bidang Tulisan", "Tata Letak", "Tipografi", "Resolusi Dokumen", "Jumlah Halaman per terbitan", "Desain Tampilan Laman (Website) dan Desain Sampul", "Keberkalaan", "Jadwal terbit", "Penomoran terbitan", "Penomoran Halaman", "Indeks Pencarian pada Mesin Pencari Jurnal", "Penyebarluasan", "Jumlah kunjungan unik ke laman", "Pencantuman di Lembaga Pengindeks", "Alamat/Identitas Unik Artikel"], "Substansi": ["Cakupan Keilmuan", "Aspirasi Wawasan", "Kepioniran / orisinalitas karya", "Makna sumbangan bagi kemajuan ilmu", "Dampak Ilmiah", "Nisbah pustaka acuan primer terhadap pustaka acuan lainnya", "Derajat kemutakhiran pustaka acuan", "Analisis dan sintesis", "Penyimpulan", "Gaya Penulisan", "Keefektifan judul artikel", "Pencantuman Nama Penulis dan Lembaga Penulis", "Abstrak", "Kata Kunci", "Sistematika penulisan artikel", "Pemanfaatan instrumen pendukung", "Sistem pengacuan pustaka dan pengutipan", "Penyusunan daftar pustaka", "Penggunaan istilah dan kebahasaan", "Penampilan"]};
+const GROUP_ORDER = ["Manajemen", "Substansi"];
+
+function createOption(text, value) {
+  const opt = document.createElement('option');
+  opt.value = value;
+  opt.textContent = `${text} [${value}]`;
+  return opt;
+}
+
+function slugify(s) {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function makeSubCard(groupCard, subName, items) {
+  const row = document.createElement('div');
+  row.className = 'row';
+
+  const title = document.createElement('h3');
+  title.textContent = subName;
+  row.appendChild(title);
+
+  const select = document.createElement('select');
+  select.id = `sel-${slugify(subName)}`;
+
+  const def = document.createElement('option');
+  def.value = '0';
+  def.textContent = 'pilih';
+  select.appendChild(def);
+
+  const seen = new Set();
+  items.forEach(it => {
+    const key = `${it.text}|${it.value}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    select.appendChild(createOption(it.text, it.value));
+  });
+
+  select.addEventListener('change', updateTotals);
+  row.appendChild(select);
+
+  groupCard.appendChild(row);
+}
+
+function buildUI() {
+  const formArea = document.getElementById('form-area');
+  formArea.innerHTML = '';
+
+  const groups = GROUP_ORDER.filter(g => DATA[g]).length ? GROUP_ORDER.filter(g => DATA[g]) : Object.keys(DATA);
+
+  groups.forEach((groupName, idx) => {
+    const groupCard = document.createElement('div');
+    groupCard.className = 'card';
+    const h2 = document.createElement('h2');
+    h2.textContent = groupName;
+    groupCard.appendChild(h2);
+
+    const subunsurs = (ORDER[groupName] || Object.keys(DATA[groupName] || {})).filter(n => (DATA[groupName]||{})[n]);
+    subunsurs.forEach(subName => {
+      const items = DATA[groupName][subName] || [];
+      makeSubCard(groupCard, subName, items);
+
+      const rows = groupCard.querySelectorAll('.row');
+      const lastRow = rows[rows.length - 1];
+      const sel = lastRow.querySelector('select');
+      if (sel) {
+        sel.dataset.group = groupName;
+        sel.dataset.subunsur = subName;
+      }
+    });
+
+    formArea.appendChild(groupCard);
+
+    if (groupName === 'Manajemen' && groups[idx + 1] === 'Substansi') {
+      const spacer = document.createElement('div');
+      spacer.className = 'baris-kosong';
+      formArea.appendChild(spacer);
+    }
+  });
+}
+
+function calcRank(total) {
+  if (total >= 85) return 'Peringkat 1 (Satu)';
+  if (total >= 70 && total < 85) return 'Peringkat 2 (Dua)';
+  if (total >= 60 && total < 70) return 'Peringkat 3 (Tiga)';
+  if (total >= 50 && total < 60) return 'Peringkat 4 (Empat)';
+  if (total >= 40 && total < 50) return 'Peringkat 5 (Lima)';
+  if (total >= 30 && total < 40) return 'Peringkat 6 (Enam)';
+  return 'Belum masuk rentang peringkat';
+}
+
+function collectChoices() {
+  const out = [];
+  const cards = document.querySelectorAll('#form-area .card');
+  cards.forEach(card => {
+    const group = card.querySelector('h2')?.textContent || '';
+    const rows = card.querySelectorAll('.row');
+    rows.forEach(r => {
+      const sub = r.querySelector('h3')?.textContent || '';
+      const sel = r.querySelector('select');
+      const nilai = sel ? parseFloat(sel.value || '0') : 0;
+      const rawText = sel ? sel.options[sel.selectedIndex]?.text || '' : '';
+      const teks = rawText.replace(/\s*\[[^\]]*\]\s*$/, '');
+      out.push({ kelompok: group, sub_unsur: sub, nilai, teks });
+    });
+  });
+  return out;
+}
+
+function updateTotals() {
+  const selects = document.querySelectorAll('select');
+  let total = 0;
+  let man = 0;
+  let sub = 0;
+
+  selects.forEach(s => {
+    const v = parseFloat(s.value || '0');
+    if (!isNaN(v)) {
+      total += v;
+      const g = s.dataset.group || '';
+      if (g === 'Manajemen') man += v;
+      if (g === 'Substansi') sub += v;
+    }
+  });
+
+  document.getElementById('total-score').textContent = total.toFixed(1);
+  document.getElementById('rank-label').textContent = calcRank(total);
+  const meter = Math.max(0, Math.min(100, total));
+  document.getElementById('meter-bar').style.width = meter + '%';
+
+  const manEl = document.getElementById('subtotal-manajemen');
+  const subEl = document.getElementById('subtotal-substansi');
+  if (manEl) manEl.textContent = man.toFixed(1);
+  if (subEl) subEl.textContent = sub.toFixed(1);
+
+  const note = document.getElementById('note-subs');
+  if (note) {
+    if (sub <= 26) {
+      note.textContent = "Untuk peringkat 1 dan 2, minimal nilai substansi adalah 26";
+      note.style.display = 'block';
+    } else {
+      note.textContent = "";
+      note.style.display = 'none';
+    }
+  }
+}
+
+function resetForm() {
+  document.querySelectorAll('select').forEach(s => s.value = '0');
+  updateTotals();
+}
+
+function exportChoices() {
+  const out = {
+    meta: {
+      nama_jurnal: document.getElementById('nama-jurnal').value || '',
+      issn_cetak: document.getElementById('issn-cetak').value || '',
+      issn_elektronik: document.getElementById('issn-elektronik').value || '',
+      penerbit: document.getElementById('penerbit').value || ''
+    },
+    total: parseFloat(document.getElementById('total-score').textContent),
+    rank: document.getElementById('rank-label').textContent,
+    choices: collectChoices()
+  };
+  const blob = new Blob([JSON.stringify(out, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'pilihan_arjuna_2021.json';
+  document.body.appendChild(a);
+  a.click();
+  URL.revokeObjectURL(url);
+  a.remove();
+}
+
+function buildPrintSummary() {
+  const nama = document.getElementById('nama-jurnal').value || '';
+  const ic = document.getElementById('issn-cetak').value || '';
+  const ie = document.getElementById('issn-elektronik').value || '';
+  const pub = document.getElementById('penerbit').value || '';
+
+  document.getElementById('p-nama').textContent = nama;
+  document.getElementById('p-issn-cetak').textContent = ic;
+  document.getElementById('p-issn-elektronik').textContent = ie;
+  document.getElementById('p-penerbit').textContent = pub;
+  document.getElementById('p-waktu').textContent = new Date().toLocaleString('id-ID');
+  document.getElementById('p-total').textContent = document.getElementById('total-score').textContent;
+  document.getElementById('p-rank').textContent = document.getElementById('rank-label').textContent;
+  // subtotals
+  const pm = document.getElementById('subtotal-manajemen')?.textContent || '0.0';
+  const ps = document.getElementById('subtotal-substansi')?.textContent || '0.0';
+  const psm = document.getElementById('p-subtotal-manajemen');
+  const pss = document.getElementById('p-subtotal-substansi');
+  if (psm) psm.textContent = pm;
+  if (pss) pss.textContent = ps;
+
+  const rows = collectChoices();
+  const tbody = document.querySelector('#print-table tbody');
+  tbody.innerHTML = '';
+  rows.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${r.kelompok}</td><td>${r.sub_unsur}</td><td>${r.teks || '-'}</td><td>${isNaN(r.nilai) ? 0 : r.nilai}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function printPDF() {
+  buildPrintSummary();
+  window.print();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildUI();
+  updateTotals();
+  document.getElementById('reset-btn').addEventListener('click', resetForm);
+  var exBtn=document.getElementById('export-btn'); if(exBtn){ exBtn.addEventListener('click', exportChoices); }
+  document.getElementById('pdf-btn').addEventListener('click', printPDF);
+});
+</script>
+
+<div class="toolkit-attribution">Adaptasi dari Simulasi Kalkulasi Penilaian Arjuna 2021 di ejournal.unand.ac.id. Catatan asli: Untuk simulasi pra akreditasi jurnal. Bukan hasil akreditasi. Lisensi: CC BY.</div>
+</body>
+</html>

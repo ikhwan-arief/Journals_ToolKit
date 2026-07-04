@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form Pemeriksaan Awal Akreditasi Jurnal (Pedoman 2021)</title>
+  <style>
+    :root{
+      --bg:#0b1020; --panel:#121a31; --ink:#eaf0ff; --muted:#aab7d1; --accent:#54b3ff;
+      --ok:#26c281; --warn:#ffcc66; --err:#ff6b6b; --border:#243153;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; background:var(--bg); color:var(--ink); font:16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji"}
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px; margin:0 auto; padding:24px}
+    header{display:flex; align-items:center; gap:16px; margin-bottom:18px}
+    .badge{font-size:12px; padding:4px 8px; border:1px solid var(--border); border-radius:999px; color:var(--muted)}
+    h1{font-size:22px; margin:0}
+    .card{background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:18px; margin:14px 0}
+    .muted{color:var(--muted)}
+    fieldset{border:1px dashed var(--border); border-radius:14px; padding:16px; margin:16px 0}
+    legend{padding:0 8px; color:#cbd7f4}
+    label{display:block; font-weight:600; margin:12px 0 6px}
+    input, select, textarea{width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#0e1730; color:var(--ink)}
+    input[type="date"]{padding:8px 12px}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .row-3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+    .row-4{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+    .actions{display:flex; gap:10px; flex-wrap:wrap}
+    button{appearance:none; border:none; border-radius:12px; padding:10px 14px; font-weight:700; cursor:pointer; background:#1c2b52; color:var(--ink); border:1px solid var(--border)}
+    button.primary{background:linear-gradient(135deg,#2b7cff,#2dc2ff); color:#061023}
+    button.ghost{background:transparent}
+    button.warn{background:#3a2a05; border-color:#6b540b}
+    button.ok{background:#0f2e25; border-color:#174f3f}
+    .hint{font-size:13px; color:var(--muted)}
+    .pill{display:inline-block; padding:4px 8px; border-radius:999px; background:#071029; color:#cfe3ff; border:1px solid var(--border); font-size:12px}
+    .issue{border:1px solid var(--border); border-radius:14px; padding:14px; margin:12px 0; background:#0f1730}
+    .issue .hdr{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px}
+    .issue .num{font-weight:700; color:#cfe3ff}
+    .error{color:var(--err); font-weight:600}
+    .warn{color:var(--warn)}
+    .ok{color:var(--ok)}
+    .preview{
+      white-space:pre-wrap; background:#0b1329; border:1px solid var(--border); border-radius:14px; padding:16px; font-family:ui-monospace, Menlo, Consolas, "Liberation Mono", monospace; max-height:380px; overflow:auto
+    }
+    .footer{font-size:12px; color:var(--muted); margin-top:16px}
+    .kbd{font-family:ui-monospace, Menlo, Consolas; background:#0d1530; border:1px solid var(--border); padding:2px 6px; border-radius:6px}
+    .grid-slim{display:grid; grid-template-columns:1.5fr 1fr; gap:12px}
+    .sr-only{position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden}
+    .box-note{border-left:4px solid var(--accent); background:rgba(84,179,255,0.08); padding:12px 14px; border-radius:10px}
+  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231d4ed8'/%3E%3Cpath d='M18 18h28v6H18zm0 11h28v6H18zm0 11h18v6H18z' fill='white'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../assets/toolkit.css" />
+  
+<style>
+  :root { --bg:#f8fafc; --panel:#ffffff; --ink:#111827; --muted:#4b5563; --accent:#1d4ed8; --border:#dbe3ef; }
+  body { background:var(--bg); color:var(--ink); }
+  .card, .issue, .preview { background:#ffffff; border-radius:8px; box-shadow:none; }
+  input, select, textarea { background:#ffffff; color:var(--ink); border-color:#cbd5e1; border-radius:6px; }
+  button { border-radius:6px; }
+  button.primary { background:var(--accent); color:#ffffff; }
+  .pill, .kbd { background:#eef2ff; color:#1e3a8a; }
+</style>
+
+</head>
+<body>
+<div class="toolkit-topbar">
+  <div class="toolkit-topbar-inner">
+    <div class="toolkit-brand">
+      <strong>Journals Toolkit</strong>
+      <span>Alat bantu publik untuk pengelola jurnal</span>
+    </div>
+    <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
+      <a href="../">Portal</a><a href="../oai-pmh/">OAI-PMH</a><a href="../arjuna-2021/">Arjuna 2021</a><a href="../pra-nilai-arjuna/" aria-current="page">Pra Nilai Arjuna</a><a href="../doaj-precheck/">DOAJ Precheck</a>
+    </nav>
+  </div>
+</div>
+
+  <div class="wrap">
+    <header>
+      <h1>Form Pemeriksaan Awal Akreditasi Jurnal</h1>
+      <span class="badge">Pedoman 2021</span>
+    </header>
+
+    <div class="card">
+      <p class="muted">Halaman ini membantu pengisian data minimum & lengkap untuk pemeriksaan awal akreditasi jurnal. <strong>Tidak ada</strong> akses baca ke URL yang Anda isikan—hanya pengecekan <em>format</em> URL.</p>
+      <div class="box-note">
+        <div><strong>Alur ringkas:</strong></div>
+        <ol>
+          <li>Isi data pada bagian-bagian di bawah (minimal: URL jurnal, jenis pengajuan, dan daftar URL PDF artikel sampel).</li>
+          <li>Klik <em>Buat Ringkasan</em> untuk melihat boks konfirmasi.</li>
+          <li>Jika sudah benar, klik <em>Konfirmasi & Salin → Buka alat bantu pemeriksaan awal</em>. Tab baru akan terbuka dan Anda cukup tekan <span class="kbd">Ctrl</span>+<span class="kbd">V</span> (atau <span class="kbd">Paste</span>) di sana.</li>
+        </ol>
+      </div>
+    </div>
+
+    <form id="formData" class="card" novalidate>
+      <fieldset>
+        <legend>A. Identitas & Akses</legend>
+        <label for="nama">Nama jurnal</label>
+        <input id="nama" name="nama" type="text" placeholder="mis. Jurnal Sains Terapan" />
+        <div class="row">
+          <div>
+            <label for="urlJurnal">URL jurnal (aktif)</label>
+            <input id="urlJurnal" name="urlJurnal" type="url" required placeholder="https://contoh.domain/jurnal" />
+            <div class="hint">Harus menggunakan <code>http</code> atau <code>https</code>.</div>
+          </div>
+          <div>
+            <label for="jenis">Jenis pengajuan</label>
+            <select id="jenis" name="jenis" required>
+              <option value="">— pilih —</option>
+              <option>usulan baru</option>
+              <option>reakreditasi</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="urlArsip">Arsip/Issues (opsional)</label>
+            <input id="urlArsip" name="urlArsip" type="url" placeholder="https://.../issue/archive" />
+          </div>
+          <div>
+            <label for="urlScope">Aim &amp; Scope (opsional)</label>
+            <input id="urlScope" name="urlScope" type="url" placeholder="https://.../about#focusAndScope" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="frekuensi">Frekuensi terbit (opsional)</label>
+            <input id="frekuensi" name="frekuensi" type="text" placeholder="mis. 2×/tahun" />
+          </div>
+          <div>
+            <label for="platform">Platform (opsional)</label>
+            <input id="platform" name="platform" type="text" placeholder="mis. OJS 3.4" />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>B. Kelembagaan Penerbit (opsional)</legend>
+        <div class="row">
+          <div>
+            <label for="urlSk">Legalitas/Surat Keputusan (URL)</label>
+            <input id="urlSk" name="urlSk" type="url" placeholder="https://..." />
+          </div>
+          <div>
+            <label for="urlMou">MoU/kemitraan (URL)</label>
+            <input id="urlMou" name="urlMou" type="url" placeholder="https://..." />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>C. Penyuntingan & Manajemen (opsional)</legend>
+        <div class="row">
+          <div>
+            <label for="urlEditor">Halaman Dewan Editor (URL)</label>
+            <input id="urlEditor" name="urlEditor" type="url" placeholder="https://.../about/editorialTeam" />
+          </div>
+          <div>
+            <label for="urlReviewer">Daftar Mitra Bestari/Reviewer (URL)</label>
+            <input id="urlReviewer" name="urlReviewer" type="url" placeholder="https://.../about/reviewers" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="urlGuidelines">Author Guidelines (URL)</label>
+            <input id="urlGuidelines" name="urlGuidelines" type="url" placeholder="https://.../about/submissions#authorGuidelines" />
+          </div>
+          <div>
+            <label for="urlTemplate">Template Artikel (URL)</label>
+            <input id="urlTemplate" name="urlTemplate" type="url" placeholder="https://.../template.docx" />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>D. Edisi & PDF Artikel Sampel (wajib)</legend>
+        <p class="hint">Tambahkan edisi sesuai jenis pengajuan. Tiap edisi memuat <strong>3 URL PDF artikel</strong>. URL harus dari domain resmi jurnal (bukan cache/mirror).</p>
+        <div id="issues"></div>
+        <div class="actions">
+          <button type="button" id="btnAddIssue">+ Tambah Edisi</button>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>E. Penyebarluasan (opsional)</legend>
+        <div class="row">
+          <div>
+            <label for="urlIndexing">Halaman indeksasi (URL)</label>
+            <input id="urlIndexing" name="urlIndexing" type="url" placeholder="https://.../indexing" />
+          </div>
+          <div>
+            <label for="urlAnalytics">GA4/Matomo (URL laporan)</label>
+            <input id="urlAnalytics" name="urlAnalytics" type="url" placeholder="https://analytics.google.com/..." />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>F. Plagiasi (opsional)</legend>
+        <div class="row">
+          <div>
+            <label for="urlSimilarity">Laporan uji kemiripan (URL)</label>
+            <input id="urlSimilarity" name="urlSimilarity" type="url" placeholder="https://..." />
+          </div>
+          <div>
+            <label for="tindakLanjut">Tindak lanjut (erratum/retraction/notice)</label>
+            <input id="tindakLanjut" name="tindakLanjut" type="text" placeholder="mis. Retraction diterbitkan 2024-11-10" />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>G. Kontak PIC (opsional)</legend>
+        <div class="row">
+          <div>
+            <label for="picNama">Nama PIC</label>
+            <input id="picNama" name="picNama" type="text" />
+          </div>
+          <div>
+            <label for="picKontak">Email/WA</label>
+            <input id="picKontak" name="picKontak" type="text" placeholder="mis. nama@domain atau +62..." />
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <button type="button" id="btnPreview" class="primary">Buat Ringkasan</button>
+        <button type="reset" id="btnReset" class="ghost">Bersihkan Isian</button>
+      </div>
+    </form>
+
+    <div id="previewCard" class="card" style="display:none">
+      <h2 style="margin:0 0 8px">Ringkasan untuk Konfirmasi</h2>
+      <div id="validationBox" class="muted" style="margin-bottom:10px"></div>
+      <div id="preview" class="preview" aria-live="polite"></div>
+      <div class="actions" style="margin-top:12px">
+        <button id="btnConfirm" class="ok">Konfirmasi & Salin → Buka alat bantu pemeriksaan awal</button>
+        <button id="btnDownload" class="ghost">Unduh .txt</button>
+        <button id="btnCopy" class="ghost">Salin Ringkasan</button>
+      </div>
+      <div class="footer">Jika tab baru tidak terbuka, izinkan <em>pop-up</em> untuk situs ini. Setelah tab terbuka, tekan <span class="kbd">Ctrl</span>+<span class="kbd">V</span> (atau <span class="kbd">Paste</span>) di sana.</div>
+    </div>
+
+    <div class="footer">Catatan: Pemeriksaan ini mengikuti pedoman akreditasi yang berlaku. URL hanya diuji formatnya, tidak diakses.</div>
+  </div>
+
+<script>
+(function(){
+  const DEST_URL = 'https://chatgpt.com/g/g-68d88d6b5a848191ae5e49c138d9c888-asisten-arjuna-panduan-2021';
+
+  const form = document.getElementById('formData');
+  const issuesEl = document.getElementById('issues');
+  const addIssueBtn = document.getElementById('btnAddIssue');
+  const previewBtn = document.getElementById('btnPreview');
+  const previewCard = document.getElementById('previewCard');
+  const previewBox = document.getElementById('preview');
+  const validationBox = document.getElementById('validationBox');
+  const confirmBtn = document.getElementById('btnConfirm');
+  const copyBtn = document.getElementById('btnCopy');
+  const downloadBtn = document.getElementById('btnDownload');
+
+  let issueCount = 0;
+
+  function isValidURL(v){
+    if(!v) return true; // empty is allowed for optional
+    try{
+      const u = new URL(v);
+      return (u.protocol === 'http:' || u.protocol === 'https:');
+    }catch(e){
+      return false;
+    }
+  }
+
+  function el(tag, attrs={}, children=[]) {
+    const e = document.createElement(tag);
+    Object.entries(attrs).forEach(([k,v])=>{
+      if(k==='class') e.className=v; else if(k==='for') e.htmlFor=v; else e.setAttribute(k,v);
+    });
+    children.forEach(c=> e.appendChild(typeof c==='string'? document.createTextNode(c): c));
+    return e;
+  }
+
+  function articleRow(idx){
+    const wrap = el('div', {class:'row-4'});
+
+    const url = el('input', {type:'url', placeholder:`https://... (PDF-${idx})`, required:'', 'data-role':'pdfUrl'});
+    const title = el('input', {type:'text', placeholder:'Judul (opsional)', 'data-role':'pdfTitle'});
+    const doi = el('input', {type:'text', placeholder:'DOI (opsional, mis. 10.xxxx/xxxx)', 'data-role':'pdfDoi', pattern:'^10\..*'});
+    const note = el('input', {type:'text', placeholder:'Catatan (opsional)', 'data-role':'pdfNote'});
+
+    wrap.append(
+      fieldWrap('URL PDF', url),
+      fieldWrap('Judul', title),
+      fieldWrap('DOI', doi),
+      fieldWrap('Catatan', note)
+    );
+    return wrap;
+  }
+
+  function fieldWrap(labelText, inputEl){
+    const w = el('div');
+    w.append(el('label',{},[labelText]), inputEl);
+    return w;
+  }
+
+  function issueBlock(){
+    issueCount++;
+    const idx = issueCount;
+    const box = el('div',{class:'issue'});
+
+    const hdr = el('div',{class:'hdr'});
+    hdr.append(el('div',{class:'num'},[`Edisi #${idx}`]));
+    const removeBtn = el('button',{type:'button', class:'ghost warn'},['Hapus edisi']);
+    removeBtn.addEventListener('click',()=>{
+      if(document.querySelectorAll('.issue').length>1){ box.remove(); renumberIssues(); }
+    });
+    hdr.append(removeBtn);
+
+    const meta = el('div',{class:'row'});
+    const volIssue = el('input',{type:'text', placeholder:'mis. Vol 12 No 2'});
+    const rls = el('input',{type:'date'});
+    meta.append(fieldWrap('Vol/Issue',volIssue), fieldWrap('Tanggal rilis', rls));
+
+    const a1 = articleRow(1);
+    const a2 = articleRow(2);
+    const a3 = articleRow(3);
+
+    box.append(hdr, meta, a1, a2, a3);
+    return box;
+  }
+
+  function renumberIssues(){
+    Array.from(document.querySelectorAll('.issue .num')).forEach((n,i)=> n.textContent = `Edisi #${i+1}`);
+  }
+
+  function addIssue(){ issuesEl.appendChild(issueBlock()); }
+
+  addIssueBtn.addEventListener('click', addIssue);
+
+  // Initialize with one issue
+  addIssue();
+
+  function collectData(){
+    const data = {
+      identitas:{
+        nama: get('nama'),
+        urlJurnal: get('urlJurnal'),
+        jenis: get('jenis'),
+        urlArsip: get('urlArsip'),
+        urlScope: get('urlScope'),
+        frekuensi: get('frekuensi'),
+        platform: get('platform')
+      },
+      lembaga:{ urlSk:get('urlSk'), urlMou:get('urlMou') },
+      manajemen:{ urlEditor:get('urlEditor'), urlReviewer:get('urlReviewer'), urlGuidelines:get('urlGuidelines'), urlTemplate:get('urlTemplate') },
+      edisi:[],
+      sebar:{ urlIndexing:get('urlIndexing'), urlAnalytics:get('urlAnalytics') },
+      plagiasi:{ urlSimilarity:get('urlSimilarity'), tindakLanjut:get('tindakLanjut') },
+      pic:{ nama:get('picNama'), kontak:get('picKontak') }
+    };
+
+    document.querySelectorAll('.issue').forEach(issue=>{
+      const volIssue = issue.querySelector('input[type="text"]').value.trim();
+      const rilis = issue.querySelector('input[type="date"]').value;
+      const pdfs = [];
+      issue.querySelectorAll('[data-role="pdfUrl"]').forEach((inp,i)=>{
+        const group = inp.closest('.row-4');
+        const rec = {
+          url: inp.value.trim(),
+          title: (group.querySelector('[data-role="pdfTitle"]').value||'').trim(),
+          doi: (group.querySelector('[data-role="pdfDoi"]').value||'').trim(),
+          note: (group.querySelector('[data-role="pdfNote"]').value||'').trim(),
+        };
+        pdfs.push(rec);
+      });
+      data.edisi.push({ volIssue, rilis, pdfs });
+    });
+
+    return data;
+  }
+
+  function get(id){ return (document.getElementById(id)?.value||'').trim(); }
+
+  function validateData(data){
+    const warn = [];
+    const err = [];
+
+    if(!data.identitas.urlJurnal){ err.push('URL jurnal wajib diisi.'); }
+    if(data.identitas.urlJurnal && !isValidURL(data.identitas.urlJurnal)) err.push('Format URL jurnal tidak valid.');
+
+    if(!data.identitas.jenis){ err.push('Jenis pengajuan wajib dipilih.'); }
+
+    if(data.identitas.urlArsip && !isValidURL(data.identitas.urlArsip)) warn.push('Format URL Arsip/Issues tidak valid.');
+    if(data.identitas.urlScope && !isValidURL(data.identitas.urlScope)) warn.push('Format URL Aim & Scope tidak valid.');
+
+    // Check each issue
+    data.edisi.forEach((e,idx)=>{
+      if(!e.pdfs?.length) err.push(`Edisi #${idx+1}: belum ada entri PDF.`);
+      e.pdfs.forEach((p,j)=>{
+        if(!p.url) err.push(`Edisi #${idx+1} PDF-${j+1}: URL wajib diisi.`);
+        if(p.url && !isValidURL(p.url)) err.push(`Edisi #${idx+1} PDF-${j+1}: format URL tidak valid.`);
+        if(p.doi && !/^10\./.test(p.doi)) warn.push(`Edisi #${idx+1} PDF-${j+1}: format DOI sebaiknya diawali "10."`);
+      });
+    });
+
+    // Optional URLs format check
+    [
+      ['urlSk','Legalitas/Surat Keputusan'],
+      ['urlMou','MoU/kemitraan'],
+      ['urlEditor','Dewan Editor'],
+      ['urlReviewer','Mitra Bestari'],
+      ['urlGuidelines','Author Guidelines'],
+      ['urlTemplate','Template Artikel'],
+      ['urlIndexing','Halaman Indeksasi'],
+      ['urlAnalytics','GA4/Matomo'],
+      ['urlSimilarity','Laporan Kemiripan']
+    ].forEach(([id,label])=>{
+      const v = get(id);
+      if(v && !isValidURL(v)) warn.push(`Format URL ${label} tidak valid.`);
+    });
+
+    // Basic guidance per jenis
+    if(data.identitas.jenis === 'reakreditasi' && data.edisi.length < 1){
+      warn.push('Reakreditasi: minimal 1 edisi dengan 3 PDF.');
+    }
+    if(data.identitas.jenis === 'usulan baru' && data.edisi.length < 2){
+      warn.push('Usulan baru: pastikan menambahkan semua edisi dalam 2 tahun terakhir (masing-masing 3 PDF).');
+    }
+
+    return {warn, err};
+  }
+
+  function compileText(d){
+    const lines = [];
+    const id = d.identitas;
+
+    lines.push('### Ringkas – 5 item wajib');
+    lines.push(`1) URL jurnal (aktif): ${id.urlJurnal||'-'}`);
+    lines.push(`2) Jenis pengajuan: ${id.jenis||'-'}`);
+    lines.push(`3) Arsip terbitan (Issues/Archive): ${id.urlArsip||'-'}`);
+    lines.push(`4) Aim & Scope: ${id.urlScope||'-'}`);
+    lines.push('5) PDF artikel sampel:');
+
+    d.edisi.forEach((e,i)=>{
+      lines.push(`\nEdisi ${i+1}`);
+      lines.push(`- Vol/Issue & tanggal rilis: ${e.volIssue||'-'} | ${e.rilis||'-'}`);
+      e.pdfs.forEach((p,j)=>{
+        const tri = [`PDF-${j+1}: ${p.url||'-'}`];
+        if(p.title) tri.push(`— ${p.title}`);
+        if(p.doi) tri.push(`— DOI: ${p.doi}`);
+        if(p.note) tri.push(`— ${p.note}`);
+        lines.push('- ' + tri.join(' '));
+      });
+    });
+
+    lines.push('\n---');
+    lines.push('### Form lengkap (opsional yang terisi)');
+
+    const addIf = (label,val)=>{ if(val) lines.push(`${label}: ${val}`); };
+
+    if(id.nama || id.frekuensi || id.platform){
+      lines.push('\nA. Identitas & Akses');
+      addIf('• Nama jurnal', id.nama);
+      addIf('• Frekuensi terbit', id.frekuensi);
+      addIf('• Platform', id.platform);
+    }
+
+    const lemb = d.lembaga; const mnj = d.manajemen; const seb = d.sebar; const plg = d.plagiasi; const pic = d.pic;
+
+    if(lemb.urlSk || lemb.urlMou){
+      lines.push('\nB. Kelembagaan Penerbit');
+      addIf('• SK/Legalitas', lemb.urlSk);
+      addIf('• MoU/kemitraan', lemb.urlMou);
+    }
+
+    if(mnj.urlEditor || mnj.urlReviewer || mnj.urlGuidelines || mnj.urlTemplate){
+      lines.push('\nC. Penyuntingan & Manajemen');
+      addIf('• Dewan Editor', mnj.urlEditor);
+      addIf('• Mitra Bestari/Reviewer', mnj.urlReviewer);
+      addIf('• Author Guidelines', mnj.urlGuidelines);
+      addIf('• Template Artikel', mnj.urlTemplate);
+    }
+
+    if(seb.urlIndexing || seb.urlAnalytics){
+      lines.push('\nE. Penyebarluasan');
+      addIf('• Indeksasi', seb.urlIndexing);
+      addIf('• GA4/Matomo', seb.urlAnalytics);
+    }
+
+    if(plg.urlSimilarity || plg.tindakLanjut){
+      lines.push('\nF. Plagiasi');
+      addIf('• Laporan uji kemiripan', plg.urlSimilarity);
+      addIf('• Tindak lanjut', plg.tindakLanjut);
+    }
+
+    if(pic.nama || pic.kontak){
+      lines.push('\nG. Kontak PIC');
+      addIf('• Nama', pic.nama);
+      addIf('• Email/WA', pic.kontak);
+    }
+
+    lines.push('\nJika ada halaman bersyarat/login, sertakan alternatif atau unggahan bukti saat diminta.');
+
+    return lines.join('\n');
+  }
+
+  function showPreview(){
+    const data = collectData();
+    const v = validateData(data);
+    const out = compileText(data);
+
+    // Visual validation summary
+    const badges = [];
+    if(v.err.length){ badges.push(`<span class="pill error">${v.err.length} kesalahan</span>`); }
+    if(v.warn.length){ badges.push(`<span class=\"pill warn\">${v.warn.length} peringatan</span>`); }
+    if(!v.err.length && !v.warn.length){ badges.push(`<span class=\"pill ok\">Siap dikirim</span>`); }
+
+    validationBox.innerHTML = badges.join(' ')
+      + (v.err.length? '<div class="error">• ' + v.err.join('<br>• ') + '</div>' : '')
+      + (v.warn.length? '<div class="warn" style="margin-top:6px">• ' + v.warn.join('<br>• ') + '</div>' : '');
+
+    previewBox.textContent = out;
+    previewCard.style.display = 'block';
+
+    // Disable confirm if errors exist
+    confirmBtn.disabled = v.err.length>0;
+    confirmBtn.title = v.err.length? 'Perbaiki kesalahan pada isian sebelum konfirmasi.' : '';
+
+    return {data, out, v};
+  }
+
+  previewBtn.addEventListener('click', showPreview);
+
+  copyBtn.addEventListener('click', ()=>{
+    const txt = previewBox.textContent;
+    navigator.clipboard?.writeText(txt).then(()=>{
+      toast('Ringkasan telah disalin ke clipboard.');
+    }).catch(()=>{
+      fallbackCopy(txt);
+    });
+  });
+
+  downloadBtn.addEventListener('click', ()=>{
+    const txt = previewBox.textContent || '';
+    const blob = new Blob([txt], {type:'text/plain'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'isian-pemeriksaan-awal.txt';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  confirmBtn.addEventListener('click', async ()=>{
+    const { out, v } = showPreview();
+    if(v.err.length){
+      toast('Perbaiki kesalahan sebelum konfirmasi.', true);
+      return;
+    }
+    try{
+      await navigator.clipboard.writeText(out);
+      toast('Tersalin. Membuka alat bantu pemeriksaan awal…');
+    }catch(e){
+      fallbackCopy(out);
+    }
+    // Buka tab tujuan
+    window.open(DEST_URL, '_blank', 'noopener');
+  });
+
+  function fallbackCopy(text){
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try{ document.execCommand('copy'); toast('Ringkasan disalin (mode kompatibilitas).'); }
+    catch(e){ toast('Gagal menyalin. Silakan salin manual dari boks ringkasan.', true); }
+    finally{ document.body.removeChild(ta); }
+  }
+
+  function toast(msg, isErr){
+    const t = document.createElement('div');
+    t.textContent = msg;
+    t.style.position='fixed'; t.style.zIndex=9999; t.style.left='50%'; t.style.transform='translateX(-50%)';
+    t.style.bottom='20px'; t.style.padding='10px 14px'; t.style.border='1px solid var(--border)'; t.style.borderRadius='12px';
+    t.style.background = isErr? '#3b1010' : '#0f2a1e';
+    t.style.color = isErr? '#ffdede' : '#dbffef';
+    document.body.appendChild(t);
+    setTimeout(()=> t.remove(), 2500);
+  }
+
+  // Reset: collapse preview
+  document.getElementById('btnReset').addEventListener('click', ()=>{
+    setTimeout(()=>{ previewCard.style.display='none'; }, 0);
+  });
+})();
+</script>
+<div class="toolkit-attribution">Adaptasi dari Form Pemeriksaan Awal Akreditasi Jurnal di ejournal.unand.ac.id. Fitur utama dan alur ringkasan dipertahankan.</div>
+</body>
+</html>

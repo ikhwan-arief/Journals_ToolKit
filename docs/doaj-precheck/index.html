@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DOAJ Readiness Checklist – Self-Check Toolkit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--
+    Copyright holder: Ikhwan Arief
+    License: CC BY-NC-ND (https://creativecommons.org/licenses/by-nc-nd/4.0/)
+  -->
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --bg-alt: #ffffff;
+      --border: #d0d7e2;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --danger: #b91c1c;
+      --text-main: #111827;
+      --text-muted: #4b5563;
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .wrapper {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1rem 1rem 3rem;
+    }
+
+    header {
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      margin: 0 -1rem 1rem;
+      padding: 1.25rem 1rem 1rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    header p {
+      margin: 0.25rem 0 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 0.15rem 0.7rem;
+      margin-top: 0.5rem;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr);
+      gap: 1.25rem;
+    }
+
+    .panel {
+      background: var(--bg-alt);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 1rem 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .panel h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .panel p {
+      margin: 0.25rem 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 0.45rem 0.55rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .result-panel {
+      border-left: 4px solid var(--accent);
+    }
+
+    .result-status {
+      font-weight: 700;
+      margin: 0.25rem 0;
+      font-size: 1rem;
+    }
+
+    .status-initial {
+      color: var(--text-muted);
+    }
+
+    .status-good {
+      color: #047857; /* green */
+    }
+
+    .status-bad {
+      color: #b91c1c; /* red */
+    }
+
+    .result-detail {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .result-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      background: #f3f4f6;
+    }
+
+    .actions {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    button {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    button.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    button:hover {
+      filter: brightness(0.97);
+    }
+
+    .section {
+      margin-top: 0.5rem;
+    }
+
+    .section-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.2rem;
+    }
+
+    .section-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .question {
+      border-radius: 6px;
+      padding: 0.45rem 0.55rem;
+      margin-bottom: 0.25rem;
+      border: 1px solid transparent;
+      background-color: #f9fafb;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .question.core {
+      border-color: #e5e7eb;
+    }
+
+    .question.recommended {
+      border-style: dashed;
+      border-color: #e5e7eb;
+      background-color: #fefefe;
+    }
+
+    .question-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .question-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .question-meta {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .meta-core {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .meta-rec {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .question small {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    .options {
+      margin-top: 0.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .options label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+    }
+
+    .options input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .question.unanswered.core {
+      border-color: #e5e7eb;
+      background: #f9fafb;
+    }
+
+    .question.core.no {
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .question.yes.core,
+    .question.yes.recommended {
+      border-color: #bbf7d0;
+      background-color: #dcfce7; /* light green */
+    }
+
+    footer {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 1.5rem;
+      padding-top: 0.75rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding-top: 0.9rem;
+      }
+
+      header h1 {
+        font-size: 1.25rem;
+      }
+
+      .question-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .options {
+        gap: 0.5rem;
+      }
+
+      .result-summary {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231d4ed8'/%3E%3Cpath d='M18 18h28v6H18zm0 11h28v6H18zm0 11h18v6H18z' fill='white'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../assets/toolkit.css" />
+  
+<style>
+  :root { --bg:#f8fafc; --bg-alt:#ffffff; --border:#dbe3ef; --accent:#1d4ed8; --accent-soft:#eff6ff; --radius:8px; }
+  .wrapper { max-width:1180px; }
+  header { border:1px solid var(--border); border-radius:8px; margin:24px 0 16px; }
+  .panel, .question { border-radius:8px; }
+  button { border-radius:6px; }
+</style>
+
+</head>
+<body>
+<div class="toolkit-topbar">
+  <div class="toolkit-topbar-inner">
+    <div class="toolkit-brand">
+      <strong>Journals Toolkit</strong>
+      <span>Alat bantu publik untuk pengelola jurnal</span>
+    </div>
+    <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
+      <a href="../">Portal</a><a href="../oai-pmh/">OAI-PMH</a><a href="../arjuna-2021/">Arjuna 2021</a><a href="../pra-nilai-arjuna/">Pra Nilai Arjuna</a><a href="../doaj-precheck/" aria-current="page">DOAJ Precheck</a>
+    </nav>
+  </div>
+</div>
+
+  <div class="wrapper">
+    <header>
+      <h1>DOAJ Readiness Checklist – Self-Check Toolkit</h1>
+      <p>
+        Use this tool to review your journal website before applying to the Directory of Open Access Journals (DOAJ).
+        The result is indicative only: DOAJ will always make its own independent decision.
+      </p>
+      <div class="badge">
+        📝 For journal editors – internal pre-evaluation
+      </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>Journal identity</h2>
+        <p>Fill in your journal details (for your own record only; these fields do not affect the calculation).</p>
+        <div class="identity-grid">
+          <div class="field">
+            <label for="journalName">Journal title</label>
+            <input type="text" id="journalName" placeholder="e.g. International Journal of Example Studies" />
+          </div>
+          <div class="field">
+            <label for="publisherName">Publisher</label>
+            <input type="text" id="publisherName" placeholder="e.g. Example University Press" />
+          </div>
+          <div class="field">
+            <label for="issnPrint">Print ISSN</label>
+            <input type="text" id="issnPrint" placeholder="e.g. 1234-5678" />
+          </div>
+          <div class="field">
+            <label for="issnOnline">Online ISSN</label>
+            <input type="text" id="issnOnline" placeholder="e.g. 2345-6789" />
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Checklist questions</h2>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">
+          Answer each question based only on what is publicly visible on your journal website (and where indicated,
+          the record for your ISSN at <a href="https://portal.issn.org" target="_blank" rel="noopener">portal.issn.org</a>).
+          If you cannot clearly verify something, the honest answer is <strong>No</strong>.
+        </p>
+
+        <!-- Section 1 -->
+        <div class="section">
+          <div class="section-title">Section 1 – Journal identity &amp; basic open access</div>
+          <div class="section-desc">
+            Core information about the journal’s identity, ISSN(s), and open access status.
+          </div>
+
+          <div class="question core" data-question-id="Q1" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">1. Journal homepage is publicly accessible.</div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The main journal URL opens normally in a browser, without login, payment, VPN, or special access.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q1" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q1" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q2" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                2. Journal title is clear, consistent, and matches the title in the ISSN Portal.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The same title appears on the homepage, logo/header, and article pages, and it matches the title shown for
+              the journal in <a href="https://portal.issn.org" target="_blank" rel="noopener">portal.issn.org</a>.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q2" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q2" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q3" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                3. ISSN(s) are shown on the journal website and match the ISSN Portal.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              Print and/or online ISSN(s) are clearly displayed and exactly match the ISSN data (including medium)
+              in the journal’s record at <a href="https://portal.issn.org" target="_blank" rel="noopener">portal.issn.org</a>.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q3" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q3" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q4" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">4. All research articles are freely available to read online.</div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              When you open several recent research articles, you can access the full text (HTML and/or PDF) without
+              paying, subscribing, or logging in.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q4" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q4" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q5" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">5. There is no embargo period (immediate open access).</div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              Articles are open access immediately when they are published, not after an embargo (e.g. 6 or 12 months).
+              If practice or policy is unclear, answer "No".
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q5" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q5" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q6" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                6. Articles are presented individually, not only as whole-issue files.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              Each article has its own page and/or separate PDF link with its own URL. The journal does not only offer a
+              single PDF per issue without article-level access.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q6" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q6" value="no" /> No</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section">
+          <div class="section-title">Section 2 – Open access, license &amp; copyright</div>
+          <div class="section-desc">
+            Clarity and internal consistency of your open access statement, license, and copyright notice.
+          </div>
+
+          <div class="question core" data-question-id="Q7" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">7. The website clearly states that the journal is open access.</div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              There is a visible statement (e.g. "Open Access", "About the Journal") explaining that all content is
+              freely available to readers and easy to find from the homepage.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q7" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q7" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q8" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                8. The journal states a specific license for published articles.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The site names a clearly identifiable license (e.g. "CC BY 4.0", "CC BY-NC 4.0", or a clearly worded
+              publisher license). Vague wording like "free for readers" alone is not enough.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q8" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q8" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q9" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">9. License terms are on a public, readable page.</div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              A visitor can click from the homepage or menu to a page (e.g. "Copyright &amp; Licensing", "Open Access
+              Policy") and read the license terms without logging in.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q9" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q9" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q10" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">10. It is clear what readers may do with the content.</div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The license or policy explains permitted uses (e.g. read, download, share, reuse with attribution). A logo
+              alone, without any explanation, is not sufficient.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q10" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q10" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="section-desc" style="margin-top:0.5rem;">
+            For 11–16, check <strong>three places</strong> for several recent research articles:
+            (1) the general copyright / policy page, (2) the article view pages, and
+            (3) the PDFs of those articles.
+          </div>
+
+          <div class="question core" data-question-id="Q11" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                11. Copyright ownership for articles is clearly stated on the website.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              There is a clear statement about who holds copyright on the articles (e.g. "Authors retain copyright"
+              or "Copyright © Publisher"), not only a generic website footer.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q11" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q11" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q12" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                12. Website copyright policy matches the article view pages.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              Copyright information on article/abstract pages (if any) is consistent with the general copyright policy.
+              There are no contradictions.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q12" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q12" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q13" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                13. Website copyright policy matches the article PDFs.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              Any copyright text in PDFs (if present) does not contradict the website policy. For example, PDFs do not
+              say "All rights reserved" if the policy says "Authors retain copyright" without explanation.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q13" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q13" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q14" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                14. License on article view pages matches the general license policy.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              If the policy says that all articles use a particular license (e.g. CC BY 4.0), then the article pages show
+              that same license, not a different one without clear justification.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q14" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q14" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q15" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                15. License in the PDFs matches the website and article pages.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              Where PDFs include license text or icons, they show the same license that is stated on the website and
+              article pages. There are no mismatches.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q15" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q15" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q16" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                16. There are no conflicts between copyright and license across website, article pages, and PDFs.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              Taking all three locations together, there is a consistent message. There is no combination like "All
+              rights reserved" next to an open license, and no conflicting owners or terms.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q16" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q16" value="no" /> No</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section">
+          <div class="section-title">Section 3 – Editorial information, peer review &amp; endogeny</div>
+
+          <div class="question core" data-question-id="Q17" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">17. The journal has a clear Aims &amp; Scope page.</div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              A public page describes the subject area(s) and the types of articles the journal publishes (e.g. research
+              articles, reviews).
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q17" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q17" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q18" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                18. The Editorial Team is listed with names, affiliations, and online profiles.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The site lists editors and editorial board members with full names, institutional affiliations, and, for
+              most members, at least one verifiable profile (e.g. ORCID, Google Scholar, Scopus Author ID, institutional
+              page) showing their academic expertise.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q18" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q18" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q19" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">19. The journal describes its peer review process.</div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The site explains how peer review works (e.g. single-blind, double-blind, open peer review), who reviews
+              submissions, and at what stage, in a clearly visible section.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q19" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q19" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q20" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                20. The journal clearly states that research submissions are peer reviewed before publication.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              There is explicit wording that research articles are peer reviewed before acceptance and publication, not
+              just a vague claim of "review".
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q20" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q20" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q21" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">21. Instructions for Authors are public and usable.</div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              A public "Instructions for Authors" / "Author Guidelines" page exists with submission steps, formatting
+              rules, and basic editorial policies, accessible without login.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q21" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q21" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q22" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                22. The proportion of in-house authors does not exceed 25% according to DOAJ’s rule.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              Check endogeny:
+              <br />
+              • If you publish in issues: for each of the latest two issues, count all research articles and how many
+              have at least one author who is an editor, editorial board member, or reviewer. Each issue must be ≤ 25%.
+              <br />
+              • If you publish continuously: for the last calendar year (minimum 5 research articles), count how many
+              have at least one author who is an editor, editorial board member, or reviewer. The proportion must be
+              ≤ 25%.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q22" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q22" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question recommended" data-question-id="Q23" data-critical="false">
+            <div class="question-header">
+              <div class="question-title">
+                23. Most recent research articles display submitted / accepted / published dates.
+              </div>
+              <div class="question-meta meta-rec">Recommended</div>
+            </div>
+            <small>
+              For a sample of recent research articles, the article page and/or PDF show at least two (ideally all
+              three) of: date submitted, date accepted, date published. This is strongly recommended for transparency.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q23" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q23" value="no" /> No</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section">
+          <div class="section-title">Section 4 – Publication fees &amp; business model</div>
+
+          <div class="question core" data-question-id="Q24" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                24. The journal clearly states whether it charges Article Processing Charges (APCs).
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The website explicitly states either that the journal does charge APCs or that it does not charge APCs.
+              If this is not clearly stated anywhere, answer "No".
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q24" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q24" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q25" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                25. If APCs are charged, the exact amount and conditions are clearly shown.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              If APCs exist, the website shows the fee (currency and amount) and what it covers. If APCs are charged but
+              the amount is not publicly visible, answer "No". If no APCs are charged and the website clearly states this,
+              you may answer "Yes".
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q25" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q25" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q26" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">26. Any other author-facing fees are fully described.</div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The website lists all other possible author charges (e.g. submission fees, page charges, colour printing,
+              print copies) and explains when they apply. Hidden or unclear fees mean "No".
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q26" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q26" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q27" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                27. If waivers or discounts are offered, they are clearly explained.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              If waivers or discounts exist (e.g. for authors from certain countries or with financial hardship), the
+              website describes who is eligible and under what conditions. If they exist but are not described, answer "No".
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q27" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q27" value="no" /> No</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="section">
+          <div class="section-title">Section 5 – Research integrity, ethics &amp; misconduct</div>
+
+          <div class="question core" data-question-id="Q28" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                28. The journal has a clear publication ethics / malpractice statement.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              A page explains how the journal handles ethical issues (e.g. plagiarism, data fabrication, duplicate
+              publication), or clearly adopts recognised guidelines and describes how they are applied.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q28" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q28" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q29" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                29. There is a visible policy on plagiarism and originality of submissions.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The site states that submissions must be original and not previously published, and ideally mentions whether
+              plagiarism-checking tools are used.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q29" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q29" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q30" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                30. The journal has a policy on conflicts of interest and authorship.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The website explains how authors, reviewers, and editors should declare conflicts of interest, and gives rules
+              on who qualifies as an author and how contributions should be acknowledged.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q30" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q30" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q31" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                31. There is a clear policy on corrections, retractions, and expressions of concern.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The site describes how the journal will handle serious issues discovered after publication, including
+              corrections, retractions, or expressions of concern, and how these will be labelled.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q31" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q31" value="no" /> No</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="section">
+          <div class="section-title">Section 6 – Quality signals, metrics &amp; indexing</div>
+
+          <div class="question core" data-question-id="Q32" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                32. The journal does not endorse or display misleading metrics.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              The site does <strong>not</strong> display or promote fake or unverifiable "impact factors", invented
+              indicators, or badges from unknown providers that could mislead authors and readers about the journal’s
+              quality or impact.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q32" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q32" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question core" data-question-id="Q33" data-critical="true">
+            <div class="question-header">
+              <div class="question-title">
+                33. Indexing and ranking claims are accurate and verifiable.
+              </div>
+              <div class="question-meta meta-core">Required</div>
+            </div>
+            <small>
+              When the journal claims to be indexed or ranked in specific services, these claims can be checked and
+              confirmed on the official sites of those services. Outdated, exaggerated, or unverifiable claims should
+              be removed or corrected.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q33" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q33" value="no" /> No</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="section">
+          <div class="section-title">Section 7 – Technical infrastructure &amp; archiving</div>
+
+          <div class="question recommended" data-question-id="Q34" data-critical="false">
+            <div class="question-header">
+              <div class="question-title">
+                34. Articles have persistent identifiers (e.g. DOIs, Handles).
+              </div>
+              <div class="question-meta meta-rec">Recommended</div>
+            </div>
+            <small>
+              Each research article has a unique persistent identifier (such as a DOI) visible on the article page and/or
+              PDF, and the identifier resolves correctly when followed.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q34" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q34" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question recommended" data-question-id="Q35" data-critical="false">
+            <div class="question-header">
+              <div class="question-title">
+                35. The archiving policy on the website matches the Keepers record at portal.issn.org.
+              </div>
+              <div class="question-meta meta-rec">Recommended</div>
+            </div>
+            <small>
+              The website states where content is digitally preserved (e.g. LOCKSS, CLOCKSS, Portico, national library),
+              and the same service(s) appear in the Keepers section of the journal’s record at
+              <a href="https://portal.issn.org" target="_blank" rel="noopener">portal.issn.org</a>,
+              or you have a documented, official agreement with the service provider.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q35" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q35" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="question recommended" data-question-id="Q36" data-critical="false">
+            <div class="question-header">
+              <div class="question-title">
+                36. The journal states a clear self-archiving / repository policy.
+              </div>
+              <div class="question-meta meta-rec">Recommended</div>
+            </div>
+            <small>
+              Authors can find information on whether they may deposit preprints, accepted manuscripts, and/or published
+              versions in repositories (institutional or disciplinary), and under what conditions.
+            </small>
+            <div class="options">
+              <label><input type="radio" name="Q36" value="yes" /> Yes</label>
+              <label><input type="radio" name="Q36" value="no" /> No</label>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- RESULT BLOCK -->
+    <section class="panel result-panel">
+      <h2>Result</h2>
+      <p class="result-status status-initial" id="resultStatus">
+        Result will appear after all required questions have been answered.
+      </p>
+      <p class="result-detail" id="resultDetail">
+        This tool distinguishes between required questions (DOAJ-style requirements) and recommended questions
+        (good practice but usually non-blocking). The default outcome, if any required question is answered "No",
+        is <strong style="color:#b91c1c;">Not ready for DOAJ application (revisions needed)</strong>.
+      </p>
+      <div class="result-summary">
+        <span class="pill">
+          Required questions: <span id="coreYes">0</span> / <span id="coreTotal">0</span>
+        </span>
+        <span class="pill">
+          Recommended: <span id="recYes">0</span> / <span id="recTotal">0</span>
+        </span>
+      </div>
+      <div id="coreIssues" class="result-detail" style="margin-top:0.5rem;"></div>
+      <div class="actions">
+        <button type="button" onclick="window.print()">Print</button>
+        <button type="button" onclick="resetChecklist()">Reset all answers</button>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        <strong>How to read the result:</strong>
+        <br />
+        • If <em>any required question (1–22, 24–33)</em> is answered "No", the outcome is:
+        <strong style="color:#b91c1c;">Not ready for DOAJ application (revisions needed)</strong>.
+        <br />
+        • If all required questions are "Yes" (even if some recommended questions are "No"), the outcome is:
+<!--    <strong style="color:#047857;">Possible for DOAJ inclusion (no guarantee)</strong>.-->
+	<strong style="color:#047857;">You can submit your journal's application to DOAJ</strong>.
+      </p>
+      <p>
+        <strong>Sources (public DOAJ information):</strong>
+        <br />
+        – <a href="https://doaj.org/apply/guide/" target="_blank" rel="noopener">Guide to applying</a>
+        <br />
+        – <a href="https://doaj.org/apply/transparency/" target="_blank" rel="noopener">Transparency &amp; best practice</a>
+        <br />
+        – <a href="https://doaj.org/apply/" target="_blank" rel="noopener">DOAJ application form</a>
+      </p>
+      <p>
+        This toolkit is provided as an independent self-check aid for journal editors. It is not an official DOAJ tool
+        and does not guarantee acceptance. Decisions on DOAJ inclusion are made solely by the DOAJ editorial team.
+      </p>
+      <p>
+        The copyright holder of this toolkit is <strong>Ikhwan Arief</strong>, with reuse license
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">CC BY-NC-ND</a>.
+        <br />
+        © 2025 Ikhwan Arief.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    function computeStats() {
+      const questions = document.querySelectorAll(".question");
+      let coreTotal = 0;
+      let coreYes = 0;
+      let recTotal = 0;
+      let recYes = 0;
+      const failedCore = [];
+      const unansweredCore = [];
+
+      questions.forEach((q) => {
+        const id = q.dataset.questionId;
+        const isCritical = q.dataset.critical === "true";
+        const selected = document.querySelector('input[name="' + id + '"]:checked');
+        const value = selected ? selected.value : null;
+
+        // Reset per-question state
+        q.classList.remove("no", "unanswered", "yes");
+
+        if (isCritical) {
+          coreTotal++;
+          if (!value) {
+            unansweredCore.push(id);
+            q.classList.add("unanswered");
+          } else if (value === "yes") {
+            coreYes++;
+            q.classList.add("yes");
+          } else if (value === "no") {
+            failedCore.push(id);
+            q.classList.add("no");
+          }
+        } else {
+          recTotal++;
+          if (value === "yes") {
+            recYes++;
+            q.classList.add("yes");
+          }
+          // "no" for recommended just keeps default styling
+        }
+      });
+
+      return { coreTotal, coreYes, recTotal, recYes, failedCore, unansweredCore };
+    }
+
+    function updateResult() {
+      const { coreTotal, coreYes, recTotal, recYes, failedCore, unansweredCore } = computeStats();
+
+      document.getElementById("coreTotal").textContent = coreTotal;
+      document.getElementById("coreYes").textContent = coreYes;
+      document.getElementById("recTotal").textContent = recTotal;
+      document.getElementById("recYes").textContent = recYes;
+
+      const statusEl = document.getElementById("resultStatus");
+      const detailEl = document.getElementById("resultDetail");
+      const issuesEl = document.getElementById("coreIssues");
+
+      statusEl.classList.remove("status-initial", "status-good", "status-bad");
+
+      // Only show a final result after ALL required questions are answered
+      if (unansweredCore.length > 0 || coreTotal === 0) {
+        statusEl.textContent = "Result will appear after all required questions have been answered.";
+        statusEl.classList.add("status-initial");
+        detailEl.textContent =
+          "This tool distinguishes between required questions (DOAJ-style requirements) and recommended questions " +
+          "(good practice but usually non-blocking). The default outcome, if any required question is answered \"No\", " +
+          "is Not ready for DOAJ application (revisions needed).";
+        issuesEl.textContent = "";
+        return;
+      }
+
+      const hasFailedCore = failedCore.length > 0;
+
+      if (hasFailedCore) {
+        statusEl.textContent = "Not ready for DOAJ application (revisions needed)";
+        statusEl.classList.add("status-bad");
+        detailEl.textContent =
+          "At least one required question is answered \"No\". Review the highlighted questions and update your " +
+          "journal website and policies before submitting an application to DOAJ.";
+      } else {
+        statusEl.textContent = "Possible for DOAJ inclusion (no guarantee)";
+        statusEl.classList.add("status-good");
+        detailEl.textContent =
+          "All required questions are answered \"Yes\". This suggests your journal may be broadly aligned with DOAJ’s " +
+          "requirements, but acceptance is not guaranteed. DOAJ will make its own independent decision.";
+      }
+
+      // No listing of specific question IDs
+      issuesEl.textContent = "";
+    }
+
+    function resetChecklist() {
+      document
+        .querySelectorAll('input[type="radio"]')
+        .forEach((input) => (input.checked = false));
+      document
+        .querySelectorAll(".question")
+        .forEach((q) => q.classList.remove("no", "unanswered", "yes"));
+      document.getElementById("journalName").value = "";
+      document.getElementById("publisherName").value = "";
+      document.getElementById("issnPrint").value = "";
+      document.getElementById("issnOnline").value = "";
+      document.getElementById("coreYes").textContent = "0";
+      document.getElementById("coreTotal").textContent = "0";
+      document.getElementById("recYes").textContent = "0";
+      document.getElementById("recTotal").textContent = "0";
+      const statusEl = document.getElementById("resultStatus");
+      const detailEl = document.getElementById("resultDetail");
+      const issuesEl = document.getElementById("coreIssues");
+      statusEl.textContent = "Result will appear after all required questions have been answered.";
+      statusEl.classList.remove("status-good", "status-bad");
+      statusEl.classList.add("status-initial");
+      detailEl.textContent =
+        "This tool distinguishes between required questions (DOAJ-style requirements) and recommended questions " +
+        "(good practice but usually non-blocking). The default outcome, if any required question is answered \"No\", " +
+        "is Not ready for DOAJ application (revisions needed).";
+      issuesEl.textContent = "";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('input[type="radio"]').forEach((input) => {
+        input.addEventListener("change", updateResult);
+      });
+      updateResult();
+    });
+  </script>
+<div class="toolkit-attribution">Adaptasi dari DOAJ Readiness Checklist di ejournal.unand.ac.id. Copyright Ikhwan Arief; lisensi CC BY-NC-ND; bukan alat resmi DOAJ.</div>
+</body>
+</html>

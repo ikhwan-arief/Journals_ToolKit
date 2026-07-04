@@ -58,8 +58,44 @@
   body { background:var(--bg); color:var(--ink); }
   .card, .issue, .preview { background:#ffffff; border-radius:8px; box-shadow:none; }
   input, select, textarea { background:#ffffff; color:var(--ink); border-color:#cbd5e1; border-radius:6px; }
-  button { border-radius:6px; }
-  button.primary { background:var(--accent); color:#ffffff; }
+  legend, .issue .num { color:var(--ink); }
+  button {
+    background:#ffffff;
+    color:#1f2937;
+    border:1px solid #cbd5e1;
+    border-radius:6px;
+  }
+  button:hover { border-color:var(--accent); color:var(--accent); }
+  button.primary,
+  #btnAddIssue {
+    background:var(--accent);
+    color:#ffffff;
+    border-color:var(--accent);
+  }
+  button.primary:hover,
+  #btnAddIssue:hover {
+    background:#1e40af;
+    color:#ffffff;
+    border-color:#1e40af;
+  }
+  button.ghost { background:#ffffff; color:#1f2937; border-color:#cbd5e1; }
+  button.ghost:hover { color:var(--accent); border-color:var(--accent); }
+  button.warn,
+  button.ghost.warn {
+    background:#fff7ed;
+    color:#9a3412;
+    border-color:#fdba74;
+  }
+  button.ok {
+    background:#047857;
+    color:#ffffff;
+    border-color:#047857;
+  }
+  button.ok:hover {
+    background:#065f46;
+    color:#ffffff;
+    border-color:#065f46;
+  }
   .pill, .kbd { background:#eef2ff; color:#1e3a8a; }
 </style>
 

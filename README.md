@@ -1,6 +1,6 @@
 # Journals_ToolKit
 
-Kumpulan aplikasi statis untuk membantu pengelola jurnal melakukan pemeriksaan awal terkait OAI-PMH, Arjuna, DOAJ, dan roadmap evaluasi diri jurnal. Toolkit ini dibuat untuk akses publik melalui GitHub Pages dan dapat dijalankan tanpa server backend.
+Kumpulan aplikasi statis untuk membantu pengelola jurnal melakukan pemeriksaan awal terkait OAI-PMH, DOI XML Crossref, Arjuna, DOAJ, dan roadmap evaluasi diri jurnal. Toolkit ini dibuat untuk akses publik melalui GitHub Pages dan dapat dijalankan tanpa server backend.
 
 Toolkit ini dikembangkan oleh Ikhwan Arief (ikhwan[at]unand.ac.id)
 
@@ -15,6 +15,7 @@ https://ikhwan-arief.github.io/Journals_ToolKit/
 | Aplikasi | URL | Fungsi utama |
 | --- | --- | --- |
 | Validator OAI-PMH Jurnal OJS | `/oai-pmh/` | Validasi endpoint OAI-PMH, metadata publik, dan rekomendasi teknis untuk harvester. |
+| DOI XML Repair | `/doi-xml-repair/` | Perbaikan XML Crossref dengan mempertahankan DOI artikel lama, mapping artikel, copy, dan download XML hasil. |
 | Simulasi Penilaian Arjuna 2021 | `/arjuna-2021/` | Simulasi skor total, subtotal manajemen/substansi, peringkat, reset, dan cetak/PDF. |
 | Pra Nilai Arjuna | `/pra-nilai-arjuna/` | Form ringkasan data awal akreditasi, URL edisi, 3 PDF per edisi, salin clipboard, unduh TXT, dan buka alat bantu eksternal. |
 | DOAJ Precheck | `/doaj-precheck/` | Checklist required/recommended, status kesiapan, reset, dan print. |
@@ -29,6 +30,12 @@ docs/
 │   └── toolkit.css
 ├── oai-pmh/
 │   └── index.html
+├── doi-xml-repair/
+│   ├── index.html
+│   ├── doi_xml_repair.py
+│   └── assets/
+│       ├── app.js
+│       └── styles.css
 ├── arjuna-2021/
 │   └── index.html
 ├── pra-nilai-arjuna/

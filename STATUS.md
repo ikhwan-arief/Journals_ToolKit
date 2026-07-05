@@ -74,7 +74,6 @@ Semua URL berikut sudah diverifikasi dengan request HEAD dan mengembalikan `HTTP
 | Portal | `https://ikhwan-arief.github.io/Journals_ToolKit/` | `200` |
 | Validator OAI-PMH | `https://ikhwan-arief.github.io/Journals_ToolKit/oai-pmh/` | `200` |
 | Simulasi Arjuna 2021 | `https://ikhwan-arief.github.io/Journals_ToolKit/arjuna-2021/` | `200` |
-| Pra Nilai Arjuna | `https://ikhwan-arief.github.io/Journals_ToolKit/pra-nilai-arjuna/` | `200` |
 | DOAJ Precheck | `https://ikhwan-arief.github.io/Journals_ToolKit/doaj-precheck/` | `200` |
 | DOI XML Repair | `https://ikhwan-arief.github.io/Journals_ToolKit/doi-xml-repair/` | `200` |
 | Evaluasi Diri Jurnal | `https://ikhwan-arief.github.io/Journals_ToolKit/evaluasi-diri-jurnal/` | `200` |
@@ -180,38 +179,7 @@ Status smoke test terakhir:
 - Tidak ada console error pada smoke test.
 - Tidak ada horizontal overflow pada desktop dan mobile.
 
-### 5. Pra Nilai Arjuna
-
-| Item | Status |
-| --- | --- |
-| Path | `docs/pra-nilai-arjuna/index.html` |
-| URL | `/pra-nilai-arjuna/` |
-| Fungsi | Form ringkasan data awal akreditasi jurnal |
-| Status akses publik | Aktif |
-| Verifikasi terakhir | HTTP 200 |
-| Desain | Sudah memakai gaya Cal.com-inspired |
-
-Fungsi yang dipertahankan:
-
-- Form identitas dan akses jurnal.
-- Tambah/hapus edisi.
-- Tiga URL PDF artikel per edisi.
-- Validasi format URL.
-- Preview/ringkasan.
-- Salin ringkasan.
-- Unduh TXT.
-- Buka alat bantu eksternal.
-- Reset isian.
-
-Status smoke test terakhir:
-
-- Jumlah `.issue` bertambah dari 1 ke 2 setelah klik `Tambah Edisi`.
-- Preview ringkasan tampil setelah klik `Buat Ringkasan`.
-- Tombol `Tambah Edisi` memiliki background hitam dan teks putih setelah redesign.
-- Tidak ada console error pada smoke test.
-- Tidak ada horizontal overflow pada desktop dan mobile.
-
-### 6. DOAJ Precheck
+### 5. DOAJ Precheck
 
 | Item | Status |
 | --- | --- |
@@ -239,7 +207,7 @@ Status smoke test terakhir:
 - Tidak ada console error pada smoke test.
 - Tidak ada horizontal overflow pada desktop dan mobile.
 
-### 7. Evaluasi Diri Jurnal
+### 6. Evaluasi Diri Jurnal
 
 | Item | Status |
 | --- | --- |
@@ -316,8 +284,6 @@ docs/
 │       ├── app.js
 │       └── styles.css
 ├── arjuna-2021/
-│   └── index.html
-├── pra-nilai-arjuna/
 │   └── index.html
 ├── doaj-precheck/
 │   └── index.html

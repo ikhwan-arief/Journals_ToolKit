@@ -17,7 +17,6 @@ https://ikhwan-arief.github.io/Journals_ToolKit/
 | Validator OAI-PMH Jurnal OJS | `/oai-pmh/` | Validasi endpoint OAI-PMH, metadata publik, dan rekomendasi teknis untuk harvester. |
 | DOI XML Repair | `/doi-xml-repair/` | Perbaikan XML Crossref dengan mempertahankan DOI artikel lama, mapping artikel, copy, dan download XML hasil. |
 | Simulasi Penilaian Arjuna 2021 | `/arjuna-2021/` | Simulasi skor total, subtotal manajemen/substansi, peringkat, reset, dan cetak/PDF. |
-| Pra Nilai Arjuna | `/pra-nilai-arjuna/` | Form ringkasan data awal akreditasi, URL edisi, 3 PDF per edisi, salin clipboard, unduh TXT, dan buka alat bantu eksternal. |
 | DOAJ Precheck | `/doaj-precheck/` | Checklist required/recommended, status kesiapan, reset, dan print. |
 | Evaluasi Diri Jurnal | `/evaluasi-diri-jurnal/` | Kuesioner mandiri, skor kapasitas, prioritas roadmap, rencana kerja 12 bulan, salin hasil, TXT, dan cetak. |
 
@@ -37,8 +36,6 @@ docs/
 │       ├── app.js
 │       └── styles.css
 ├── arjuna-2021/
-│   └── index.html
-├── pra-nilai-arjuna/
 │   └── index.html
 ├── doaj-precheck/
 │   └── index.html

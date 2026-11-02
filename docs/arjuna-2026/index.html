@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simulasi Penilaian Akreditasi Jurnal Ilmiah 2026</title>
+<style>
+  :root{
+    --bg:#f5f7fb; --card:#ffffff; --ink:#18212f; --muted:#667085; --line:#d9e0ea;
+    --primary:#0b5cad; --primary2:#eaf3ff; --good:#137a4b; --warn:#9a6700; --bad:#b42318;
+    --shadow:0 8px 24px rgba(16,24,40,.08); --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+  .app-header{border-bottom:1px solid var(--line);background:#fff;color:var(--ink);padding:48px 20px 30px}
+  .wrap{max-width:1220px;margin:0 auto}
+  h1{font-size:clamp(1.55rem,2.4vw,2.25rem);margin:0 0 6px;line-height:1.15}
+  .subtitle{margin:0;opacity:.9;max-width:880px}
+  .source-note{margin-top:12px;font-size:.88rem;opacity:.9}
+  main{padding:22px 18px 46px}
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:20px;align-items:start}
+  .stack{display:grid;gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+  .card h2{font-size:1.16rem;margin:0 0 12px}
+  .card h3{font-size:1rem;margin:18px 0 10px}
+  .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  label.field{display:grid;gap:6px;font-weight:650;font-size:.9rem}
+  input[type=text],input[type=url],select{width:100%;border:1px solid #c8d1dc;border-radius:10px;padding:10px 11px;background:#fff;color:var(--ink);font:inherit}
+  input:focus,select:focus{outline:3px solid rgba(11,92,173,.15);border-color:var(--primary)}
+  .muted{color:var(--muted);font-size:.88rem}
+  .checks{display:grid;gap:8px}
+  .checkrow{display:grid;grid-template-columns:36px 1fr 165px;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;transition:.18s ease}
+  .checkrow.met{border-color:#9fd5ba;background:#f4fbf7}
+  .checkrow.na{border-color:#b8c7d9;background:#f5f8fc}
+  .checkrow.na .code{color:#526b86}
+  .checkrow.na select{border-color:#aab9ca;color:#42566d;background:#f8fafc}
+  .checkrow.pending,.checkrow.unmet{border-color:#efb5b0;background:#fff5f4}
+  .checkrow.pending .code,.checkrow.unmet .code{color:var(--bad)}
+  .checkrow.pending select,.checkrow.unmet select{border-color:#dc8178;color:#8f1f17;background:#fff}
+  .code{font-weight:800;color:var(--primary)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  button,.button{border:0;border-radius:10px;padding:10px 13px;font:inherit;font-weight:700;cursor:pointer;background:var(--primary);color:#fff}
+  button.secondary,.button.secondary{background:#eef2f6;color:#27364a;border:1px solid #d8e0e9}
+  button.danger{background:#fff1f0;color:var(--bad);border:1px solid #f5c3bf}
+  details.group{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,24,40,.045)}
+  details.group>summary{list-style:none;cursor:pointer;padding:15px 16px;font-weight:800;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fbfcfe}
+  details.group>summary::-webkit-details-marker{display:none}
+  .groupbody{padding:8px 14px 16px}
+  .subitem{padding:14px 0;border-top:1px solid #edf0f4}
+  .subitem:first-child{border-top:0}
+  .subhead{display:flex;gap:10px;align-items:baseline;margin-bottom:8px}
+  .subcode{font-weight:900;color:var(--primary);min-width:42px}
+  .subname{font-weight:800}
+  .options{display:grid;gap:7px}
+  .option{display:grid;grid-template-columns:24px 1fr auto;gap:9px;align-items:start;border:1px solid #dce3eb;border-radius:10px;padding:9px 10px;cursor:pointer;background:#fff}
+  .option:hover{border-color:#9dbfe1;background:#fafdff}
+  .option:has(input:checked){border-color:var(--primary);background:var(--primary2)}
+  .option input{margin-top:4px}
+  .scorepill{min-width:42px;text-align:center;background:#eef2f6;border-radius:999px;padding:3px 8px;font-weight:850;font-size:.85rem}
+  .groupmeta{font-size:.82rem;color:var(--muted);font-weight:650;white-space:nowrap}
+  .sticky{position:sticky;top:14px;display:grid;gap:12px}
+  .scorebox{text-align:center;padding:8px 0 12px}
+  .bigscore{font-size:3rem;font-weight:900;letter-spacing:-.05em;line-height:1}
+  .rank{display:inline-block;margin-top:10px;border-radius:999px;padding:7px 12px;background:#eef2f6;font-weight:850}
+  .rank.good{background:#e8f6ef;color:var(--good)}
+  .rank.bad{background:#fff0ef;color:var(--bad)}
+  .rank.warn{background:#fff7df;color:var(--warn)}
+  .minirows{display:grid;gap:7px;margin-top:10px}
+  .minirow{display:flex;justify-content:space-between;gap:10px;padding-bottom:6px;border-bottom:1px dashed #d9e0ea}
+  .minirow:last-child{border-bottom:0}
+  .progressbar{height:9px;background:#edf1f5;border-radius:99px;overflow:hidden;margin-top:8px}
+  .progressbar>span{display:block;height:100%;background:var(--primary);width:0;transition:width .2s ease}
+  .ranktable{width:100%;border-collapse:collapse;font-size:.88rem}
+  .ranktable th,.ranktable td{border-bottom:1px solid #e5e9ef;padding:7px 5px;text-align:left}
+  .notice{border-left:4px solid var(--primary);background:#f2f7fd;padding:10px 12px;border-radius:8px;font-size:.9rem}
+  .notice.warning{border-left-color:var(--warn);background:#fff9e9}
+  .notice.danger{border-left-color:var(--bad);background:#fff4f2}
+  .honesty{border:1px solid #f0c36a;background:#fff9e8;border-radius:12px;padding:13px 14px;color:#6b4b00}
+  .honesty strong{color:#7a4f00}
+  .checktitle{font-weight:750;color:var(--ink)}
+  .checkdesc{margin-top:4px;color:var(--muted);font-size:.83rem;line-height:1.45}
+  .subdesc{margin:0 0 10px 52px;padding:8px 10px;border-left:3px solid #c7d8eb;background:#f8fbff;border-radius:0 8px 8px 0;color:#526176;font-size:.84rem;line-height:1.48}
+  .evidence-tip{margin:8px 0 0;color:#526176;font-size:.84rem}
+  .gate-status{margin-top:10px;border-radius:10px;padding:10px 12px;font-size:.86rem;font-weight:750}
+  .gate-status.good{border:1px solid #9fd5ba;background:#eef9f3;color:#12633f}
+  .gate-status.bad{border:1px solid #efb5b0;background:#fff1f0;color:#9b241b}
+  .gate-status.neutral{border:1px solid #b8c7d9;background:#f5f8fc;color:#42566d}
+  .context-note{margin:10px 0 12px;border:1px solid #cdd9e7;background:#f7faff;border-radius:10px;padding:10px 12px;font-size:.86rem;color:#465a70}
+  .context-note strong{color:#243b55}
+  .fieldhint{font-weight:400;color:var(--muted);font-size:.78rem;line-height:1.4}
+  .applicability{display:inline-block;margin-top:5px;border-radius:999px;padding:2px 7px;background:#edf2f7;color:#526176;font-size:.72rem;font-weight:800}
+  .applicability.na{background:#edf3f9;color:#42617f}
+  .summary-table{width:100%;border-collapse:collapse;font-size:.82rem}
+  .summary-table th,.summary-table td{border:1px solid #cfd7e2;padding:7px;vertical-align:top}
+  .summary-table th{background:#f1f4f8}
+  .sectiontitle{display:flex;justify-content:space-between;gap:12px;align-items:center}
+  .badge{border-radius:999px;background:#eef2f6;padding:4px 9px;font-size:.78rem;font-weight:800;color:#42526a}
+  .purpose-note{margin-top:18px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:#f8f9fa;color:#374151;font-size:.86rem;line-height:1.55}
+  .purpose-note a{color:var(--ink);text-decoration:underline;font-weight:700}
+  footer{max-width:1220px;margin:0 auto;padding:0 18px 32px;color:#667085;font-size:.83rem}
+  .print-only{display:none}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}.sticky{position:static}.grid2{grid-template-columns:1fr}.checkrow{grid-template-columns:34px 1fr}.checkrow select{grid-column:2}}
+  @media print{
+    @page{size:A4;margin:14mm}
+    body{background:#fff;color:#000;font-size:10pt}
+    .toolkit-topbar{display:none!important}.app-header{background:#fff!important;color:#000;padding:0 0 10px;border-bottom:2px solid #000}
+    main{padding:10px 0}.layout{display:block}.no-print{display:none!important}.print-only{display:block!important}
+    .card{box-shadow:none;border:0;padding:8px 0}.sticky{position:static}.results-panel{page-break-inside:avoid}
+    .summary-table{font-size:8.6pt}.summary-table th,.summary-table td{padding:5px}
+    footer{padding:8px 0;color:#000}
+  }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23111111'/%3E%3Cpath d='M18 18h28v6H18zm0 11h28v6H18zm0 11h18v6H18z' fill='white'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/toolkit.css" />
+<style id="toolkit-arjuna-2026-overrides">
+  :root{
+    --bg:var(--toolkit-canvas);--card:var(--toolkit-canvas);--ink:var(--toolkit-ink);
+    --muted:var(--toolkit-muted);--line:var(--toolkit-line);--primary:var(--toolkit-primary);
+    --primary2:var(--toolkit-surface-card);--shadow:none;--radius:var(--toolkit-radius-md)
+  }
+  body{background:var(--toolkit-canvas)!important;color:var(--toolkit-ink);font-family:var(--toolkit-font)}
+  .app-header h1{font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-.04em;max-width:900px}
+  .subtitle{color:var(--toolkit-body);font-size:1.05rem}
+  main{background:var(--toolkit-canvas)}
+  .card,details.group{border-color:var(--toolkit-line);border-radius:var(--toolkit-radius-md);box-shadow:none}
+  details.group>summary{background:var(--toolkit-surface-soft)}
+  button,.button{border-radius:var(--toolkit-radius-sm);background:var(--toolkit-primary)}
+  button:hover,.button:hover{background:var(--toolkit-primary-active)}
+  input[type=text],input[type=url],select,.checkrow,.option{border-radius:var(--toolkit-radius-sm)}
+  .code,.subcode{color:var(--toolkit-ink)}
+  .option:has(input:checked){border-color:var(--toolkit-primary);background:var(--toolkit-surface-card)}
+  .progressbar>span{background:var(--toolkit-primary)}
+  .sticky{top:84px}
+  footer{border-top:1px solid var(--toolkit-line);padding-top:24px}
+</style>
+</head>
+<body>
+<div class="toolkit-topbar">
+  <div class="toolkit-topbar-inner">
+    <div class="toolkit-brand">
+      <strong>Journals Toolkit</strong>
+      <span>Alat bantu publik untuk pengelola jurnal</span>
+    </div>
+    <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
+      <a href="../">Portal</a>
+      <a href="../oai-pmh/">OAI-PMH</a>
+      <a href="../doi-xml-repair/">DOI XML Repair</a>
+      <a href="../scopus-readiness/">Scopus Readiness</a>
+      <a href="../arjuna-2021/">Arjuna 2021</a>
+      <a href="../arjuna-2026/" aria-current="page">Arjuna 2026</a>
+      <a href="../doaj-precheck/">DOAJ Precheck</a>
+      <a href="../evaluasi-diri-jurnal/">Evaluasi Diri</a>
+    </nav>
+  </div>
+</div>
+<header class="app-header">
+  <div class="wrap">
+    <h1>Simulasi Penilaian Akreditasi Jurnal Ilmiah 2026</h1>
+    <p class="subtitle">Alat bantu simulasi untuk pengelola jurnal yang akan mengajukan akreditasi. Isilah setiap butir berdasarkan kondisi nyata dan bukti yang dapat diperiksa.</p>
+    <div class="purpose-note"><strong>Informasi penggunaan:</strong> Alat bantu ini dibuat untuk keperluan simulasi bagi pengelola jurnal yang akan mengajukan akreditasi dan <strong>bukan sebagai alat ukur akreditasi resmi</strong>. Simulasi ini dibuat berdasarkan <strong>Keputusan Direktur Jenderal Sains dan Teknologi Nomor 374/DST/D.D1/HM.01.01/2026 tentang Petunjuk Teknis Akreditasi Jurnal Ilmiah</strong>, yang dirujuk pada <a href="https://arjuna.kemdiktisaintek.go.id/#/pengumuman/724" target="_blank" rel="noopener noreferrer">https://arjuna.kemdiktisaintek.go.id/#/pengumuman/724</a>. Dibuat oleh <strong>Ikhwan Arief</strong> (ikhwan[at]unand.ac.id).</div>
+  </div>
+</header>
+<main>
+<div class="wrap layout">
+  <section class="stack">
+    <div class="card no-print">
+      <div class="sectiontitle"><h2>1. Pilih Jenis Usulan</h2><span class="badge">menentukan cabang pemeriksaan</span></div>
+      <p class="muted">Pilih jenis usulan sebelum mengisi Pemeriksaan Awal. Pilihan ini menentukan cakupan terbitan yang harus diperiksa dan menyesuaikan pertanyaan di bawahnya.</p>
+      <label class="field">Jenis usulan
+        <select id="proposalType">
+          <option value="">Pilih jenis usulan</option>
+          <option value="baru">Akreditasi Baru</option>
+          <option value="ulang">Akreditasi Ulang (Reakreditasi)</option>
+        </select>
+        <span class="fieldhint">Akreditasi Baru menggunakan seluruh nomor terbitan dalam 3 tahun terakhir. Akreditasi Ulang menggunakan 3 nomor terbitan terakhir/terbaru. Pertanyaan Pemeriksaan Awal akan menyesuaikan otomatis dengan pilihan ini.</span>
+      </label>
+    </div>
+
+    <div class="card no-print">
+      <h2>2. Identitas Jurnal</h2>
+      <div class="grid2">
+        <label class="field">Nama jurnal<input id="journalName" type="text" placeholder="Nama jurnal" /></label>
+        <label class="field">Nama penerbit<input id="publisher" type="text" placeholder="Nama penerbit" /></label>
+        <label class="field">E-ISSN<input id="eissn" type="text" placeholder="xxxx-xxxx" /></label>
+        <label class="field">P-ISSN <span class="muted">(jika ada)</span><input id="pissn" type="text" placeholder="xxxx-xxxx" /></label>
+        <label class="field">URL jurnal<input id="journalUrl" type="url" placeholder="https://..." /></label>
+      </div>
+    </div>
+
+    <div class="card no-print">
+      <div class="honesty"><strong>Wajib diisi dengan jujur.</strong> Jawaban harus menggambarkan keadaan jurnal yang sebenarnya dan didasarkan pada bukti yang dapat diverifikasi, seperti laman jurnal, Portal ISSN, metadata artikel, galley/PDF, rekam proses editorial, bukti telaah, data pengindeks, dan dokumen penerbit. Jangan memilih “Memenuhi” atau nilai yang lebih tinggi hanya untuk mengejar peringkat tertentu.<br><br><strong>Prinsip kelulusan tahap pemeriksaan:</strong> Pemeriksaan mengikuti cabang jenis usulan yang dipilih. Untuk <strong>Akreditasi Baru</strong>, bukti penerbitan diperiksa pada <strong>seluruh nomor terbitan dalam 3 tahun terakhir</strong>. Untuk <strong>Akreditasi Ulang</strong>, bukti penerbitan utama diperiksa pada <strong>3 nomor terbitan terakhir/terbaru</strong>. Pada <strong>Pemeriksaan Awal</strong>, status <em>Memenuhi</em> diberikan apabila seluruh butir yang berlaku pada cabang tersebut telah dijawab “Memenuhi”. Butir yang memang tidak relevan dapat berstatus “Tidak Berlaku” dan tidak menggagalkan Pemeriksaan Awal. Pada <strong>Pemeriksaan Kelayakan</strong>, seluruh butir wajib dijawab “Memenuhi”. Jika masih ada persyaratan yang berlaku tetapi belum memenuhi atau belum dapat diverifikasi, sebaiknya jurnal melengkapi bukti dan melakukan perbaikan terlebih dahulu sebelum mengajukan akreditasi.</div>
+    </div>
+
+    <div class="card no-print">
+      <div class="sectiontitle"><h2>Pemeriksaan Awal</h2><span class="badge">kriteria minimum</span></div>
+      <p class="muted">Pemeriksaan Awal otomatis bercabang mengikuti <strong>Jenis usulan</strong> yang dipilih pada bagian pertama. Akreditasi Baru diperiksa terhadap seluruh nomor terbitan dalam 3 tahun terakhir, sedangkan Akreditasi Ulang diperiksa terhadap 3 nomor terbitan terakhir/terbaru. Butir mengenai peringkat dan masa berlaku akreditasi sebelumnya hanya ditampilkan untuk Akreditasi Ulang.</p>
+      <div id="preChecks" class="checks"></div>
+      <p class="evidence-tip"><strong>Prinsip pengisian:</strong> jawab “Memenuhi” hanya jika bukti benar-benar mendukung. Jawaban “Tidak Berlaku” dianggap memenuhi hanya pada butir yang memang tidak relevan untuk jenis usulan yang dipilih. Jika ada satu atau lebih butir yang berlaku tetapi belum memenuhi, lengkapi persyaratan dan lakukan perbaikan terlebih dahulu sebelum mengajukan akreditasi.</p>
+      <div id="preGateStatus" class="gate-status bad">BELUM DAPAT DINILAI: pilih jenis usulan dan lengkapi Pemeriksaan Awal.</div>
+    </div>
+
+    <div class="card no-print">
+      <div class="sectiontitle"><h2>Pemeriksaan Kelayakan</h2><span class="badge">tahap sebelum penilaian</span></div>
+      <p class="muted">Tahap ini menilai apakah proses penelaahan artikel dan integritas penerbit benar-benar layak untuk dilanjutkan ke penilaian. Jawab berdasarkan rekam proses dan bukti yang dapat ditelusuri.</p>
+      <div id="eligChecks" class="checks"></div>
+      <p class="evidence-tip"><strong>Prinsip pengisian:</strong> temuan yang belum jelas harus diverifikasi terlebih dahulu. Jangan menganggap “Memenuhi” hanya karena kebijakan tertulis tersedia jika praktik dan buktinya tidak mendukung. Tahap ini hanya dinyatakan memenuhi bila seluruh butir dijawab “Memenuhi”.</p>
+      <div id="eligGateStatus" class="gate-status bad">BELUM MEMENUHI: seluruh butir Pemeriksaan Kelayakan wajib dijawab “Memenuhi”.</div>
+    </div>
+
+    <div class="card no-print">
+      <div class="sectiontitle"><h2>Penilaian Tata Kelola dan Mutu Artikel</h2><span class="badge">maksimum 100</span></div>
+      <p class="muted">Pilih satu indikator pada setiap sub-unsur. Nilai Tata Kelola maksimum 46 dan Mutu Artikel maksimum 54. Disinsentif dihitung setelah subtotal penilaian.</p>
+      <div id="scoreScopeContext" class="context-note"><strong>Cakupan belum ditentukan.</strong> Pilih jenis usulan terlebih dahulu.</div>
+      <div class="honesty" style="margin-bottom:14px"><strong>Nilai berdasarkan bukti, bukan target.</strong> Baca bagian “Yang diperiksa” pada setiap sub-unsur, cocokkan dengan kondisi jurnal dan artikel yang dinilai, kemudian pilih indikator yang paling tepat. Jika kondisi berada di antara dua pilihan, gunakan pilihan yang benar-benar dapat didukung oleh bukti.</div>
+      <div id="scoreGroups" class="stack"></div>
+    </div>
+
+    <div class="card print-only" id="printSummary">
+      <h2>Ringkasan Simulasi Penilaian</h2>
+      <div id="printIdentity"></div>
+      <div id="printResult" style="margin:12px 0"></div>
+      <p style="font-size:9pt"><strong>Pernyataan penggunaan:</strong> Alat bantu ini dibuat untuk simulasi bagi pengelola jurnal yang akan mengajukan akreditasi dan bukan sebagai alat ukur akreditasi resmi. Simulasi disusun berdasarkan Keputusan Direktur Jenderal Sains dan Teknologi Nomor 374/DST/D.D1/HM.01.01/2026 tentang Petunjuk Teknis Akreditasi Jurnal Ilmiah. Dibuat oleh Ikhwan Arief (ikhwan[at]unand.ac.id). Isian harus dilakukan secara jujur berdasarkan keadaan jurnal yang sebenarnya dan bukti yang dapat diverifikasi.</p>
+      <table class="summary-table">
+        <thead><tr><th>Kode</th><th>Sub-unsur</th><th>Indikator terpilih</th><th>Nilai</th></tr></thead>
+        <tbody id="summaryRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <aside class="sticky">
+    <div class="card results-panel">
+      <h2>Hasil Simulasi</h2>
+      <div class="scorebox">
+        <div class="bigscore" id="totalScore">0</div>
+        <div class="rank warn" id="rankLabel">Belum lengkap</div>
+      </div>
+      <div class="minirows">
+        <div class="minirow"><span>Tata Kelola (A-E)</span><strong id="governanceScore">0 / 46</strong></div>
+        <div class="minirow"><span>Mutu Artikel (F-G)</span><strong id="articleScore">0 / 54</strong></div>
+        <div class="minirow"><span>Disinsentif (H)</span><strong id="penaltyScore">0</strong></div>
+        <div class="minirow"><span>Butir terisi</span><strong id="completedCount">0 / 30</strong></div>
+      </div>
+      <div class="progressbar"><span id="progressFill"></span></div>
+      <div id="statusNotice" class="notice warning" style="margin-top:12px">Lengkapi pemeriksaan dan seluruh sub-unsur penilaian.</div>
+      <div class="toolbar no-print">
+        <button type="button" id="printBtn">Cetak / Simpan PDF</button>
+        <button type="button" class="danger" id="resetBtn">Reset</button>
+      </div>
+    </div>
+    <div class="card no-print">
+      <h2>Rentang Peringkat 2026</h2>
+      <table class="ranktable">
+        <thead><tr><th>Status</th><th>Nilai total</th></tr></thead>
+        <tbody>
+          <tr><td>Peringkat 1</td><td>90 ≤ n ≤ 100</td></tr>
+          <tr><td>Peringkat 2</td><td>80 ≤ n &lt; 90</td></tr>
+          <tr><td>Peringkat 3</td><td>70 ≤ n &lt; 80</td></tr>
+          <tr><td>Peringkat 4</td><td>60 ≤ n &lt; 70</td></tr>
+          <tr><td>Tidak Terakreditasi</td><td>n &lt; 60</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card no-print">
+      <div class="notice danger"><strong>Catatan:</strong> hasil ini bersifat simulasi. Keputusan resmi hanya ditetapkan melalui proses akreditasi sesuai ketentuan yang berlaku.</div>
+    </div>
+  </aside>
+</div>
+</main>
+<footer>Alat bantu simulasi bagi pengelola jurnal yang akan mengajukan akreditasi, bukan alat ukur akreditasi resmi. Berdasarkan Keputusan Direktur Jenderal Sains dan Teknologi Nomor 374/DST/D.D1/HM.01.01/2026. Dibuat oleh Ikhwan Arief (ikhwan[at]unand.ac.id). Isilah dengan jujur berdasarkan bukti yang dapat diverifikasi.</footer>
+<script>
+const checkDescriptions = {
+  P1:'Buka URL jurnal yang diajukan dan pastikan laman dapat diakses normal, menampilkan jurnal yang benar, serta menyediakan informasi dan arsip yang diperlukan untuk pemeriksaan. Pilih Memenuhi hanya bila laman valid dan dapat diperiksa.',
+  P2:'Cocokkan nama jurnal pada laman jurnal dengan data resmi ISSN. Perhatikan juga konsistensinya pada metadata artikel dan galley/PDF. Memenuhi bila identitas nama jurnal sesuai dan dapat diverifikasi.',
+  P3:'Cocokkan nama penerbit pada laman jurnal dengan data penerbit yang tercatat pada ISSN. Memenuhi bila penerbit yang ditampilkan sesuai, jelas, dan dapat diverifikasi.',
+  P4:'Pastikan cakupan terbitan yang diajukan dan waktu pengajuan sesuai dengan cabang jenis usulan yang telah dipilih di bagian awal.',
+  P5:'Cocokkan frekuensi penerbitan aktual dengan frekuensi yang tercatat pada data e-ISSN/Portal ISSN. Juknis mensyaratkan frekuensi penerbitan sesuai data e-ISSN dan sekurang-kurangnya 2 kali dalam 1 tahun secara teratur. Jika data ISSN menyatakan 2 nomor per tahun tetapi jurnal menerbitkan 3 nomor reguler per tahun, atau sebaliknya tidak mencapai frekuensi yang terdaftar, pilih Belum memenuhi.',
+  P6:'Periksa keberkalaan dan kelengkapan terbitan sesuai cakupan jenis usulan yang telah dipilih.',
+  P7:'Untuk jurnal yang sudah pernah terakreditasi, periksa apakah peringkat akreditasi dan masa berlakunya dicantumkan secara benar pada laman jurnal. Pilih Tidak berlaku hanya bila ketentuan ini memang tidak relevan untuk usulan tersebut.',
+  P8:'Pastikan tersedia laman kebijakan etika publikasi yang jelas dan dapat diakses, serta mengacu pada standar etika publikasi yang diakui, termasuk prinsip COPE.',
+  P9:'Pastikan laman jurnal menjelaskan seluruh biaya yang dibebankan kepada penulis, seperti submission fee, APC, biaya penerbitan, atau biaya lain. Jika tanpa biaya, informasi biaya nol juga harus dinyatakan secara transparan.',
+  P10:'Uji DOI pada artikel yang diterbitkan. Memenuhi bila setiap artikel memiliki DOI yang aktif, mengarah ke artikel yang benar, dan dapat ditelusuri.',
+  P11:'Buka setiap artikel pada seluruh terbitan yang termasuk dalam cakupan usulan dan pastikan tersedia teks penuh, sekurang-kurangnya dalam bentuk PDF, yang dapat diakses untuk keperluan pemeriksaan.',
+  P12:'Periksa nama, afiliasi, kualifikasi, dan keterlibatan Tim Editor. Juknis Pemeriksaan Awal meminta keberagaman nasional dan/atau internasional yang mencukupi tetapi tidak menetapkan angka minimum eksplisit. Untuk membantu simulasi, gunakan acuan paling konservatif dari rubrik B.3: keberagaman mulai memperoleh nilai positif terendah bila Tim Editor aktif berasal dari sedikitnya 2 institusi dan memiliki rekam jejak publikasi nasional 3 tahun terakhir. Tidak ada syarat eksplisit harus berbeda kota/provinsi; yang diperiksa adalah keberagaman institusi/negara dan bukan hanya berasal dari institusi penerbit.',
+  P13:'Periksa nama, afiliasi, kualifikasi, dan keterlibatan aktif Mitra Bestari. Juknis Pemeriksaan Awal meminta keberagaman nasional dan/atau internasional yang mencukupi tetapi tidak memberi angka minimum eksplisit. Untuk membantu simulasi, gunakan acuan paling konservatif dari rubrik B.1: nilai positif terendah mulai pada reviewer aktif dengan rekam jejak publikasi nasional 3 tahun terakhir, berasal dari sedikitnya 4 institusi, dan setiap naskah ditelaah sedikitnya 2 reviewer dengan bukti telaah. Tidak ada syarat eksplisit harus berbeda kota/provinsi; keberagaman dinilai dari institusi/negara dan keterlibatan nyata.',
+  P14:'Coba masuk menggunakan username dan password yang disediakan untuk pemeriksaan. Memenuhi bila kredensial valid dan dapat digunakan tanpa kendala untuk mengakses sistem jurnal.',
+  P15:'Setelah login, pastikan akun memiliki peran Editor atau kewenangan yang memadai untuk menelusuri alur pengelolaan dan penerbitan artikel, termasuk bukti proses editorial dan penelaahan.',
+  K1:'Telusuri rekam proses setiap artikel yang diterbitkan. Memenuhi bila setiap artikel benar-benar telah melalui penelaahan oleh Mitra Bestari dan tersedia bukti telaah yang dapat diperiksa, bukan hanya pernyataan kebijakan.',
+  K2:'Periksa legalitas, rekam jejak, kredibilitas, kepatuhan etika penerbitan, dan integritas akademik penerbit. Memenuhi bila penerbit dapat diverifikasi dan tidak terdapat temuan yang menunjukkan ketidaklayakan atau pola pelanggaran yang tidak ditangani.'
+};
+
+const itemDescriptions = {
+  A:'Bandingkan identitas jurnal pada Portal ISSN, laman jurnal, metadata artikel, dan judul sirahan galley/PDF. Nilai juga apakah nama jurnal cukup unik/spesifik dan selaras dengan fokus serta disiplin ilmu jurnal.',
+  'B.1':'Periksa tiga tahun terakhir: keterlibatan aktif reviewer, rekam jejak publikasinya, keberagaman negara/institusi asal, jumlah reviewer pada setiap naskah, serta bukti telaah yang benar-benar tersedia di sistem.',
+  'B.2':'Baca sampel bukti telaah tiga tahun terakhir. Nilai apakah komentar reviewer membahas substansi, metode, hasil, argumentasi, dan perbaikan ilmiah secara konstruktif, bukan hanya bahasa atau tata letak.',
+  'B.3':'Periksa keterlibatan aktif Tim Editor/Editorial Board, rekam jejak publikasi tiga tahun terakhir, keberagaman negara/institusi asal, kesesuaian keahlian dengan fokus jurnal, serta bukti aktivitas editorialnya.',
+  'B.4':'Hitung asal institusi dan/atau negara penulis pada setiap nomor terbitan selama tiga tahun terakhir berdasarkan afiliasi yang valid. Gunakan pola per nomor terbitan, bukan hanya daftar penulis gabungan seluruh periode.',
+  'B.5':'Telusuri alur artikel dari registrasi dan submission, review, editing, revisi, metadata, sampai penerbitan. Nilai apakah proses benar-benar dijalankan melalui sistem manajemen jurnal daring atau masih bergantung pada e-mail.',
+  'C.1':'Periksa laman kebijakan peer review. Kebijakan yang lengkap menjelaskan tipe review, tahapan proses, kriteria penelaahan, kualifikasi dan jumlah reviewer, batas waktu, pemeriksaan similaritas, pengambilan keputusan editorial, serta prinsip etika.',
+  'C.2':'Periksa Author Guidelines dan template. Nilai apakah instruksi menjelaskan isi dan sistematika artikel secara rinci, mudah diikuti, konsisten dengan gaya selingkung, serta menyediakan contoh/template yang benar-benar dapat digunakan.',
+  'C.3':'Periksa kebijakan AI pada laman jurnal. Untuk nilai tertinggi, kebijakan harus mencakup pengungkapan penggunaan AI oleh Penulis, batasan penggunaan oleh Tim Editor, serta larangan Mitra Bestari memakai AI dalam proses telaah, termasuk menganalisis atau mengunggah naskah ke aplikasi AI.',
+  'C.4':'Periksa pemenuhan 16 unsur transparansi laman: ISSN; aims and scope; jenis manuskrip; jadwal terbit; akses; kontak; hak cipta; lisensi; kepemilikan/pengelolaan; authorship/contributorship; penanganan misconduct; diskusi pascapenerbitan; koreksi/retraksi; pengarsipan; konflik kepentingan; dan plagiasi. Hitung persentase unsur yang benar-benar tersedia.',
+  'D.1':'Bandingkan jadwal yang diumumkan dengan tanggal penerbitan tiga tahun terakhir. Periksa ketepatan waktu, penggunaan Article in Press/Issue in Progress bila ada, serta pastikan tidak ada praktik abstract only atau penyisipan artikel ke back issue.',
+  'D.2':'Periksa konsistensi penomoran volume, nomor terbitan, halaman atau identitas unik artikel selama tiga tahun terakhir. Sistem harus teratur, mudah ditelusuri, dan diterapkan konsisten antar terbitan.',
+  'E.1':'Gunakan data sitasi tiga tahun terakhir yang dapat diverifikasi dari basis data pengindeks bereputasi internasional dan/atau basis data berbasis DOI. Jangan memasukkan angka yang tidak dapat ditelusuri sumbernya.',
+  'E.2':'Verifikasi bahwa jurnal benar-benar tercantum pada pengindeks dan periksa apakah metadata artikelnya juga sudah terindeks. Bedakan pengindeks bereputasi internasional, pengindeks dengan sistem seleksi, dan pengindeks tanpa sistem seleksi.',
+  'F.1':'Baca judul artikel pada terbitan yang dinilai. Nilai apakah judul lugas, spesifik, efektif, dan cukup menginformasikan temuan penting, bukan sekadar menyebut topik atau lokasi penelitian.',
+  'F.2':'Periksa abstrak artikel. Abstrak yang baik menyajikan secara ringkas latar belakang penting bila diperlukan, tujuan, metode, hasil temuan utama, dan simpulan; tidak memuat rujukan, serta menggunakan bahasa yang dipersyaratkan Juknis.',
+  'F.3':'Periksa apakah kata kunci merupakan istilah atau frasa baku yang mewakili konsep utama artikel dan membantu penelusuran. Jangan memberi nilai tinggi bila kata kunci terlalu umum atau tidak mewakili substansi.',
+  'F.4':'Fokuskan pemeriksaan pada pendahuluan dan kontribusi artikel: kecukupan state of the art, justifikasi kebaruan atau analisis kesenjangan riset, dan kejelasan tujuan riset. Nilai tingkat orisinalitas dan kontribusi ilmiahnya berdasarkan tiga unsur tersebut.',
+  'F.5':'Periksa empat aspek utama: kecukupan metode, kejelasan temuan penting berbasis data/fakta, kedalaman interpretasi atau pembahasan, dan perbandingan kritis dengan teori atau penelitian relevan yang mutakhir. Nilai berdasarkan kedalaman analisis, bukan panjang teks.',
+  'F.6':'Periksa apakah simpulan menjawab tujuan riset, menegaskan temuan penting atau baru, didukung fakta hasil penelitian, dan bila relevan memuat implikasi. Simpulan tidak seharusnya menjadi tempat pembahasan baru yang panjang.',
+  'F.7':'Klasifikasikan daftar rujukan artikel menjadi sumber primer dan non-primer, lalu hitung persentasenya. Sumber primer mencakup karya yang melaporkan hasil riset langsung; perhatikan juga syarat jumlah rujukan minimal 15.',
+  'F.8':'Hitung persentase pustaka yang terbit dalam sepuluh tahun terakhir dari seluruh daftar rujukan. Karya klasik tetap boleh digunakan bila relevan, tetapi penilaian kemutakhiran mengikuti proporsi rujukan mutakhir.',
+  'F.9':'Cocokkan setiap artikel dengan fokus dan skop jurnal. Hitung proporsi artikel yang benar-benar berada dalam cakupan keilmuan jurnal dan waspadai terbitan yang menyerupai bunga rampai dari bidang-bidang yang tidak berkaitan.',
+  'G.1':'Periksa sembilan unsur galley/PDF: identitas bibliografis jurnal/artikel; lisensi akses; hak cipta; riwayat tanggal naskah; DOI; pernyataan penggunaan AI; kontribusi penulis; pendanaan; dan konflik kepentingan. Hitung berapa unsur yang tersedia dan konsisten dengan metadata laman.',
+  'G.2':'Periksa penulisan nama dan afiliasi pada metadata dan PDF: nama penulis, family/last name, tanpa gelar/jabatan, afiliasi lengkap termasuk negara, alamat penulis korespondensi, dan konsistensi antar artikel. Identitas harus dapat diverifikasi.',
+  'G.3':'Periksa apakah sistematika artikel sesuai jenis manuskrip dan Author Guidelines. Untuk artikel empiris umumnya mencakup pendahuluan, metode, hasil dan pembahasan, serta simpulan; nilai juga konsistensinya antar artikel dan terbitan.',
+  'G.4':'Periksa penggunaan tabel, gambar/grafik, persamaan, simbol, satuan, tanda baca, huruf kapital/miring/tebal, dan instrumen pendukung lain. Setiap unsur harus jelas, baku, relevan, dirujuk dalam teks, dan membantu pemahaman hasil.',
+  'G.5':'Bandingkan sistem sitasi dan daftar pustaka dengan Author Guidelines. Periksa kebakuan gaya, konsistensi antar artikel, serta prinsip bahwa semua sitasi dalam teks ada di daftar pustaka dan semua pustaka yang dicantumkan benar-benar dirujuk dalam teks.',
+  'G.6':'Baca sampel artikel dan nilai penggunaan istilah baku bidang ilmu, struktur kalimat, tata bahasa, dan konsistensi kualitas kebahasaan. Penilaian didasarkan pada proporsi artikel yang memenuhi, bukan hanya satu artikel terbaik.',
+  'G.7':'Bandingkan artikel antar nomor terbitan. Nilai konsistensi penyuntingan substansi, gaya selingkung, format penulisan, dan tata letak serta apakah semuanya sesuai standar artikel ilmiah dan diterapkan secara konsisten.'
+};
+
+const preChecks = [
+  ['P1','Validitas laman jurnal'],
+  ['P2','Validitas nama jurnal sesuai ISSN'],
+  ['P3','Validitas penerbit jurnal sesuai ISSN'],
+  ['P4','Kesesuaian cakupan dan waktu usulan'],
+  ['P5','Kesesuaian frekuensi terbitan dengan data ISSN'],
+  ['P6','Keberkalaan dan kelengkapan terbitan yang diperiksa'],
+  ['P7','Pencantuman peringkat dan masa berlaku akreditasi'],
+  ['P8','Ketersediaan laman etika publikasi'],
+  ['P9','Ketersediaan laman biaya pemrosesan artikel / Author Fees'],
+  ['P10','Ketersediaan DOI aktif pada setiap artikel'],
+  ['P11','Ketersediaan teks penuh pada setiap artikel'],
+  ['P12','Kecukupan keberagaman afiliasi Editor'],
+  ['P13','Kecukupan keberagaman afiliasi Mitra Bestari / reviewer'],
+  ['P14','Validitas username dan password akun jurnal'],
+  ['P15','Ketersediaan kredensial / peran Editor untuk pemeriksaan']
+];
+const eligChecks = [
+  ['K1','Kecukupan Penelaahan Artikel oleh Mitra Bestari'],
+  ['K2','Validitas dan Integritas Penerbit']
+];
+
+const groups = [
+ {code:'A',name:'Konsistensi Identitas Jurnal Ilmiah',type:'gov',max:2,items:[
+  {code:'A',name:'Konsistensi Identitas Jurnal Ilmiah',opts:[
+   [2,'Unik dan/atau spesifik, mencerminkan super-spesialisasi atau spesialisasi disiplin ilmu tertentu, serta identitas jurnal konsisten pada laman jurnal, metadata artikel, dan judul sirahan galley/PDF.'],
+   [1,'Kurang unik dan/atau kurang spesifik, berkaitan dengan bidang ilmu yang meluas, serta identitas jurnal kurang konsisten pada laman jurnal, metadata artikel, dan judul sirahan galley/PDF.'],
+   [0,'Tidak unik, serupa dengan jurnal lain, dan/atau mengandung nama lembaga/institusi lokal dan/atau tidak sesuai dengan nama yang terdaftar di ISSN.']
+  ]}
+ ]},
+ {code:'B',name:'Tata Kelola Jurnal Ilmiah dan Keberagaman Mitra Bestari / Editor / Penulis',type:'gov',max:22,items:[
+  {code:'B.1',name:'Komposisi, Rekam Jejak Publikasi, dan Keberagaman Asal Mitra Bestari / Peer-Reviewer',opts:[
+   [6,'Melibatkan aktif Mitra Bestari dengan rekam jejak publikasi internasional 3 tahun terakhir, berasal dari 5 negara atau lebih, jumlah penelaah tiap naskah minimal 3 orang, dan disertai bukti telaah.'],
+   [4,'Melibatkan aktif Mitra Bestari dengan rekam jejak publikasi internasional 3 tahun terakhir, berasal minimal 6 institusi dari 3 negara atau 8 institusi, jumlah penelaah tiap naskah minimal 2 orang, dan disertai bukti telaah.'],
+   [2,'Melibatkan aktif Mitra Bestari dengan rekam jejak publikasi minimal nasional 3 tahun terakhir, berasal minimal 6 institusi, jumlah penelaah tiap naskah minimal 2 orang, dan disertai bukti telaah.'],
+   [1,'Melibatkan aktif Mitra Bestari dengan rekam jejak publikasi minimal nasional 3 tahun terakhir, berasal minimal 4 institusi, jumlah penelaah tiap naskah minimal 2 orang, dan disertai bukti telaah.'],
+   [0,'Tidak melibatkan Mitra Bestari secara aktif dalam proses penelaahan dan/atau tidak dapat menunjukkan bukti telaah substantif atas artikel yang diterbitkan.']
+  ]},
+  {code:'B.2',name:'Mutu Penyuntingan Substansi oleh Mitra Bestari / Peer-Reviewer',opts:[
+   [4,'Mutu penyuntingan artikel baik sekali; Mitra Bestari secara ketat menilai manuskrip dan memberi catatan/saran perbaikan yang substantif dan signifikan sehingga mutu isi artikel terjaga dalam 3 tahun terakhir.'],
+   [2,'Mutu penyuntingan artikel kurang baik; catatan/saran Mitra Bestari kurang substantif dan tidak signifikan dalam 3 tahun terakhir.'],
+   [0,'Mutu penyuntingan artikel tidak baik; Mitra Bestari hanya memberi catatan terkait tata bahasa dan tata letak (layout) dalam 3 tahun terakhir.']
+  ]},
+  {code:'B.3',name:'Pelibatan, Komposisi, Rekam Jejak Publikasi, dan Keberagaman Asal Tim Penyunting / Tim Editor / Editorial Board',opts:[
+   [5,'Melibatkan aktif Tim Penyunting/Editor/Editorial Board, memiliki rekam jejak publikasi internasional 3 tahun terakhir, berasal dari 5 negara atau lebih, dan disertai bukti aktivitas.'],
+   [3,'Melibatkan aktif Tim Penyunting/Editor/Editorial Board, memiliki rekam jejak publikasi internasional 3 tahun terakhir, berasal minimal 2 negara atau 6 institusi, dan disertai bukti aktivitas.'],
+   [2,'Melibatkan aktif Tim Penyunting/Editor/Editorial Board, memiliki rekam jejak publikasi nasional 3 tahun terakhir, berasal minimal 4 institusi, dan disertai bukti aktivitas.'],
+   [1,'Melibatkan aktif Tim Penyunting/Editor/Editorial Board, memiliki rekam jejak publikasi nasional 3 tahun terakhir, berasal dari 2 institusi, dan disertai bukti aktivitas.']
+  ]},
+  {code:'B.4',name:'Keberagaman Asal Penulis',opts:[
+   [6,'Keberagaman asal penulis dari 5 negara atau lebih per nomor terbitan dalam 3 tahun terakhir.'],
+   [4,'Keberagaman asal penulis minimal dari 2 negara atau 8 institusi per nomor terbitan dalam 3 tahun terakhir.'],
+   [2,'Keberagaman asal penulis minimal dari 4 institusi per nomor terbitan dalam 3 tahun terakhir.'],
+   [1,'Keberagaman asal penulis minimal dari 2 institusi per nomor terbitan dalam 3 tahun terakhir.'],
+   [0,'Keberagaman asal penulis hanya dari 1 institusi per nomor terbitan dalam 3 tahun terakhir.']
+  ]},
+  {code:'B.5',name:'Pengelolaan Artikel Jurnal Ilmiah',opts:[
+   [1,'Menggunakan pengelolaan penyuntingan artikel secara sistem manajemen jurnal daring.'],
+   [0.5,'Menggunakan kombinasi sistem manajemen jurnal daring dan surat elektronik.'],
+   [0,'Menggunakan pengelolaan penyuntingan artikel melalui surat elektronik saja.']
+  ]}
+ ]},
+ {code:'C',name:'Kelengkapan Laman Jurnal Ilmiah',type:'gov',max:7,items:[
+  {code:'C.1',name:'Kejelasan Kebijakan Proses Penelaahan',opts:[
+   [2,'Kebijakan proses penelaahan menjelaskan secara jelas semua proses peer-review naskah.'],
+   [1,'Kebijakan proses penelaahan menjelaskan secara jelas sebagian proses peer-review naskah.'],
+   [0,'Kebijakan proses penelaahan tidak tersedia atau tersedia tetapi tidak menjelaskan prinsip dasar proses peer-review naskah.']
+  ]},
+  {code:'C.2',name:'Kejelasan Petunjuk Penulisan bagi Penulis',opts:[
+   [1,'Petunjuk penulisan terinci, lengkap, jelas secara substantif dan sistematis pada laman jurnal maupun template artikel, serta tersedia contoh template format artikel.'],
+   [0.5,'Petunjuk penulisan terinci, lengkap, jelas secara substantif dan sistematis pada laman jurnal, tetapi tidak tersedia contoh template format artikel.'],
+   [0,'Petunjuk penulisan kurang lengkap dan/atau kurang jelas pada laman jurnal maupun template, atau ada template tetapi tidak ada petunjuk penulisan.']
+  ]},
+  {code:'C.3',name:'Kejelasan Penggunaan Kecerdasan Artifisial',opts:[
+   [1,'Memiliki kebijakan penggunaan AI yang mengatur kewajiban pengungkapan oleh Penulis, batasan penggunaan oleh Tim Editor, dan larangan penggunaan AI oleh Mitra Bestari dalam proses penelaahan naskah.'],
+   [0.5,'Kebijakan AI tersedia, tetapi belum lengkap karena hanya mengatur sebagian ketentuan penggunaan AI.'],
+   [0,'Kebijakan AI tidak tersedia pada laman jurnal, atau hanya berupa pernyataan umum yang tidak memberikan ketentuan penggunaan AI secara jelas.']
+  ]},
+  {code:'C.4',name:'Kelengkapan Laman Jurnal Ilmiah',opts:[
+   [3,'Kelengkapan laman sesuai 100% dengan 16 klausul COPE Principles of Transparency and Best Practice in Scholarly Publishing.'],
+   [2,'Kelengkapan laman sebagian besar sesuai: ≥75% dan <100% dari 16 klausul.'],
+   [1,'Kelengkapan laman sebagian sesuai: ≥50% dan <75% dari 16 klausul.'],
+   [0,'Kelengkapan laman kurang sesuai: <50% dari 16 klausul.']
+  ]}
+ ]},
+ {code:'D',name:'Keberkalaan Penerbitan Jurnal Ilmiah',type:'gov',max:3,items:[
+  {code:'D.1',name:'Jadwal Penerbitan',opts:[
+   [2,'Menerapkan sistem prapublikasi seperti Article in Press dan/atau Issue in Progress, serta seluruh terbitan sesuai periode yang ditentukan dalam 3 tahun terakhir.'],
+   [1.5,'Lebih dari 75% terbitan sesuai dengan periode yang ditentukan dalam 3 tahun terakhir.'],
+   [1,'Lebih dari 25% sampai dengan 75% terbitan sesuai dengan periode yang ditentukan dalam 3 tahun terakhir.'],
+   [0.5,'Kurang dari atau sama dengan 25% terbitan sesuai dengan periode yang ditentukan dalam 3 tahun terakhir.'],
+   [0,'Menganut konsep penerbitan abstract only dan/atau menyisipkan artikel pada nomor terbitan sebelumnya (back issue).']
+  ]},
+  {code:'D.2',name:'Sistem Penomoran Volume, Nomor Terbitan, dan Nomor Halaman / Identitas Artikel',opts:[
+   [1,'Penomoran volume, terbitan, dan halaman/identitas artikel bersistem baik dan konsisten dalam 3 tahun terakhir.'],
+   [0.5,'Penomoran volume, terbitan, dan halaman/identitas artikel bersistem cukup baik dan/atau cukup konsisten dalam 3 tahun terakhir.'],
+   [0,'Penomoran volume, terbitan, dan halaman/identitas artikel bersistem kurang baik dan/atau kurang konsisten dalam 3 tahun terakhir.']
+  ]}
+ ]},
+ {code:'E',name:'Penyebarluasan Jurnal Ilmiah',type:'gov',max:12,items:[
+  {code:'E.1',name:'Dampak Ilmiah (Jumlah Sitasi)',opts:[
+   [6,'Jumlah sitasi 3 tahun terakhir >25 pada basis data pengindeks bereputasi internasional dan/atau >75 berdasarkan basis data DOI.'],
+   [4,'Jumlah sitasi 3 tahun terakhir 20–25 pada basis data pengindeks bereputasi internasional dan/atau 31–75 berdasarkan basis data DOI.'],
+   [3,'Jumlah sitasi 3 tahun terakhir 10–19 pada basis data pengindeks bereputasi internasional dan/atau 11–30 berdasarkan basis data DOI.'],
+   [2,'Jumlah sitasi 3 tahun terakhir 5–9 pada basis data pengindeks bereputasi internasional dan/atau 5–10 berdasarkan basis data DOI.'],
+   [1,'Jumlah sitasi 3 tahun terakhir <5 pada basis data pengindeks bereputasi internasional dan/atau <5 berdasarkan basis data DOI.'],
+   [0,'Jumlah sitasi dalam 3 tahun terakhir tidak dapat diverifikasi secara memadai.']
+  ]},
+  {code:'E.2',name:'Visibilitas Jurnal Ilmiah',opts:[
+   [6,'Tercantum dan metadata terindeks di lembaga pengindeks bereputasi internasional.'],
+   [4,'Tercantum tetapi metadata belum terindeks di lembaga pengindeks bereputasi internasional.'],
+   [3,'Tercantum dan metadata terindeks di lembaga pengindeks internasional/nasional bersistem seleksi.'],
+   [2,'Tercantum tetapi metadata belum terindeks di lembaga pengindeks internasional/nasional bersistem seleksi.'],
+   [1,'Tercantum dan metadata terindeks di lembaga pengindeks internasional/nasional yang tidak bersistem seleksi.']
+  ]}
+ ]},
+ {code:'F',name:'Mutu Artikel (Substansi)',type:'article',max:34,items:[
+  {code:'F.1',name:'Judul Artikel',opts:[[2,'Lugas dan memuat informasi temuan penting.'],[1,'Lugas tetapi kurang memuat informasi temuan penting.'],[0,'Tidak lugas dan tidak memuat informasi temuan penting.']]},
+  {code:'F.2',name:'Abstrak',opts:[[3,'Abstrak jelas dan ringkas dalam Bahasa Inggris, atau Bahasa Inggris dan Bahasa Indonesia.'],[2,'Abstrak kurang jelas dan kurang ringkas dalam Bahasa Inggris, atau Bahasa Inggris dan Bahasa Indonesia.'],[0,'Abstrak tidak jelas.']]},
+  {code:'F.3',name:'Kata Kunci',opts:[[1,'Memuat kata kunci yang mencerminkan konsep penting isi artikel dan memudahkan pencarian oleh mesin pencari.'],[0.5,'Memuat kata kunci tetapi kurang mencerminkan konsep penting isi artikel.'],[0,'Tidak memuat kata kunci.']]},
+  {code:'F.4',name:'Kepioniran Ilmiah / Orisinalitas / Kontribusi Kebaruan / Analisis Kesenjangan',opts:[
+   [7,'Karya orisinal dengan kontribusi kebaruan sangat tinggi; lengkap memuat state of the art overview, justifikasi kontribusi kebaruan/analisis kesenjangan, dan tujuan riset.'],
+   [5,'Karya orisinal dengan kontribusi kebaruan tinggi; paling tidak dua dari tiga unsur tersebut terpenuhi.'],
+   [3,'Karya orisinal dengan kontribusi kebaruan cukup; salah satu dari tiga unsur tersebut terpenuhi.'],
+   [1,'Karya kurang orisinal dan kurang memberikan kontribusi kebaruan ilmiah atau tidak ada informasi analisis kesenjangan.']
+  ]},
+  {code:'F.5',name:'Analisis dan Sintesis',opts:[
+   [8,'Sangat baik dan sangat mendalam; mencakup metode penelitian, deskripsi temuan penting, kedalaman interpretasi pembahasan, dan perbandingan dengan penelitian lain sesuai kekhasan bidang.'],
+   [6,'Baik dan mendalam; satu dari empat aspek utama tersebut tidak ditemukan.'],
+   [4,'Kurang baik dan kurang mendalam; dua dari empat aspek utama tersebut tidak ditemukan.'],
+   [1,'Tidak baik dan tidak mendalam; tiga dari empat aspek utama tersebut tidak ditemukan.']
+  ]},
+  {code:'F.6',name:'Penyimpulan',opts:[[5,'Sangat baik dan menjawab tujuan dan/atau memuat implikasi hasil riset.'],[3,'Cukup baik dan cukup menjawab tujuan dan/atau memuat implikasi hasil riset.'],[1,'Kurang baik dan kurang menjawab tujuan riset.']]},
+  {code:'F.7',name:'Nisbah Sumber Acuan Primer berbanding Sumber Lainnya',opts:[[3,'Lebih dari 80% dari daftar rujukan adalah sumber primer dan jumlah rujukan minimal 15.'],[2,'40–80% dari daftar rujukan adalah sumber primer dan jumlah rujukan minimal 15.'],[1,'Kurang dari 40% dari daftar rujukan adalah sumber primer dan jumlah rujukan minimal 15.'],[0.5,'Jumlah rujukan kurang dari 15.']]},
+  {code:'F.8',name:'Derajat Kemutakhiran Pustaka Acuan',opts:[[3,'Lebih dari 80% dari daftar rujukan mutakhir.'],[2,'40–80% dari daftar rujukan mutakhir.'],[1,'Kurang dari 40% dari daftar rujukan mutakhir.']]},
+  {code:'F.9',name:'Cakupan Keilmuan',opts:[[2,'Proporsi artikel yang sesuai fokus dan skop jurnal mencakup seluruh artikel (100%).'],[1.5,'Proporsi artikel sesuai fokus dan skop ≥90% dan <100%.'],[1,'Proporsi artikel sesuai fokus dan skop ≥80% dan <90%.'],[0.5,'Proporsi artikel sesuai fokus dan skop <80%.']]}
+ ]},
+ {code:'G',name:'Gaya Penulisan dan Penyuntingan Artikel',type:'article',max:20,items:[
+  {code:'G.1',name:'Kelengkapan Galley/PDF Artikel yang Diterbitkan',opts:[[3,'Sangat lengkap; memenuhi 8 atau 9 dari 9 unsur kelengkapan galley.'],[2,'Cukup lengkap; memenuhi 6 atau 7 dari 9 unsur kelengkapan galley.'],[1,'Kurang lengkap; memenuhi 4 atau 5 dari 9 unsur kelengkapan galley.'],[0.5,'Tidak lengkap; tidak tersedia atau memenuhi 1–3 dari 9 unsur kelengkapan galley.']]},
+  {code:'G.2',name:'Pencantuman Nama Penulis dan Afiliasi Penulis',opts:[[1,'Lengkap, benar, dan konsisten antar artikel.'],[0.5,'Lengkap dan benar, tetapi tidak konsisten antar artikel.'],[0,'Tidak lengkap dan tidak konsisten.']]},
+  {code:'G.3',name:'Sistematika Penulisan Artikel',opts:[[2,'Lengkap, bersistem baik, dan konsisten antar artikel dan antar terbitan.'],[1,'Lengkap, bersistem baik, tetapi tidak konsisten antar artikel dan antar terbitan.'],[0.5,'Kurang lengkap, kurang bersistem baik, tetapi konsisten antar artikel dan antar terbitan.'],[0,'Kurang lengkap, kurang bersistem baik, dan tidak konsisten antar artikel dan antar terbitan.']]},
+  {code:'G.4',name:'Pemanfaatan Instrumen Pendukung',opts:[[4,'Pemanfaatan instrumen pendukung efektif dan komplementer.'],[2,'Pemanfaatan instrumen pendukung cukup efektif dan cukup komplementer.'],[0,'Pemanfaatan instrumen pendukung tidak efektif dan tidak komplementer.']]},
+  {code:'G.5',name:'Sistem Pengacuan Pustaka di dalam Artikel dan Konsistensi Penulisan Daftar Pustaka',opts:[[3,'Sistem pengacuan pustaka baku sesuai Petunjuk Penulisan dan konsisten antar artikel (kesesuaian 100%).'],[2,'Sistem pengacuan cukup baku dan cukup konsisten (kesesuaian 75% sampai <100%).'],[0,'Sistem pengacuan tidak baku dan tidak konsisten (kesesuaian <75%).']]},
+  {code:'G.6',name:'Penggunaan Istilah dan Kualitas Kebahasaan',opts:[[4,'Semua (100%) artikel menggunakan istilah baku dan kualitas kebahasaan baik dan benar.'],[3,'Sebagian besar (75% sampai <100%) artikel menggunakan istilah baku dan kualitas kebahasaan baik dan benar.'],[1,'Sebagian (50% sampai <75%) artikel menggunakan istilah baku, tetapi kualitas kebahasaan belum baik dan benar; atau sebaliknya.'],[0,'Sebagian besar artikel berbahasa kurang baik dan kurang benar.']]},
+  {code:'G.7',name:'Mutu Penyuntingan Substansi, Gaya Selingkung, dan Format Tata Letak',opts:[[3,'Mutu penyuntingan substansi, gaya selingkung, dan format tata letak sesuai standar artikel ilmiah dan konsisten antar artikel.'],[2,'Sesuai standar artikel ilmiah, tetapi tidak konsisten antar artikel.'],[1,'Kurang sesuai standar artikel ilmiah dan/atau tidak konsisten antar artikel.']]}
+ ]},
+ {code:'H',name:'Disinsentif',type:'penalty',max:0,items:[
+  {code:'H.1',name:'Pelanggaran Integritas Akademik',defaultValue:0,opts:[[0,'Tidak ada temuan pelanggaran yang memenuhi kondisi disinsentif.'],[-20,'Terbukti lebih dari 3 artikel pada nomor terbitan yang diajukan merupakan penyimpangan/pelanggaran integritas akademik dan tidak ada tindakan koreksi atau retraksi oleh penerbit.'],[-15,'Terbukti 2–3 artikel pada nomor terbitan yang diajukan merupakan pelanggaran integritas akademik dan tidak ada tindakan koreksi atau retraksi oleh penerbit.'],[-10,'Terbukti 1 artikel pada nomor terbitan yang diajukan merupakan pelanggaran integritas akademik dan tidak ada tindakan koreksi atau retraksi oleh penerbit.']]},
+  {code:'H.2',name:'Ketersediaan Informasi Dokumen Persetujuan Etik (Ethical Clearance)',defaultValue:0,opts:[[0,'Tidak ada kondisi yang menimbulkan disinsentif / tidak relevan.'],[-3,'Artikel riset yang melibatkan manusia dan/atau hewan tidak mencantumkan nomor dan tahun dokumen Ethical Clearance yang relevan atau pernyataan kepatuhan kelayakan etik yang disetujui Mitra Bestari dan/atau Tim Editor.']]}
+ ]}
+];
+
+const STORE='simulasi_arjuna_2026_v2';
+const allScoredItems = groups.filter(g=>g.code!=='H').flatMap(g=>g.items);
+const totalScoredCount = allScoredItems.length;
+
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function proposalLabel(type){return type==='baru'?'Akreditasi Baru':type==='ulang'?'Akreditasi Ulang':'Belum dipilih';}
+function isNAAllowed(code,type){
+  // Matriks dibuat eksplisit agar dapat diperluas bila Juknis menetapkan butir kontekstual lain.
+  const matrix={baru:new Set(['P7']),ulang:new Set([])};
+  return Boolean(matrix[type]?.has(code));
+}
+function proposalScope(type){
+  if(type==='baru') return {
+    short:'seluruh nomor terbitan dalam 3 tahun terakhir',
+    label:'Akreditasi Baru',
+    detail:'Seluruh nomor terbitan yang terbit dalam 3 tahun terakhir menjadi cakupan utama pemeriksaan. Tidak boleh hanya memilih tiga nomor tertentu; semua edisi dalam rentang tersebut harus diperiksa.'
+  };
+  if(type==='ulang') return {
+    short:'3 nomor terbitan terakhir/terbaru',
+    label:'Akreditasi Ulang (Reakreditasi)',
+    detail:'Tiga nomor terbitan terakhir/terbaru menjadi cakupan utama pemeriksaan. Ketiganya harus merupakan terbitan paling mutakhir dan diperiksa sebagai satu paket usulan.'
+  };
+  return {short:'belum ditentukan',label:'Belum dipilih',detail:'Pilih jenis usulan terlebih dahulu.'};
+}
+function contextualCheckTitle(code){
+  const type=val('proposalType');
+  if(code==='P4') return type==='baru'?'Kesesuaian cakupan usulan Akreditasi Baru':type==='ulang'?'Kesesuaian cakupan usulan Akreditasi Ulang':'Kesesuaian cakupan dan waktu usulan';
+  if(code==='P6') return type==='baru'?'Keberkalaan seluruh terbitan dalam 3 tahun terakhir':type==='ulang'?'Kelengkapan 3 nomor terbitan terakhir/terbaru':'Keberkalaan dan kelengkapan terbitan yang diperiksa';
+  if(code==='P7') return 'Pencantuman peringkat dan masa berlaku akreditasi';
+  const item=preChecks.find(x=>x[0]===code);
+  return item?item[1]:code;
+}
+function contextualCheckDescription(code){
+  const type=val('proposalType');
+  const scope=proposalScope(type);
+  if(code==='P4'){
+    if(type==='baru') return 'Jenis usulan sudah dipilih di bagian awal. Pada butir ini tidak perlu memilih jenis lagi. Periksa apakah usulan Akreditasi Baru mencakup seluruh nomor terbitan dalam 3 tahun terakhir dan jurnal memang telah memiliki riwayat terbit yang memenuhi syarat untuk usulan baru. Jawab Memenuhi hanya bila cakupan terbitan lengkap dan waktu pengajuannya sesuai.';
+    if(type==='ulang') return 'Jenis usulan sudah dipilih di bagian awal. Pada butir ini tidak perlu memilih jenis lagi. Periksa apakah usulan Akreditasi Ulang menggunakan tepat 3 nomor terbitan terakhir/terbaru dan diajukan dalam waktu yang diperbolehkan berdasarkan riwayat akreditasi sebelumnya. Jawab Memenuhi hanya bila ketiga nomor tersebut benar-benar merupakan terbitan terbaru dan waktu pengajuannya sesuai.';
+    return 'Pilih jenis usulan terlebih dahulu. Setelah dipilih, butir ini berubah menjadi pemeriksaan cakupan dan waktu usulan, bukan pertanyaan ulang mengenai jenis usulan.';
+  }
+  if(code==='P5'){
+    if(type==='baru') return 'Cocokkan frekuensi penerbitan aktual pada seluruh nomor terbitan dalam 3 tahun terakhir dengan frekuensi yang tercatat pada e-ISSN/Portal ISSN. Juknis mensyaratkan frekuensi sesuai data e-ISSN dan sekurang-kurangnya 2 kali per tahun secara teratur. Contoh: bila ISSN mencatat 2 nomor per tahun tetapi jurnal menerbitkan 3 nomor reguler per tahun, pilih Belum memenuhi.';
+    if(type==='ulang') return 'Cocokkan pola 3 nomor terbitan terakhir/terbaru dengan frekuensi yang tercatat pada e-ISSN/Portal ISSN. Juknis mensyaratkan frekuensi sesuai data e-ISSN dan sekurang-kurangnya 2 kali per tahun secara teratur. Bila frekuensi aktual berbeda dari data ISSN, pilih Belum memenuhi.';
+  }
+  if(code==='P6'){
+    if(type==='baru') return 'Periksa seluruh nomor terbitan dalam 3 tahun terakhir, tanpa melewatkan satu edisi pun. Pastikan jurnal terbit secara berurutan dan teratur sesuai frekuensi yang tercatat pada ISSN, dan setiap nomor terbitan memuat sekurang-kurangnya 5 artikel sebagaimana kriteria minimum Juknis.';
+    if(type==='ulang') return 'Periksa tepat 3 nomor terbitan terakhir/terbaru yang diajukan. Pastikan ketiganya benar-benar merupakan tiga edisi paling mutakhir, berurutan, diterbitkan sesuai frekuensi yang tercatat pada ISSN, dan setiap nomor terbitan memuat sekurang-kurangnya 5 artikel sebagaimana kriteria minimum Juknis.';
+  }
+  if(code==='P7'){
+    if(type==='baru') return 'Butir ini tidak ditampilkan untuk Akreditasi Baru karena jurnal belum memiliki peringkat akreditasi sebelumnya.';
+    if(type==='ulang') return 'Untuk Akreditasi Ulang, periksa apakah laman jurnal mencantumkan peringkat akreditasi sebelumnya dan masa berlakunya secara benar, sekurang-kurangnya nomor/tanggal penetapan dan tanggal akhir masa berlaku.';
+  }
+  if(['P10','P11','P12','P13'].includes(code) && type){
+    const base=checkDescriptions[code]||'';
+    return `${base} Cakupan terbitan untuk usulan ini adalah ${scope.short}.`;
+  }
+  return checkDescriptions[code]||'Periksa kesesuaian kondisi jurnal dengan ketentuan Juknis dan pastikan tersedia bukti yang dapat diverifikasi.';
+}
+function renderChecks(id,items,prefix){
+ const box=document.getElementById(id);
+ box.innerHTML=items.map(([code,text])=>`<div class="checkrow pending" data-checkrow="${prefix}" data-code="${code}"><div class="code">${code}</div><div><div class="checktitle" id="title-${code}">${esc(prefix==='pre'?contextualCheckTitle(code):text)}</div><div class="checkdesc" id="desc-${code}"><strong>Yang diperiksa:</strong> ${esc(contextualCheckDescription(code))}</div><span class="applicability" id="app-${code}">Wajib diperiksa</span></div><select data-check="${prefix}" data-code="${code}" aria-label="${esc(code+' '+text)}"><option value="">Belum diperiksa</option><option value="yes">Memenuhi</option><option value="no">Belum memenuhi</option></select></div>`).join('');
+}
+function updatePreApplicability({preserve=true}={}){
+ const type=val('proposalType');
+ document.querySelectorAll('select[data-check="pre"]').forEach(sel=>{
+   const code=sel.dataset.code;
+   const allowed=isNAAllowed(code,type);
+   const row=sel.closest('.checkrow');
+   if(row && code==='P7') row.style.display=(type==='baru'?'none':'');
+   let naOpt=sel.querySelector('option[value="na"]');
+   if(allowed && !naOpt){naOpt=document.createElement('option');naOpt.value='na';naOpt.textContent='Tidak berlaku';sel.appendChild(naOpt);}
+   if(!allowed && naOpt){
+     if(sel.value==='na') sel.value='';
+     naOpt.remove();
+   }
+   // Untuk butir yang jelas tidak berlaku karena jenis usulan, set otomatis jika belum diisi.
+   if(allowed && (!preserve || sel.value==='' || sel.value==='na')) sel.value='na';
+   const app=document.getElementById('app-'+code);
+   if(app){
+     app.className='applicability'+(allowed?' na':'');
+     app.textContent=allowed?'Tidak berlaku untuk jenis usulan ini':'Wajib diperiksa';
+   }
+   const desc=document.getElementById('desc-'+code);
+   if(desc) desc.innerHTML='<strong>Yang diperiksa:</strong> '+esc(contextualCheckDescription(code));
+   const title=document.getElementById('title-'+code);
+   if(title) title.textContent=contextualCheckTitle(code);
+ });
+ const scope=proposalScope(type);
+ const scoreScope=document.getElementById('scoreScopeContext');
+ // P7 tidak ditampilkan pada Akreditasi Baru agar tidak menimbulkan keraguan.
+ const p7row=document.querySelector('.checkrow[data-code="P7"]');
+ if(p7row) p7row.style.display=(type==='baru'?'none':'');
+ if(scoreScope){
+   if(type==='baru') scoreScope.innerHTML='<strong>Cakupan artikel/terbitan untuk simulasi ini:</strong> seluruh nomor terbitan dalam 3 tahun terakhir. Untuk indikator yang secara eksplisit menilai rekam jejak atau sitasi selama 3 tahun, tetap gunakan periode 3 tahun sebagaimana tertulis pada indikator.';
+   else if(type==='ulang') scoreScope.innerHTML='<strong>Cakupan artikel/terbitan untuk simulasi ini:</strong> 3 nomor terbitan terakhir/terbaru. Untuk indikator yang secara eksplisit menilai rekam jejak atau sitasi selama 3 tahun, periode 3 tahun pada indikator tersebut tetap digunakan.';
+   else scoreScope.innerHTML='<strong>Cakupan belum ditentukan.</strong> Pilih jenis usulan terlebih dahulu.';
+ }
+}
+function evaluateGate(prefix){
+ const type=val('proposalType');
+ const selects=[...document.querySelectorAll(`select[data-check="${prefix}"]`)];
+ if(prefix==='pre' && !type) return {ok:false,missingType:true,failed:0,pending:selects.length,na:0,total:selects.length};
+ let failed=0,pending=0,na=0;
+ for(const sel of selects){
+   const v=sel.value, allowed=prefix==='pre' && isNAAllowed(sel.dataset.code,type);
+   if(v==='yes') continue;
+   if(v==='na' && allowed){na++;continue;}
+   if(v==='') pending++; else failed++;
+ }
+ return {ok:failed===0&&pending===0&&selects.length>0,missingType:false,failed,pending,na,total:selects.length};
+}
+function renderGroups(){
+ const root=document.getElementById('scoreGroups');
+ root.innerHTML=groups.map((g,gi)=>`<details class="group"><summary><span>${g.code}. ${esc(g.name)}</span><span class="groupmeta" id="meta-${g.code}">${g.type==='penalty'?'disinsentif':'maks. '+g.max}</span></summary><div class="groupbody">${g.items.map(item=>`<div class="subitem"><div class="subhead"><span class="subcode">${item.code}</span><span class="subname">${esc(item.name)}</span></div>${itemDescriptions[item.code]?`<div class="subdesc"><strong>Yang diperiksa:</strong> ${esc(itemDescriptions[item.code])}</div>`:''}<div class="options">${item.opts.map(([val,text],oi)=>`<label class="option"><input type="radio" name="score_${item.code.replace('.','_')}" data-item="${item.code}" data-group="${g.code}" value="${val}" ${item.defaultValue===val?'checked':''}><span>${esc(text)}</span><span class="scorepill">${val>0?'+':''}${String(val).replace('.',',')}</span></label>`).join('')}</div></div>`).join('')}</div></details>`).join('');
+}
+function getCheckState(prefix){return [...document.querySelectorAll(`select[data-check="${prefix}"]`)].map(x=>x.value);}
+function getScoreSelections(){
+ const out={};
+ groups.forEach(g=>g.items.forEach(item=>{const el=document.querySelector(`input[data-item="${item.code}"]:checked`); if(el) out[item.code]=Number(el.value);}));
+ return out;
+}
+function findSelectedText(itemCode,value){
+ const item=groups.flatMap(g=>g.items).find(i=>i.code===itemCode); if(!item)return '';
+ const opt=item.opts.find(o=>Number(o[0])===Number(value)); return opt?opt[1]:'';
+}
+function calculate(){
+ const sel=getScoreSelections();
+ let gov=0,article=0,penalty=0;
+ groups.forEach(g=>g.items.forEach(i=>{if(sel[i.code]===undefined)return; if(g.type==='gov')gov+=sel[i.code]; else if(g.type==='article')article+=sel[i.code]; else penalty+=sel[i.code];}));
+ const base=gov+article; const total=base+penalty;
+ const complete=allScoredItems.filter(i=>sel[i.code]!==undefined).length;
+ const preEval=evaluateGate('pre'), eligEval=evaluateGate('elig');
+ const preOK=preEval.ok, eligOK=eligEval.ok;
+ document.querySelectorAll('select[data-check]').forEach(x=>{
+   const row=x.closest('.checkrow'); if(!row)return;
+   const allowed=x.dataset.check==='pre' && isNAAllowed(x.dataset.code,val('proposalType'));
+   row.classList.remove('met','pending','unmet','na');
+   if(x.value==='yes')row.classList.add('met');
+   else if(x.value==='na' && allowed)row.classList.add('na');
+   else if(x.value==='')row.classList.add('pending');
+   else row.classList.add('unmet');
+ });
+ const preGate=document.getElementById('preGateStatus');
+ if(preGate){
+   if(preEval.missingType){preGate.className='gate-status bad';preGate.textContent='BELUM DAPAT DINILAI: pilih Jenis Usulan terlebih dahulu agar aplikasi dapat menentukan butir Pemeriksaan Awal yang berlaku.';}
+   else if(preOK){preGate.className='gate-status good';preGate.textContent=`MEMENUHI: seluruh butir Pemeriksaan Awal yang berlaku telah terpenuhi${preEval.na?`; ${preEval.na} butir berstatus “Tidak Berlaku” sesuai jenis usulan`:''}.`;}
+   else {preGate.className='gate-status bad';preGate.textContent=`BELUM MEMENUHI: ${preEval.failed} butir belum memenuhi dan ${preEval.pending} butir belum diperiksa. Mohon lengkapi bukti dan lakukan perbaikan pada seluruh persyaratan yang berlaku sebelum mengajukan akreditasi.`;}
+ }
+ const eligGate=document.getElementById('eligGateStatus');
+ if(eligGate){eligGate.className='gate-status '+(eligOK?'good':'bad');eligGate.textContent=eligOK?'MEMENUHI: seluruh butir Pemeriksaan Kelayakan telah dijawab “Memenuhi”.':`BELUM MEMENUHI: ${eligEval.failed} butir belum memenuhi dan ${eligEval.pending} butir belum diperiksa. Mohon lengkapi bukti dan lakukan perbaikan terlebih dahulu sebelum mengajukan akreditasi.`;}
+ let rank='Belum lengkap', cls='warn', notice='Lengkapi pemeriksaan dan seluruh sub-unsur penilaian.';
+ if(preEval.missingType){rank='Pilih Jenis Usulan';cls='bad';notice='Pilih Akreditasi Baru atau Akreditasi Ulang terlebih dahulu. Jenis usulan menentukan ketentuan Pemeriksaan Awal dan apakah suatu butir dapat dinyatakan Tidak Berlaku.';}
+ else if(!preOK){rank='Belum Memenuhi Pemeriksaan Awal';cls='bad';notice='Masih terdapat persyaratan Pemeriksaan Awal yang berlaku tetapi belum memenuhi atau belum diperiksa. Mohon lengkapi bukti dan lakukan perbaikan terlebih dahulu sebelum mengajukan akreditasi.';}
+ else if(!eligOK){rank='Belum Memenuhi Pemeriksaan Kelayakan';cls='bad';notice='Pemeriksaan Kelayakan belum terpenuhi seluruhnya. Mohon lengkapi bukti dan lakukan perbaikan pada butir yang belum memenuhi. Pengajuan akreditasi disarankan dilakukan setelah seluruh butir Pemeriksaan Kelayakan telah terpenuhi.';}
+ else if(complete<totalScoredCount){rank='Penilaian Belum Lengkap';cls='warn';notice=`Pemeriksaan Awal dan Pemeriksaan Kelayakan telah memenuhi. Masih ada ${totalScoredCount-complete} sub-unsur A–G yang belum dipilih.`;}
+ else if(total>=90){rank='Terakreditasi Peringkat 1';cls='good';notice='Skor simulasi berada pada rentang Peringkat 1.';}
+ else if(total>=80){rank='Terakreditasi Peringkat 2';cls='good';notice='Skor simulasi berada pada rentang Peringkat 2.';}
+ else if(total>=70){rank='Terakreditasi Peringkat 3';cls='good';notice='Skor simulasi berada pada rentang Peringkat 3.';}
+ else if(total>=60){rank='Terakreditasi Peringkat 4';cls='good';notice='Skor simulasi berada pada rentang Peringkat 4.';}
+ else {rank='Tidak Terakreditasi';cls='bad';notice='Skor simulasi berada di bawah 60.';}
+ document.getElementById('totalScore').textContent=(Math.round(total*10)/10).toLocaleString('id-ID',{maximumFractionDigits:1});
+ const r=document.getElementById('rankLabel');r.textContent=rank;r.className='rank '+cls;
+ document.getElementById('governanceScore').textContent=`${fmt(gov)} / 46`;
+ document.getElementById('articleScore').textContent=`${fmt(article)} / 54`;
+ document.getElementById('penaltyScore').textContent=fmt(penalty);
+ document.getElementById('completedCount').textContent=`${complete} / ${totalScoredCount}`;
+ document.getElementById('progressFill').style.width=`${(complete/totalScoredCount)*100}%`;
+ const n=document.getElementById('statusNotice');n.textContent=notice;n.className='notice '+(cls==='bad'?'danger':cls==='warn'?'warning':'');
+ groups.forEach(g=>{let subtotal=0,done=0;g.items.forEach(i=>{if(sel[i.code]!==undefined){subtotal+=sel[i.code];done++;}});const m=document.getElementById('meta-'+g.code); if(m)m.textContent=g.type==='penalty'?`dipilih ${done}/${g.items.length} • ${fmt(subtotal)}`:`${done}/${g.items.length} • ${fmt(subtotal)}/${g.max}`;});
+ updatePrintSummary(rank,gov,article,penalty,total,sel);
+ saveState();
+}
+function fmt(n){return (Math.round(n*10)/10).toLocaleString('id-ID',{maximumFractionDigits:1});}
+function updatePrintSummary(rank,gov,article,penalty,total,sel){
+ const vals=id=>document.getElementById(id).value||'—';
+ document.getElementById('printIdentity').innerHTML=`<table class="summary-table"><tbody><tr><th>Nama jurnal</th><td>${esc(vals('journalName'))}</td><th>Penerbit</th><td>${esc(vals('publisher'))}</td></tr><tr><th>E-ISSN</th><td>${esc(vals('eissn'))}</td><th>P-ISSN</th><td>${esc(vals('pissn'))}</td></tr><tr><th>URL</th><td colspan="3">${esc(vals('journalUrl'))}</td></tr><tr><th>Jenis usulan</th><td>${esc(proposalLabel(vals('proposalType')))}</td><th>Cakupan terbitan</th><td>${esc(proposalScope(vals('proposalType')).short)}</td></tr></tbody></table>`;
+ document.getElementById('printResult').innerHTML=`<strong>Hasil:</strong> ${esc(rank)} &nbsp; | &nbsp; Tata Kelola ${fmt(gov)}/46 &nbsp; | &nbsp; Mutu Artikel ${fmt(article)}/54 &nbsp; | &nbsp; Disinsentif ${fmt(penalty)} &nbsp; | &nbsp; <strong>Total ${fmt(total)}</strong>`;
+ let rows='';
+ groups.forEach(g=>g.items.forEach(i=>{if(sel[i.code]===undefined)return;rows+=`<tr><td>${i.code}</td><td>${esc(i.name)}</td><td>${esc(findSelectedText(i.code,sel[i.code]))}</td><td>${fmt(sel[i.code])}</td></tr>`;}));
+ document.getElementById('summaryRows').innerHTML=rows||'<tr><td colspan="4">Belum ada indikator yang dipilih.</td></tr>';
+}
+function saveState(){
+ const state={identity:{journalName:val('journalName'),publisher:val('publisher'),eissn:val('eissn'),pissn:val('pissn'),journalUrl:val('journalUrl'),proposalType:val('proposalType')},pre:{},elig:{},scores:getScoreSelections(),savedAt:new Date().toISOString()};
+ document.querySelectorAll('select[data-check="pre"]').forEach(x=>state.pre[x.dataset.code]=x.value);
+ document.querySelectorAll('select[data-check="elig"]').forEach(x=>state.elig[x.dataset.code]=x.value);
+ localStorage.setItem(STORE,JSON.stringify(state));
+}
+function val(id){return document.getElementById(id).value;}
+function loadState(state){
+ if(!state)return;
+ Object.entries(state.identity||{}).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.value=v||''});
+ // Normalisasi nilai lama agar kompatibel dengan versi sebelumnya.
+ const pt=document.getElementById('proposalType');
+ const savedType=state.identity?.proposalType;
+ if(pt){
+   if(savedType==='Akreditasi Baru') pt.value='baru';
+   else if(savedType==='Akreditasi Ulang') pt.value='ulang';
+   else if(['baru','ulang',''].includes(savedType||'')) pt.value=savedType||'';
+   else pt.value='';
+ }
+ updatePreApplicability({preserve:true});
+ document.querySelectorAll('select[data-check="pre"]').forEach(x=>{
+   const saved=state.pre?.[x.dataset.code];
+   if(saved!==undefined){
+     if(saved==='na' && !isNAAllowed(x.dataset.code,val('proposalType'))) x.value='';
+     else if([...x.options].some(o=>o.value===saved)) x.value=saved;
+   }
+ });
+ updatePreApplicability({preserve:false});
+ document.querySelectorAll('select[data-check="elig"]').forEach(x=>{if(state.elig?.[x.dataset.code]!==undefined)x.value=state.elig[x.dataset.code]});
+ Object.entries(state.scores||{}).forEach(([code,v])=>{const e=document.querySelector(`input[data-item="${code}"][value="${v}"]`);if(e)e.checked=true;});
+ calculate();
+}
+function resetAll(){if(!confirm('Hapus seluruh isian simulasi?'))return;localStorage.removeItem(STORE);location.reload();}
+function markAll(prefix,value){document.querySelectorAll(`select[data-check="${prefix}"]`).forEach(x=>x.value=value);calculate();}
+function validateModel(){
+ const sums={}; groups.filter(g=>g.code!=='H').forEach(g=>{sums[g.code]=g.items.reduce((a,i)=>a+Math.max(...i.opts.map(o=>Number(o[0]))),0); if(Math.abs(sums[g.code]-g.max)>.001) console.error('Maksimum tidak cocok',g.code,sums[g.code],g.max);});
+ const gov=groups.filter(g=>g.type==='gov').reduce((a,g)=>a+g.max,0), art=groups.filter(g=>g.type==='article').reduce((a,g)=>a+g.max,0);
+ if(gov!==46||art!==54)console.error('Total bobot tidak cocok',gov,art);
+}
+renderChecks('preChecks',preChecks,'pre');renderChecks('eligChecks',eligChecks,'elig');renderGroups();validateModel();
+updatePreApplicability({preserve:true});
+['journalName','publisher','eissn','pissn','journalUrl'].forEach(id=>document.getElementById(id).addEventListener('input',calculate));
+document.getElementById('proposalType').addEventListener('change',()=>{updatePreApplicability({preserve:false});calculate();});
+document.addEventListener('change',e=>{if(e.target.matches('input[type=radio], select[data-check]'))calculate();});
+document.getElementById('printBtn').onclick=()=>{calculate();window.print();};document.getElementById('resetBtn').onclick=resetAll;
+try{loadState(JSON.parse(localStorage.getItem(STORE)||'null'));}catch{calculate();}
+calculate();
+</script>
+</body>
+</html>

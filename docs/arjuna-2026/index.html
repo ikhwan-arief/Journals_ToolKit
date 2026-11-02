@@ -126,6 +126,7 @@
   .app-header h1{font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-.04em;max-width:900px}
   .subtitle{color:var(--toolkit-body);font-size:1.05rem}
   main{background:var(--toolkit-canvas)}
+  .layout{grid-template-columns:minmax(0,1fr) minmax(280px,330px)}
   .card,details.group{border-color:var(--toolkit-line);border-radius:var(--toolkit-radius-md);box-shadow:none}
   details.group>summary{background:var(--toolkit-surface-soft)}
   button,.button{border-radius:var(--toolkit-radius-sm);background:var(--toolkit-primary)}
@@ -136,6 +137,7 @@
   .progressbar>span{background:var(--toolkit-primary)}
   .sticky{top:84px}
   footer{border-top:1px solid var(--toolkit-line);padding-top:24px}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}}
 </style>
 </head>
 <body>

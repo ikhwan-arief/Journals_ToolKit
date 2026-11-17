@@ -40,35 +40,41 @@
 
       .layout {
         display: grid;
-        grid-template-columns: 320px minmax(0, 1fr);
-        min-height: 100vh;
+        grid-template-columns: 340px minmax(0, 1fr);
+        min-height: calc(100vh - 65px);
       }
 
       aside {
         border-right: 1px solid var(--line);
-        background: #f1f5f9;
-        padding: 28px 24px;
+        background: #f8fafc;
+        padding: 36px 28px;
+        box-sizing: border-box;
       }
 
       main {
-        padding: 48px clamp(18px, 4vw, 56px);
+        padding: 44px clamp(20px, 4vw, 56px);
+        box-sizing: border-box;
       }
 
       h1 {
-        margin: 0;
-        font-size: clamp(34px, 5vw, 54px);
-        line-height: 1.05;
-        letter-spacing: 0;
+        margin: 0 0 10px;
+        font-size: clamp(28px, 3.5vw, 42px);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        color: #0f172a;
       }
 
       h2 {
         margin: 0 0 14px;
-        font-size: 22px;
+        font-size: 20px;
+        font-weight: 700;
       }
 
       h3 {
         margin: 0 0 10px;
-        font-size: 18px;
+        font-size: 16px;
+        font-weight: 700;
       }
 
       p {
@@ -76,27 +82,31 @@
       }
 
       .subtitle {
-        max-width: 980px;
-        margin-top: 18px;
         color: var(--muted);
-        font-size: 18px;
+        font-size: 15px;
+        margin: 0 0 24px;
+        max-width: 860px;
+        line-height: 1.6;
       }
 
       .note {
-        margin-top: 20px;
+        margin-bottom: 24px;
         border: 1px solid #bfdbfe;
         border-radius: 8px;
         background: #eff6ff;
         color: #1e3a8a;
         padding: 14px 16px;
+        font-size: 13.5px;
+        line-height: 1.6;
       }
 
       .panel {
-        margin-top: 24px;
+        background: #ffffff;
         border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--panel);
-        padding: 20px;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
       }
 
       .form-grid {
@@ -168,11 +178,45 @@
       }
 
       .sidebar-block {
-        margin-bottom: 28px;
+        margin-bottom: 32px;
+      }
+
+      .sidebar-block h2 {
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #64748b;
+        margin: 0 0 14px;
       }
 
       .sidebar-block ol {
+        margin: 0;
         padding-left: 20px;
+        color: #334155;
+      }
+
+      .sidebar-block ol li {
+        font-size: 13.5px;
+        line-height: 1.6;
+        margin-bottom: 12px;
+        color: #334155;
+        word-break: break-word;
+      }
+
+      .sidebar-block ol li:last-child {
+        margin-bottom: 0;
+      }
+
+      .sidebar-block code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 12px;
+        background: #e2e8f0;
+        color: #0f172a;
+        padding: 2px 6px;
+        border-radius: 4px;
+        word-break: break-all;
+        overflow-wrap: anywhere;
       }
 
       .setting {
@@ -392,29 +436,13 @@
 <div class="layout">
       <aside>
         <section class="sidebar-block">
-          <h2>Panduan singkat</h2>
+          <h2>Panduan Penggunaan</h2>
           <ol>
-            <li>Masukkan URL halaman utama jurnal, contoh <code>https://jurnal.example.ac.id/index.php/nama-jurnal</code>.</li>
-            <li>URL endpoint lengkap seperti <code>/oai</code> juga bisa digunakan.</li>
-            <li>Tekan <strong>Enter</strong> atau klik tombol <strong>Periksa OAI-PMH</strong>.</li>
-            <li>Lihat status, endpoint, metadata, publikasi, dan rekomendasi.</li>
+            <li>Masukkan URL halaman utama jurnal (contoh: <code>https://jurnal.unand.ac.id/index.php/jidt</code>) atau endpoint OAI langsung.</li>
+            <li>Klik tombol <strong>Periksa OAI-PMH</strong>.</li>
+            <li>Sistem akan mendeteksi endpoint, menguji validitas XML Identify, format metadata, dan kelayakan penarikan data publikasi.</li>
+            <li>Tinjau status kelayakan harvest, skor kualitas metadata, dan rekomendasi perbaikan.</li>
           </ol>
-        </section>
-
-        <section class="sidebar-block">
-          <h2>Pengaturan</h2>
-          <div class="setting">
-            <label for="maxRecords">Jumlah record maksimal</label>
-            <input id="maxRecords" type="number" min="10" max="500" value="50" />
-          </div>
-          <div class="setting">
-            <label for="timeout">Timeout request (detik)</label>
-            <input id="timeout" type="number" min="5" max="60" value="15" />
-          </div>
-          <div class="setting">
-            <label for="metadataPrefix">Metadata prefix</label>
-            <input id="metadataPrefix" value="oai_dc" />
-          </div>
         </section>
       </aside>
 
@@ -556,9 +584,9 @@
 
       function getSettings() {
         return {
-          maxRecords: clampNumber(document.getElementById("maxRecords").value, 10, 500, 50),
-          timeout: clampNumber(document.getElementById("timeout").value, 5, 60, 15),
-          metadataPrefix: document.getElementById("metadataPrefix").value.trim() || "oai_dc",
+          maxRecords: 50,
+          timeout: 15,
+          metadataPrefix: "oai_dc",
           autoDiscover: DEFAULT_AUDIT_SETTINGS.autoDiscover,
           followTokens: DEFAULT_AUDIT_SETTINGS.followTokens,
           maxTokenPages: DEFAULT_AUDIT_SETTINGS.maxTokenPages,
@@ -593,7 +621,7 @@
           checkedAt,
         };
 
-        const endpoints = settings.autoDiscover ? discoverOaiEndpoints(normalizedUrl) : [normalizedUrl];
+        const endpoints = settings.autoDiscover ? await discoverOaiEndpoints(normalizedUrl, settings) : [normalizedUrl];
         for (const endpoint of endpoints) {
           const response = await requestOai(endpoint, { verb: "Identify" }, settings);
           audit.requestLog.push(response);
@@ -732,6 +760,30 @@
         }
       }
 
+      const OAI_CORS_PROXIES = [
+        {
+          name: "jina",
+          buildUrl: (url) => `https://r.jina.ai/${url}`,
+          headers: { "X-Return-Format": "html" }
+        },
+        {
+          name: "allorigins_raw",
+          buildUrl: (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+          headers: {}
+        },
+        {
+          name: "allorigins_get",
+          buildUrl: (url) => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+          headers: {},
+          isJson: true
+        },
+        {
+          name: "codetabs",
+          buildUrl: (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+          headers: {}
+        }
+      ];
+
       async function requestOai(endpoint, params, settings) {
         const requestUrl = safeJoinQuery(endpoint, params);
         const cacheKey = `${settings.useCorsProxy ? "proxy" : "direct"}|${requestUrl}`;
@@ -740,19 +792,10 @@
           return cachedOaiResponse(cachedResponse);
         }
 
-        let response;
-        if (settings.useCorsProxy) {
-          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(requestUrl)}`;
-          const proxiedResponse = await fetchOaiUrl({
-            endpoint,
-            requestUrl,
-            fetchUrl: proxyUrl,
-            settings,
-            viaProxy: true,
-            proxyUrl,
-          });
-          response = proxiedResponse;
-        } else {
+        let response = null;
+
+        // 1. Coba direct fetch dulu
+        if (!settings.useCorsProxy) {
           response = await fetchOaiUrl({
             endpoint,
             requestUrl,
@@ -760,9 +803,72 @@
             settings,
             viaProxy: false,
           });
+        } else {
+          // Coba Direct lebih dahulu secara cepat (3.5s) jika CORS diizinkan oleh server
+          try {
+            const directResp = await fetchOaiUrl({
+              endpoint,
+              requestUrl,
+              fetchUrl: requestUrl,
+              settings: { ...settings, timeout: 3.5 },
+              viaProxy: false,
+            });
+            if (directResp.ok) {
+              response = directResp;
+            }
+          } catch (e) {
+            // Lanjut ke proxy
+          }
+
+          // Jika direct gagal, telusuri multi-proxy fallback
+          if (!response || !response.ok) {
+            for (const proxy of OAI_CORS_PROXIES) {
+              try {
+                const proxyUrl = proxy.buildUrl(requestUrl);
+                const proxiedResponse = await fetchOaiUrl({
+                  endpoint,
+                  requestUrl,
+                  fetchUrl: proxyUrl,
+                  settings,
+                  viaProxy: true,
+                  proxyUrl,
+                  proxyHeaders: proxy.headers || {},
+                  isJson: proxy.isJson,
+                  proxyName: proxy.name
+                });
+                if (proxiedResponse.ok) {
+                  response = proxiedResponse;
+                  break;
+                }
+              } catch (err) {
+                // coba proxy berikutnya
+              }
+            }
+          }
+
+          // Fallback jika semua proxy gagal
+          if (!response) {
+            response = {
+              requestUrl,
+              endpointUrl: endpoint,
+              fetchUrl: requestUrl,
+              viaProxy: true,
+              proxyUrl: "",
+              fromCache: false,
+              ok: false,
+              httpStatus: null,
+              contentType: "",
+              responseTimeSeconds: 0,
+              finalUrl: requestUrl,
+              errorType: "proxy_error",
+              errorMessage: "Seluruh proxy CORS gagal membaca respons dari endpoint jurnal.",
+              text: "",
+              snippet: ""
+            };
+          }
         }
 
-        if (response.ok) {
+        if (response && response.ok) {
           state.requestCache.set(cacheKey, cloneOaiResponse(response));
         }
         return response;
@@ -780,7 +886,7 @@
         return { ...response };
       }
 
-      async function fetchOaiUrl({ endpoint, requestUrl, fetchUrl, settings, viaProxy, proxyUrl = "" }) {
+      async function fetchOaiUrl({ endpoint, requestUrl, fetchUrl, settings, viaProxy, proxyUrl = "", proxyHeaders = {}, isJson = false, proxyName = "" }) {
         const startedAt = performance.now();
         const controller = new AbortController();
         const timeoutId = window.setTimeout(() => controller.abort(), settings.timeout * 1000);
@@ -808,11 +914,15 @@
         };
 
         try {
+          const requestHeaders = {
+            Accept: "application/xml,text/xml,text/html,*/*;q=0.8",
+            ...proxyHeaders
+          };
           const response = await fetch(fetchUrl, {
             method: "GET",
             redirect: "follow",
             signal: controller.signal,
-            headers: { Accept: "application/xml,text/xml,*/*;q=0.8" },
+            headers: requestHeaders,
           });
           responseData.httpStatus = response.status;
           responseData.contentType = response.headers.get("content-type") || "";
@@ -824,7 +934,21 @@
             return finishResponse(responseData, startedAt);
           }
 
-          const text = await readLimitedText(response, MAX_RESPONSE_BYTES);
+          let text = "";
+          if (isJson) {
+            const json = await response.json();
+            text = json && json.contents ? json.contents : "";
+          } else {
+            text = await readLimitedText(response, MAX_RESPONSE_BYTES);
+          }
+
+          // Bersihkan wrapper jika ada (misal wrapper HTML dari proxy atau CDN)
+          if (text.includes("<OAI-PMH") && text.includes("</OAI-PMH>")) {
+            const startIndex = text.indexOf("<OAI-PMH");
+            const endIndex = text.lastIndexOf("</OAI-PMH>") + 10;
+            text = text.slice(startIndex, endIndex);
+          }
+
           responseData.text = text;
           responseData.snippet = text.slice(0, 3000);
           if (response.status === 403) {
@@ -839,12 +963,12 @@
           } else if (!text.trim()) {
             responseData.errorType = "empty_content";
             responseData.errorMessage = "Content kosong.";
-          } else if (isHtmlResponse(responseData.contentType, text)) {
+          } else if (!text.includes("<OAI-PMH") && isHtmlResponse(responseData.contentType, text)) {
             responseData.errorType = "html_response";
-            responseData.errorMessage = "Respons HTML, bukan XML.";
+            responseData.errorMessage = "Respons HTML, bukan XML OAI-PMH.";
           } else {
             responseData.ok = true;
-            if (viaProxy) responseData.contentType = `${responseData.contentType || "text/xml"} (via proxy CORS)`;
+            if (viaProxy) responseData.contentType = `${responseData.contentType || "text/xml"} (via proxy ${proxyName || 'CORS'})`;
           }
         } catch (error) {
           if (error.name === "ResponseTooLargeError") {
@@ -933,10 +1057,41 @@
         return a === 10 || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168) || a === 169;
       }
 
-      function discoverOaiEndpoints(inputUrl) {
+      async function discoverOaiEndpoints(inputUrl, settings) {
         const url = new URL(inputUrl);
         const candidates = [];
         if (looksLikeOaiEndpoint(url)) candidates.push(url.toString());
+
+        // Coba baca homepage terlebih dahulu untuk mendeteksi canonical URL & slug jurnal (cth: aijans)
+        if (!looksLikeOaiEndpoint(url)) {
+          try {
+            const homeReq = await fetchOaiUrl({
+              endpoint: inputUrl,
+              requestUrl: inputUrl,
+              fetchUrl: `https://r.jina.ai/${inputUrl}`,
+              settings: { ...settings, timeout: 6 },
+              viaProxy: true,
+              proxyUrl: `https://r.jina.ai/${inputUrl}`,
+              proxyHeaders: { "X-Return-Format": "html" },
+              proxyName: "jina"
+            });
+            if (homeReq.ok && homeReq.text) {
+              const canonicalMatch = homeReq.text.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i);
+              if (canonicalMatch && canonicalMatch[1]) {
+                const canUrl = new URL(canonicalMatch[1]);
+                if (canUrl.pathname.includes("/index.php/")) {
+                  const parts = canUrl.pathname.split("/index.php/");
+                  const slug = parts[1].split("/")[0];
+                  if (slug) {
+                    candidates.push(`${canUrl.origin}/index.php/${slug}/oai`);
+                  }
+                }
+              }
+            }
+          } catch (e) {
+            // Abaikan jika homepage inspection gagal
+          }
+        }
 
         let rootPath = stripKnownOjsPagePaths(url.pathname);
         rootPath = stripTrailingIndex(rootPath);

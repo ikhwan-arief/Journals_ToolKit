@@ -725,10 +725,27 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
       ];
 
       const CORS_PROXIES = [
-        (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-        (url) => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-        (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-        (url) => `https://thingproxy.freeboard.io/fetch/${url}`
+        {
+          name: "jina",
+          buildUrl: (url) => `https://r.jina.ai/${url}`,
+          headers: { "X-Return-Format": "html" }
+        },
+        {
+          name: "allorigins_raw",
+          buildUrl: (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+          headers: {}
+        },
+        {
+          name: "allorigins_get",
+          buildUrl: (url) => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+          headers: {},
+          isJson: true
+        },
+        {
+          name: "codetabs",
+          buildUrl: (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+          headers: {}
+        }
       ];
 
       const urlListEl = document.getElementById("urlList");
@@ -801,7 +818,7 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
         currentResults = [];
       });
 
-      async function fetchWithFallback(targetUrl, timeoutMs = 10000) {
+      async function fetchWithFallback(targetUrl, timeoutMs = 12000) {
         try {
           const directController = new AbortController();
           const timer = setTimeout(() => directController.abort(), 3500);
@@ -820,25 +837,26 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
           // Lanjut ke proxy
         }
 
-        for (const proxyFn of CORS_PROXIES) {
+        for (const proxy of CORS_PROXIES) {
           try {
-            const proxyUrl = proxyFn(targetUrl);
+            const proxyUrl = proxy.buildUrl(targetUrl);
             const controller = new AbortController();
             const timer = setTimeout(() => controller.abort(), timeoutMs);
             const resp = await fetch(proxyUrl, {
-              signal: controller.signal
+              signal: controller.signal,
+              headers: proxy.headers || {}
             });
             clearTimeout(timer);
             if (resp.ok) {
               let text = "";
-              if (proxyUrl.includes("/get?url=")) {
+              if (proxy.isJson) {
                 const jsonData = await resp.json();
                 text = jsonData && jsonData.contents ? jsonData.contents : "";
               } else {
                 text = await resp.text();
               }
               if (text && text.trim().length > 0) {
-                return { ok: true, text, via: "Proxy" };
+                return { ok: true, text, via: proxy.name };
               }
             }
           } catch (err) {
@@ -914,14 +932,35 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
         return "";
       }
 
-      function deriveEndpoints(baseUrl) {
-        const cleanBase = baseUrl.replace(/\/+$/, "");
-        const aboutUrl = cleanBase + "/about/aboutThisPublishingSystem";
+      function deriveEndpoints(baseUrl, htmlContent = "") {
+        let cleanBase = baseUrl.replace(/\/+$/, "");
+        
+        // Coba ekstrak path canonical dari HTML jika ada
+        if (htmlContent) {
+          const canMatch = htmlContent.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i);
+          if (canMatch && canMatch[1]) {
+            const canonicalUrl = canMatch[1].replace(/\/+$/, "");
+            if (canonicalUrl.includes("/index.php/")) {
+              const parts = canonicalUrl.split("/index.php/");
+              const slug = parts[1].split("/")[0];
+              if (slug) {
+                const journalBase = `${parts[0]}/index.php/${slug}`;
+                return {
+                  aboutUrl: `${journalBase}/about/aboutThisPublishingSystem`,
+                  oaiUrl: `${journalBase}/oai`
+                };
+              }
+            }
+          }
+        }
 
+        let aboutUrl = cleanBase + "/about/aboutThisPublishingSystem";
         let oaiUrl = cleanBase + "/oai";
         if (cleanBase.includes("/index.php/")) {
           const parts = cleanBase.split("/index.php/");
-          oaiUrl = parts[0] + "/index.php/" + parts[1] + "/oai";
+          const slug = parts[1].split("/")[0];
+          oaiUrl = parts[0] + "/index.php/" + slug + "/oai";
+          aboutUrl = parts[0] + "/index.php/" + slug + "/about/aboutThisPublishingSystem";
         }
 
         return { aboutUrl, oaiUrl };
@@ -939,18 +978,21 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
           error: null
         };
 
-        const { aboutUrl, oaiUrl } = deriveEndpoints(url);
-        result.oaiEndpoint = oaiUrl;
-
         // Tahap 1: Cek Homepage
         const homeResp = await fetchWithFallback(url);
+        let htmlBody = "";
         if (homeResp.ok) {
-          result.journalTitle = extractTitle(homeResp.text);
-          const detected = extractOjsVersionFromHtml(homeResp.text);
+          htmlBody = homeResp.text;
+          result.journalTitle = extractTitle(htmlBody);
+          const detected = extractOjsVersionFromHtml(htmlBody);
           if (detected) {
             result.version = detected.version;
           }
         }
+
+        // Resolusi endpoint yang tepat berdasarkan homepage
+        const { aboutUrl, oaiUrl } = deriveEndpoints(url, htmlBody);
+        result.oaiEndpoint = oaiUrl;
 
         // Tahap 2: Jika belum ada versi, Cek aboutThisPublishingSystem
         if (!result.version) {

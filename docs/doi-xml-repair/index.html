@@ -77,11 +77,11 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
         <div class="upload-panel">
           <div class="panel-heading"><span class="step">2</span><div><h2>New XML</h2><p>Source of new metadata for the output.</p></div></div>
-          <label class="file-drop" for="newXmlInput"><i data-lucide="file-up"></i><span id="newFileName">Select new XML file</span><input id="newXmlInput" type="file" accept=".xml,text/xml,application/xml" disabled /></label>
           <div class="mode-toggle resource-toggle" role="radiogroup" aria-label="Output article URL source">
             <label><input type="radio" name="newResourceMode" value="xml" checked />Use URL from new XML</label>
             <label><input type="radio" name="newResourceMode" value="manual" />Enter new URLs</label>
           </div>
+          <label class="file-drop" for="newXmlInput"><i data-lucide="file-up"></i><span id="newFileName">Select new XML file</span><input id="newXmlInput" type="file" accept=".xml,text/xml,application/xml" disabled /></label>
           <div class="doi-input-panel url-input-panel" id="newUrlPanel" hidden>
             <label for="newUrlInput">New article website URLs</label>
             <textarea id="newUrlInput" spellcheck="false" placeholder="https://journal.example.org/article-1&#10;https://journal.example.org/article-2" disabled></textarea>

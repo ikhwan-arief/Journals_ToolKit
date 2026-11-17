@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.lucide.createIcons();
   }
   bindEvents();
+  setOldMode(state.oldMode);
   setNewResourceMode(state.newResourceMode, { clear: false });
   bootPython();
 });

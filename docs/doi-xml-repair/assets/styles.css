@@ -1,3 +1,7 @@
+[hidden] {
+  display: none !important;
+}
+
 .doi-tool-page {
   background: var(--toolkit-canvas);
 }

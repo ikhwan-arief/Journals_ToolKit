@@ -1,0 +1,92 @@
+[
+  {
+    "group": "Management",
+    "criterion": "Convincing editorial policy",
+    "components": ["Clear aims and scope", "Ethics and misconduct policy", "Authorship, data, conflict-of-interest, and AI policies", "Reviewer guidance"],
+    "rationale": "Governance and transparency are under the journal's control"
+  },
+  {
+    "group": "Management",
+    "criterion": "Type of peer review",
+    "components": ["Single-anonymous, double-anonymous, open, or other review model", "Workflow description", "Timelines", "Plagiarism checks"],
+    "rationale": "Process design is an operational lever"
+  },
+  {
+    "group": "Management",
+    "criterion": "Broad geographical distribution of editors",
+    "components": ["Editor-in-Chief and board span multiple countries or regions", "Affiliations listed"],
+    "rationale": "Staffing and outreach choices made by the journal"
+  },
+  {
+    "group": "Management",
+    "criterion": "Publishing regularity",
+    "components": ["Declared frequency", "Archive shows on-time issues for recent years"],
+    "rationale": "Scheduling and production management"
+  },
+  {
+    "group": "Management",
+    "criterion": "No delays or interruptions in the publication schedule",
+    "components": ["No multi-month gaps", "Consistent issue or article posting"],
+    "rationale": "Reliability of operations"
+  },
+  {
+    "group": "Management",
+    "criterion": "Full journal content available online",
+    "components": ["All articles have HTML or PDF", "Archive persists", "DOIs resolve"],
+    "rationale": "Platform, hosting, and preservation decisions"
+  },
+  {
+    "group": "Management",
+    "criterion": "English-language journal home page available",
+    "components": ["English navigation", "English policy pages or summaries"],
+    "rationale": "Web presentation and accessibility"
+  },
+  {
+    "group": "Management",
+    "criterion": "Quality of journal home page",
+    "components": ["Clean navigation", "ISSN and DOI visible", "Policies, board, and contact visible", "Accurate indexing claims"],
+    "rationale": "Website quality signals professionalism"
+  },
+  {
+    "group": "Management",
+    "criterion": "Editor standing",
+    "components": ["Senior editors' track records", "Indexed publications", "Institutional roles"],
+    "rationale": "Recruitment and selection reflect editorial strength"
+  },
+  {
+    "group": "Content",
+    "criterion": "Academic contribution to the field",
+    "components": ["Novel research questions", "Clear contribution", "Field relevance"],
+    "rationale": "Core scholarly value of published work"
+  },
+  {
+    "group": "Content",
+    "criterion": "Clarity of abstracts",
+    "components": ["Structured and concise abstracts", "Methods and results stated", "Informative keywords"],
+    "rationale": "Improves discoverability and comprehension"
+  },
+  {
+    "group": "Content",
+    "criterion": "Quality of and conformity to aims and scope",
+    "components": ["Recent articles match stated scope", "Coherent sections", "Topic fit"],
+    "rationale": "Portfolio alignment with declared mission"
+  },
+  {
+    "group": "Content",
+    "criterion": "Readability of articles",
+    "components": ["Language quality", "Formatting", "Legible figures and tables"],
+    "rationale": "Article-level quality and user experience"
+  },
+  {
+    "group": "Content",
+    "criterion": "Broad geographical distribution of authors",
+    "components": ["Authors from multiple countries or continents in recent issues"],
+    "rationale": "Reflects community reach and content diversity"
+  },
+  {
+    "group": "Content",
+    "criterion": "Citedness of journal articles in Scopus",
+    "components": ["Citations to recent articles", "Field-aware impact indicators"],
+    "rationale": "External impact signal arising from content quality"
+  }
+]

@@ -3,7 +3,7 @@ Developed by Ikhwan Arief (ikhwan[at]unand.ac.id).
 Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
 -->
 <!doctype html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -523,7 +523,7 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
       <div class="toolkit-topbar-inner">
         <div class="toolkit-brand">
           <strong>Journals Toolkit</strong>
-          <span>Alat bantu publik untuk pengelola jurnal</span>
+          <span>Public tools for journal managers</span>
         </div>
         <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
           <a href="../">Portal</a>
@@ -533,7 +533,7 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
           <a href="../arjuna-2021/">Arjuna 2021</a>
           <a href="../arjuna-2026/">Arjuna 2026</a>
           <a href="../doaj-precheck/">DOAJ Precheck</a>
-          <a href="../evaluasi-diri-jurnal/">Evaluasi Diri</a>
+          <a href="../evaluasi-diri-jurnal/">Self-Evaluation</a>
         </nav>
       </div>
     </div>
@@ -541,34 +541,34 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
     <div class="layout">
       <aside>
         <section class="sidebar-block">
-          <h2>Panduan Penggunaan</h2>
+          <h2>User Guide</h2>
           <ol>
-            <li>Salin URL jurnal (contoh: <code>https://jurnal.unand.ac.id/index.php/jidt</code>).</li>
-            <li>Tempelkan ke kotak teks. Anda dapat memasukkan <strong>hingga 10 URL</strong> (satu URL per baris).</li>
-            <li>Klik tombol <strong>Periksa Versi OJS & OAI-PMH</strong>.</li>
-            <li>Tinjau status siklus hidup OJS, kompatibilitas versi PHP server, rekomendasi jalur upgrade, serta keaktifan endpoint OAI-PMH.</li>
-            <li>Jika ada URL yang terhalang CORS/WAF kampus, gunakan tombol <strong>Input Manual</strong> pada kartu rincian untuk menempelkan baris generator secara instan.</li>
+            <li>Copy the journal website URL (e.g., <code>https://jurnal.unand.ac.id/index.php/jidt</code>).</li>
+            <li>Paste into the text area. You can input <strong>up to 10 URLs</strong> (one URL per line).</li>
+            <li>Click the <strong>Check OJS Version & OAI-PMH</strong> button.</li>
+            <li>Review the OJS lifecycle status, server PHP compatibility, upgrade pathway recommendations, and OAI-PMH endpoint availability.</li>
+            <li>If any URL is protected by a strict campus CORS/WAF, use the <strong>Manual Input</strong> button in the details card to paste the generator meta line instantly.</li>
           </ol>
         </section>
 
         <section class="sidebar-block">
-          <h2>Referensi Siklus PKP</h2>
+          <h2>PKP Lifecycle Reference</h2>
           <div class="reference-list">
             <div class="reference-item">
               <span class="pill-badge badge-good">LTS</span>
-              <span><strong>OJS 3.3.x</strong> (Dukungan jangka panjang)</span>
+              <span><strong>OJS 3.3.x</strong> (Long-term support)</span>
             </div>
             <div class="reference-item">
               <span class="pill-badge badge-good">Stable</span>
-              <span><strong>OJS 3.4.x</strong> (Rilis stabil fitur baru)</span>
+              <span><strong>OJS 3.4.x</strong> (Latest stable release)</span>
             </div>
             <div class="reference-item">
               <span class="pill-badge badge-warning">Legacy</span>
-              <span><strong>OJS 3.2.x</strong> (Menjelang EOL)</span>
+              <span><strong>OJS 3.2.x</strong> (Approaching EOL)</span>
             </div>
             <div class="reference-item">
               <span class="pill-badge badge-danger">EOL</span>
-              <span><strong>OJS 2.4.x / 3.0 / 3.1</strong> (Rentan)</span>
+              <span><strong>OJS 2.4.x / 3.0 / 3.1</strong> (Vulnerable)</span>
             </div>
           </div>
         </section>
@@ -586,7 +586,7 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
           <form id="checkerForm" class="form-grid">
             <div>
               <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
-                <label for="urlList" style="margin-bottom: 0;">Daftar URL Jurnal (Maksimal 10 URL)</label>
+                <label for="urlList" style="margin-bottom: 0;">Journal URLs List (Maximum 10 URLs)</label>
                 <span id="urlCountLabel" class="helper-text" style="margin-top: 0;">0 / 10 URL</span>
               </div>
               <textarea
@@ -595,17 +595,17 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
                 spellcheck="false"
               ></textarea>
               <div class="helper-text">
-                Masukkan satu URL per baris. Protokol <code>http://</code> atau <code>https://</code> dapat disertakan.
+                Enter one URL per line. Protocol <code>http://</code> or <code>https://</code> can be included.
               </div>
             </div>
 
             <div class="form-actions">
               <button id="btnCheck" type="submit">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                Periksa Versi OJS & OAI-PMH
+                Check OJS Version & OAI-PMH
               </button>
-              <button id="btnExample" class="secondary" type="button">Contoh URL</button>
-              <button id="btnReset" class="secondary" type="reset">Bersihkan</button>
+              <button id="btnExample" class="secondary" type="button">Example URLs</button>
+              <button id="btnReset" class="secondary" type="reset">Clear</button>
             </div>
           </form>
 
@@ -614,7 +614,7 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
               <div id="progressBar" class="progress-bar-fill"></div>
             </div>
             <div class="progress-meta">
-              <span id="progressText">Memproses pemeriksaan...</span>
+              <span id="progressText">Processing checks...</span>
               <span id="progressRatio">0/0</span>
             </div>
           </div>
@@ -623,15 +623,15 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
         <!-- Hasil Pemeriksaan -->
         <section id="resultsSection" class="hidden">
           <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px;">
-            <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0f172a;">Hasil Pemeriksaan Batch</h2>
+            <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0f172a;">Batch Inspection Results</h2>
             <div style="display: flex; gap: 8px;">
               <button id="btnCopyMarkdown" class="secondary" type="button" title="Salin ringkasan hasil dalam format Markdown">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                Salin Ringkasan
+                Copy Summary
               </button>
               <button onclick="window.print()" class="secondary btn-print" type="button" title="Cetak atau simpan sebagai PDF">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-                Cetak / Simpan PDF
+                Print / Save PDF
               </button>
             </div>
           </div>
@@ -642,11 +642,11 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
               <thead>
                 <tr>
                   <th style="width: 40px; text-align: center;">No</th>
-                  <th>Jurnal & URL</th>
-                  <th>Versi OJS</th>
-                  <th>Status Rilis</th>
-                  <th>PHP Server</th>
-                  <th>Status OAI-PMH</th>
+                  <th>Journal & URL</th>
+                  <th>OJS Version</th>
+                  <th>Release Status</th>
+                  <th>Server PHP</th>
+                  <th>OAI-PMH Status</th>
                   <th style="width: 80px; text-align: center;">Aksi</th>
                 </tr>
               </thead>
@@ -656,8 +656,8 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
             </table>
           </div>
 
-          <!-- Detail Kartu Per Jurnal -->
-          <h3 style="margin: 32px 0 14px; font-size: 18px; font-weight: 700; color: #0f172a;">Rincian & Rekomendasi Tiap Jurnal</h3>
+          <!-- Details Kartu Per Jurnal -->
+          <h3 style="margin: 32px 0 14px; font-size: 18px; font-weight: 700; color: #0f172a;">Detailsed Findings & Recommendations</h3>
           <div id="detailsContainer" class="details-list">
             <!-- Diisi via JavaScript -->
           </div>
@@ -679,8 +679,8 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
           badgeClass: "badge-good",
           statusLabel: "Stable Release",
           phpVersion: "PHP 8.1 - 8.2",
-          description: "Rilis stabil generasi modern dengan arsitektur UI berbasis Vue 3 dan manajemen job runner mandiri.",
-          upgradeRecommendation: "Versi OJS saat ini sudah mutakhir. Pastikan selalu menerapkan rilis patch keamanan minor terbaru (cth: 3.4.0-x terbaru) dan memantau kompatibilitas plugin pihak ketiga."
+          description: "Modern stable release built with Vue 3 UI architecture and standalone job runner management.",
+          upgradeRecommendation: "The OJS version is current. Ensure routine application of minor security patches and monitor third-party plugin compatibility."
         },
         {
           pattern: /^3\.3\./,
@@ -689,8 +689,8 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
           badgeClass: "badge-good",
           statusLabel: "LTS (Long-Term Support)",
           phpVersion: "PHP 7.4 - 8.1",
-          description: "Rilis Long-Term Support (LTS) resmi dari PKP. Menjadi standar emas stabilitas dengan dukungan terluas untuk plugin indexing, preservasi, dan Crossref.",
-          upgradeRecommendation: "Sangat stabil dan aman digunakan. Pengelola jurnal disarankan tetap di 3.3 LTS dengan patch minor terbaru (misal: 3.3.0-16+). Rencana migrasi ke OJS 3.4 dapat disiapkan bertahap setelah menguji dependensi tema dan plugin."
+          description: "Official PKP Long-Term Support (LTS) release. Gold standard for stability with comprehensive support for indexing, preservation, and Crossref plugins.",
+          upgradeRecommendation: "Highly stable and secure. Journal managers are advised to remain on 3.3 LTS with the latest minor patch. Future migration to 3.4 can be prepared in staging after auditing theme and plugin dependencies."
         },
         {
           pattern: /^3\.2\./,
@@ -699,18 +699,18 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
           badgeClass: "badge-warning",
           statusLabel: "Legacy / Approaching EOL",
           phpVersion: "PHP 7.3 - 7.4",
-          description: "Versi transisi OJS 3 yang sudah tidak lagi mendapatkan pembaruan fitur aktif dari PKP.",
-          upgradeRecommendation: "Direkomendasikan untuk segera melakukan upgrade langsung ke OJS 3.3.0-x LTS. Proses upgrade dari 3.2 ke 3.3 relatif mulus dan minim risiko kerusakan skema basis data."
+          description: "Transition OJS 3 release that no longer receives active feature updates from PKP.",
+          upgradeRecommendation: "Recommended to upgrade directly to OJS 3.3.0-x LTS. Upgrading from 3.2 to 3.3 is straightforward with minimal database schema risk."
         },
         {
           pattern: /^3\.[01]\./,
           category: "OJS 3.0.x / 3.1.x",
           status: "EOL",
           badgeClass: "badge-danger",
-          statusLabel: "End of Life (Rentan)",
+          statusLabel: "End of Life (Vulnerable)",
           phpVersion: "PHP 5.6 - 7.3",
-          description: "Versi awal OJS 3 yang sudah dihentikan total dukungannya dan rentan terhadap berbagai celah keamanan.",
-          upgradeRecommendation: "Jalur Upgrade Bertahap Wajib: Jangan langsung melompat ke 3.4. Lakukan upgrade bertahap: OJS 3.0/3.1 -> OJS 3.2.1-4 -> OJS 3.3 LTS. Perhatikan kompatibilitas versi PHP server pada setiap tahapan migrasi."
+          description: "Early OJS 3 release that has reached End of Life and is vulnerable to known security issues.",
+          upgradeRecommendation: "Mandatory Stepwise Upgrade: Do not jump directly to 3.4. Upgrade incrementally: OJS 3.0/3.1 -> OJS 3.2.1-4 -> OJS 3.3 LTS. Verify server PHP compatibility at each milestone."
         },
         {
           pattern: /^2\./,
@@ -719,8 +719,8 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
           badgeClass: "badge-danger",
           statusLabel: "Critical EOL (Sangat Rentan)",
           phpVersion: "PHP 5.6 - 7.2",
-          description: "Generasi lama OJS 2 yang sudah usang, tidak memenuhi standar modern pengindeks bereputasi (Scopus/DOAJ/Arjuna), dan memiliki risiko keamanan tinggi.",
-          upgradeRecommendation: "Peringatan Wajib: Dilarang keras langsung meng-upgrade ke OJS 3.3 atau 3.4 karena struktur database dan file artikel/galley akan rusak! Gunakan jalur resmi: OJS 2.4.8-x -> Upgrade ke OJS 3.2.1-4 (jalankan php tools/upgrade.php) -> Verifikasi data -> Baru upgrade ke OJS 3.3 LTS."
+          description: "Legacy OJS 2 release that is obsolete, fails modern indexer standards, and carries critical security vulnerabilities.",
+          upgradeRecommendation: "Critical Warning: Never upgrade directly from OJS 2 to OJS 3.3 or 3.4! The database and galley files will be corrupted. Use the official path: OJS 2.4.8-x -> Upgrade to OJS 3.2.1-4 -> Verify data integrity -> Upgrade to OJS 3.3 LTS."
         }
       ];
 
@@ -869,11 +869,11 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
       function evaluateOjsVersion(versionStr) {
         if (!versionStr) {
           return {
-            category: "Tidak Terdeteksi",
+            category: "Undetected",
             status: "UNKNOWN",
             badgeClass: "badge-neutral",
-            statusLabel: "Tidak Terdeteksi",
-            phpVersion: "Tidak diketahui",
+            statusLabel: "Undetected",
+            phpVersion: "Unknown",
             description: "Nomor versi spesifik belum terdeteksi. Gunakan tombol 'Input Manual HTML / Meta Tag' di bawah jika halaman terhalang proteksi CORS/WAF kampus.",
             upgradeRecommendation: "Versi OJS belum dapat dipastikan. Jika Anda adalah pengelola jurnal, periksa file versi di server: `php tools/upgrade.php check`."
           };
@@ -1012,7 +1012,7 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
           const xml = oaiResp.text;
           if (xml.includes("<OAI-PMH") && xml.includes("<Identify>")) {
             result.oaiActive = true;
-            result.oaiMessage = "Aktif (OAI-PMH 2.0 valid)";
+            result.oaiMessage = "Active (OAI-PMH 2.0 valid)";
 
             if (!result.version) {
               const oaiVer = extractOjsVersionFromHtml(xml);
@@ -1022,11 +1022,11 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
             }
           } else {
             result.oaiActive = false;
-            result.oaiMessage = "Endpoint merespons tetapi bukan XML OAI-PMH valid";
+            result.oaiMessage = "Endpoint responded but is not valid OAI-PMH XML";
           }
         } else {
           result.oaiActive = false;
-          result.oaiMessage = "Tidak aktif atau tidak dapat dijangkau dari peramban";
+          result.oaiMessage = "Inactive or unreachable from browser";
         }
 
         result.statusInfo = evaluateOjsVersion(result.version);
@@ -1042,14 +1042,14 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
         e.preventDefault();
         const urls = parseUrls(urlListEl.value);
         if (urls.length === 0) {
-          alert("Silakan masukkan minimal 1 URL website jurnal.");
+          alert("Please enter at least 1 journal URL.");
           return;
         }
 
         btnCheck.disabled = true;
         progressBox.style.display = "block";
         progressBar.style.width = "0%";
-        progressText.textContent = "Menyiapkan pemeriksaan...";
+        progressText.textContent = "Initializing inspection...";
         progressRatio.textContent = `0 / ${urls.length}`;
         resultsSection.classList.add("hidden");
         summaryTableBody.innerHTML = "";
@@ -1068,7 +1068,7 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
           progressRatio.textContent = `${i + 1} / ${urls.length}`;
         }
 
-        progressText.textContent = "Pemeriksaan selesai!";
+        progressText.textContent = "Inspection completed!";
         btnCheck.disabled = false;
         renderResults(currentResults);
         resultsSection.classList.remove("hidden");
@@ -1089,7 +1089,7 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
               <div class="journal-url"><a href="${res.url}" target="_blank" rel="noopener">${res.url}</a></div>
             </td>
             <td>
-              <strong>${res.version ? 'OJS ' + res.version : '<span style="color:var(--muted)">Tidak Terdeteksi</span>'}</strong>
+              <strong>${res.version ? 'OJS ' + res.version : '<span style="color:var(--muted)">Undetected</span>'}</strong>
             </td>
             <td>
               <span class="pill-badge ${res.statusInfo.badgeClass}">
@@ -1101,12 +1101,12 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
             </td>
             <td>
               ${res.oaiActive
-                ? '<span class="pill-badge badge-good">Aktif</span>'
-                : '<span class="pill-badge badge-danger">Tidak Aktif</span>'}
+                ? '<span class="pill-badge badge-good">Active</span>'
+                : '<span class="pill-badge badge-danger">Tidak Active</span>'}
             </td>
             <td style="text-align: center;">
               <a href="#card-${index}" class="pill-badge badge-neutral" style="text-decoration:none; cursor:pointer;">
-                Detail
+                Details
               </a>
             </td>
           `;
@@ -1128,26 +1128,26 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
                   ${res.statusInfo.statusLabel}
                 </span>
                 ${res.oaiActive
-                  ? '<span class="pill-badge badge-good">OAI-PMH Aktif</span>'
-                  : '<span class="pill-badge badge-danger">OAI-PMH Tidak Aktif</span>'}
+                  ? '<span class="pill-badge badge-good">OAI-PMH Active</span>'
+                  : '<span class="pill-badge badge-danger">OAI-PMH Tidak Active</span>'}
               </div>
             </div>
             <div class="detail-card-body">
               <div class="info-box">
                 <h4>
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                  Status Versi & PHP
+                  Version & PHP Status
                 </h4>
-                <p><strong>Versi Terdeteksi:</strong> ${res.version ? 'OJS ' + res.version : '<span style="color:var(--danger)">Tidak Terdeteksi Otomatis</span>'}</p>
-                <p><strong>Kompatibilitas PHP:</strong> ${res.statusInfo.phpVersion}</p>
+                <p><strong>Detected Version:</strong> ${res.version ? 'OJS ' + res.version : '<span style="color:var(--danger)">Undetected Otomatis</span>'}</p>
+                <p><strong>PHP Compatibility:</strong> ${res.statusInfo.phpVersion}</p>
                 <p style="margin-top: 8px;">${res.statusInfo.description}</p>
                 
                 ${!res.version ? `
                   <div class="manual-paste-box">
-                    <strong style="font-size:12px; color:#1e293b; display:block; margin-bottom:4px;">Fallback Input Manual HTML:</strong>
-                    <p style="font-size:11.5px; color:var(--muted); margin-bottom:6px;">Buka <a href="${res.url}" target="_blank" rel="noopener">website jurnal</a>, tekan <code>Ctrl+U</code> (View Source), lalu salin tag <code>&lt;meta name="generator"...&gt;</code> atau baris versi ke sini:</p>
-                    <textarea id="manualText-${index}" placeholder="Contoh: <meta name='generator' content='Open Journal Systems 3.3.0.14'> atau cukup ketik: 3.3.0.14"></textarea>
-                    <button type="button" class="btn-small" onclick="applyManualHtml(${index})">Analisis Versi</button>
+                    <strong style="font-size:12px; color:#1e293b; display:block; margin-bottom:4px;">Manual HTML / Meta Input Fallback:</strong>
+                    <p style="font-size:11.5px; color:var(--muted); margin-bottom:6px;">Open the <a href="${res.url}" target="_blank" rel="noopener">journal site</a>, press <code>Ctrl+U</code> (View Source), then copy the <code>&lt;meta name="generator"...&gt;</code> line or version text here:</p>
+                    <textarea id="manualText-${index}" placeholder="Example: <meta name='generator' content='Open Journal Systems 3.3.0.14'> or enter: 3.3.0.14"></textarea>
+                    <button type="button" class="btn-small" onclick="applyManualHtml(${index})">Analyze Version</button>
                   </div>
                 ` : ''}
               </div>
@@ -1155,7 +1155,7 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
               <div class="info-box upgrade-path-box">
                 <h4>
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                  Rekomendasi Jalur Upgrade
+                  Upgrade Path Recommendation
                 </h4>
                 <p>${res.statusInfo.upgradeRecommendation}</p>
               </div>
@@ -1163,12 +1163,12 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
               <div class="info-box ${res.oaiActive ? 'oai-box-active' : 'oai-box-inactive'}">
                 <h4>
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" r="1"></circle></svg>
-                  Status Endpoint OAI-PMH
+                  OAI-PMH Endpoint Status
                 </h4>
-                <p><strong>Status:</strong> ${res.oaiActive ? '<span style="color:var(--good); font-weight:600;">Aktif & Siap Ditarik Harvester</span>' : '<span style="color:var(--danger); font-weight:600;">Tidak Aktif / Terkendala</span>'}</p>
-                <p><strong>Endpoint Teruji:</strong> <code style="font-size:11.5px;">${res.oaiEndpoint}?verb=Identify</code></p>
-                <p><strong>Keterangan:</strong> ${res.oaiMessage}</p>
-                ${!res.oaiActive ? '<p class="helper-text" style="color:var(--danger); margin-top:6px;">Harvester (SINTA, Garuda, DOAJ, BASE) tidak dapat mengindeks artikel jurnal jika OAI-PMH mati.</p>' : ''}
+                <p><strong>Status:</strong> ${res.oaiActive ? '<span style="color:var(--good); font-weight:600;">Active & Siap Ditarik Harvester</span>' : '<span style="color:var(--danger); font-weight:600;">Tidak Active / Terkendala</span>'}</p>
+                <p><strong>Tested Endpoint:</strong> <code style="font-size:11.5px;">${res.oaiEndpoint}?verb=Identify</code></p>
+                <p><strong>Notes:</strong> ${res.oaiMessage}</p>
+                ${!res.oaiActive ? '<p class="helper-text" style="color:var(--danger); margin-top:6px;">Harvesters (DOAJ, Scopus, BASE, Garuda) cannot index articles if OAI-PMH is inactive.</p>' : ''}
               </div>
             </div>
           `;
@@ -1204,8 +1204,8 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
 
         currentResults.forEach((res, i) => {
           const name = res.journalTitle ? res.journalTitle.replace(/\|/g, "/") : res.url;
-          const ver = res.version ? `OJS ${res.version}` : `Tidak Terdeteksi`;
-          const oai = res.oaiActive ? `Aktif` : `Tidak Aktif`;
+          const ver = res.version ? `OJS ${res.version}` : `Undetected`;
+          const oai = res.oaiActive ? `Active` : `Tidak Active`;
           md += `| ${i + 1} | [${name}](${res.url}) | ${ver} | ${res.statusInfo.statusLabel} | ${res.statusInfo.phpVersion} | ${oai} |\n`;
         });
 
@@ -1214,12 +1214,12 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
           md += `${i + 1}. **${res.journalTitle || res.url}** (${res.version ? 'OJS ' + res.version : 'OJS Unknown'}):\n`;
           md += `   - Status: ${res.statusInfo.statusLabel} (Dukungan PHP: ${res.statusInfo.phpVersion})\n`;
           md += `   - Rekomendasi: ${res.statusInfo.upgradeRecommendation}\n`;
-          md += `   - OAI-PMH: ${res.oaiActive ? 'Aktif' : 'Terkendala/Mati'} (${res.oaiMessage})\n\n`;
+          md += `   - OAI-PMH: ${res.oaiActive ? 'Active' : 'Terkendala/Mati'} (${res.oaiMessage})\n\n`;
         });
 
         navigator.clipboard.writeText(md).then(() => {
           const originalText = btnCopyMarkdown.innerHTML;
-          btnCopyMarkdown.innerHTML = `<span style="color:var(--good); font-weight:600;">Tersalin!</span>`;
+          btnCopyMarkdown.innerHTML = `<span style="color:var(--good); font-weight:600;">Copied!</span>`;
           setTimeout(() => {
             btnCopyMarkdown.innerHTML = originalText;
           }, 2000);

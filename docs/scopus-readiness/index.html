@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scopus Readiness Auditor</title>
+    <meta name="description" content="Evidence-first self-audit for checking journal readiness before preparing a Scopus title suggestion." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23111111'/%3E%3Cpath d='M18 18h28v6H18zm0 11h28v6H18zm0 11h18v6H18z' fill='white'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/toolkit.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body class="scopus-page">
+    <div class="toolkit-topbar">
+      <div class="toolkit-topbar-inner">
+        <div class="toolkit-brand">
+          <strong>Journals Toolkit</strong>
+          <span>Public tools for journal managers</span>
+        </div>
+        <nav class="toolkit-nav" aria-label="Application navigation">
+          <a href="../">Portal</a>
+          <a href="../oai-pmh/">OAI-PMH</a>
+          <a href="../doi-xml-repair/">DOI XML Repair</a>
+          <a href="../arjuna-2021/">Arjuna 2021</a>
+          <a href="../doaj-precheck/">DOAJ Precheck</a>
+          <a href="../scopus-readiness/" aria-current="page">Scopus Readiness</a>
+        </nav>
+      </div>
+    </div>
+
+    <main class="scopus-shell">
+      <section class="scopus-intro" aria-labelledby="appTitle">
+        <div>
+          <p class="scopus-eyebrow">Evidence-first journal assessment</p>
+          <h1 id="appTitle">Scopus Readiness Auditor</h1>
+          <p class="scopus-lead">Check public evidence, complete blocked items manually, confirm findings, and generate an indicative readiness report before preparing a title suggestion.</p>
+        </div>
+      </section>
+
+      <section class="notice-band">
+        <p><strong>Indicative self-assessment only.</strong> This audit is not an official Scopus, Elsevier, or CSAB evaluation and does not guarantee acceptance for Scopus coverage.</p>
+        <p>The app first tries direct browser reading. If that is blocked, it uses a configured URL reader gateway or the temporary public CORS fallback to extract public page text. If all attempts fail, open the page yourself, copy the visible text, and paste it into the evidence box.</p>
+        <p>Your audit data is processed in your browser. The URL reader gateway only receives public URLs that need text extraction and does not require a login.</p>
+      </section>
+
+      <div class="audit-layout">
+        <aside class="audit-sidebar" aria-label="Audit sections">
+          <a href="#section-journal">Journal Identity</a>
+          <a href="#section-evidence">Required Evidence URLs</a>
+          <a href="#section-policy">Journal Policy</a>
+          <a href="#section-people">People and Geodiversity</a>
+          <a href="#section-regularity">Publishing Regularity</a>
+          <a href="#section-content">Content and Metadata</a>
+          <a href="#section-availability">Online Availability</a>
+          <a href="#section-standing">Title and Claims</a>
+          <a href="#section-results">Report</a>
+        </aside>
+
+        <div class="audit-main">
+          <form id="auditForm" class="audit-form">
+            <div id="formSections"></div>
+            <section class="action-panel" aria-label="Audit actions">
+              <div>
+                <h2>Run the audit</h2>
+                <p>Direct URL reads are attempted first. Blocked or incomplete evidence can be completed below before final scoring.</p>
+              </div>
+              <div class="button-row">
+                <button id="runAuditButton" class="button primary" type="submit">Run Scopus Readiness Audit</button>
+                <button id="resetButton" class="button secondary" type="button">Reset audit</button>
+              </div>
+            </section>
+          </form>
+
+          <section id="section-queue" class="audit-section" aria-labelledby="queueTitle">
+            <div class="section-heading">
+              <div>
+                <p class="scopus-eyebrow">Manual completion</p>
+                <h2 id="queueTitle">Evidence Completion Queue</h2>
+              </div>
+              <span class="summary-pill" id="queueCount">0 items</span>
+            </div>
+            <div id="evidenceQueue" class="queue-list empty-state">Run the audit to see blocked, failed, empty, or unresolved evidence items.</div>
+          </section>
+
+          <section id="section-confirm" class="audit-section" aria-labelledby="confirmTitle">
+            <div class="section-heading">
+              <div>
+                <p class="scopus-eyebrow">Human verification</p>
+                <h2 id="confirmTitle">Criterion Confirmation</h2>
+              </div>
+            </div>
+            <div id="confirmationTable" class="table-wrap empty-state">Run the audit to review detected signals and confirm each criterion.</div>
+          </section>
+
+          <section id="section-results" class="audit-section" aria-labelledby="resultsTitle">
+            <div class="section-heading">
+              <div>
+                <p class="scopus-eyebrow">Output</p>
+                <h2 id="resultsTitle">Readiness Report</h2>
+              </div>
+              <div class="button-row">
+                <button id="copyReportButton" class="button secondary" type="button" disabled>Copy report</button>
+                <button id="downloadMarkdownButton" class="button secondary" type="button" disabled>Download Markdown</button>
+                <button id="downloadTxtButton" class="button secondary" type="button" disabled>Download TXT</button>
+                <button id="printButton" class="button secondary" type="button" disabled>Print / Save as PDF</button>
+              </div>
+            </div>
+            <div id="scoreSummary" class="score-grid"></div>
+            <div id="derivedChecks" class="derived-grid"></div>
+            <textarea id="reportOutput" class="report-output" readonly spellcheck="false" placeholder="The generated report will appear here."></textarea>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="toolkit-attribution">Scopus Readiness Auditor is an indicative self-audit tool. It is not affiliated with, endorsed by, or a substitute for Scopus, Elsevier, or CSAB evaluation.</footer>
+
+    <script src="assets/pyodide-loader.js"></script>
+    <script src="assets/evidence.js"></script>
+    <script src="assets/ui.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>

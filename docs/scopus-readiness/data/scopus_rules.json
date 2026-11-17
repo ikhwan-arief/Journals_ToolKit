@@ -1,0 +1,272 @@
+{
+  "weights": {
+    "Journal Policy": 25,
+    "Content": 20,
+    "Journal Standing": 35,
+    "Publishing Regularity": 10,
+    "Online Availability": 10
+  },
+  "verdicts": {
+    "ready_min": 85,
+    "nearly_ready_min": 70
+  },
+  "hard_gates": [
+    "valid_issn",
+    "peer_review_content",
+    "regular_publication",
+    "publication_history",
+    "english_titles_abstracts",
+    "publication_ethics",
+    "online_content_access",
+    "english_homepage",
+    "dedicated_website",
+    "sample_content_ready"
+  ],
+  "confirmation_scores": {
+    "Pass": 5,
+    "Weak": 3,
+    "Fail": 0,
+    "Verification needed": 0,
+    "Not applicable": null
+  },
+  "criteria": [
+    {
+      "id": "valid_issn",
+      "category": "Online Availability",
+      "label": "Valid ISSN evidence",
+      "hard_gate": true,
+      "signals": ["ISSN format", "registered ISSN", "e-ISSN", "print ISSN"]
+    },
+    {
+      "id": "peer_review_content",
+      "category": "Journal Policy",
+      "label": "Peer-reviewed content and process",
+      "hard_gate": true,
+      "signals": ["peer review", "reviewer", "double-blind", "single-blind", "editorial decision"]
+    },
+    {
+      "id": "publication_ethics",
+      "category": "Journal Policy",
+      "label": "Publication ethics and malpractice statement",
+      "hard_gate": true,
+      "signals": ["authorship", "conflict of interest", "misconduct", "correction", "retraction", "plagiarism"]
+    },
+    {
+      "id": "regular_publication",
+      "category": "Publishing Regularity",
+      "label": "Regular publication schedule",
+      "hard_gate": true,
+      "signals": ["frequency", "archive", "current issue", "published on schedule"]
+    },
+    {
+      "id": "publication_history",
+      "category": "Publishing Regularity",
+      "label": "Publication history can be reviewed",
+      "hard_gate": true,
+      "signals": ["archive years", "volume", "issue", "two-year history"]
+    },
+    {
+      "id": "english_titles_abstracts",
+      "category": "Content",
+      "label": "English article titles and abstracts",
+      "hard_gate": true,
+      "signals": ["English title", "English abstract", "keywords", "article samples"]
+    },
+    {
+      "id": "online_content_access",
+      "category": "Online Availability",
+      "label": "Recent full content is available online",
+      "hard_gate": true,
+      "signals": ["article landing page", "PDF", "HTML full text", "open access link"]
+    },
+    {
+      "id": "english_homepage",
+      "category": "Online Availability",
+      "label": "English homepage or English metadata pages",
+      "hard_gate": true,
+      "signals": ["English navigation", "English policies", "English metadata"]
+    },
+    {
+      "id": "dedicated_website",
+      "category": "Online Availability",
+      "label": "Dedicated journal website",
+      "hard_gate": true,
+      "signals": ["homepage", "archive", "policies", "editorial board", "articles"]
+    },
+    {
+      "id": "sample_content_ready",
+      "category": "Content",
+      "label": "Sample research or review content is ready",
+      "hard_gate": true,
+      "signals": ["three issues", "nine articles", "research article", "review article"]
+    },
+    {
+      "id": "editorial_policy",
+      "category": "Journal Policy",
+      "label": "Clear and credible editorial policy",
+      "hard_gate": false,
+      "signals": ["aims", "scope", "article types", "editorial process", "decision pathway"]
+    },
+    {
+      "id": "editor_geodiversity",
+      "category": "Journal Policy",
+      "label": "Broad geographic distribution of editors",
+      "hard_gate": false,
+      "signals": ["editor country", "affiliation", "continent", "role"]
+    },
+    {
+      "id": "author_geodiversity",
+      "category": "Journal Policy",
+      "label": "Broad geographic distribution of authors",
+      "hard_gate": false,
+      "signals": ["author country", "affiliation", "recent issues"]
+    },
+    {
+      "id": "transparency_principles",
+      "category": "Journal Policy",
+      "label": "Transparency and best practice coverage",
+      "hard_gate": false,
+      "signals": ["fees", "licensing", "ownership", "contact", "archiving", "revenue"]
+    },
+    {
+      "id": "genai_policy",
+      "category": "Journal Policy",
+      "label": "Generative AI policy",
+      "hard_gate": false,
+      "signals": ["AI disclosure", "AI authorship", "human responsibility", "review confidentiality"]
+    },
+    {
+      "id": "contact_governance",
+      "category": "Journal Policy",
+      "label": "Editorial contact and governance transparency",
+      "hard_gate": false,
+      "signals": ["editorial office", "publisher", "owner", "official email", "address"]
+    },
+    {
+      "id": "academic_contribution",
+      "category": "Content",
+      "label": "Academic contribution to the field",
+      "hard_gate": false,
+      "signals": ["research question", "method", "results", "contribution"]
+    },
+    {
+      "id": "abstract_clarity",
+      "category": "Content",
+      "label": "Abstracts are clear and informative",
+      "hard_gate": false,
+      "signals": ["objective", "method", "results", "conclusion", "keywords"]
+    },
+    {
+      "id": "scope_fit",
+      "category": "Content",
+      "label": "Recent articles fit the stated aims and scope",
+      "hard_gate": false,
+      "signals": ["scope keywords", "article topics", "in scope"]
+    },
+    {
+      "id": "readability",
+      "category": "Content",
+      "label": "Articles are readable and scholarly",
+      "hard_gate": false,
+      "signals": ["article structure", "references", "figures", "tables", "language clarity"]
+    },
+    {
+      "id": "metadata_completeness",
+      "category": "Content",
+      "label": "Article metadata is complete",
+      "hard_gate": false,
+      "signals": ["title", "abstract", "authors", "affiliations", "DOI", "dates", "license"]
+    },
+    {
+      "id": "editor_standing",
+      "category": "Journal Standing",
+      "label": "Editor-in-Chief and board standing",
+      "hard_gate": false,
+      "signals": ["public profile", "ORCID", "Scopus Author ID", "institutional profile"]
+    },
+    {
+      "id": "board_scope_fit",
+      "category": "Journal Standing",
+      "label": "Board expertise fits the journal scope",
+      "hard_gate": false,
+      "signals": ["expertise", "subfield", "role", "scope"]
+    },
+    {
+      "id": "citedness_evidence",
+      "category": "Journal Standing",
+      "label": "Citedness or discoverability evidence",
+      "hard_gate": false,
+      "signals": ["citation notes", "Google Scholar", "Scopus citedness", "indexing evidence"]
+    },
+    {
+      "id": "indexing_claims_accuracy",
+      "category": "Journal Standing",
+      "label": "Indexing and metric claims are accurate",
+      "hard_gate": false,
+      "signals": ["indexing page", "database list", "metric claims", "Scopus badge"]
+    },
+    {
+      "id": "title_uniqueness",
+      "category": "Journal Standing",
+      "label": "Journal title is distinct and not misleading",
+      "hard_gate": false,
+      "signals": ["Scopus Sources search", "similar title findings", "title variants"]
+    },
+    {
+      "id": "scope_saturation",
+      "category": "Journal Standing",
+      "label": "Scope saturation is manageable",
+      "hard_gate": false,
+      "signals": ["scope keywords", "nearby titles", "differentiation"]
+    },
+    {
+      "id": "archive_regular",
+      "category": "Publishing Regularity",
+      "label": "Archive shows on-time recent publication",
+      "hard_gate": false,
+      "signals": ["last issues", "issue months", "article counts"]
+    },
+    {
+      "id": "volume_stability",
+      "category": "Publishing Regularity",
+      "label": "Publication volume is plausible and stable",
+      "hard_gate": false,
+      "signals": ["articles per issue", "articles per year", "stable output"]
+    },
+    {
+      "id": "production_dates",
+      "category": "Publishing Regularity",
+      "label": "Article production dates are plausible",
+      "hard_gate": false,
+      "signals": ["submitted", "revised", "accepted", "published"]
+    },
+    {
+      "id": "site_navigation",
+      "category": "Online Availability",
+      "label": "Site navigation is complete and usable",
+      "hard_gate": false,
+      "signals": ["about", "archive", "policies", "submissions", "board", "contact"]
+    },
+    {
+      "id": "doi_resolution",
+      "category": "Online Availability",
+      "label": "DOIs resolve for citable items",
+      "hard_gate": false,
+      "signals": ["doi.org", "Crossref", "article DOI"]
+    },
+    {
+      "id": "license_access_consistency",
+      "category": "Online Availability",
+      "label": "Access model, copyright, and license are consistent",
+      "hard_gate": false,
+      "signals": ["open access", "Creative Commons", "copyright", "license"]
+    },
+    {
+      "id": "website_qa",
+      "category": "Online Availability",
+      "label": "Website quality is acceptable",
+      "hard_gate": false,
+      "signals": ["working links", "mobile layout", "no misleading badges", "no empty pages"]
+    }
+  ]
+}

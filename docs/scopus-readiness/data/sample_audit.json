@@ -1,0 +1,14 @@
+{
+  "journal": {
+    "title": "Example Journal of Applied Studies",
+    "homepage_url": "https://journal.example.org",
+    "publisher_name": "Example University Press",
+    "publisher_country": "Indonesia",
+    "online_issn": "1234-567X",
+    "publication_frequency": "Quarterly",
+    "subject_area": "14 - Business"
+  },
+  "operational": {},
+  "evidence": [],
+  "confirmations": {}
+}

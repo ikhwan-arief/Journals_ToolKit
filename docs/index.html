@@ -1,10 +1,15 @@
+<!--
+Developed by Ikhwan Arief (ikhwan[at]unand.ac.id).
+Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
+All rights reserved. Unauthorized copying or redistribution is prohibited.
+-->
 <!doctype html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Journals Toolkit</title>
-    <meta name="description" content="Kumpulan alat bantu publik untuk pengelola jurnal." />
+    <meta name="description" content="A collection of public online tools for academic journal editors and managers." />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2710%27 fill=%27%23111111%27/%3E%3Cpath d=%27M18 18h28v6H18zm0 11h28v6H18zm0 11h18v6H18z%27 fill=%27white%27/%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,17 +21,18 @@
       <div class="toolkit-topbar-inner">
         <div class="toolkit-brand">
           <strong>Journals Toolkit</strong>
-          <span>Alat bantu publik untuk pengelola jurnal</span>
+          <span>Public tools for journal managers</span>
         </div>
-        <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
+        <nav class="toolkit-nav" aria-label="Application navigation">
           <a href="." aria-current="page">Portal</a>
           <a href="./oai-pmh/">OAI-PMH</a>
           <a href="./ojs-version-checker/">OJS Checker</a>
           <a href="./doi-xml-repair/">DOI XML Repair</a>
+          <a href="./scopus-readiness/">Scopus Readiness</a>
           <a href="./arjuna-2021/">Arjuna 2021</a>
           <a href="./arjuna-2026/">Arjuna 2026</a>
           <a href="./doaj-precheck/">DOAJ Precheck</a>
-          <a href="./evaluasi-diri-jurnal/">Evaluasi Diri</a>
+          <a href="./evaluasi-diri-jurnal/">Self-Evaluation</a>
         </nav>
       </div>
     </div>
@@ -34,75 +40,104 @@
     <main class="toolkit-portal">
       <section class="toolkit-hero">
         <div>
-          <p class="toolkit-kicker">Toolkit pengelolaan jurnal</p>
-          <h1>Alat praktis untuk memeriksa kesiapan jurnal.</h1>
-          <p>Kumpulan aplikasi statis untuk membantu pengelola jurnal memeriksa OAI-PMH, memperbaiki XML DOI Crossref, menjalankan simulasi Arjuna, melakukan precheck DOAJ, dan menyusun roadmap evaluasi diri jurnal.</p>
+          <p class="toolkit-kicker">Journal Management Toolkit</p>
+          <h1>Practical tools to inspect journal readiness.</h1>
+          <p>A collection of static web tools to assist academic journal managers in validating OAI-PMH endpoints, repairing Crossref DOI XML, checking OJS release lifecycles, preparing DOAJ applications, auditing Scopus readiness, and planning self-evaluation roadmaps.</p>
         </div>
-        <div class="toolkit-hero-artifact" aria-label="Ringkasan aplikasi toolkit">
+        <div class="toolkit-hero-artifact" aria-label="Toolkit overview">
           <div class="toolkit-window-bar"><span></span><span></span><span></span></div>
           <div class="toolkit-artifact-row">
             <div class="toolkit-artifact-icon">O</div>
-            <div><strong>OAI-PMH</strong><span>Endpoint, metadata, dan rekomendasi harvest.</span></div>
-            <div class="toolkit-artifact-badge">Validasi</div>
+            <div><strong>OAI-PMH</strong><span>Endpoints, metadata quality, and harvester audit.</span></div>
+            <div class="toolkit-artifact-badge">Validator</div>
+          </div>
+          <div class="toolkit-artifact-row">
+            <div class="toolkit-artifact-icon">V</div>
+            <div><strong>OJS Checker</strong><span>Version detection, LTS/EOL status, and upgrade paths.</span></div>
+            <div class="toolkit-artifact-badge">Diagnostic</div>
           </div>
           <div class="toolkit-artifact-row">
             <div class="toolkit-artifact-icon">X</div>
-            <div><strong>DOI XML Repair</strong><span>Kunci DOI artikel lama pada metadata Crossref baru.</span></div>
+            <div><strong>DOI XML Repair</strong><span>Retain historical article DOIs in updated Crossref XML.</span></div>
             <div class="toolkit-artifact-badge">XML</div>
-          </div>
-          <div class="toolkit-artifact-row">
-            <div class="toolkit-artifact-icon">A</div>
-            <div><strong>Arjuna</strong><span>Simulasi nilai Arjuna 2021 dan 2026.</span></div>
-            <div class="toolkit-artifact-badge">Skor</div>
-          </div>
-          <div class="toolkit-artifact-row">
-            <div class="toolkit-artifact-icon">D</div>
-            <div><strong>DOAJ & Evaluasi Diri</strong><span>Checklist, readiness, roadmap, dan rencana kerja.</span></div>
-            <div class="toolkit-artifact-badge">Roadmap</div>
           </div>
           <div class="toolkit-artifact-row">
             <div class="toolkit-artifact-icon">S</div>
             <div><strong>Scopus Readiness</strong><span>Evidence-first audit before title suggestion.</span></div>
             <div class="toolkit-artifact-badge">Audit</div>
           </div>
+          <div class="toolkit-artifact-row">
+            <div class="toolkit-artifact-icon">A</div>
+            <div><strong>Arjuna</strong><span>National accreditation score simulations (2021 & 2026).</span></div>
+            <div class="toolkit-artifact-badge">Score</div>
+          </div>
+          <div class="toolkit-artifact-row">
+            <div class="toolkit-artifact-icon">D</div>
+            <div><strong>DOAJ & Self-Evaluation</strong><span>Checklists, readiness scores, and 12-month roadmaps.</span></div>
+            <div class="toolkit-artifact-badge">Roadmap</div>
+          </div>
         </div>
       </section>
 
-      <section class="toolkit-card-grid" aria-label="Daftar aplikasi">
+      <section class="toolkit-card-grid" aria-label="Applications list">
         <article class="toolkit-card">
-          <div><h2>Validator OAI-PMH Jurnal OJS</h2><p>Temukan endpoint OAI-PMH, validasi Identify/ListRecords, dan lihat rekomendasi teknis untuk harvester.</p></div>
-          <a href="oai-pmh/">Buka aplikasi</a>
+          <div>
+            <h2>OAI-PMH Validator</h2>
+            <p>Discover OAI-PMH endpoints, validate Identify/ListRecords, assess metadata completeness, and inspect technical harvester compatibility.</p>
+          </div>
+          <a href="oai-pmh/">Open tool</a>
         </article>
         <article class="toolkit-card">
-          <div><h2>OJS Version Checker</h2><p>Pemeriksaan versi OJS, status siklus rilis (LTS/EOL), kompatibilitas PHP, jalur upgrade, dan keaktifan OAI-PMH secara batch (maks 10 URL).</p></div>
-          <a href="ojs-version-checker/">Buka aplikasi</a>
+          <div>
+            <h2>OJS Version Checker</h2>
+            <p>Batch diagnostic tool (up to 10 URLs) to detect OJS releases, LTS/EOL lifecycle status, server PHP compatibility, and upgrade recommendations.</p>
+          </div>
+          <a href="ojs-version-checker/">Open tool</a>
         </article>
         <article class="toolkit-card">
-          <div><h2>DOI XML Repair</h2><p>Perbaiki XML Crossref dengan mempertahankan DOI artikel lama, memetakan artikel, dan menghasilkan XML update siap salin atau unduh.</p></div>
-          <a href="doi-xml-repair/">Buka aplikasi</a>
+          <div>
+            <h2>DOI XML Repair</h2>
+            <p>Repair Crossref XML by preserving existing registered article DOIs, mapping new metadata, and generating ready-to-deposit XML updates.</p>
+          </div>
+          <a href="doi-xml-repair/">Open tool</a>
         </article>
         <article class="toolkit-card">
-          <div><h2>Scopus Readiness Auditor</h2><p>Evidence-first self-audit for checking journal readiness before preparing a Scopus title suggestion.</p></div>
-          <a href="scopus-readiness/">Buka aplikasi</a>
+          <div>
+            <h2>Scopus Readiness Auditor</h2>
+            <p>Evidence-first self-audit for evaluating journal standards, publication ethics, and editorial benchmarks before submitting a Scopus title suggestion.</p>
+          </div>
+          <a href="scopus-readiness/">Open tool</a>
         </article>
         <article class="toolkit-card">
-          <div><h2>Simulasi Penilaian Arjuna 2021</h2><p>Isi indikator Arjuna 2021, hitung skor total, subtotal manajemen/substansi, dan cetak ringkasan.</p></div>
-          <a href="arjuna-2021/">Buka aplikasi</a>
+          <div>
+            <h2>Simulasi Penilaian Arjuna 2021</h2>
+            <p>Simulasi penilaian akreditasi nasional berdasarkan Pedoman Akreditasi Jurnal Ilmiah 2021 (Indonesian-only standard).</p>
+          </div>
+          <a href="arjuna-2021/">Open tool</a>
         </article>
         <article class="toolkit-card">
-          <div><h2>Simulasi Penilaian Arjuna 2026</h2><p>Periksa persyaratan awal dan kelayakan, isi indikator tata kelola serta mutu artikel, lalu hitung peringkat berdasarkan Juknis 2026.</p></div>
-          <a href="arjuna-2026/">Buka aplikasi</a>
+          <div>
+            <h2>Simulasi Penilaian Arjuna 2026</h2>
+            <p>Pemeriksaan kelayakan dan simulasi skor tata kelola serta mutu artikel berdasarkan Juknis Akreditasi 2026 (Indonesian-only standard).</p>
+          </div>
+          <a href="arjuna-2026/">Open tool</a>
         </article>
         <article class="toolkit-card">
-          <div><h2>DOAJ Precheck</h2><p>Checklist required/recommended, status kesiapan, reset, dan print.</p></div>
-          <a href="doaj-precheck/">Buka aplikasi</a>
+          <div>
+            <h2>DOAJ Precheck</h2>
+            <p>Self-check required and recommended criteria for indexing in the Directory of Open Access Journals (DOAJ).</p>
+          </div>
+          <a href="doaj-precheck/">Open tool</a>
         </article>
         <article class="toolkit-card">
-          <div><h2>Evaluasi Diri Jurnal</h2><p>Kuesioner mandiri untuk skor kapasitas jurnal, prioritas roadmap, rencana 12 bulan, salin hasil, TXT, dan cetak.</p></div>
-          <a href="evaluasi-diri-jurnal/">Buka aplikasi</a>
+          <div>
+            <h2>Journal Self-Evaluation</h2>
+            <p>Self-assessment tool for evaluating journal capacity, prioritizing development roadmaps, and producing 12-month action plans.</p>
+          </div>
+          <a href="evaluasi-diri-jurnal/">Open tool</a>
         </article>
       </section>
     </main>
-    <footer class="toolkit-attribution">Toolkit ini dikembangkan oleh Ikhwan Arief (ikhwan[at]unand.ac.id)</footer>
+    <footer class="toolkit-attribution">Developed by Ikhwan Arief (ikhwan[at]unand.ac.id)</footer>
   </body>
 </html>

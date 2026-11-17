@@ -1,0 +1,191 @@
+[
+  {
+    "code_system": "ASJC",
+    "code": 10,
+    "description": "Multidisciplinary",
+    "label": "10 - Multidisciplinary",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 11,
+    "description": "Agricultural and Biological Sciences",
+    "label": "11 - Agricultural and Biological Sciences",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 12,
+    "description": "Arts and Humanities",
+    "label": "12 - Arts and Humanities",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 13,
+    "description": "Biochemistry",
+    "label": "13 - Biochemistry",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 14,
+    "description": "Business",
+    "label": "14 - Business",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 15,
+    "description": "Chemical Engineering",
+    "label": "15 - Chemical Engineering",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 16,
+    "description": "Chemistry",
+    "label": "16 - Chemistry",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 17,
+    "description": "Computer Science",
+    "label": "17 - Computer Science",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 18,
+    "description": "Decision Sciences",
+    "label": "18 - Decision Sciences",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 19,
+    "description": "Earth and Planetary Sciences",
+    "label": "19 - Earth and Planetary Sciences",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 20,
+    "description": "Economics",
+    "label": "20 - Economics",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 21,
+    "description": "Energy",
+    "label": "21 - Energy",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 22,
+    "description": "Engineering",
+    "label": "22 - Engineering",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 23,
+    "description": "Environmental Science",
+    "label": "23 - Environmental Science",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 24,
+    "description": "Immunology and Microbiology",
+    "label": "24 - Immunology and Microbiology",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 25,
+    "description": "Materials Science",
+    "label": "25 - Materials Science",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 26,
+    "description": "Mathematics",
+    "label": "26 - Mathematics",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 27,
+    "description": "Medicine",
+    "label": "27 - Medicine",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 28,
+    "description": "Neuroscience",
+    "label": "28 - Neuroscience",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 29,
+    "description": "Nursing",
+    "label": "29 - Nursing",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 30,
+    "description": "Pharmacology",
+    "label": "30 - Pharmacology",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 31,
+    "description": "Physics and Astronomy",
+    "label": "31 - Physics and Astronomy",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 32,
+    "description": "Psychology",
+    "label": "32 - Psychology",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 33,
+    "description": "Social Sciences",
+    "label": "33 - Social Sciences",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 34,
+    "description": "Veterinary",
+    "label": "34 - Veterinary",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 35,
+    "description": "Dentistry",
+    "label": "35 - Dentistry",
+    "level": "subject_area"
+  },
+  {
+    "code_system": "ASJC",
+    "code": 36,
+    "description": "Health Professions",
+    "label": "36 - Health Professions",
+    "level": "subject_area"
+  }
+]

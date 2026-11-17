@@ -1,9 +1,14 @@
+<!--
+Developed by Ikhwan Arief (ikhwan[at]unand.ac.id).
+Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
+All rights reserved. Unauthorized copying or redistribution is prohibited.
+-->
 <!doctype html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Validator OAI-PMH Jurnal OJS</title>
+    <title>OAI-PMH Validator - Journals Toolkit</title>
     <link rel="icon" href="data:," />
     <meta
       name="description"
@@ -259,8 +264,91 @@
 
       .metrics {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #ffffff;
+        padding: 16px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      }
+
+      .metric span {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--ink);
+      }
+
+      .download-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+      }
+
+      .download-row button {
+        background: #ffffff;
+        color: #1e293b;
+        border: 1px solid var(--line);
+        font-size: 13px;
+        font-weight: 600;
+        padding: 8px 14px;
+        border-radius: 8px;
+      }
+
+      .download-row button:hover {
+        background: #f8fafc;
+        border-color: #cbd5e1;
+      }
+
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 20px;
+        background: #f1f5f9;
+        padding: 6px;
+        border-radius: 10px;
+      }
+
+      .tab-button {
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 600;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .tab-button:hover {
+        color: var(--ink);
+        background: rgba(255,255,255,0.6);
+      }
+
+      .tab-button.active {
+        background: #ffffff;
+        color: var(--ink);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
       }
 
       .metric {
@@ -425,10 +513,10 @@
   <div class="toolkit-topbar-inner">
     <div class="toolkit-brand">
       <strong>Journals Toolkit</strong>
-      <span>Alat bantu publik untuk pengelola jurnal</span>
+      <span>Public tools for journal managers</span>
     </div>
     <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
-          <a href="../">Portal</a><a href="../oai-pmh/" aria-current="page">OAI-PMH</a><a href="../ojs-version-checker/">OJS Checker</a><a href="../doi-xml-repair/">DOI XML Repair</a><a href="../arjuna-2021/">Arjuna 2021</a><a href="../arjuna-2026/">Arjuna 2026</a><a href="../doaj-precheck/">DOAJ Precheck</a><a href="../evaluasi-diri-jurnal/">Evaluasi Diri</a>
+          <a href="../">Portal</a><a href="../oai-pmh/" aria-current="page">OAI-PMH</a><a href="../ojs-version-checker/">OJS Checker</a><a href="../doi-xml-repair/">DOI XML Repair</a><a href="../arjuna-2021/">Arjuna 2021</a><a href="../arjuna-2026/">Arjuna 2026</a><a href="../doaj-precheck/">DOAJ Precheck</a><a href="../evaluasi-diri-jurnal/">Self-Evaluation</a>
         </nav>
   </div>
 </div>
@@ -436,18 +524,18 @@
 <div class="layout">
       <aside>
         <section class="sidebar-block">
-          <h2>Panduan Penggunaan</h2>
+          <h2>User Guide</h2>
           <ol>
-            <li>Masukkan URL halaman utama jurnal (contoh: <code>https://jurnal.unand.ac.id/index.php/jidt</code>) atau endpoint OAI langsung.</li>
-            <li>Klik tombol <strong>Periksa OAI-PMH</strong>.</li>
-            <li>Sistem akan mendeteksi endpoint, menguji validitas XML Identify, format metadata, dan kelayakan penarikan data publikasi.</li>
-            <li>Tinjau status kelayakan harvest, skor kualitas metadata, dan rekomendasi perbaikan.</li>
+            <li>Enter the journal homepage URL (e.g., <code>https://jurnal.unand.ac.id/index.php/jidt</code>) or direct OAI endpoint.</li>
+            <li>Click the <strong>Validate OAI-PMH</strong> button.</li>
+            <li>The system discovers the endpoint, checks XML Identify validity, verifies metadata prefixes, and inspects harvest readiness.</li>
+            <li>Review harvestability status, metadata quality scores, and actionable recommendations.</li>
           </ol>
         </section>
       </aside>
 
       <main>
-        <h1>Validator OAI-PMH Jurnal OJS</h1>
+        <h1>OAI-PMH Validator</h1>
         <p class="subtitle">
           Masukkan URL website jurnal. Aplikasi akan mencoba menemukan endpoint OAI-PMH,
           memeriksa validitasnya, menampilkan metadata publikasi yang tersedia, dan memberi
@@ -462,7 +550,7 @@
         <section class="panel">
           <form id="auditForm" class="form-grid">
             <div>
-              <label for="journalUrl">URL website jurnal atau URL OAI-PMH</label>
+              <label for="journalUrl">Journal website URL or OAI-PMH endpoint</label>
               <input
                 id="journalUrl"
                 placeholder="https://jurnal.example.ac.id/index.php/nama-jurnal"
@@ -470,7 +558,7 @@
               />
             </div>
             <div class="form-actions">
-              <button id="checkButton" type="submit">Periksa OAI-PMH</button>
+              <button id="checkButton" type="submit">Validate OAI-PMH</button>
               <button id="resetButton" class="secondary" type="reset">Reset</button>
             </div>
           </form>
@@ -479,14 +567,14 @@
 
         <section id="results" class="hidden">
           <nav class="tabs" aria-label="Tab hasil">
-            <button class="tab-button active" type="button" data-tab="summary">Ringkasan</button>
-            <button class="tab-button" type="button" data-tab="endpoints">Endpoint yang Diuji</button>
-            <button class="tab-button" type="button" data-tab="repository">Informasi Repository</button>
-            <button class="tab-button" type="button" data-tab="formats">Metadata Format</button>
-            <button class="tab-button" type="button" data-tab="records">Publikasi</button>
-            <button class="tab-button" type="button" data-tab="quality">Kualitas Metadata</button>
-            <button class="tab-button" type="button" data-tab="issues">Rekomendasi Action</button>
-            <button class="tab-button" type="button" data-tab="technical">Detail Teknis</button>
+            <button class="tab-button active" type="button" data-tab="summary">Summary</button>
+            <button class="tab-button" type="button" data-tab="endpoints">Tested Endpoints</button>
+            <button class="tab-button" type="button" data-tab="repository">Repository Info</button>
+            <button class="tab-button" type="button" data-tab="formats">Metadata Formats</button>
+            <button class="tab-button" type="button" data-tab="records">Publications</button>
+            <button class="tab-button" type="button" data-tab="quality">Metadata Quality</button>
+            <button class="tab-button" type="button" data-tab="issues">Action Recommendations</button>
+            <button class="tab-button" type="button" data-tab="technical">Technical Details</button>
           </nav>
 
           <div id="summary" class="tab-panel active panel"></div>
@@ -552,7 +640,7 @@
         const runId = state.runId + 1;
         state.runId = runId;
         button.disabled = true;
-        status.textContent = "Memeriksa endpoint OAI-PMH...";
+        status.textContent = "Validating OAI-PMH endpoint...";
 
         try {
           const settings = getSettings();
@@ -561,11 +649,11 @@
           if (runId !== state.runId) return;
           state.audit = audit;
           renderAudit(audit, settings);
-          status.textContent = "Pemeriksaan selesai.";
+          status.textContent = "Validation completed.";
           document.getElementById("results").classList.remove("hidden");
         } catch (error) {
           if (runId !== state.runId) return;
-          status.textContent = error.message || "Pemeriksaan gagal.";
+          status.textContent = error.message || "Validation failed.";
           document.getElementById("results").classList.add("hidden");
         } finally {
           if (runId === state.runId) button.disabled = false;
@@ -617,7 +705,7 @@
           tokenError: "",
           tokenTruncated: false,
           harvestabilityScore: 0,
-          harvestabilityStatus: "Kemungkinan besar gagal di-harvest",
+          harvestabilityStatus: "High Risk of Harvest Failure",
           checkedAt,
         };
 
@@ -1443,7 +1531,7 @@
         }
 
         if (audit.noRecordsMatch) {
-          issues.push(issue("no_records_match", "High", "OAI-PMH aktif, tetapi tidak ada record yang cocok untuk metadataPrefix ini.", "P2", "Pengelola Jurnal dan Tim IT", [
+          issues.push(issue("no_records_match", "High", "OAI-PMH is active, but no records match this metadataPrefix.", "P2", "Pengelola Jurnal dan Tim IT", [
             "Belum ada artikel published, issue belum published, atau metadataPrefix salah.",
           ], [
             "Pastikan issue dan artikel sudah dipublikasikan.",
@@ -1528,11 +1616,11 @@
       }
 
       function classifyHarvestability(score, issues) {
-        if (issues.some((item) => item.severity === "Critical") && score < 65) return "Kemungkinan besar gagal di-harvest";
-        if (score >= 85) return "Siap di-harvest";
+        if (issues.some((item) => item.severity === "Critical") && score < 65) return "High Risk of Harvest Failure";
+        if (score >= 85) return "Ready for Harvesting";
         if (score >= 65) return "Bisa di-harvest, tetapi perlu perbaikan";
         if (score >= 40) return "Berisiko gagal atau hanya tertarik sebagian";
-        return "Kemungkinan besar gagal di-harvest";
+        return "High Risk of Harvest Failure";
       }
 
       function renderAudit(audit, settings) {
@@ -1551,17 +1639,17 @@
         const last = audit.requestLog[audit.requestLog.length - 1] || {};
         const statusClass = audit.harvestabilityScore >= 85 ? "status-good" : audit.harvestabilityScore >= 40 ? "status-warning" : "status-danger";
         document.getElementById("summary").innerHTML = `
-          <h2>Ringkasan</h2>
-          <p>Harvestability score adalah perkiraan kesiapan endpoint untuk dipanen oleh sistem pengindeks.</p>
+          <h2>Summary</h2>
+          <p>The harvestability score estimates how ready your endpoint is to be successfully harvested by academic indexers.</p>
           <div class="metrics">
-            ${metric("Status akhir", escapeHtml(audit.harvestabilityStatus), statusClass)}
+            ${metric("Final status", escapeHtml(audit.harvestabilityStatus), statusClass)}
             ${metric("Harvestability score", `${audit.harvestabilityScore}/100`, statusClass)}
-            ${metric("Record ditemukan", String(audit.records.length))}
-            ${metric("HTTP status terakhir", String(last.httpStatus || "-"))}
+            ${metric("Records found", String(audit.records.length))}
+            ${metric("Latest HTTP status", String(last.httpStatus || "-"))}
           </div>
-          <p><strong>Endpoint OAI-PMH terpilih:</strong> <code>${escapeHtml(audit.selectedEndpoint || "-")}</code></p>
-          <p><strong>Metadata prefix dipakai:</strong> <code>${escapeHtml(audit.metadataPrefix)}</code></p>
-          <p><strong>Waktu pemeriksaan:</strong> <code>${escapeHtml(audit.checkedAt)}</code></p>
+          <p><strong>Selected OAI-PMH endpoint:</strong> <code>${escapeHtml(audit.selectedEndpoint || "-")}</code></p>
+          <p><strong>Metadata prefix used:</strong> <code>${escapeHtml(audit.metadataPrefix)}</code></p>
+          <p><strong>Audit timestamp:</strong> <code>${escapeHtml(audit.checkedAt)}</code></p>
           <div class="metrics">
             ${metric("Critical", String(counts.Critical), "status-danger")}
             ${metric("High", String(counts.High), "status-warning")}
@@ -1569,16 +1657,16 @@
             ${metric("Low", String(counts.Low))}
           </div>
           <div class="download-row">
-            <button type="button" onclick="downloadRecordsCsv()">Download publikasi CSV</button>
-            <button type="button" onclick="downloadIssuesCsv()">Download rekomendasi CSV</button>
-            <button type="button" onclick="downloadSummaryMarkdown()">Download ringkasan Markdown</button>
-            <button type="button" onclick="downloadSummaryTxt()">Download laporan TXT</button>
+            <button type="button" onclick="downloadRecordsCsv()">Export Records CSV</button>
+            <button type="button" onclick="downloadIssuesCsv()">Export Recommendations CSV</button>
+            <button type="button" onclick="downloadSummaryMarkdown()">Export Summary Markdown</button>
+            <button type="button" onclick="downloadSummaryTxt()">Export Report TXT</button>
           </div>
         `;
       }
 
       function renderEndpoints(audit) {
-        renderTable("endpoints", ["kandidat endpoint", "status", "alasan", "waktu respons", "HTTP status", "dipilih"], audit.endpointAttempts.map((attempt) => [
+        renderTable("endpoints", ["Candidate Endpoint", "Status", "Reason", "Response Time (s)", "HTTP Status", "Selected"], audit.endpointAttempts.map((attempt) => [
           attempt.endpointUrl,
           attempt.status,
           attempt.reason,
@@ -1590,7 +1678,7 @@
 
       function renderRepository(audit) {
         if (!audit.repositoryInfo) {
-          document.getElementById("repository").innerHTML = `<h2>Informasi Repository</h2><div class="empty">Informasi repository belum tersedia karena Identify tidak valid.</div>`;
+          document.getElementById("repository").innerHTML = `<h2>Repository Info</h2><div class="empty">Repository information is unavailable because the Identify response is invalid.</div>`;
           return;
         }
         const info = audit.repositoryInfo;
@@ -1607,8 +1695,8 @@
 
       function renderFormats(audit) {
         const prefixStatus = audit.metadataFormats.some((item) => item.metadataPrefix === "oai_dc")
-          ? `<p class="status-good"><strong>Format oai_dc tersedia.</strong></p>`
-          : `<p class="status-warning"><strong>Format oai_dc tidak ditemukan atau metadata format belum bisa dibaca.</strong></p>`;
+          ? `<p class="status-good"><strong>oai_dc format is available and valid.</strong></p>`
+          : `<p class="status-warning"><strong>oai_dc format not found or metadata formats could not be read.</strong></p>`;
         renderTable("formats", ["metadataPrefix", "schema", "metadataNamespace"], audit.metadataFormats.map((item) => [
           item.metadataPrefix,
           item.schema,
@@ -1617,7 +1705,7 @@
       }
 
       function renderRecords(audit) {
-        const note = audit.noRecordsMatch ? `<p class="status-warning"><strong>OAI-PMH aktif, tetapi tidak ada record yang cocok untuk metadataPrefix ini.</strong></p>` : "";
+        const note = audit.noRecordsMatch ? `<p class="status-warning"><strong>OAI-PMH is active, but no records match this metadataPrefix.</strong></p>` : "";
         renderTable("records", ["No", "OAI Identifier", "Datestamp", "Judul", "Penulis", "Tanggal", "Publisher", "Bahasa", "Tipe", "Source", "Rights", "SetSpec"], audit.records.map((record, index) => [
           index + 1,
           record.identifier,
@@ -1631,7 +1719,7 @@
           record.source,
           record.rights,
           record.setSpecs.join("; "),
-        ]), "Publikasi yang Bisa Ditarik Harvester", note);
+        ]), "Publications Harvestable by Harvester", note);
       }
 
       function renderQuality(audit) {
@@ -1644,24 +1732,24 @@
           item.problems,
         ]));
         document.getElementById("quality").innerHTML = `
-          <h2>Kualitas Metadata</h2>
+          <h2>Metadata Quality</h2>
           <div class="metrics">
-            ${metric("% record dengan judul", percent(diagnostic.withTitle, total))}
-            ${metric("% record dengan penulis", percent(diagnostic.withCreator, total))}
-            ${metric("% record dengan tanggal", percent(diagnostic.withDate, total))}
-            ${metric("% record dengan deskripsi", percent(diagnostic.withDescription, total))}
-            ${metric("% record dengan publisher", percent(diagnostic.withPublisher, total))}
-            ${metric("% record dengan bahasa", percent(diagnostic.withLanguage, total))}
-            ${metric("Identifier duplikat", String(diagnostic.duplicateIdentifiers.length))}
-            ${metric("Record deleted", String(diagnostic.deletedRecords))}
+            ${metric("% records with title", percent(diagnostic.withTitle, total))}
+            ${metric("% records with creator", percent(diagnostic.withCreator, total))}
+            ${metric("% records with date", percent(diagnostic.withDate, total))}
+            ${metric("% records with description", percent(diagnostic.withDescription, total))}
+            ${metric("% records with publisher", percent(diagnostic.withPublisher, total))}
+            ${metric("% records with language", percent(diagnostic.withLanguage, total))}
+            ${metric("Duplicate identifiers", String(diagnostic.duplicateIdentifiers.length))}
+            ${metric("Deleted records", String(diagnostic.deletedRecords))}
           </div>
-          <h3>Record bermasalah</h3>
-          ${diagnostic.problemRecords.length ? problemTable : `<div class="empty">Tidak ada masalah metadata utama pada record yang ditampilkan.</div>`}
+          <h3>Problematic Records</h3>
+          ${diagnostic.problemRecords.length ? problemTable : `<div class="empty">No major metadata quality issues detected in the retrieved records.</div>`}
         `;
       }
 
       function renderIssues(audit) {
-        renderTable("issues", ["Prioritas", "Tingkat masalah", "Gejala", "Dugaan penyebab", "Dampak bagi harvester", "Action untuk pengelola jurnal", "Action untuk tim IT", "Cara validasi", "Penanggung jawab"], audit.issues.map((item) => [
+        renderTable("issues", ["Priority", "Severity", "Symptom", "Probable Causes", "Harvester Impact", "Journal Manager Action", "IT Team Action", "Validation Method", "Owner"], audit.issues.map((item) => [
           item.priority,
           item.severity,
           item.symptom,
@@ -1671,7 +1759,7 @@
           item.actionForItAdmin.join("\n"),
           item.validationSteps.join("\n"),
           item.owner,
-        ]), "Rekomendasi Action", `<p>Rekomendasi action membedakan pekerjaan editorial dan pekerjaan server agar masalah bisa ditangani oleh pihak yang tepat.</p>`);
+        ]), "Rekomendasi Action", `<p>Action recommendations separate editorial tasks from server/IT tasks so that each issue can be addressed by the appropriate team.</p>`);
       }
 
       function renderTechnical(audit, settings) {
@@ -1691,8 +1779,8 @@
           .map((item, index) => `<h3>Potongan respons ${index + 1}</h3><pre>${escapeHtml(item.snippet)}</pre>`)
           .join("");
         document.getElementById("technical").innerHTML = `
-          <h2>Detail Teknis</h2>
-          ${tableHtml(["URL request", "mode baca", "cache", "HTTP status", "response time", "content type", "catatan fallback", "proxy URL", "error"], rows)}
+          <h2>Technical Details</h2>
+          ${tableHtml(["Request URL", "Mode", "Cache", "HTTP Status", "Response Time (s)", "Content-Type", "Fallback Note", "Proxy URL", "Error"], rows)}
           ${snippets}
         `;
       }
@@ -1785,7 +1873,7 @@
           `- Status: ${audit.harvestabilityStatus}`,
           `- Harvestability score: ${audit.harvestabilityScore}/100`,
           `- Jumlah record: ${audit.records.length}`,
-          `- Waktu pemeriksaan: ${audit.checkedAt}`,
+          `- Audit timestamp: ${audit.checkedAt}`,
           "",
           "## Rekomendasi",
           ...audit.issues.map((item) => `- [${item.priority}] ${item.symptom}`),
@@ -1873,6 +1961,6 @@
           .replaceAll("'", "&#039;");
       }
     </script>
-  <div class="toolkit-attribution">Toolkit ini dikembangkan oleh Ikhwan Arief (ikhwan[at]unand.ac.id)</div>
+  <div class="toolkit-attribution">Developed by Ikhwan Arief (ikhwan[at]unand.ac.id)</div>
 </body>
 </html>

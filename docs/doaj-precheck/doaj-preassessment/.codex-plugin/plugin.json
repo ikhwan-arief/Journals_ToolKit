@@ -1,0 +1,18 @@
+{
+  "name": "doaj-preassessment",
+  "version": "0.1.0",
+  "description": "Independent pilot for evidence-based preparation of a DOAJ journal application using a frozen criteria baseline.",
+  "author": {
+    "name": "Ikhwan Arief"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "DOAJ Pre-Assessment Pilot",
+    "shortDescription": "Review public journal evidence before a DOAJ application.",
+    "longDescription": "An independent, skills-only pilot that guides a URL-only review against the bundled October 2026 criteria baseline. It does not represent DOAJ or predict its decision.",
+    "developerName": "Ikhwan Arief",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Review my journal homepage for DOAJ application preparation."
+  }
+}

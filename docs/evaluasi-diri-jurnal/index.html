@@ -1,11 +1,16 @@
+<!--
+Developed by Ikhwan Arief (ikhwan[at]unand.ac.id).
+Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
+All rights reserved. Unauthorized copying or redistribution is prohibited.
+-->
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Ikhwan Arief">
   <meta name="copyright" content="Copyright (c) 2026 Ikhwan Arief">
-  <title>Evaluasi Diri Roadmap Jurnal</title>
+  <title>Journal Self-Evaluation Roadmap</title>
   <style>
     :root {
       color-scheme: light;
@@ -959,10 +964,10 @@
   <div class="toolkit-topbar-inner">
     <div class="toolkit-brand">
       <strong>Journals Toolkit</strong>
-      <span>Alat bantu publik untuk pengelola jurnal</span>
+      <span>Public tools for journal managers</span>
     </div>
     <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
-          <a href="../">Portal</a><a href="../oai-pmh/">OAI-PMH</a><a href="../ojs-version-checker/">OJS Checker</a><a href="../doi-xml-repair/">DOI XML Repair</a><a href="../arjuna-2021/">Arjuna 2021</a><a href="../arjuna-2026/">Arjuna 2026</a><a href="../doaj-precheck/">DOAJ Precheck</a><a href="../evaluasi-diri-jurnal/" aria-current="page">Evaluasi Diri</a>
+          <a href="../">Portal</a><a href="../oai-pmh/">OAI-PMH</a><a href="../ojs-version-checker/">OJS Checker</a><a href="../doi-xml-repair/">DOI XML Repair</a><a href="../arjuna-2021/">Arjuna 2021</a><a href="../arjuna-2026/">Arjuna 2026</a><a href="../doaj-precheck/">DOAJ Precheck</a><a href="../evaluasi-diri-jurnal/" aria-current="page">Self-Evaluation</a>
         </nav>
   </div>
 </div>
@@ -971,11 +976,11 @@
     <section class="intro" aria-labelledby="page-title">
       <div>
         <p class="eyebrow">Alat evaluasi mandiri</p>
-        <h1 id="page-title">Roadmap menuju jurnal internasional bereputasi</h1>
+        <h1 id="page-title">Roadmap Towards Reputable International Journal</h1>
         <p class="intro-copy">Isi kuesioner sesuai kondisi nyata jurnal. Hasilnya berupa prioritas pengembangan, kegiatan aktual, komponen biaya, calon mitra, indikator terukur, dan rencana kerja 12 bulan.</p>
       </div>
       <aside class="scale-panel" aria-labelledby="scale-title">
-        <h2 id="scale-title">Skala penilaian</h2>
+        <h2 id="scale-title">Assessment Scales</h2>
         <p>Gunakan bukti kerja yang sudah berjalan, bukan hanya rencana.</p>
         <ul class="scale-list">
           <li><span class="scale-number">0</span><span>Belum tersedia atau belum ada bukti.</span></li>
@@ -992,7 +997,7 @@
         <aside class="side" aria-label="Panel pengaturan evaluasi">
           <div class="side-grid">
             <section class="side-panel">
-              <h2>Identitas jurnal</h2>
+              <h2>Journal Identity</h2>
               <p>Nama jurnal bersifat opsional dan hanya dipakai untuk judul laporan di halaman ini.</p>
               <div class="input-block">
                 <label for="journalName">Nama jurnal</label>
@@ -1020,7 +1025,7 @@
             </section>
 
             <section class="side-panel">
-              <h2>Status pengisian</h2>
+              <h2>Completion Status</h2>
               <p id="fieldHint">Pilih bidang kajian untuk memunculkan kuesioner.</p>
               <div class="progress-wrap" aria-label="Progres pengisian">
                 <div class="progress-meta">
@@ -1045,7 +1050,7 @@
           <div class="message" id="message" role="alert"></div>
           <div id="questionMount">
             <section class="empty-state">
-              <h2>Pilih bidang kajian jurnal untuk mulai menilai kapasitas saat ini.</h2>
+              <h2>Select the journal's subject area to begin assessing current capacity.</h2>
               <p>Jurnal multidisiplin dapat memilih rumpun terdekat. Pertanyaan akan menyesuaikan bidang yang dipilih agar rekomendasi roadmap lebih terarah.</p>
             </section>
           </div>
@@ -1054,7 +1059,7 @@
             <div class="result-hero">
               <div>
                 <p class="eyebrow">Hasil evaluasi mandiri</p>
-                <h2 id="resultTitle">Rekomendasi roadmap jurnal</h2>
+                <h2 id="resultTitle">Journal Roadmap Recommendations</h2>
                 <p id="resultLead">Isi kuesioner untuk melihat ringkasan kesiapan dan prioritas pengembangan.</p>
                 <div class="result-actions" aria-label="Opsi keluaran hasil evaluasi">
                   <button class="btn secondary" type="button" id="resultCopyBtn">Salin Hasil</button>
@@ -1491,7 +1496,7 @@
       if (!field) {
         questionMount.innerHTML = `
           <section class="empty-state">
-            <h2>Pilih bidang kajian jurnal untuk mulai menilai kapasitas saat ini.</h2>
+            <h2>Select the journal's subject area to begin assessing current capacity.</h2>
             <p>Jurnal multidisiplin dapat memilih rumpun terdekat. Pertanyaan akan menyesuaikan bidang yang dipilih agar rekomendasi roadmap lebih terarah.</p>
           </section>
         `;

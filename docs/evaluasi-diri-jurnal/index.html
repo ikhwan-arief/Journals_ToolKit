@@ -101,11 +101,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     }
 
     .intro {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-      gap: clamp(20px, 3vw, 40px);
-      align-items: end;
-      padding: 16px 0 28px;
+      padding: 16px 0 24px;
     }
 
     .eyebrow {
@@ -127,7 +123,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     }
 
     .intro-copy {
-      max-width: 760px;
+      max-width: 820px;
       margin: 14px 0 0;
       color: var(--muted);
       font-size: 15px;
@@ -135,7 +131,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     }
 
     .scale-panel {
-      padding: 18px 20px;
+      padding: 18px 22px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: rgba(255, 255, 255, 0.82);
@@ -155,14 +151,16 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     .side-panel p,
     .question-section > p,
     .result-block > p {
-      margin: 8px 0 0;
+      margin: 6px 0 0;
       color: var(--muted);
+      font-size: 14px;
     }
 
     .scale-list {
       display: grid;
-      gap: 8px;
-      margin: 16px 0 0;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 14px 0 0;
       padding: 0;
       list-style: none;
     }
@@ -173,7 +171,8 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       gap: 10px;
       align-items: start;
       color: var(--muted);
-      font-size: 13.5px;
+      font-size: 13px;
+      line-height: 1.4;
     }
 
     .scale-number {
@@ -1005,22 +1004,9 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
 <main class="page">
     <section class="intro" aria-labelledby="page-title">
-      <div>
-        <p class="eyebrow">Self-Evaluation Tool</p>
-        <h1 id="page-title">Roadmap Towards Reputable International Journal</h1>
-        <p class="intro-copy">Complete the questionnaire reflecting the real current state of your journal. Output provides development priorities, actionable tasks, budget components, prospective partners, measurable indicators, and a 12-month work plan.</p>
-      </div>
-      <aside class="scale-panel" aria-labelledby="scale-title">
-        <h2 id="scale-title">Assessment Scales</h2>
-        <p>Assess based on operational evidence in practice, not merely future plans.</p>
-        <ul class="scale-list">
-          <li><span class="scale-number">0</span><span>Not available or no evidence.</span></li>
-          <li><span class="scale-number">1</span><span>Informal and not yet stable.</span></li>
-          <li><span class="scale-number">2</span><span>Partially documented, but inconsistent.</span></li>
-          <li><span class="scale-number">3</span><span>Consistent practice with clear ownership.</span></li>
-          <li><span class="scale-number">4</span><span>Measured, evaluated, and showing continuous improvement.</span></li>
-        </ul>
-      </aside>
+      <p class="eyebrow">Self-Evaluation Tool</p>
+      <h1 id="page-title">Roadmap Towards Reputable International Journal</h1>
+      <p class="intro-copy">Complete the questionnaire reflecting the real current state of your journal. Output provides development priorities, actionable tasks, budget components, prospective partners, measurable indicators, and a 12-month work plan.</p>
     </section>
 
     <form id="assessmentForm" novalidate>
@@ -1078,6 +1064,18 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
         </aside>
 
         <div class="main-column">
+          <aside class="scale-panel" aria-labelledby="scale-title">
+            <h2 id="scale-title">Assessment Scales</h2>
+            <p>Assess based on operational evidence in practice, not merely future plans.</p>
+            <ul class="scale-list">
+              <li><span class="scale-number">0</span><span>Not available or no evidence.</span></li>
+              <li><span class="scale-number">1</span><span>Informal and not yet stable.</span></li>
+              <li><span class="scale-number">2</span><span>Partially documented, but inconsistent.</span></li>
+              <li><span class="scale-number">3</span><span>Consistent practice with clear ownership.</span></li>
+              <li><span class="scale-number">4</span><span>Measured, evaluated, and showing continuous improvement.</span></li>
+            </ul>
+          </aside>
+
           <div class="message" id="message" role="alert"></div>
           <div id="questionMount">
             <section class="empty-state">

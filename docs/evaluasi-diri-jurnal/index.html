@@ -95,17 +95,17 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     }
 
     .page {
-      width: min(1480px, 100%);
+      width: min(1180px, calc(100% - 48px));
       margin: 0 auto;
-      padding: 34px clamp(18px, 4vw, 56px) 54px;
+      padding: 24px 0 60px;
     }
 
     .intro {
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-      gap: clamp(24px, 4vw, 58px);
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: clamp(20px, 3vw, 40px);
       align-items: end;
-      padding: 20px 0 34px;
+      padding: 16px 0 28px;
     }
 
     .eyebrow {
@@ -120,7 +120,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     h1 {
       max-width: 980px;
       margin: 0;
-      font-size: clamp(30px, 4vw, 42px);
+      font-size: clamp(28px, 3.6vw, 38px);
       line-height: 1.15;
       font-weight: 800;
       letter-spacing: -0.02em;
@@ -135,7 +135,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     }
 
     .scale-panel {
-      padding: 20px;
+      padding: 18px 20px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: rgba(255, 255, 255, 0.82);
@@ -147,7 +147,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     .question-section h2,
     .result-block h2 {
       margin: 0;
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1.25;
     }
 
@@ -169,39 +169,45 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
     .scale-list li {
       display: grid;
-      grid-template-columns: 30px 1fr;
+      grid-template-columns: 28px 1fr;
       gap: 10px;
       align-items: start;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13.5px;
     }
 
     .scale-number {
       display: grid;
-      height: 28px;
+      height: 26px;
       place-items: center;
       border-radius: 999px;
       background: var(--panel-soft);
       color: var(--accent-dark);
       font-weight: 760;
+      font-size: 13px;
     }
 
     .workspace {
       display: grid;
-      grid-template-columns: 340px minmax(0, 1fr);
-      gap: 28px;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 24px;
       align-items: start;
     }
 
     .side {
       position: sticky;
-      top: 84px;
-      max-height: calc(100vh - 100px);
+      top: 76px;
+      height: fit-content;
+      max-height: calc(100vh - 90px);
       overflow-y: auto;
       overscroll-behavior: contain;
       padding-right: 4px;
       display: grid;
       gap: 16px;
+    }
+
+    .side-grid {
+      display: contents;
     }
 
     .side::-webkit-scrollbar {
@@ -448,10 +454,10 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
     .question-row {
       display: grid;
-      grid-template-columns: minmax(230px, 0.9fr) minmax(340px, 1.1fr);
-      gap: clamp(16px, 2.4vw, 32px);
-      align-items: start;
-      padding: 22px clamp(18px, 3vw, 28px);
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      padding: 18px 22px;
       border-top: 1px solid var(--line);
     }
 
@@ -459,22 +465,29 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       border-top: 0;
     }
 
+    .question-info {
+      min-width: 0;
+    }
+
     .question-text {
       margin: 0;
       font-weight: 720;
-      line-height: 1.35;
+      line-height: 1.4;
+      font-size: 15px;
     }
 
     .question-help {
-      margin: 8px 0 0;
+      margin: 6px 0 0;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13.5px;
+      line-height: 1.5;
     }
 
     .score-options {
       display: grid;
-      grid-template-columns: repeat(5, minmax(52px, 1fr));
+      grid-template-columns: repeat(5, 56px);
       gap: 8px;
+      flex-shrink: 0;
     }
 
     .score-options label {
@@ -829,6 +842,18 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       .timeline,
       .summary-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .question-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .score-options {
+        grid-template-columns: repeat(5, minmax(48px, 1fr));
+        width: 100%;
       }
     }
 

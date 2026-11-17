@@ -42,20 +42,18 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
       }
 
       .layout {
-        display: grid;
-        grid-template-columns: 340px minmax(0, 1fr);
-        min-height: calc(100vh - 65px);
-      }
-
-      aside {
-        border-right: 1px solid var(--line);
-        background: #f8fafc;
-        padding: 36px 28px;
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 24px 0 60px;
         box-sizing: border-box;
       }
 
+      aside {
+        display: none;
+      }
+
       main {
-        padding: 44px clamp(20px, 4vw, 56px);
+        padding: 0;
         box-sizing: border-box;
       }
 
@@ -476,16 +474,8 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
       }
 
       @media (max-width: 900px) {
-        .layout {
+        .form-grid {
           grid-template-columns: 1fr;
-        }
-        aside {
-          border-right: none;
-          border-bottom: 1px solid var(--line);
-          padding: 24px 20px;
-        }
-        main {
-          padding: 32px 20px;
         }
       }
 
@@ -539,41 +529,6 @@ Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
     </div>
 
     <div class="layout">
-      <aside>
-        <section class="sidebar-block">
-          <h2>User Guide</h2>
-          <ol>
-            <li>Copy the journal website URL (e.g., <code>https://jurnal.unand.ac.id/index.php/jidt</code>).</li>
-            <li>Paste into the text area. You can input <strong>up to 10 URLs</strong> (one URL per line).</li>
-            <li>Click the <strong>Check OJS Version & OAI-PMH</strong> button.</li>
-            <li>Review the OJS lifecycle status, server PHP compatibility, upgrade pathway recommendations, and OAI-PMH endpoint availability.</li>
-            <li>If any URL is protected by a strict campus CORS/WAF, use the <strong>Manual Input</strong> button in the details card to paste the generator meta line instantly.</li>
-          </ol>
-        </section>
-
-        <section class="sidebar-block">
-          <h2>PKP Lifecycle Reference</h2>
-          <div class="reference-list">
-            <div class="reference-item">
-              <span class="pill-badge badge-good">LTS</span>
-              <span><strong>OJS 3.3.x</strong> (Long-term support)</span>
-            </div>
-            <div class="reference-item">
-              <span class="pill-badge badge-good">Stable</span>
-              <span><strong>OJS 3.4.x</strong> (Latest stable release)</span>
-            </div>
-            <div class="reference-item">
-              <span class="pill-badge badge-warning">Legacy</span>
-              <span><strong>OJS 3.2.x</strong> (Approaching EOL)</span>
-            </div>
-            <div class="reference-item">
-              <span class="pill-badge badge-danger">EOL</span>
-              <span><strong>OJS 2.4.x / 3.0 / 3.1</strong> (Vulnerable)</span>
-            </div>
-          </div>
-        </section>
-      </aside>
-
       <main>
         <h1>OJS Version Checker</h1>
         <p class="subtitle">

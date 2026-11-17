@@ -44,20 +44,18 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       }
 
       .layout {
-        display: grid;
-        grid-template-columns: 340px minmax(0, 1fr);
-        min-height: calc(100vh - 65px);
-      }
-
-      aside {
-        border-right: 1px solid var(--line);
-        background: #f8fafc;
-        padding: 36px 28px;
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 24px 0 60px;
         box-sizing: border-box;
       }
 
+      aside {
+        display: none;
+      }
+
       main {
-        padding: 44px clamp(20px, 4vw, 56px);
+        padding: 0;
         box-sizing: border-box;
       }
 
@@ -449,15 +447,6 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       }
 
       @media (max-width: 980px) {
-        .layout {
-          grid-template-columns: 1fr;
-        }
-
-        aside {
-          border-right: 0;
-          border-bottom: 1px solid var(--line);
-        }
-
         .form-grid,
         .metrics {
           grid-template-columns: 1fr;
@@ -522,18 +511,6 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 </div>
 
 <div class="layout">
-      <aside>
-        <section class="sidebar-block">
-          <h2>User Guide</h2>
-          <ol>
-            <li>Enter the journal homepage URL (e.g., <code>https://jurnal.unand.ac.id/index.php/jidt</code>) or direct OAI endpoint.</li>
-            <li>Click the <strong>Validate OAI-PMH</strong> button.</li>
-            <li>The system discovers the endpoint, checks XML Identify validity, verifies metadata prefixes, and inspects harvest readiness.</li>
-            <li>Review harvestability status, metadata quality scores, and actionable recommendations.</li>
-          </ol>
-        </section>
-      </aside>
-
       <main>
         <h1>OAI-PMH Validator</h1>
         <p class="subtitle">

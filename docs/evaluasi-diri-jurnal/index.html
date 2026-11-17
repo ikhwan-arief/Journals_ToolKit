@@ -966,7 +966,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       <strong>Journals Toolkit</strong>
       <span>Public tools for journal managers</span>
     </div>
-    <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
+    <nav class="toolkit-nav" aria-label="Application navigation">
           <a href="../">Portal</a><a href="../oai-pmh/">OAI-PMH</a><a href="../ojs-version-checker/">OJS Checker</a><a href="../doi-xml-repair/">DOI XML Repair</a><a href="../arjuna-2021/">Arjuna 2021</a><a href="../arjuna-2026/">Arjuna 2026</a><a href="../doaj-precheck/">DOAJ Precheck</a><a href="../evaluasi-diri-jurnal/" aria-current="page">Self-Evaluation</a>
         </nav>
   </div>
@@ -975,50 +975,50 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 <main class="page">
     <section class="intro" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">Alat evaluasi mandiri</p>
+        <p class="eyebrow">Self-Evaluation Tool</p>
         <h1 id="page-title">Roadmap Towards Reputable International Journal</h1>
-        <p class="intro-copy">Isi kuesioner sesuai kondisi nyata jurnal. Hasilnya berupa prioritas pengembangan, kegiatan aktual, komponen biaya, calon mitra, indikator terukur, dan rencana kerja 12 bulan.</p>
+        <p class="intro-copy">Complete the questionnaire reflecting the real current state of your journal. Output provides development priorities, actionable tasks, budget components, prospective partners, measurable indicators, and a 12-month work plan.</p>
       </div>
       <aside class="scale-panel" aria-labelledby="scale-title">
         <h2 id="scale-title">Assessment Scales</h2>
-        <p>Gunakan bukti kerja yang sudah berjalan, bukan hanya rencana.</p>
+        <p>Assess based on operational evidence in practice, not merely future plans.</p>
         <ul class="scale-list">
-          <li><span class="scale-number">0</span><span>Belum tersedia atau belum ada bukti.</span></li>
-          <li><span class="scale-number">1</span><span>Ada secara informal dan belum stabil.</span></li>
-          <li><span class="scale-number">2</span><span>Terdokumentasi sebagian, tetapi belum konsisten.</span></li>
-          <li><span class="scale-number">3</span><span>Berjalan konsisten dengan penanggung jawab jelas.</span></li>
-          <li><span class="scale-number">4</span><span>Terukur, dievaluasi, dan menunjukkan perbaikan.</span></li>
+          <li><span class="scale-number">0</span><span>Not available or no evidence.</span></li>
+          <li><span class="scale-number">1</span><span>Informal and not yet stable.</span></li>
+          <li><span class="scale-number">2</span><span>Partially documented, but inconsistent.</span></li>
+          <li><span class="scale-number">3</span><span>Consistent practice with clear ownership.</span></li>
+          <li><span class="scale-number">4</span><span>Measured, evaluated, and showing continuous improvement.</span></li>
         </ul>
       </aside>
     </section>
 
     <form id="assessmentForm" novalidate>
       <div class="workspace">
-        <aside class="side" aria-label="Panel pengaturan evaluasi">
+        <aside class="side" aria-label="Evaluation settings panel">
           <div class="side-grid">
             <section class="side-panel">
               <h2>Journal Identity</h2>
-              <p>Nama jurnal bersifat opsional dan hanya dipakai untuk judul laporan di halaman ini.</p>
+              <p>Journal name is optional and only used for report headings on this page.</p>
               <div class="input-block">
-                <label for="journalName">Nama jurnal</label>
-                <input class="text-input" id="journalName" name="journalName" type="text" autocomplete="off" placeholder="Contoh: Jurnal Ilmu ...">
+                <label for="journalName">Journal name</label>
+                <input class="text-input" id="journalName" name="journalName" type="text" autocomplete="off" placeholder="Example: Journal of Science...">
               </div>
               <div class="input-block">
-                <label for="evaluationDate">Tanggal evaluasi</label>
+                <label for="evaluationDate">Evaluation date</label>
                 <input class="text-input" id="evaluationDate" name="evaluationDate" type="date">
               </div>
               <fieldset class="field-group">
-                <legend>Bidang kajian</legend>
+                <legend>Subject area / Discipline</legend>
                 <div class="field-options">
                   <label class="field-card">
                     <input type="radio" name="field" value="SosHum">
-                    <strong>SosHum</strong>
-                    <span>Sosial, humaniora, hukum, pendidikan, seni, dan kajian sejenis.</span>
+                    <strong>HSS (SosHum)</strong>
+                    <span>Social sciences, humanities, law, education, arts, and related fields.</span>
                   </label>
                   <label class="field-card">
                     <input type="radio" name="field" value="SainTek">
-                    <strong>SainTek</strong>
-                    <span>Sains, teknologi, kesehatan, rekayasa, pangan, lingkungan, dan kajian sejenis.</span>
+                    <strong>STEM (SainTek)</strong>
+                    <span>Science, technology, engineering, medicine/health, agriculture, and related fields.</span>
                   </label>
                 </div>
               </fieldset>
@@ -1026,19 +1026,19 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
             <section class="side-panel">
               <h2>Completion Status</h2>
-              <p id="fieldHint">Pilih bidang kajian untuk memunculkan kuesioner.</p>
+              <p id="fieldHint">Select a subject area to display the questionnaire.</p>
               <div class="progress-wrap" aria-label="Progres pengisian">
                 <div class="progress-meta">
-                  <span id="progressLabel">0 dari 0 terisi</span>
+                  <span id="progressLabel">0 of 0 answered</span>
                   <strong id="progressPercent">0%</strong>
                 </div>
                 <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
               </div>
               <div class="actions">
-                <button class="btn" type="submit">Hitung Rekomendasi</button>
-                <button class="btn secondary" type="button" id="copyBtn">Salin Hasil</button>
-                <button class="btn secondary" type="button" id="saveBtn">Simpan Hasil (.txt)</button>
-                <button class="btn secondary" type="button" id="printBtn">Cetak</button>
+                <button class="btn" type="submit">Calculate Recommendations</button>
+                <button class="btn secondary" type="button" id="copyBtn">Copy Summary</button>
+                <button class="btn secondary" type="button" id="saveBtn">Save Report (.txt)</button>
+                <button class="btn secondary" type="button" id="printBtn">Print / PDF</button>
                 <button class="btn warning" type="reset">Reset</button>
               </div>
               <div class="copy-status" id="copyStatus" role="status" aria-live="polite"></div>
@@ -1051,20 +1051,20 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
           <div id="questionMount">
             <section class="empty-state">
               <h2>Select the journal's subject area to begin assessing current capacity.</h2>
-              <p>Jurnal multidisiplin dapat memilih rumpun terdekat. Pertanyaan akan menyesuaikan bidang yang dipilih agar rekomendasi roadmap lebih terarah.</p>
+              <p>Multidisciplinary journals can select the closest discipline. Questions adapt to the selected area to produce targeted roadmap recommendations.</p>
             </section>
           </div>
 
           <section class="result-block" id="resultBlock" aria-labelledby="resultTitle">
             <div class="result-hero">
               <div>
-                <p class="eyebrow">Hasil evaluasi mandiri</p>
+                <p class="eyebrow">Self-Evaluation Results</p>
                 <h2 id="resultTitle">Journal Roadmap Recommendations</h2>
-                <p id="resultLead">Isi kuesioner untuk melihat ringkasan kesiapan dan prioritas pengembangan.</p>
-                <div class="result-actions" aria-label="Opsi keluaran hasil evaluasi">
-                  <button class="btn secondary" type="button" id="resultCopyBtn">Salin Hasil</button>
-                  <button class="btn secondary" type="button" id="resultSaveBtn">Simpan Hasil (.txt)</button>
-                  <button class="btn secondary" type="button" id="resultPrintBtn">Cetak</button>
+                <p id="resultLead">Complete the questionnaire to view your readiness summary and strategic development priorities.</p>
+                <div class="result-actions" aria-label="Output options">
+                  <button class="btn secondary" type="button" id="resultCopyBtn">Copy Summary</button>
+                  <button class="btn secondary" type="button" id="resultSaveBtn">Save Report (.txt)</button>
+                  <button class="btn secondary" type="button" id="resultPrintBtn">Print / PDF</button>
                   <button class="btn warning" type="reset">Reset</button>
                 </div>
                 <div class="copy-status" id="resultStatus" role="status" aria-live="polite"></div>
@@ -1072,7 +1072,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
               <div class="score-circle" aria-label="Skor kesiapan">
                 <div>
                   <strong id="scoreValue">0.0</strong>
-                  <span>dari 4.0</span>
+                  <span>out of 4.0</span>
                 </div>
               </div>
             </div>
@@ -1083,188 +1083,188 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     </form>
   </main>
 <script>
-    const scaleShort = ["Belum", "Informal", "Sebagian", "Konsisten", "Terukur"];
+    const scaleShort = ["None", "Informal", "Partial", "Consistent", "Measured"];
 
-    const dimensions = {
+        const dimensions = {
       governance: {
-        title: "Tata kelola editorial",
-        rationale: "Jurnal internasional bereputasi dibangun dari keputusan editorial yang dapat dijelaskan, konsisten, dan tidak bergantung pada satu orang.",
+        title: "Editorial Governance & Decision-Making",
+        rationale: "Reputable international journals are anchored in transparent, accountable editorial decisions that do not depend on a single individual.",
         activities: [
-          "Susun matriks peran editor, section editor, managing editor, dan editor teknis.",
-          "Tetapkan alur keputusan editorial, batas waktu setiap tahap, dan format catatan keputusan.",
-          "Adakan rapat editorial bulanan berbasis data naskah masuk, naskah tertahan, dan alasan penolakan."
+          "Establish an editorial responsibility matrix for editors-in-chief, section editors, managing editors, and copyeditors.",
+          "Formalize the editorial workflow, turnaround deadlines for each stage, and formal templates for decision notes.",
+          "Institute monthly data-driven editorial meetings analyzing submissions, backlog, turnaround times, and rejection reasons."
         ],
-        costs: ["honor rapat editorial", "lokakarya tata kelola", "pengembangan SOP dan formulir kerja", "alat pemantauan alur naskah"],
-        partners: ["editor senior lintas institusi", "pengelola jurnal bereputasi", "asosiasi bidang keilmuan"],
-        metrics: ["SOP editorial disahkan", "100% keputusan memiliki catatan alasan", "median waktu keputusan awal turun", "rapat evaluasi berjalan minimal 10 kali setahun"]
+        costs: ["editorial meeting honoraria", "governance workshops", "SOP and form development", "workflow tracking tools"],
+        partners: ["senior editors from cross-institutional networks", "experienced international journal editors", "disciplinary academic associations"],
+        metrics: ["editorial SOP formally ratified", "100% of decisions include written justification", "median initial decision time reduced", "minimum 10 editorial meetings held annually"]
       },
       transparency: {
-        title: "Transparansi kebijakan jurnal",
-        rationale: "Pembaca, penulis, reviewer, dan calon mitra harus dapat memeriksa standar jurnal tanpa meminta penjelasan tambahan.",
+        title: "Journal Policy Transparency",
+        rationale: "Authors, reviewers, readers, and partners must be able to verify journal standards directly on the website without needing additional inquiry.",
         activities: [
-          "Audit seluruh halaman kebijakan jurnal dari perspektif penulis, reviewer, pembaca, dan editor.",
-          "Perbarui informasi ruang lingkup, biaya, lisensi, arsip, keluhan, konflik kepentingan, dan koreksi artikel.",
-          "Buat halaman kebijakan yang ringkas, saling terhubung, dan mudah ditemukan dari menu utama."
+          "Conduct a thorough audit of all policy pages from the perspective of authors, reviewers, readers, and indexing harvesters.",
+          "Update policies on aims and scope, publication fees/waivers, licensing, digital archiving, complaints, conflicts of interest, and errata.",
+          "Structure policy pages cleanly, interconnected, and accessible within two clicks from the main navigation."
         ],
-        costs: ["penyuntingan kebijakan", "penerjemahan profesional bila diperlukan", "review kepatuhan etika publikasi", "perbaikan halaman website"],
-        partners: ["pakar etika publikasi", "editor bahasa", "pengelola platform jurnal"],
-        metrics: ["semua kebijakan utama tampil di website", "panduan penulis dan reviewer diperbarui", "waktu klarifikasi penulis berkurang", "audit kebijakan dilakukan dua kali setahun"]
+        costs: ["editorial policy review", "professional academic English proofreading", "COPE ethical compliance audit", "website layout optimization"],
+        partners: ["publication ethics advisors", "academic language editors", "journal platform administrators"],
+        metrics: ["all core policies clearly published on website", "author and reviewer guidelines fully updated", "author clarification inquiries reduced", "semi-annual policy compliance reviews"]
       },
       peerReview: {
-        title: "Mutu peer review",
-        rationale: "Artikel yang kuat lahir dari proses review yang selektif, relevan bidang, bebas konflik, dan menghasilkan komentar substantif.",
+        title: "Peer Review Quality",
+        rationale: "Strong publications originate from rigorous, subject-specific, conflict-free review that delivers substantive, constructive critique.",
         activities: [
-          "Bangun database reviewer dengan bidang, metode, afiliasi, rekam jejak, dan performa review.",
-          "Gunakan formulir review yang menilai kontribusi, metode, etika, argumentasi, kebaruan, dan keterbacaan.",
-          "Evaluasi mutu komentar reviewer dan buat daftar reviewer prioritas untuk topik strategis."
+          "Build an active reviewer database cataloging expertise keywords, affiliations, publication track records, and review performance.",
+          "Standardize review scorecards evaluating novelty, methodology, ethical compliance, argumentation, and clarity.",
+          "Appraise the substantive quality of reviewer reports and maintain a priority roster of high-performing reviewers."
         ],
-        costs: ["honor reviewer prioritas", "pelatihan reviewer", "kurasi database reviewer", "administrasi undangan dan pengingat review"],
-        partners: ["asosiasi akademik", "program studi/pusat riset", "jejaring editor internasional"],
-        metrics: ["database reviewer aktif bertambah", "minimal dua reviewer relevan per artikel riset", "median durasi review turun", "skor mutu komentar reviewer meningkat"]
+        costs: ["priority reviewer honoraria", "reviewer training workshops", "database curation", "invitation and reminder administration"],
+        partners: ["scholarly societies", "research institutes and graduate faculties", "international editorial networks"],
+        metrics: ["active reviewer roster expanded", "minimum two independent qualified reviewers per research article", "median review duration decreased", "reviewer substantive quality rating improved"]
       },
       articleQuality: {
-        title: "Mutu artikel",
-        rationale: "Kenaikan reputasi tidak cukup melalui promosi; artikel harus memiliki kontribusi, metode, argumen, dan relevansi yang layak dirujuk.",
+        title: "Article Substance & Quality",
+        rationale: "Reputation cannot be earned solely through outreach; published articles must demonstrate rigorous methodology, conceptual contribution, and global relevance.",
         activities: [
-          "Terapkan desk review ketat untuk kontribusi, metode, struktur, relevansi literatur, dan kejelasan temuan.",
-          "Buat klinik artikel untuk naskah potensial sebelum diterima final.",
-          "Rancang tema terbitan yang memiliki pertanyaan riset kuat dan pembaca internasional yang jelas."
+          "Enforce stringent desk reviews evaluating theoretical contribution, methodology, literature positioning, and empirical clarity.",
+          "Host manuscript development workshops or clinics for promising submissions prior to final acceptance.",
+          "Curate thematic issues with sharp research questions that resonate with international scholarship."
         ],
-        costs: ["honor editor substansi", "klinik penulisan artikel", "penyuntingan bahasa akademik", "review statistik atau metodologi"],
-        partners: ["peneliti bereputasi", "editor bahasa akademik", "ahli metodologi", "komunitas riset bidang"],
-        metrics: ["tingkat penolakan desk review lebih selektif", "proporsi artikel dengan kontribusi eksplisit naik", "artikel prioritas memiliki abstrak dan judul yang diperbaiki", "sitasi artikel terpilih mulai tumbuh"]
+        costs: ["substantive editor honoraria", "author writing clinics", "academic language editing", "methodological/statistical review"],
+        partners: ["reputable international scholars", "academic language specialists", "methodologists and biostatisticians", "disciplinary research communities"],
+        metrics: ["more selective desk-rejection rate", "higher proportion of papers stating clear conceptual contribution", "priority articles receive enhanced titles and abstracts", "initial citation growth observed"]
       },
       ethics: {
-        title: "Etika publikasi",
-        rationale: "Kepercayaan internasional menuntut pencegahan plagiarisme, manipulasi sitasi, konflik kepentingan, dan keputusan editorial yang tidak transparan.",
+        title: "Publication Ethics & Integrity",
+        rationale: "International trust demands proactive prevention of plagiarism, citation manipulation, authorship disputes, and undeclared conflicts of interest.",
         activities: [
-          "Terapkan pemeriksaan kesamaan, konflik kepentingan, authorship, data, pendanaan, dan izin etik sebelum keputusan.",
-          "Buat prosedur koreksi, pencabutan, keluhan, dan banding yang dapat dijalankan.",
-          "Latih editor untuk mengenali paper mill, peer review palsu, manipulasi sitasi, dan data bermasalah."
+          "Systematically screen for text similarity, authorship legitimacy, ethics clearance, data availability, and funding before decision.",
+          "Establish enforceable protocols for corrections, retractions, expressions of concern, and appeals in accordance with COPE.",
+          "Train editorial staff to detect paper mills, fake peer reviews, citation stacking, and manipulated datasets."
         ],
-        costs: ["alat pemeriksaan kesamaan", "pelatihan etika publikasi", "konsultasi kasus etik", "administrasi investigasi naskah"],
-        partners: ["komite etik institusi", "pakar integritas akademik", "pengelola jurnal berpengalaman"],
-        metrics: ["100% naskah diperiksa sebelum review atau penerimaan", "log kasus etik tersedia", "kebijakan koreksi dan pencabutan tampil jelas", "tidak ada keluhan tanpa tindak lanjut"]
+        costs: ["similarity check software licenses", "publication ethics training", "ethics consultation services", "investigation administration"],
+        partners: ["institutional ethics committees", "academic integrity experts", "experienced journal managing editors"],
+        metrics: ["100% of manuscripts screened prior to review/acceptance", "ethics case log systematically maintained", "retraction/correction guidelines published", "zero unresolved ethics complaints"]
       },
       websiteMetadata: {
-        title: "Website dan metadata",
-        rationale: "Website dan metadata menentukan apakah artikel dapat ditemukan, dibaca, dirayapi, dikutip, dan dipercaya oleh pembaca internasional.",
+        title: "Website Usability & Technical Metadata",
+        rationale: "Websites and machine-readable metadata must enable articles to be discovered, read, cited, and harvested seamlessly by indexers.",
         activities: [
-          "Audit struktur website, navigasi, halaman artikel, arsip, informasi editorial, dan panduan penulis.",
-          "Lengkapi metadata artikel: DOI, ORCID, afiliasi, abstrak, kata kunci, referensi, lisensi, dan funding.",
-          "Perbaiki konsistensi template artikel, landing page artikel, file PDF, dan tampilan mobile."
+          "Ensure streamlined navigation to scope, editorial board, archives, author guidelines, contact, and indexing statements.",
+          "Embed complete bibliographic metadata: title, abstract, keywords, author affiliations, ORCID, DOI, references, license, and funding.",
+          "Optimize landing pages for mobile responsiveness, fast load speeds, PDF viewer integration, and active DOI outbound links."
         ],
-        costs: ["pengembang website", "editor metadata", "pembaruan template artikel", "validasi DOI dan referensi"],
-        partners: ["pengelola platform jurnal", "pustakawan metadata", "penyedia DOI", "tim teknologi informasi"],
-        metrics: ["metadata lengkap untuk seluruh artikel baru", "error tautan dan metadata menurun", "halaman artikel ramah mobile", "arsip dan kebijakan mudah ditemukan dalam dua klik"]
+        costs: ["web development and OJS theme upgrades", "OAI-PMH & Crossref deposit auditing", "metadata enrichment", "SSL and hosting maintenance"],
+        partners: ["journal platform developers", "academic librarians", "Crossref / PKP support communities"],
+        metrics: ["100% of articles display complete metadata and ORCID", "OAI-PMH validator score > 85", "mobile rendering passes Core Web Vitals", "zero broken outbound reference links"]
       },
       visibilityCitation: {
-        title: "Visibilitas dan sitasi",
-        rationale: "Sitasi yang sehat lahir dari artikel yang relevan, mudah ditemukan, aktif didiseminasikan, dan masuk dalam percakapan akademik bidangnya.",
+        title: "Visibility, Citations & Scholarly Dissemination",
+        rationale: "High-quality scholarship must be proactively connected to the global communities of researchers most likely to read, debate, and cite it.",
         activities: [
-          "Pilih artikel unggulan berdasarkan topik, kualitas, dan potensi rujukan, lalu buat rencana diseminasi.",
-          "Bangun kanal diseminasi akademik melalui penulis, asosiasi, repositori, seminar, dan komunitas riset.",
-          "Pantau unduhan, asal pembaca, kata kunci, tautan masuk, dan sitasi untuk menentukan tema berikutnya."
+          "Curate a portfolio of standout articles promoted through thematic dissemination campaigns.",
+          "Distribute publications through preprint servers, institutional repositories, professional societies, and author scholarly networks.",
+          "Track usage metrics, downloads, geographic readership, citation inflows, and referring domains to inform future editorial strategy."
         ],
-        costs: ["produksi materi diseminasi akademik", "pengelolaan kanal komunikasi", "registrasi seminar atau forum bidang", "analitik website"],
-        partners: ["asosiasi bidang", "komunitas peneliti", "perpustakaan", "pusat kajian", "penulis artikel unggulan"],
-        metrics: ["daftar artikel unggulan tersedia", "kampanye diseminasi berjalan per terbitan", "kunjungan artikel prioritas naik", "sitasi artikel prioritas dipantau setiap triwulan"]
+        costs: ["academic social media outreach", "graphical/plain-language abstract production", "citation analytics tooling", "author promotional kits"],
+        partners: ["disciplinary research networks", "university public relations offices", "academic repository managers"],
+        metrics: ["regular readership growth across international IP ranges", "standout articles cited within 12-18 months", "altmetric and repository engagement increased", "quarterly citation monitoring reports"]
       },
       internationalNetwork: {
-        title: "Jejaring internasional",
-        rationale: "Jurnal perlu keterlibatan nyata editor, reviewer, penulis, dan komunitas akademik lintas negara agar tidak hanya bersifat lokal.",
+        title: "International Scholarly Network",
+        rationale: "True international standing requires active participation from cross-border editors, reviewers, authors, and collaborative research initiatives.",
         activities: [
-          "Petakan calon editor, reviewer, guest editor, dan penulis dari jejaring konferensi atau asosiasi bidang.",
-          "Bangun kerja sama special issue atau call for papers dengan tema lintas negara.",
-          "Libatkan mitra internasional dalam review tematik, editorial note, webinar ilmiah, atau klinik artikel."
+          "Engage international editorial board members in active tasks: guest editing, manuscript scouting, review, and strategic advice.",
+          "Build formal partnerships with international conferences, research clusters, and regional scholarly associations.",
+          "Launch international call-for-papers on cross-country comparative issues and transboundary research problems."
         ],
-        costs: ["honor guest editor", "webinar internasional", "korespondensi dan administrasi mitra", "penyuntingan bahasa untuk naskah undangan"],
-        partners: ["asosiasi internasional bidang", "pusat riset luar negeri", "editor jurnal mitra", "jejaring alumni doktoral"],
-        metrics: ["mitra aktif tercatat dengan kontribusi nyata", "reviewer internasional aktif bertambah", "call for papers tematik diluncurkan", "artikel lintas negara meningkat"]
+        costs: ["international editorial honoraria", "conference session sponsorship", "partnership communications", "special issue coordination"],
+        partners: ["international academic associations", "cross-national research consortia", "overseas university departments"],
+        metrics: ["active international editorial board contributions", "proportion of international submissions and authors increased", "special issues organized with overseas co-editors", "cross-national readership expansion"]
       },
       sustainability: {
-        title: "Keberlanjutan operasional",
-        rationale: "Roadmap hanya berjalan jika ada anggaran, jadwal, pembagian kerja, dan regenerasi tim yang realistis.",
+        title: "Operational & Resource Sustainability",
+        rationale: "A journal roadmap must be executable with realistic human resources, sustainable funding, and resilient succession planning.",
         activities: [
-          "Susun kalender kerja 12 bulan untuk penerimaan, review, produksi, diseminasi, dan evaluasi.",
-          "Tetapkan anggaran minimum per fungsi: editorial, reviewer, website, metadata, bahasa, dan promosi akademik.",
-          "Bangun cadangan peran untuk editor teknis, copyeditor, layout, dan pengelola komunikasi."
+          "Establish a stable 12-month publication schedule, operating budget, technical staffing, and editorial deputy roles.",
+          "Standardize production workflows so continuity does not hinge entirely on a single person.",
+          "Schedule regular professional training for editors, reviewers, copyeditors, and layout/metadata specialists."
         ],
-        costs: ["honor tim operasional", "pelatihan pengelola", "langganan layanan teknis", "anggaran evaluasi triwulan"],
-        partners: ["fakultas atau lembaga penerbit", "perpustakaan", "unit teknologi informasi", "asosiasi pengelola jurnal"],
-        metrics: ["kalender kerja disahkan", "anggaran 12 bulan tersedia", "ketergantungan pada satu orang turun", "evaluasi triwulan menghasilkan tindak lanjut"]
+        costs: ["operational support budget", "staff professional development", "copyediting and proofreading services", "technical infrastructure"],
+        partners: ["university publication centers / LPPM", "faculty deans and department chairs", "scholarly publishing associations"],
+        metrics: ["12-month operating budget secured", "zero issue publication delays", "backup editors designated for all key roles", "at least two team training sessions conducted yearly"]
       },
       soshumContribution: {
-        title: "Kontribusi teoretik dan konseptual",
-        rationale: "Artikel SosHum perlu menunjukkan argumen, konsep, dan posisi keilmuan yang melampaui laporan kasus atau deskripsi lokal.",
+        title: "HSS Conceptual & Theoretical Contribution",
+        rationale: "Humanities and social science manuscripts must transcend purely local descriptions to engage wider conceptual debates and theoretical discourses.",
         activities: [
-          "Tambahkan kriteria desk review untuk posisi teori, kebaruan argumen, dan kontribusi konseptual.",
-          "Adakan klinik abstrak dan pendahuluan agar penulis menyatakan kontribusi secara eksplisit.",
-          "Rancang tema terbitan yang menghubungkan kasus lokal dengan perdebatan regional atau global."
+          "Introduce desk-review criteria evaluating conceptual positioning, theoretical debate, and generalizable analytical insights.",
+          "Conduct abstract and introduction writing clinics ensuring authors articulate their conceptual contribution explicitly.",
+          "Curate thematic issues linking regional case studies to broader comparative and global phenomena."
         ],
-        costs: ["honor editor substansi SosHum", "klinik penulisan argumen", "penyuntingan bahasa akademik", "kurasi tema terbitan"],
-        partners: ["asosiasi keilmuan SosHum", "pakar teori bidang", "pusat kajian", "peneliti lintas negara"],
-        metrics: ["abstrak artikel menyatakan kontribusi", "naskah deskriptif murni berkurang", "tema terbitan memiliki pertanyaan konseptual", "artikel mulai dirujuk oleh kajian sejenis"]
+        costs: ["HSS substantive editor honoraria", "argumentation writing clinics", "academic language editing", "thematic issue curation"],
+        partners: ["HSS disciplinary associations", "theoretical scholars and thought leaders", "regional studies centers", "cross-national research networks"],
+        metrics: ["all published abstracts explicitly state conceptual contribution", "purely descriptive submissions desk-rejected early", "thematic issues feature comparative frameworks", "articles cited by related international scholarship"]
       },
       soshumLiterature: {
-        title: "Mutu literatur dan posisi argumen",
-        rationale: "Artikel SosHum lebih mudah masuk percakapan internasional jika literatur, konsep, dan implikasi disusun dengan posisi yang jelas.",
+        title: "HSS Literature Positioning & Coherence",
+        rationale: "HSS scholarship connects with global audiences when contextual literature, foundational debates, and analytical implications are lucidly framed.",
         activities: [
-          "Buat checklist literatur inti: klasik, mutakhir, regional, dan global sesuai bidang.",
-          "Perkuat penilaian koherensi argumen, metode kualitatif/interpretatif, dan implikasi kajian.",
-          "Tingkatkan kualitas judul, abstrak, dan kata kunci agar mudah ditemukan oleh pembaca lintas negara."
+          "Develop a core literature checklist covering seminal classics, state-of-the-art debates, and regional perspectives.",
+          "Strengthen editorial evaluation of argument coherence, qualitative/interpretive methodology, and policy or societal implications.",
+          "Enhance title, abstract, and keyword clarity to optimize discoverability across international indexing databases."
         ],
-        costs: ["akses basis literatur", "workshop literature positioning", "review metode SosHum", "penyuntingan judul dan abstrak"],
-        partners: ["pustakawan riset", "pakar metodologi SosHum", "editor bahasa", "komunitas penulis bidang"],
-        metrics: ["referensi inti lebih relevan", "kata kunci artikel lebih presisi", "reviewer menilai posisi argumen", "artikel unggulan memiliki materi diseminasi akademik"]
+        costs: ["bibliographic database access", "literature positioning workshops", "qualitative methodology review", "title/abstract refinement"],
+        partners: ["subject research librarians", "HSS research methodologists", "academic English editors", "scholarly writing communities"],
+        metrics: ["reference lists reflect authoritative and contemporary international debates", "keywords adhere to recognized disciplinary thesauri", "reviewers evaluate argument coherence explicitly", "flagship papers accompanied by academic dissemination briefs"]
       },
       soshumNetwork: {
-        title: "Jejaring SosHum dan forum kebijakan",
-        rationale: "Sebagian artikel SosHum memperoleh dampak melalui asosiasi keilmuan, forum kebijakan, diskusi publik akademik, dan kajian lintas konteks.",
+        title: "HSS Academic Networks & Policy Discourse",
+        rationale: "HSS scholarship achieves scholarly and societal impact when connected to academic societies, policy forums, and cross-contextual exchanges.",
         activities: [
-          "Bangun daftar asosiasi, pusat kajian, forum kebijakan, dan konferensi yang sesuai dengan scope jurnal.",
-          "Selenggarakan diskusi artikel tematik bersama penulis, reviewer, dan komunitas pengguna ilmu.",
-          "Kembangkan undangan naskah tematik yang membandingkan konteks Indonesia dengan negara atau kawasan lain."
+          "Map academic associations, think tanks, policy centers, and conferences aligned with the journal's focus.",
+          "Host thematic webinars and scholarly discussions uniting authors, reviewers, and knowledge users.",
+          "Commission comparative manuscripts juxtaposing Indonesian/Southeast Asian contexts with other global regions."
         ],
-        costs: ["webinar tematik", "honor narasumber", "komunikasi mitra", "produksi ringkasan akademik atau policy brief"],
-        partners: ["asosiasi profesi", "pusat studi", "lembaga kebijakan", "komunitas akademik regional"],
-        metrics: ["minimal dua forum tematik per tahun", "mitra SosHum aktif bertambah", "artikel tematik memperoleh pembaca baru", "naskah lintas konteks meningkat"]
+        costs: ["thematic webinars", "invited speaker honoraria", "partner outreach", "policy brief and executive summary production"],
+        partners: ["professional associations", "public policy institutes", "regional academic consortia", "international study centers"],
+        metrics: ["minimum two thematic scholarly events annually", "expanded network of active institutional partners", "growing readership among international area specialists", "increased comparative cross-context submissions"]
       },
       saintekMethod: {
-        title: "Ketepatan metode dan validitas data",
-        rationale: "Artikel SainTek perlu dapat diperiksa ulang dari sisi rancangan metode, data, instrumen, analisis, dan batasan hasil.",
+        title: "STEM Methodological Rigor & Data Validity",
+        rationale: "STEM articles must provide sufficient methodological, empirical, instrumental, and analytical detail to permit rigorous verification and replication.",
         activities: [
-          "Tambahkan checklist metode sesuai jenis studi: eksperimental, komputasional, klinis, lingkungan, pangan, rekayasa, atau survei teknis.",
-          "Libatkan reviewer metodologi atau statistik untuk naskah berisiko tinggi.",
-          "Bangun standar pelaporan alat, bahan, parameter, dataset, prosedur, dan analisis."
+          "Deploy study-specific reporting checklists (e.g. experimental, computational, clinical, environmental, materials, technical surveys).",
+          "Involve specialized methodology and statistical reviewers for complex or high-risk empirical manuscripts.",
+          "Standardize detailed reporting protocols for apparatus, materials, datasets, parameters, algorithms, and analytical pipelines."
         ],
-        costs: ["honor reviewer metodologi/statistik", "pelatihan standar pelaporan", "penyuntingan tabel dan gambar ilmiah", "validasi data pendukung"],
-        partners: ["laboratorium/pusat riset", "ahli statistik", "metodolog bidang", "komunitas data atau komputasi"],
-        metrics: ["checklist metode dipakai pada artikel baru", "catatan reviewer teknis meningkat", "koreksi metode sebelum terbit berkurang", "artikel memiliki batasan studi yang jelas"]
+        costs: ["statistical/methodological reviewer honoraria", "reporting guideline training", "scientific graphics editing", "supporting dataset validation"],
+        partners: ["research laboratories & centers of excellence", "applied statisticians", "methodology experts", "computational science communities"],
+        metrics: ["reporting checklists routinely applied to new submissions", "detailed technical review comments documented", "pre-publication corrigenda minimized", "study limitations explicitly discussed in all accepted papers"]
       },
       saintekRepro: {
-        title: "Reproducibility dan ketersediaan data",
-        rationale: "Keterbukaan data, kode, protokol, atau material pendukung meningkatkan kepercayaan dan peluang artikel digunakan kembali.",
+        title: "STEM Reproducibility & Open Data Availability",
+        rationale: "Transparent availability of research data, computational code, protocols, and materials builds scholarly credibility and maximizes citation potential.",
         activities: [
-          "Tetapkan kebijakan data availability sesuai risiko dan karakter bidang.",
-          "Sediakan panduan repository, lampiran teknis, kode, protokol, atau material pendukung.",
-          "Latih editor untuk memeriksa konsistensi data, tabel, gambar, metode, dan pernyataan ketersediaan data."
+          "Formulate explicit Data Availability Statement (DAS) policies appropriate to disciplinary norms and confidentiality constraints.",
+          "Provide guidelines for depositing data, scripts, and supplementary materials in trusted public repositories (Zenodo, Dryad, Figshare, GitHub).",
+          "Train editorial staff to verify consistency between text, tables, figures, code, and supplementary repository links."
         ],
-        costs: ["kurasi data pendukung", "pelatihan repository", "validasi tabel dan gambar", "penyuntingan pernyataan data availability"],
-        partners: ["pustakawan data", "repository institusi", "laboratorium", "komunitas open science"],
-        metrics: ["artikel baru memiliki pernyataan data availability", "lampiran teknis lebih lengkap", "tautan data/kode valid", "permintaan koreksi data menurun"]
+        costs: ["data curation assistance", "repository workflow training", "tabular/graphical data auditing", "data availability policy development"],
+        partners: ["research data librarians", "institutional repositories", "open science communities", "data archiving organizations"],
+        metrics: ["100% of newly published empirical papers include clear DAS", "supplementary files and code hosted on persistent repositories", "data repository DOI links verified prior to publication", "reproducibility issues identified and resolved prior to acceptance"]
       },
       saintekMetadata: {
-        title: "Metadata teknis dan artikel strategis",
-        rationale: "Bidang SainTek sangat bergantung pada metadata presisi, referensi bersih, identitas penulis, dan artikel strategis seperti review, methods, atau data paper.",
+        title: "STEM Technical Metadata & High-Impact Formats",
+        rationale: "Disciplined metadata tagging and strategic article types (e.g. systematic reviews, data descriptors, method papers) accelerate citation velocity.",
         activities: [
-          "Validasi DOI, ORCID, afiliasi, funding, lisensi, referensi, dan metadata gambar/tabel pada setiap artikel.",
-          "Rancang artikel review, methods paper, atau data paper pada tema yang sedang tumbuh.",
-          "Perbaiki tampilan artikel agar abstrak, grafis, data pendukung, dan referensi cepat dipahami pembaca."
+          "Mandate persistent identifiers: DOIs, ORCIDs for all authors, and ROR identifiers for institutional affiliations.",
+          "Curate high-impact contribution types: commissioned reviews, novel methodology papers, and benchmark dataset descriptors.",
+          "Display structured abstracts, graphical abstracts, tabular datasets, and key findings prominently on web interfaces."
         ],
-        costs: ["editor metadata", "validasi referensi", "produksi graphical abstract bila relevan", "kurasi artikel review atau methods"],
-        partners: ["pustakawan metadata", "penyedia DOI", "pusat riset bidang", "editor tamu teknis"],
-        metrics: ["metadata artikel baru lengkap", "referensi tanpa error mayor", "artikel review/methods terbit sesuai rencana", "kunjungan dan unduhan artikel strategis meningkat"]
+        costs: ["graphical abstract design support", "XML and metadata enrichment", "review paper commissioning honoraria", "metadata index auditing"],
+        partners: ["scientific illustrators", "Crossref & metadata specialists", "senior citation-impact researchers", "indexing databases"],
+        metrics: ["all published authors linked to authenticated ORCIDs", "at least two high-impact review or methods papers published annually", "graphical abstracts featured on journal portal", "citation velocity of technical and review papers measured quarterly"]
       }
     };
 
@@ -1272,185 +1272,160 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       common: [
         {
           id: "governance",
-          title: "Tata kelola dan keputusan editorial",
-          description: "Nilai kesiapan struktur kerja editorial, pembagian peran, dan konsistensi keputusan.",
+          title: "Editorial Governance & Decision-Making",
+          description: "Assess the clarity of editorial structure, task delegation, and decision consistency.",
           questions: [
-            ["g1", "governance", "Dewan editor memiliki peran terdokumentasi, pembagian tugas, dan komitmen waktu yang jelas.", "Bukti dapat berupa SK, matriks peran, agenda kerja, atau catatan rapat."],
-            ["g2", "governance", "Kebijakan editor, mitra bestari, dan penulis tersedia jelas serta diterapkan pada setiap naskah.", "Nilai tinggi jika kebijakan benar-benar dipakai dalam alur editorial."],
-            ["g3", "governance", "Proses keputusan editorial memiliki catatan alasan, batas waktu, dan tanggung jawab final.", "Catatan keputusan membantu konsistensi dan akuntabilitas."]
+            ["g1", "governance", "Editorial board members have documented roles, clear task distributions, and verified time commitments.", "High score if editors have active portfolios, not merely names listed on the website."],
+            ["g2", "governance", "Explicit policies for editors, reviewers, and authors are documented and consistently enforced across all submissions.", "Examine whether author guidelines, reviewer criteria, and editorial workflow are actively practiced."],
+            ["g3", "governance", "Editorial decisions maintain documented rationales, defined turnaround benchmarks, and unambiguous final authority.", "Every acceptance, revision, or rejection should be backed by substantive editorial records."]
           ]
         },
         {
           id: "transparency",
-          title: "Transparansi kebijakan",
-          description: "Nilai keterbukaan informasi yang dibutuhkan penulis, reviewer, pembaca, dan calon mitra.",
+          title: "Journal Policy Transparency",
+          description: "Assess the accessibility of essential information needed by authors, reviewers, readers, and indexers.",
           questions: [
-            ["t1", "transparency", "Informasi ruang lingkup, biaya, lisensi, arsip, kontak, dan kepemilikan jurnal mudah ditemukan.", "Pembaca seharusnya tidak perlu menebak aturan dasar jurnal."],
-            ["t2", "transparency", "Panduan penulis mencantumkan struktur artikel, standar sitasi, persyaratan etika, dan proses editorial.", "Panduan yang baik mengurangi revisi administratif berulang."],
-            ["t3", "transparency", "Kebijakan koreksi, pencabutan, konflik kepentingan, keluhan, dan banding tersedia serta dapat dijalankan.", "Nilai tinggi jika ada alur kerja dan penanggung jawab."]
+            ["t1", "transparency", "Aims & scope, publication fees/waivers, licensing, copyright, archiving, and editorial contacts are prominently displayed.", "Core publishing terms should be immediately discoverable from the homepage."],
+            ["t2", "transparency", "Author guidelines clearly articulate manuscript structure, citation standards, ethics requirements, and review processes.", "Clear instructions reduce author errors and unnecessary back-and-forth inquiries."],
+            ["t3", "transparency", "Formal policies for corrections, retractions, conflicts of interest, complaints, and appeals are in place and actionable.", "Policies must be practical and ready to handle real ethical disputes."]
           ]
         },
         {
           id: "peer-review",
-          title: "Mutu peer review",
-          description: "Nilai apakah review membantu memilih dan memperbaiki artikel secara substantif.",
+          title: "Peer Review Rigor",
+          description: "Assess whether the review process genuinely selects and improves manuscript substance.",
           questions: [
-            ["p1", "peerReview", "Pemilihan reviewer sesuai bidang naskah, bebas konflik, dan didukung database reviewer aktif.", "Database yang baik memuat keahlian, afiliasi, performa, dan riwayat review."],
-            ["p2", "peerReview", "Durasi review dipantau dan ada tindak lanjut untuk reviewer yang lambat atau tidak relevan.", "Waktu review yang terukur membantu menjaga jadwal terbit."],
-            ["p3", "peerReview", "Mutu komentar reviewer dievaluasi oleh editor sebelum menjadi dasar keputusan.", "Komentar harus membahas kontribusi, metode, argumen, dan perbaikan substansi."]
+            ["p1", "peerReview", "Reviewers are selected based on subject expertise, without conflicts of interest, supported by an active reviewer database.", "A robust database tracks expertise keywords, affiliations, timeliness, and review history."],
+            ["p2", "peerReview", "Review turnaround times are tracked with clear follow-up procedures for tardy or unresponsive reviewers.", "Disciplined turnaround monitoring ensures consistent publication schedules."],
+            ["p3", "peerReview", "The substantive depth of reviewer comments is evaluated by editors before reaching a formal decision.", "Reviews must scrutinize contribution, methodology, argumentation, and necessary revisions."]
           ]
         },
         {
           id: "article-quality",
-          title: "Mutu artikel",
-          description: "Nilai kemampuan jurnal menaikkan kualitas substansi artikel sebelum diterbitkan.",
+          title: "Article Substance & Quality",
+          description: "Assess the journal's capacity to elevate the academic substance of manuscripts prior to publication.",
           questions: [
-            ["a1", "articleQuality", "Desk review menilai kontribusi baru, metode, argumentasi, relevansi literatur, dan kesesuaian scope.", "Seleksi awal yang kuat menaikkan mutu artikel yang masuk review."],
-            ["a2", "articleQuality", "Editor memberi arahan perbaikan substansi untuk naskah potensial sebelum keputusan akhir.", "Nilai tinggi jika ada catatan editorial, bukan hanya koreksi format."],
-            ["a3", "articleQuality", "Terbitan memiliki tema, target pembaca, dan komposisi artikel yang jelas.", "Terbitan yang terarah lebih mudah dipromosikan dan dirujuk."]
+            ["a1", "articleQuality", "Desk reviews rigorously evaluate novelty, methodology, argumentation, literature relevance, and scope fit.", "Strong initial screening filters low-quality submissions before entering full peer review."],
+            ["a2", "articleQuality", "Editors provide substantive revision guidance to promising manuscripts before issuing final decisions.", "Score high if editors contribute intellectual feedback, beyond formatting checks."],
+            ["a3", "articleQuality", "Published issues demonstrate coherent themes, clearly identified target readerships, and balanced composition.", "Targeted, coherent issues are more easily promoted and cited globally."]
           ]
         },
         {
           id: "ethics",
-          title: "Etika publikasi dan integritas naskah",
-          description: "Nilai kemampuan jurnal mencegah masalah integritas sebelum artikel diterbitkan.",
+          title: "Publication Ethics & Manuscript Integrity",
+          description: "Assess the journal's measures to prevent integrity breaches prior to publication.",
           questions: [
-            ["e1", "ethics", "Pemeriksaan kesamaan, plagiarisme, konflik kepentingan, dan authorship berjalan sebelum keputusan.", "Nilai tinggi jika pemeriksaan tercatat, bukan hanya dilakukan sewaktu-waktu."],
-            ["e2", "ethics", "Kebijakan data, koreksi, pencabutan, dan keluhan diterapkan secara konsisten.", "Kebijakan perlu bisa dijalankan pada kasus nyata."],
-            ["e3", "ethics", "Editor mampu mengenali risiko paper mill, reviewer palsu, manipulasi sitasi, dan data bermasalah.", "Kemampuan deteksi risiko harus menjadi bagian dari kompetensi editor."]
+            ["e1", "ethics", "Systematic screening for text similarity, plagiarism, authorship disputes, and conflicts of interest occurs before decisions.", "Score high if screening records are logged systematically for all submissions."],
+            ["e2", "ethics", "Policies governing research data, ethics approvals, errata, and retractions are consistently enforced.", "Ethical policies must be actively applied to real editorial cases."],
+            ["e3", "ethics", "Editors are trained to recognize risks of paper mills, fake reviewers, citation manipulation, and problematic datasets.", "Risk detection capability must be part of core editorial competency."]
           ]
         },
         {
           id: "website",
-          title: "Website dan metadata",
-          description: "Nilai kesiapan website dan metadata untuk ditemukan, dibaca, dan dipercaya.",
+          title: "Website Usability & Technical Metadata",
+          description: "Assess whether the website and metadata are fully optimized to be discovered, read, cited, and harvested.",
           questions: [
-            ["w1", "websiteMetadata", "Website mudah dinavigasi pada halaman fokus jurnal, dewan editor, arsip, panduan, dan kontak.", "Informasi inti sebaiknya dapat ditemukan dalam dua klik."],
-            ["w2", "websiteMetadata", "Metadata artikel lengkap: judul, abstrak, kata kunci, afiliasi, DOI, referensi, lisensi, dan funding bila ada.", "Metadata lengkap membuat artikel lebih mudah ditemukan dan dikutip."],
-            ["w3", "websiteMetadata", "Halaman artikel mendukung keterbacaan, akses arsip, tautan aktif, dan tampilan mobile.", "Periksa halaman artikel sebagai pembaca, bukan hanya sebagai admin."]
+            ["w1", "websiteMetadata", "The website is easy to navigate across scope, editorial board, archives, guidelines, and contact pages.", "Core journal information should be reachable within two clicks."],
+            ["w2", "websiteMetadata", "Article metadata is complete: title, abstract, keywords, author affiliations, ORCID, DOI, references, license, and funding.", "Complete machine-readable metadata drives discovery and citation tracking."],
+            ["w3", "websiteMetadata", "Article landing pages support clean reading, PDF access, active reference links, and responsive mobile rendering.", "Inspect article pages from the reader's perspective across multiple devices."]
           ]
         },
         {
           id: "visibility",
-          title: "Visibilitas, sitasi, dan diseminasi",
-          description: "Nilai apakah jurnal punya cara aktif agar artikel bermutu masuk percakapan akademik.",
+          title: "Visibility, Citations & Scholarly Dissemination",
+          description: "Assess whether the journal actively connects quality articles with the broader scholarly conversation.",
           questions: [
-            ["v1", "visibilityCitation", "Jurnal memiliki daftar artikel unggulan yang dipromosikan berdasarkan tema dan potensi sitasi.", "Tidak semua artikel dipromosikan dengan cara yang sama."],
-            ["v2", "visibilityCitation", "Strategi diseminasi dilakukan melalui kanal akademik, repositori, asosiasi, penulis, dan komunitas riset.", "Promosi akademik berfokus pada pembaca yang mungkin memakai artikel."],
-            ["v3", "visibilityCitation", "Data sitasi, unduhan, asal pembaca, kata kunci, dan tautan masuk dipantau untuk keputusan editorial.", "Data membantu menentukan tema, kanal, dan artikel prioritas berikutnya."]
+            ["v1", "visibilityCitation", "The journal maintains a priority list of standout articles actively promoted based on theme and citation potential.", "Not all papers should be promoted uniformly; prioritize impactful research."],
+            ["v2", "visibilityCitation", "Dissemination strategies utilize academic channels, repositories, scholarly associations, authors, and research networks.", "Target promotion directly to researchers who actively publish in the field."],
+            ["v3", "visibilityCitation", "Citation metrics, download counts, reader geography, search keywords, and referring links are tracked for editorial decisions.", "Analytics data guide future call-for-papers and strategic focus areas."]
           ]
         },
         {
           id: "network",
-          title: "Jejaring internasional",
-          description: "Nilai keterlibatan nyata mitra lintas negara dalam editorial, review, penulisan, dan diseminasi.",
+          title: "International Scholarly Network",
+          description: "Assess genuine cross-border engagement among editors, reviewers, authors, and collaborating organizations.",
           questions: [
-            ["n1", "internationalNetwork", "Editor, reviewer, atau author internasional aktif berkontribusi, bukan hanya tercantum di website.", "Kontribusi dapat berupa review, editorial, guest editing, atau diseminasi."],
-            ["n2", "internationalNetwork", "Jurnal membangun kolaborasi dengan asosiasi, konferensi, laboratorium, pusat kajian, atau jejaring akademik.", "Kolaborasi sebaiknya terkait tema artikel dan pembaca sasaran."],
-            ["n3", "internationalNetwork", "Special issue atau call for papers dibangun dari isu lintas negara atau lintas institusi.", "Tema lintas konteks membantu memperluas pembaca dan penulis."]
+            ["n1", "internationalNetwork", "International editors, reviewers, or authors actively contribute to editorial workflows, not merely listed on the site.", "Contributions include handling manuscripts, reviewing, guest editing, or active promotion."],
+            ["n2", "internationalNetwork", "The journal builds structured collaborations with academic associations, conferences, laboratories, or research centers.", "Collaborations should align directly with journal scope and target readership."],
+            ["n3", "internationalNetwork", "Special issues or thematic calls address transboundary, comparative, or multi-institutional issues.", "Cross-context themes broaden international readership and author engagement."]
           ]
         },
         {
           id: "sustainability",
-          title: "Keberlanjutan operasional",
-          description: "Nilai apakah roadmap dapat dijalankan dengan SDM, waktu, dan anggaran yang realistis.",
+          title: "Operational & Resource Sustainability",
+          description: "Assess whether the roadmap is supported by realistic human resources, time commitments, and budget.",
           questions: [
-            ["s1", "sustainability", "Jadwal terbit, anggaran, SDM teknis, dan cadangan editor tersedia untuk 12 bulan.", "Rencana harus dapat dijalankan ketika ada editor yang berhalangan."],
-            ["s2", "sustainability", "Proses produksi naskah punya alur kerja dan standar mutu yang tidak bergantung pada satu orang.", "Ketergantungan tunggal menjadi risiko utama keberlanjutan."],
-            ["s3", "sustainability", "Pelatihan editor, reviewer, copyeditor, dan pengelola website dijadwalkan rutin.", "Kapasitas tim perlu tumbuh mengikuti target reputasi."]
+            ["s1", "sustainability", "Publication schedules, operating budgets, technical support, and editorial deputy roles are secured for 12 months.", "Operations must remain resilient even when individual editors take leave."],
+            ["s2", "sustainability", "Manuscript production workflows and quality standards do not depend solely on a single individual.", "Single-person dependency is a primary vulnerability for journal sustainability."],
+            ["s3", "sustainability", "Professional training for editors, reviewers, copyeditors, and web administrators is scheduled routinely.", "Editorial team capabilities must grow to match target indexing benchmarks."]
           ]
         }
       ],
       SosHum: [
         {
           id: "soshum-contribution",
-          title: "Kekuatan kontribusi SosHum",
-          description: "Nilai apakah artikel mampu berbicara pada debat konsep, teori, kebijakan, atau praktik sosial yang lebih luas.",
+          title: "HSS Conceptual & Theoretical Contribution",
+          description: "Assess whether articles engage broader conceptual debates, social theories, policy discourses, or social practices.",
           questions: [
-            ["sh1", "soshumContribution", "Artikel menunjukkan posisi teoretik atau konseptual yang jelas dan bukan hanya deskripsi kasus.", "Kontribusi sebaiknya terlihat sejak judul, abstrak, dan pendahuluan."],
-            ["sh2", "soshumContribution", "Manuskrip menghubungkan temuan lokal dengan percakapan keilmuan regional atau global.", "Konteks lokal perlu diubah menjadi kontribusi yang dapat dibandingkan."],
-            ["sh3", "soshumContribution", "Topik terbitan dibangun dari isu yang bisa dibandingkan lintas konteks, kelompok, atau wilayah.", "Tema komparatif membantu memperluas pembaca dan calon sitasi."]
+            ["sh1", "soshumContribution", "Articles establish clear theoretical or conceptual positioning rather than purely local case description.", "Scholarly contribution should be evident from the title, abstract, and introduction."],
+            ["sh2", "soshumContribution", "Manuscripts connect localized empirical findings to regional or global scholarly conversations.", "Local context must be translated into analytical insights that invite comparative inquiry."],
+            ["sh3", "soshumContribution", "Thematic issues focus on questions that can be comparatively examined across contexts, groups, or regions.", "Comparative frameworks expand international readership and citation potential."]
           ]
         },
         {
           id: "soshum-literature",
-          title: "Literatur, argumen, dan keterbacaan",
-          description: "Nilai mutu literatur, koherensi argumen, serta kemampuan artikel ditemukan pembaca luar negeri.",
+          title: "HSS Literature Positioning & Argument Coherence",
+          description: "Assess literature depth, argument coherence, and the manuscript's discoverability by overseas scholars.",
           questions: [
-            ["sl1", "soshumLiterature", "Referensi inti mencakup literatur internasional mutakhir dan klasik yang relevan dengan bidang.", "Bukan sekadar banyak referensi, tetapi tepat untuk posisi argumen."],
-            ["sl2", "soshumLiterature", "Abstrak, kata kunci, dan judul menjelaskan kontribusi artikel kepada pembaca lintas negara.", "Judul dan abstrak adalah pintu masuk pembaca dan calon pengutip."],
-            ["sl3", "soshumLiterature", "Editor menilai koherensi argumen, kerangka teori, metode, dan implikasi kajian.", "Penilaian substansi lebih penting daripada koreksi format semata."]
+            ["sl1", "soshumLiterature", "Core references engage contemporary international scholarship alongside foundational literature in the field.", "Prioritize relevant theoretical positioning over sheer volume of citations."],
+            ["sl2", "soshumLiterature", "Abstracts, keywords, and titles clearly communicate conceptual contributions to an international audience.", "The title and abstract represent the primary gateway for readers and future citers."],
+            ["sl3", "soshumLiterature", "Editors evaluate argument coherence, theoretical framing, interpretive methodology, and societal implications.", "Substantive evaluation takes precedence over mechanical formatting checks."]
           ]
         },
         {
           id: "soshum-network",
-          title: "Jejaring SosHum dan dampak akademik",
-          description: "Nilai kemampuan jurnal membangun pembaca melalui asosiasi, forum kebijakan, dan komunitas kajian.",
+          title: "HSS Scholarly Networks & Disciplinary Impact",
+          description: "Assess the journal's capacity to build readership through academic associations, policy forums, and research networks.",
           questions: [
-            ["sn1", "soshumNetwork", "Jurnal memiliki jejaring dengan asosiasi bidang, forum kebijakan, komunitas riset, atau pusat kajian.", "Jejaring harus relevan dengan scope jurnal dan tema artikel."],
-            ["sn2", "soshumNetwork", "Agenda diseminasi artikel diarahkan ke seminar, diskusi akademik, dan komunitas internasional bidang.", "Diseminasi sebaiknya membuat artikel masuk percakapan bidang."],
-            ["sn3", "soshumNetwork", "Naskah potensial diberi pendampingan bahasa, argumentasi, atau literature positioning sebelum diterbitkan.", "Pendampingan diarahkan pada artikel yang paling mungkin memberi dampak."]
+            ["sn1", "soshumNetwork", "The journal maintains ties with disciplinary associations, policy think tanks, research communities, or study centers.", "Networks must align directly with the journal's thematic focus."],
+            ["sn2", "soshumNetwork", "Dissemination efforts target international conferences, academic seminars, and specialized research circles.", "Proactive outreach brings publications directly into active scholarly discourse."],
+            ["sn3", "soshumNetwork", "Promising submissions receive developmental mentorship in language, argument framing, or literature positioning.", "Direct mentorship to papers with the greatest potential for long-term scholarly impact."]
           ]
         }
       ],
       SainTek: [
         {
           id: "saintek-method",
-          title: "Metode, validitas data, dan standar pelaporan",
-          description: "Nilai apakah artikel SainTek cukup kuat dari sisi rancangan, data, analisis, dan pelaporan teknis.",
+          title: "STEM Methodological Rigor & Data Validity",
+          description: "Assess whether STEM manuscripts demonstrate robust study design, data verification, analysis, and technical reporting.",
           questions: [
-            ["st1", "saintekMethod", "Artikel menampilkan rancangan metode, alat, bahan, dataset, parameter, atau protokol yang cukup untuk dinilai ulang.", "Kejelasan metode menentukan kepercayaan pembaca teknis."],
-            ["st2", "saintekMethod", "Validasi hasil, analisis statistik, dan batasan penelitian diperiksa sebelum keputusan akhir.", "Naskah berisiko tinggi memerlukan review metodologi yang lebih ketat."],
-            ["st3", "saintekMethod", "Editor melibatkan reviewer teknis sesuai metode, instrumen, bahan, data, atau komputasi yang digunakan.", "Reviewer umum sering tidak cukup untuk isu teknis yang spesifik."]
+            ["st1", "saintekMethod", "Articles present complete experimental designs, apparatus, materials, datasets, parameters, or protocols to permit replication.", "Methodological clarity is fundamental to establishing technical credibility."],
+            ["st2", "saintekMethod", "Validation of findings, statistical analyses, and study limitations are rigorously audited prior to final decisions.", "Complex or high-risk empirical manuscripts require dedicated methodological review."],
+            ["st3", "saintekMethod", "Editors assign technical reviewers matching the exact experimental methods, instrumentation, materials, or computational models used.", "Generalist reviewers are often insufficient for assessing niche technical details."]
           ]
         },
         {
           id: "saintek-repro",
-          title: "Reproducibility dan data availability",
-          description: "Nilai kesiapan jurnal mendukung pemeriksaan ulang, penggunaan ulang, dan kepercayaan terhadap hasil riset.",
+          title: "STEM Reproducibility & Open Data Availability",
+          description: "Assess journal readiness to support verification, reuse, and trust in published scientific findings.",
           questions: [
-            ["sr1", "saintekRepro", "Kebijakan ketersediaan data, kode, material, atau protokol dijelaskan kepada penulis.", "Tidak semua data harus terbuka, tetapi status dan alasan harus jelas."],
-            ["sr2", "saintekRepro", "Artikel mendorong penggunaan repository, lampiran teknis, atau dokumen pendukung.", "Lampiran teknis membantu pembaca menilai dan memakai ulang hasil."],
-            ["sr3", "saintekRepro", "Standar pelaporan sesuai jenis studi dipakai dalam checklist editorial.", "Checklist mengurangi risiko metode penting terlewat."]
+            ["sr1", "saintekRepro", "Policies regarding availability of raw datasets, code, materials, or laboratory protocols are explicitly communicated to authors.", "A transparent data policy signals commitment to rigorous scientific standards."],
+            ["sr2", "saintekRepro", "Articles encourage the deposit of supplementary materials, scripts, and datasets into persistent public repositories.", "Open data repositories increase article visibility, downloads, and citation longevity."],
+            ["sr3", "saintekRepro", "Discipline-specific reporting standards (e.g. ARRIVE, CONSORT, MIAME, PRISMA) are embedded in editorial checklists.", "Standardized reporting structures ensure essential experimental parameters are not omitted."]
           ]
         },
         {
           id: "saintek-metadata",
-          title: "Metadata teknis dan artikel strategis",
-          description: "Nilai kesiapan metadata, identitas penulis, referensi, dan tipe artikel yang potensial disitasi.",
+          title: "STEM Technical Metadata & Strategic Formats",
+          description: "Assess technical metadata completeness, persistent author identifiers, and article formats with high citation potential.",
           questions: [
-            ["sm1", "saintekMetadata", "Metadata teknis artikel lengkap untuk DOI, ORCID, referensi, afiliasi, funding, dan lisensi.", "Metadata yang rapi memudahkan pelacakan artikel dan penulis."],
-            ["sm2", "saintekMetadata", "Artikel review, methods paper, atau data paper dirancang sebagai bagian strategi sitasi.", "Tipe artikel strategis harus tetap melewati standar mutu ketat."],
-            ["sm3", "saintekMetadata", "Website menampilkan abstrak, grafis, data pendukung, dan referensi secara rapi serta mudah ditemukan.", "Pembaca teknis perlu cepat melihat inti metode, data, dan hasil."]
+            ["sm1", "saintekMetadata", "Technical metadata is complete for DOIs, author ORCIDs, reference lists, institutional affiliations, and funding acknowledgments.", "Disciplined machine-readable metadata enables international databases to index and cite correctly."],
+            ["sm2", "saintekMetadata", "Review articles, methodological papers, or benchmark data descriptors are intentionally commissioned as part of citation strategy.", "Review and methodology papers traditionally achieve above-average citation velocity."],
+            ["sm3", "saintekMetadata", "Website interfaces display structured abstracts, graphical abstracts, supplementary datasets, and reference lists clearly and cleanly.", "Readers and indexing crawlers must easily navigate complex scientific assets."]
           ]
         }
       ]
     };
-
-    const form = document.getElementById("assessmentForm");
-    const questionMount = document.getElementById("questionMount");
-    const message = document.getElementById("message");
-    const resultBlock = document.getElementById("resultBlock");
-    const resultContent = document.getElementById("resultContent");
-    const resultLead = document.getElementById("resultLead");
-    const scoreValue = document.getElementById("scoreValue");
-    const fieldHint = document.getElementById("fieldHint");
-    const progressLabel = document.getElementById("progressLabel");
-    const progressPercent = document.getElementById("progressPercent");
-    const progressBar = document.getElementById("progressBar");
-    const copyBtn = document.getElementById("copyBtn");
-    const saveBtn = document.getElementById("saveBtn");
-    const printBtn = document.getElementById("printBtn");
-    const resultCopyBtn = document.getElementById("resultCopyBtn");
-    const resultSaveBtn = document.getElementById("resultSaveBtn");
-    const resultPrintBtn = document.getElementById("resultPrintBtn");
-    const copyStatus = document.getElementById("copyStatus");
-    const resultStatus = document.getElementById("resultStatus");
-    const evaluationDateInput = document.getElementById("evaluationDate");
-
-    let activeQuestions = [];
-    let latestReportText = "";
-    let latestFileName = "";
 
     function todayString() {
       const today = new Date();
@@ -1497,19 +1472,19 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
         questionMount.innerHTML = `
           <section class="empty-state">
             <h2>Select the journal's subject area to begin assessing current capacity.</h2>
-            <p>Jurnal multidisiplin dapat memilih rumpun terdekat. Pertanyaan akan menyesuaikan bidang yang dipilih agar rekomendasi roadmap lebih terarah.</p>
+            <p>Multidisciplinary journals can select the closest discipline. Questions adapt to the selected area to produce targeted roadmap recommendations.</p>
           </section>
         `;
-        fieldHint.textContent = "Pilih bidang kajian untuk memunculkan kuesioner.";
+        fieldHint.textContent = "Select a subject area to display the questionnaire.";
         updateProgress();
         return;
       }
 
-      fieldHint.textContent = `${field} dipilih. Jawab ${activeQuestions.length} pertanyaan untuk menghasilkan rekomendasi.`;
+      fieldHint.textContent = `${field} selected. Answer ${activeQuestions.length} questions to generate recommendations.`;
       questionMount.innerHTML = groups.map((group, index) => `
         <section class="question-section" aria-labelledby="${group.id}-title">
           <div class="section-head">
-            <p class="eyebrow">Dimensi ${index + 1}</p>
+            <p class="eyebrow">Dimension ${index + 1}</p>
             <h2 id="${group.id}-title">${group.title}</h2>
             <p>${group.description}</p>
           </div>
@@ -1546,7 +1521,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       const total = activeQuestions.length;
       const answered = activeQuestions.filter((q) => form.querySelector(`input[name="${q.id}"]:checked`)).length;
       const percent = total ? Math.round((answered / total) * 100) : 0;
-      progressLabel.textContent = `${answered} dari ${total} terisi`;
+      progressLabel.textContent = `${answered} of ${total} answered`;
       progressPercent.textContent = `${percent}%`;
       progressBar.style.width = `${percent}%`;
     }
@@ -1589,25 +1564,25 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     function statusFor(score) {
       if (score <= 1.4) {
         return {
-          label: "Fondasi perlu dibangun",
-          tone: "Prioritas utama adalah membangun bukti dasar, alur kerja, dan penanggung jawab."
+          label: "Foundation Needs Development",
+          tone: "Top priority is establishing core evidence, defined workflows, and assigned roles."
         };
       }
       if (score <= 2.4) {
         return {
-          label: "Fondasi ada, perlu distabilkan",
-          tone: "Prioritas utama adalah membuat praktik yang sudah ada menjadi konsisten dan terdokumentasi."
+          label: "Foundation Present, Needs Stabilization",
+          tone: "Top priority is ensuring existing practices become consistent, documented, and reproducible."
         };
       }
       if (score <= 3.2) {
         return {
-          label: "Siap akselerasi terbatas",
-          tone: "Prioritas utama adalah memilih tema dan kegiatan yang paling berdampak pada reputasi dan sitasi."
+          label: "Ready for Targeted Acceleration",
+          tone: "Top priority is prioritizing actions and themes that drive the highest impact on reputation and citations."
         };
       }
       return {
-        label: "Siap akselerasi reputasi",
-        tone: "Prioritas utama adalah memperluas jejaring, memperkuat artikel strategis, dan menunjukkan hasil terukur."
+        label: "Ready for Full International Acceleration",
+        tone: "Top priority is expanding international networks, commissioning strategic articles, and measuring progress."
       };
     }
 
@@ -1634,10 +1609,10 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     }
 
     function recommendationIntro(score) {
-      if (score <= 1.4) return "Bangun fondasi terlebih dahulu melalui SOP, bukti kerja, penanggung jawab, dan indikator sederhana.";
-      if (score <= 2.4) return "Stabilkan praktik yang sudah ada agar konsisten, terdokumentasi, dan tidak bergantung pada orang tertentu.";
-      if (score <= 3.2) return "Akselerasikan kegiatan yang paling berdampak dan ukur hasilnya secara triwulanan.";
-      return "Pertajam keunggulan yang sudah berjalan dan arahkan pada kolaborasi serta artikel strategis yang lebih kuat.";
+      if (score <= 1.4) return "Build foundational infrastructure first through SOPs, operational evidence, assigned ownership, and baseline indicators.";
+      if (score <= 2.4) return "Stabilize current practices to ensure they are consistent, documented, and resilient to team turnover.";
+      if (score <= 3.2) return "Accelerate high-impact activities and monitor progress through quarterly evaluations.";
+      return "Hone established strengths and channel effort into strategic collaborations and high-impact publications.";
     }
 
     function renderPriority(item, index) {
@@ -1646,24 +1621,24 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
         <article class="priority-item">
           <div class="priority-head">
             <h3>${index + 1}. ${profile.title}</h3>
-            <span class="badge">Skor ${item.score.toFixed(1)}</span>
+            <span class="badge">Score ${item.score.toFixed(1)}</span>
           </div>
-          <p><strong>Rasional:</strong> ${profile.rationale} ${recommendationIntro(item.score)}</p>
+          <p><strong>Rationale:</strong> ${profile.rationale} ${recommendationIntro(item.score)}</p>
           <div class="priority-details">
             <div class="detail-box">
-              <strong>Kegiatan aktual</strong>
+              <strong>Actionable Tasks</strong>
               ${listItems(profile.activities)}
             </div>
             <div class="detail-box">
-              <strong>Komponen biaya</strong>
+              <strong>Budget Components</strong>
               ${listItems(profile.costs)}
             </div>
             <div class="detail-box">
-              <strong>Mitra kerja</strong>
+              <strong>Prospective Partners</strong>
               ${listItems(profile.partners)}
             </div>
             <div class="detail-box">
-              <strong>Indikator terukur</strong>
+              <strong>Measurable Indicators</strong>
               ${listItems(profile.metrics)}
             </div>
           </div>
@@ -1688,44 +1663,44 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
     function buildTimeline(priorities, field) {
       const titles = priorities.map((item) => dimensions[item.dimension].title);
-      const first = titles[0] || "dimensi prioritas";
-      const second = titles[1] || "mutu artikel";
-      const third = titles[2] || "visibilitas";
+      const first = titles[0] || "priority dimension";
+      const second = titles[1] || "article quality";
+      const third = titles[2] || "visibility";
       const fieldFocus = field === "SosHum"
-        ? "perkuat posisi argumen, kontribusi konseptual, dan jejaring SosHum"
-        : "perkuat validitas metode, data availability, dan metadata teknis";
+        ? "strengthen argument positioning, conceptual contributions, and HSS networks"
+        : "strengthen methodological validity, data availability, and technical metadata";
 
       return [
         {
-          period: "0-3 bulan",
+          period: "0-3 Months (Phase 1: Foundation & Audit)",
           items: [
-            `Audit bukti kerja untuk ${first}.`,
-            "Tetapkan penanggung jawab, SOP ringkas, baseline skor, dan indikator triwulan.",
-            "Perbaiki halaman kebijakan, panduan penulis, dan daftar artikel prioritas."
+            `Audit operational evidence and baseline score for ${first}.`,
+            "Assign responsible coordinators, concise SOPs, and quarterly indicator targets.",
+            "Revise journal policy pages, author guidelines, and list of priority manuscripts."
           ]
         },
         {
-          period: "4-6 bulan",
+          period: "4-6 Months (Phase 2: Capability & Workflow)",
           items: [
-            `Jalankan pelatihan atau klinik untuk ${second}.`,
-            "Bangun database reviewer, mitra, dan artikel unggulan.",
-            `Mulai ${fieldFocus}.`
+            `Conduct training or clinics targeting ${second}.`,
+            "Curate reviewer databases, potential partners, and standout article candidates.",
+            `Initiate: ${fieldFocus}.`
           ]
         },
         {
-          period: "7-9 bulan",
+          period: "7-9 Months (Phase 3: Collaboration & Dissemination)",
           items: [
-            `Luncurkan kegiatan kolaboratif untuk ${third}.`,
-            "Adakan call for papers atau diskusi artikel tematik dengan mitra terpilih.",
-            "Pantau data pembaca, unduhan, review, dan sitasi awal."
+            `Launch targeted collaborative initiatives for ${third}.`,
+            "Publish special thematic calls or coordinate symposiums with partner networks.",
+            "Monitor readership metrics, geographic downloads, and early citation velocity."
           ]
         },
         {
-          period: "10-12 bulan",
+          period: "10-12 Months (Phase 4: Evaluation & Next Roadmap)",
           items: [
-            "Evaluasi capaian indikator dan bandingkan dengan baseline.",
-            "Pilih kegiatan yang terbukti berdampak untuk dilanjutkan.",
-            "Susun roadmap tahun berikutnya berbasis bukti, bukan asumsi."
+            "Audit indicator milestones, SOP adherence, and readiness for target indexing.",
+            "Re-run self-evaluation to quantify capacity score improvements.",
+            "Formulate year-two roadmap based on verified empirical achievements."
           ]
         }
       ];
@@ -1757,45 +1732,46 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     }
 
     function buildFileName(journalName, evaluationDate) {
-      return `${sanitizeFilePart(journalName)}_${evaluationDate}_evaluasi-diri.txt`;
+      return `${sanitizeFilePart(journalName)}_${evaluationDate}_self-evaluation.txt`;
     }
 
     function buildReportText(data) {
       const { journalName, evaluationDate, field, overall, status, weak, dimensionScores, priorities } = data;
       const lines = [];
-      lines.push("Evaluasi Diri Roadmap Jurnal");
-      lines.push("================================");
-      lines.push(`Jurnal: ${journalName || "Tanpa nama"}`);
-      lines.push(`Tanggal evaluasi: ${evaluationDate}`);
-      lines.push(`Bidang: ${field}`);
-      lines.push(`Skor kesiapan: ${overall.toFixed(2)} dari 4.00`);
-      lines.push(`Status: ${status.label}`);
+      lines.push("Journal Roadmap Self-Evaluation Report");
+      lines.push("====================================");
+      lines.push(`Journal: ${journalName || "Unnamed Journal"}`);
+      lines.push(`Evaluation Date: ${evaluationDate}`);
+      lines.push(`Subject Area: ${field}`);
+      lines.push(`Readiness Score: ${overall.toFixed(2)} out of 4.00`);
+      lines.push(`Readiness Status: ${status.label}`);
+      lines.push(`Assessment Summary: ${status.tone}`);
       lines.push("");
-      lines.push("Dimensi terlemah:");
+      lines.push("Weakest Dimensions:");
       weak.forEach((item, index) => lines.push(`${index + 1}. ${item.title} - ${item.score.toFixed(2)}`));
       lines.push("");
-      lines.push("Skor per dimensi:");
+      lines.push("Scores by Dimension:");
       [...dimensionScores]
         .sort((a, b) => a.title.localeCompare(b.title))
         .forEach((item) => lines.push(`- ${item.title}: ${item.score.toFixed(2)}`));
       lines.push("");
-      lines.push("Prioritas roadmap:");
+      lines.push("Top Roadmap Priorities:");
       priorities.forEach((item, index) => {
         const profile = dimensions[item.dimension];
         lines.push("");
-        lines.push(`${index + 1}. ${profile.title} - skor ${item.score.toFixed(2)}`);
-        lines.push(`   Rasional: ${profile.rationale} ${recommendationIntro(item.score)}`);
-        lines.push("   Kegiatan aktual:");
+        lines.push(`${index + 1}. ${profile.title} - Score ${item.score.toFixed(2)}`);
+        lines.push(`   Rationale: ${profile.rationale} ${recommendationIntro(item.score)}`);
+        lines.push("   Actionable Tasks:");
         profile.activities.forEach((activity) => lines.push(`   - ${activity}`));
-        lines.push("   Komponen biaya:");
+        lines.push("   Budget Components:");
         profile.costs.forEach((cost) => lines.push(`   - ${cost}`));
-        lines.push("   Mitra kerja:");
+        lines.push("   Prospective Partners:");
         profile.partners.forEach((partner) => lines.push(`   - ${partner}`));
-        lines.push("   Indikator terukur:");
+        lines.push("   Measurable Indicators:");
         profile.metrics.forEach((metric) => lines.push(`   - ${metric}`));
       });
       lines.push("");
-      lines.push("Rencana 12 bulan:");
+      lines.push("12-Month Work Plan:");
       buildTimeline(priorities, field).forEach((step) => {
         lines.push("");
         lines.push(step.period);
@@ -1808,14 +1784,14 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       clearMessage();
       const field = getField();
       if (!field) {
-        showMessage("Pilih bidang kajian terlebih dahulu.");
+        showMessage("Please select a subject area first.");
         return;
       }
 
       const { answers, missing } = collectAnswers();
       if (missing.length) {
         const firstMissing = document.querySelector(`[data-question="${missing[0].id}"]`);
-        showMessage(`Masih ada ${missing.length} pertanyaan yang belum dijawab. Lengkapi semua pertanyaan agar rekomendasi terukur.`);
+        showMessage(`There are still ${missing.length} unanswered questions. Complete all questions to ensure accurate recommendations.`);
         if (firstMissing) firstMissing.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
       }
@@ -1829,32 +1805,32 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       const strongest = [...dimensionScores].sort((a, b) => b.score - a.score)[0];
 
       scoreValue.textContent = overall.toFixed(1);
-      resultLead.textContent = `${journalName ? journalName + " " : ""}berada pada status "${status.label}". ${status.tone}`;
+      resultLead.textContent = `${journalName ? journalName + " " : ""}is currently classified under "${status.label}". ${status.tone}`;
 
       const summaryHtml = `
         <section class="output-panel">
           <div>
-            <h2>Opsi hasil</h2>
-            <p>Unduhan tidak otomatis. Klik simpan untuk mengunduh laporan TXT terstruktur.</p>
+            <h2>Report Options</h2>
+            <p>Download is manual. Click save to download a structured TXT report.</p>
           </div>
-          <div class="result-actions" aria-label="Opsi simpan hasil evaluasi">
-            <button class="btn secondary" type="button" data-action="copy-report">Salin Hasil</button>
-            <button class="btn" type="button" data-action="save-report">Simpan Hasil (.txt)</button>
-            <button class="btn secondary" type="button" data-action="print-report">Cetak</button>
+          <div class="result-actions" aria-label="Save options">
+            <button class="btn secondary" type="button" data-action="copy-report">Copy Summary</button>
+            <button class="btn" type="button" data-action="save-report">Save Report (.txt)</button>
+            <button class="btn secondary" type="button" data-action="print-report">Print / PDF</button>
           </div>
         </section>
         <section>
           <div class="summary-grid">
             <div class="summary-item">
-              <span>Bidang kajian</span>
+              <span>Subject Area</span>
               <strong>${field}</strong>
             </div>
             <div class="summary-item">
-              <span>Status kesiapan</span>
+              <span>Readiness Status</span>
               <strong>${status.label}</strong>
             </div>
             <div class="summary-item">
-              <span>Dimensi terkuat</span>
+              <span>Strongest Dimension</span>
               <strong>${strongest.title} (${strongest.score.toFixed(1)})</strong>
             </div>
           </div>
@@ -1863,8 +1839,8 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
       const weakHtml = `
         <section>
-          <h2>Dimensi terlemah</h2>
-          <p>Dimensi berikut sebaiknya menjadi dasar pemilihan kegiatan roadmap karena skornya paling rendah.</p>
+          <h2>Weakest Dimensions</h2>
+          <p>These dimensions scored lowest and should form the immediate foundation for your roadmap activities.</p>
           <ul class="weak-list">
             ${weak.map((item) => `<li><strong>${item.title}</strong> - skor ${item.score.toFixed(1)}. ${statusFor(item.score).label}.</li>`).join("")}
           </ul>
@@ -1873,16 +1849,16 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
       const barsHtml = `
         <section>
-          <h2>Skor per dimensi</h2>
-          <p>Gunakan grafik ini untuk melihat celah kapasitas antar area kerja jurnal.</p>
+          <h2>Scores by Dimension</h2>
+          <p>Use this breakdown to identify capacity gaps across core operational areas.</p>
           ${renderBars(dimensionScores)}
         </section>
       `;
 
       const priorityHtml = `
         <section>
-          <h2>5 prioritas roadmap utama</h2>
-          <p>Prioritas diurutkan dari skor terendah agar kegiatan awal berfokus pada celah paling penting.</p>
+          <h2>Top 5 Roadmap Priorities</h2>
+          <p>Priorities are ranked from lowest score to focus early efforts on the most critical gaps.</p>
           <div class="priority-list">
             ${priorities.map((item, index) => renderPriority(item, index)).join("")}
           </div>
@@ -1891,8 +1867,8 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
       const timelineHtml = `
         <section>
-          <h2>Rencana 12 bulan</h2>
-          <p>Gunakan fase berikut sebagai kerangka kerja. Setiap jurnal dapat menyesuaikan beban kegiatan dengan SDM dan anggaran yang tersedia.</p>
+          <h2>12-Month Action Roadmap</h2>
+          <p>Use these phased milestones as an operational framework, adapting workloads to available staffing and budget.</p>
           ${renderTimeline(priorities, field)}
         </section>
       `;
@@ -1903,7 +1879,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
       latestReportText = buildReportText({ journalName, evaluationDate, field, overall, status, weak, dimensionScores, priorities });
       latestFileName = buildFileName(journalName, evaluationDate);
-      setActionStatus("Hasil siap disalin, disimpan, atau dicetak.");
+      setActionStatus("Results ready to copy, save, or print.");
     }
 
     form.addEventListener("change", (event) => {
@@ -1934,13 +1910,13 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
     async function copyReport() {
       if (!latestReportText) {
-        showMessage("Hitung rekomendasi terlebih dahulu sebelum menyalin hasil.");
+        showMessage("Calculate recommendations before copying results.");
         return;
       }
 
       try {
         await navigator.clipboard.writeText(latestReportText);
-        setActionStatus("Hasil evaluasi sudah disalin.");
+        setActionStatus("Evaluation results copied to clipboard.");
       } catch (error) {
         const textArea = document.createElement("textarea");
         textArea.value = latestReportText;
@@ -1948,13 +1924,13 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
         textArea.select();
         document.execCommand("copy");
         document.body.removeChild(textArea);
-        setActionStatus("Hasil evaluasi sudah disalin.");
+        setActionStatus("Evaluation results copied to clipboard.");
       }
     }
 
     function saveReport() {
       if (!latestReportText) {
-        showMessage("Hitung rekomendasi terlebih dahulu sebelum menyimpan hasil.");
+        showMessage("Calculate recommendations before saving results.");
         return;
       }
 
@@ -1967,12 +1943,12 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      setActionStatus(`File TXT disiapkan: ${link.download}`);
+      setActionStatus(`TXT file prepared: ${link.download}`);
     }
 
     function printReport() {
       if (!latestReportText) {
-        showMessage("Hitung rekomendasi terlebih dahulu sebelum mencetak hasil.");
+        showMessage("Calculate recommendations before printing results.");
         return;
       }
       window.print();
@@ -1996,6 +1972,6 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     setDefaultEvaluationDate();
     updateProgress();
   </script>
-<div class="toolkit-attribution">Toolkit ini dikembangkan oleh Ikhwan Arief (ikhwan[at]unand.ac.id)</div>
+<div class="toolkit-attribution">Developed by Ikhwan Arief (ikhwan[at]unand.ac.id)</div>
 </body>
 </html>

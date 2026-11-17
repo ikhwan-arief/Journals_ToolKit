@@ -12,7 +12,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     <link rel="icon" href="data:," />
     <meta
       name="description"
-      content="Aplikasi web publik untuk memeriksa endpoint OAI-PMH jurnal OJS langsung dari GitHub Pages."
+      content="Public web application to inspect and validate OJS journal OAI-PMH endpoints directly from GitHub Pages."
     />
     <style>
       :root {
@@ -515,7 +515,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       <strong>Journals Toolkit</strong>
       <span>Public tools for journal managers</span>
     </div>
-    <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
+    <nav class="toolkit-nav" aria-label="Application navigation">
           <a href="../">Portal</a><a href="../oai-pmh/" aria-current="page">OAI-PMH</a><a href="../ojs-version-checker/">OJS Checker</a><a href="../doi-xml-repair/">DOI XML Repair</a><a href="../arjuna-2021/">Arjuna 2021</a><a href="../arjuna-2026/">Arjuna 2026</a><a href="../doaj-precheck/">DOAJ Precheck</a><a href="../evaluasi-diri-jurnal/">Self-Evaluation</a>
         </nav>
   </div>
@@ -537,14 +537,10 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       <main>
         <h1>OAI-PMH Validator</h1>
         <p class="subtitle">
-          Masukkan URL website jurnal. Aplikasi akan mencoba menemukan endpoint OAI-PMH,
-          memeriksa validitasnya, menampilkan metadata publikasi yang tersedia, dan memberi
-          rekomendasi jika data tidak bisa ditarik oleh harvester.
+          Enter the journal website URL. The application will discover the OAI-PMH endpoint, verify its validity, display available publication metadata, and provide recommendations if data cannot be retrieved by harvesters.
         </p>
         <div class="note">
-          Aplikasi ini berjalan langsung di GitHub Pages dan hanya membaca metadata publik dari endpoint OAI-PMH.
-          Tidak membutuhkan login ke OJS. Versi GitHub Pages dapat memakai proxy CORS publik agar browser bisa
-          membaca XML OAI-PMH dari server jurnal.
+          This application runs directly on GitHub Pages and only reads public metadata from the OAI-PMH endpoint. No OJS login required. A built-in public CORS proxy layer allows browsers to read OAI-PMH XML directly from journal servers.
         </div>
 
         <section class="panel">
@@ -553,7 +549,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
               <label for="journalUrl">Journal website URL or OAI-PMH endpoint</label>
               <input
                 id="journalUrl"
-                placeholder="https://jurnal.example.ac.id/index.php/nama-jurnal"
+                placeholder="https://journal.example.ac.id/index.php/journal-name"
                 autocomplete="url"
               />
             </div>
@@ -566,7 +562,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
         </section>
 
         <section id="results" class="hidden">
-          <nav class="tabs" aria-label="Tab hasil">
+          <nav class="tabs" aria-label="Results navigation">
             <button class="tab-button active" type="button" data-tab="summary">Summary</button>
             <button class="tab-button" type="button" data-tab="endpoints">Tested Endpoints</button>
             <button class="tab-button" type="button" data-tab="repository">Repository Info</button>
@@ -719,23 +715,23 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
             if (!parsed.ok) {
               response.errorType = "xml_parse_error";
               response.errorMessage = parsed.error;
-              attempt.status = "Gagal";
-              attempt.reason = "Respons XML tidak valid.";
+              attempt.status = "Failed";
+              attempt.reason = "Invalid XML response.";
             } else if (!isOaiRoot(parsed.root)) {
-              attempt.status = "Gagal";
-              attempt.reason = "Root XML bukan OAI-PMH.";
+              attempt.status = "Failed";
+              attempt.reason = "XML root element is not OAI-PMH.";
             } else if (getOaiError(parsed.root)) {
               const error = getOaiError(parsed.root);
-              attempt.status = "Gagal";
+              attempt.status = "Failed";
               attempt.reason = `OAI error ${error.code}: ${error.message}`;
               response.oaiErrorCode = error.code;
               response.oaiErrorMessage = error.message;
             } else if (!findFirst(parsed.root, "Identify")) {
-              attempt.status = "Gagal";
-              attempt.reason = "Respons OAI-PMH tidak mengandung Identify.";
+              attempt.status = "Failed";
+              attempt.reason = "OAI-PMH response does not contain an Identify element.";
             } else {
               attempt.status = "Valid";
-              attempt.reason = "Identify valid.";
+              attempt.reason = "Valid Identify element.";
               attempt.selected = true;
               audit.selectedEndpoint = endpoint;
               audit.repositoryInfo = parseIdentify(parsed.root);
@@ -761,12 +757,12 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       function responseToAttempt(endpoint, response) {
         return {
           endpointUrl: endpoint,
-          status: response.ok ? "Diuji" : "Gagal",
+          status: response.ok ? "Tested" : "Failed",
           reason: response.ok
             ? response.viaProxy
-              ? "Respons dibaca via proxy CORS, menunggu validasi XML Identify."
-              : "HTTP 200, menunggu validasi XML Identify."
-            : response.errorMessage || "Identify tidak valid.",
+              ? "Response received via CORS proxy, awaiting XML Identify validation."
+              : "HTTP 200, awaiting XML Identify validation."
+            : response.errorMessage || "Invalid Identify response.",
           httpStatus: response.httpStatus,
           responseTimeSeconds: response.responseTimeSeconds,
           contentType: response.contentType,
@@ -949,7 +945,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
               responseTimeSeconds: 0,
               finalUrl: requestUrl,
               errorType: "proxy_error",
-              errorMessage: "Seluruh proxy CORS gagal membaca respons dari endpoint jurnal.",
+              errorMessage: "All CORS proxies failed to read the response from the journal endpoint.",
               text: "",
               snippet: ""
             };
@@ -1061,17 +1057,17 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
         } catch (error) {
           if (error.name === "ResponseTooLargeError") {
             responseData.errorType = "response_too_large";
-            responseData.errorMessage = "Ukuran respons terlalu besar untuk diperiksa dengan aman.";
+            responseData.errorMessage = "Response payload too large to process safely in browser.";
           } else if (error.name === "AbortError") {
             responseData.errorType = "timeout";
             responseData.errorMessage = viaProxy
               ? "Proxy CORS timeout. Server atau proxy terlalu lama merespons."
-              : "Request timeout. Server terlalu lama merespons.";
+              : "Request timed out. The journal server took too long to respond.";
           } else {
             responseData.errorType = viaProxy ? "proxy_error" : "connection_error";
             responseData.errorMessage = viaProxy
               ? "Proxy CORS gagal membaca endpoint OAI-PMH."
-              : "Koneksi gagal atau diblokir CORS oleh server target. Browser tidak mengizinkan aplikasi GitHub Pages membaca respons tersebut.";
+              : "Connection failed or blocked by server CORS policy. The browser prevented GitHub Pages from reading the response.";
           }
         } finally {
           window.clearTimeout(timeoutId);
@@ -1107,7 +1103,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
       class ResponseTooLargeError extends Error {
         constructor() {
-          super("Ukuran respons terlalu besar untuk diperiksa dengan aman.");
+          super("Response payload too large to process safely in browser.");
           this.name = "ResponseTooLargeError";
         }
       }
@@ -1441,135 +1437,135 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       function generateRecommendations(audit) {
         const issues = [];
         if (!audit.selectedEndpoint) {
-          issues.push(issue("endpoint_not_found", "Critical", "Endpoint OAI-PMH tidak menghasilkan Identify yang valid.", "P1", "Pengelola Jurnal dan Tim IT", [
-            "OAI belum aktif.",
-            "Path jurnal salah.",
-            "Konfigurasi pretty URL atau routing OJS bermasalah.",
+          issues.push(issue("endpoint_not_found", "Critical", "OAI-PMH endpoint does not return a valid Identify response.", "P1", "Journal Manager & IT Team", [
+            "OAI-PMH is not active.",
+            "Incorrect journal URL path.",
+            "OJS route handling or URL rewriting issue.",
           ], [
-            "Pastikan URL yang dimasukkan adalah URL jurnal, bukan URL portal induk.",
-            "Pastikan jurnal sudah memiliki issue dan artikel yang dipublikasikan.",
-            "Kirim contoh URL jurnal dan hasil error ke tim IT.",
+            "Ensure the input URL points directly to the journal homepage, not a multi-journal portal.",
+            "Confirm the journal has published issues and articles.",
+            "Share the journal URL and error details with the IT/hosting administrator.",
           ], [
-            "Periksa konfigurasi OAI pada OJS.",
-            "Pastikan routing /oai dapat diakses publik.",
-            "Periksa rewrite URL, base_url, dan log PHP/web server.",
-          ], "Harvester tidak punya alamat valid untuk menarik metadata."));
+            "Verify the OAI configuration in config.inc.php and OJS Settings.",
+            "Ensure the /oai route is publicly accessible.",
+            "Check rewrite rules, base_url directives, and web server logs.",
+          ], "Harvesters cannot locate a valid endpoint to index metadata."));
         }
 
         for (const response of audit.requestLog) {
           if (response.errorType === "http_403") {
-            issues.push(issue("http_403_forbidden", "Critical", "Endpoint mengembalikan 403 Forbidden.", "P1", "Tim IT atau Admin Server", [
-              "Firewall, WAF, Cloudflare, ModSecurity, atau rate limit memblokir request.",
+            issues.push(issue("http_403_forbidden", "Critical", "Endpoint returned HTTP 403 Forbidden.", "P1", "IT Team / Server Administrator", [
+              "Firewall, WAF, Cloudflare, ModSecurity, or rate limiting is blocking public requests.",
             ], [
-              "Laporkan ke tim IT bahwa endpoint OAI ditolak publik.",
-              "Berikan URL endpoint dan waktu pengecekan.",
+              "Report to IT that public requests to the OAI endpoint are forbidden.",
+              "Provide the endpoint URL and test timestamp to system administrators.",
             ], [
-              "Izinkan akses publik ke endpoint OAI.",
-              "Pastikan request GET ke /oai tidak diblokir.",
-            ], "Harvester ditolak server."));
+              "Allow public GET access to the OAI endpoint.",
+              "Ensure GET requests to /oai are not blocked.",
+            ], "Harvesters are rejected by the server."));
           }
           if (response.errorType === "http_500") {
-            issues.push(issue("http_500_server_error", "Critical", "Endpoint mengembalikan 500 Internal Server Error.", "P1", "Tim IT atau Admin Server", [
-              "Error PHP, plugin OJS bermasalah, database error, atau versi PHP tidak sesuai.",
+            issues.push(issue("http_500_server_error", "Critical", "Endpoint returned HTTP 500 Internal Server Error.", "P1", "IT Team / Server Administrator", [
+              "PHP fatal error, plugin issue, database query failure, or PHP version mismatch.",
             ], [
-              "Laporkan sebagai error server kepada tim IT.",
+              "Report server-side errors to the IT administration team.",
             ], [
-              "Periksa error_log PHP dan log web server.",
-              "Periksa kompatibilitas versi OJS, PHP, dan plugin.",
-            ], "Harvester gagal total."));
+              "Inspect PHP error_log and web server error logs.",
+              "Verify compatibility between OJS, PHP, and installed plugins.",
+            ], "Harvesters experience a total retrieval failure."));
           }
           if (response.errorType === "xml_parse_error") {
-            issues.push(issue("invalid_xml", "Critical", "Respons XML tidak valid.", "P1", "Pengelola Jurnal dan Tim IT", [
-              "Warning PHP tampil sebelum XML, karakter ilegal XML, atau encoding tidak UTF-8.",
+            issues.push(issue("invalid_xml", "Critical", "Invalid XML response format.", "P1", "Journal Manager & IT Team", [
+              "PHP warnings output before XML header, unescaped XML characters, or non-UTF-8 encoding.",
             ], [
-              "Periksa metadata artikel terbaru, terutama judul, abstrak, keyword, dan nama penulis.",
+              "Check recent article metadata for unescaped special characters or control characters.",
             ], [
-              "Matikan display_errors di production.",
-              "Simpan error ke log, bukan ke output.",
-            ], "Harvester gagal membaca record."));
+              "Disable display_errors in production php.ini.",
+              "Log PHP errors to file rather than standard HTTP output.",
+            ], "Harvester XML parser fails to parse records."));
           }
           if (response.errorType === "html_response") {
-            issues.push(issue("non_xml_response", "Critical", "Endpoint mengembalikan HTML, bukan XML.", "P1", "Tim IT atau Admin Server", [
-              "Endpoint salah, redirect ke halaman utama, atau routing OAI tidak aktif.",
+            issues.push(issue("non_xml_response", "Critical", "Endpoint returned HTML instead of XML.", "P1", "IT Team / Server Administrator", [
+              "Incorrect endpoint, redirect loop to homepage, or disabled OAI routing.",
             ], [
-              "Gunakan endpoint yang direkomendasikan aplikasi.",
+              "Use the endpoint recommended by the diagnostic tool.",
             ], [
-              "Periksa redirect, base_url, dan rewrite URL.",
-              "Pastikan endpoint OAI menghasilkan XML.",
-            ], "Harvester gagal parse metadata."));
+              "Inspect HTTP redirects, base_url settings, and mod_rewrite rules.",
+              "Confirm the OAI endpoint returns XML with Content-Type text/xml.",
+            ], "Harvester fails to parse metadata as XML."));
           }
           if (response.errorType === "timeout") {
-            issues.push(issue("timeout_or_slow", "High", "Request timeout atau server sangat lambat.", "P2", "Tim IT atau Admin Server", [
-              "oai_max_records terlalu besar, query database lambat, atau resource hosting terbatas.",
+            issues.push(issue("timeout_or_slow", "High", "Request timeout or server response excessively slow.", "P2", "IT Team / Server Administrator", [
+              "oai_max_records setting too large, slow SQL queries, or server resource bottlenecks.",
             ], [
-              "Laporkan endpoint lambat kepada tim IT.",
+              "Notify the server administrator regarding slow OAI-PMH execution.",
             ], [
-              "Turunkan oai_max_records.",
-              "Periksa performa database, cache OJS, memory_limit, dan max_execution_time.",
-            ], "Harvester gagal atau hanya menarik sebagian data."));
+              "Reduce oai_max_records in config.inc.php (e.g. to 50 or 100).",
+              "Tune database performance, OJS cache, PHP memory_limit, and max_execution_time.",
+            ], "Harvesters fail or time out after retrieving partial records."));
           }
           if (response.errorType === "connection_error" || response.errorType === "proxy_error") {
-            issues.push(issue("cors_or_connection", "High", "Browser tidak bisa membaca respons endpoint.", "P2", "Tim IT atau Admin Server", [
-              "Server tidak mengizinkan akses lintas origin dari GitHub Pages, proxy CORS gagal, atau koneksi gagal.",
+            issues.push(issue("cors_or_connection", "High", "Browser cannot access the endpoint directly due to CORS or network restrictions.", "P2", "IT Team / Server Administrator", [
+              "Server does not allow Cross-Origin requests from GitHub Pages, public CORS proxy failed, or connection timed out.",
             ], [
-              "Coba jalankan versi lokal/Streamlit jika audit dari browser tetap diblokir.",
+              "Run a local desktop check or test with curl/Postman if campus WAF blocks browser proxies.",
             ], [
-              "Izinkan header CORS yang sesuai untuk endpoint OAI jika ingin diperiksa dari GitHub Pages.",
-              "Pastikan endpoint bisa diakses publik.",
-            ], "Aplikasi GitHub Pages tidak bisa menampilkan hasil walaupun endpoint mungkin aktif."));
+              "Consider enabling Access-Control-Allow-Origin headers on OAI endpoints for public web auditors.",
+              "Verify that the endpoint can be accessed without IP-based geoblocking.",
+            ], "The GitHub Pages client cannot display responses even if the endpoint is running on the server."));
           }
         }
 
         if (audit.selectedEndpoint && !audit.metadataFormats.some((format) => format.metadataPrefix === "oai_dc")) {
-          issues.push(issue("oai_dc_missing", "High", "ListMetadataFormats tidak menampilkan metadataPrefix oai_dc.", "P1", "Tim IT atau Admin Server", [
-            "Metadata format tidak aktif atau plugin metadata bermasalah.",
+          issues.push(issue("oai_dc_missing", "High", "ListMetadataFormats does not include Dublin Core (oai_dc).", "P1", "IT Team / Server Administrator", [
+            "Metadata format disabled or OJS metadata plugin malfunction.",
           ], [
-            "Laporkan bahwa Dublin Core tidak tersedia.",
+            "Report Dublin Core missing to journal IT support.",
           ], [
-            "Periksa plugin metadata OAI dan pastikan format oai_dc aktif.",
-          ], "Banyak harvester dasar tidak bisa menarik data."));
+            "Verify OAI metadata plugins and confirm oai_dc format is enabled.",
+          ], "Basic academic harvesters (SINTA, BASE, DOAJ) cannot harvest data without oai_dc."));
         }
 
         if (audit.noRecordsMatch) {
-          issues.push(issue("no_records_match", "High", "OAI-PMH is active, but no records match this metadataPrefix.", "P2", "Pengelola Jurnal dan Tim IT", [
-            "Belum ada artikel published, issue belum published, atau metadataPrefix salah.",
+          issues.push(issue("no_records_match", "High", "OAI-PMH is active, but no records match this metadataPrefix.", "P2", "Journal Manager & IT Team", [
+            "No published articles found, unpublished issue, or unsupported metadataPrefix.",
           ], [
-            "Pastikan issue dan artikel sudah dipublikasikan.",
-            "Periksa tanggal publikasi artikel.",
+            "Ensure journal issues and articles are published in OJS.",
+            "Check article publication dates and OJS status.",
           ], [
-            "Periksa apakah OAI membaca data artikel published dan cache OJS.",
-          ], "Harvester tidak menemukan publikasi."));
+            "Verify that OAI queries find published articles and refresh OJS file cache.",
+          ], "Harvesters cannot locate any articles in the repository."));
         }
 
         if (audit.tokenError) {
-          issues.push(issue("resumption_token_problem", "High", audit.tokenError, "P2", "Tim IT atau Admin Server", [
-            "Bug OJS/plugin, cache bermasalah, atau konfigurasi oai_max_records tidak stabil.",
+          issues.push(issue("resumption_token_problem", "High", audit.tokenError, "P2", "IT Team / Server Administrator", [
+            "OJS plugin bug, stale cache, or unstable resumptionToken pagination.",
           ], [
-            "Cocokkan jumlah artikel di OJS dengan jumlah record OAI.",
+            "Compare total articles published in OJS against retrieved OAI record count.",
           ], [
-            "Periksa cache, versi OJS, plugin, dan konfigurasi oai_max_records.",
-          ], "Harvester hanya menarik sebagian publikasi."));
+            "Check file cache, OJS patch level, and oai_max_records settings.",
+          ], "Harvester only paginates partially and terminates unexpectedly."));
         }
 
         if (audit.records.length && audit.diagnostic.completenessPercent < 80) {
-          issues.push(issue("metadata_incomplete", "Medium", "Banyak metadata utama kosong.", "P3", "Pengelola Jurnal", [
-            "Metadata artikel tidak lengkap di OJS atau data migrasi kosong.",
+          issues.push(issue("metadata_incomplete", "Medium", "Multiple required metadata elements are missing or blank.", "P3", "Journal Manager", [
+            "Article metadata fields are blank in OJS or missing from data migration.",
           ], [
-            "Lengkapi title, author, abstract, keyword, date, DOI, pages, language.",
-            "Periksa issue terbaru dan dua issue terakhir lebih dahulu.",
+            "Complete title, authors, abstract, keywords, publication date, DOI, page numbers, and language.",
+            "Prioritize completing metadata for recent issues and ongoing volumes.",
           ], [
-            "Jika data lama hasil migrasi kosong massal, bantu ekspor dan audit database.",
-          ], "Portal indeks bisa menampilkan artikel secara salah atau tidak lengkap."));
+            "If legacy migrated issues are empty in bulk, perform a batch SQL or XML metadata update.",
+          ], "Indexing services may display incomplete titles, missing author affiliations, or broken citations."));
         }
 
         if (audit.diagnostic.duplicateIdentifiers.length) {
-          issues.push(issue("duplicate_identifier", "High", "Ada OAI identifier sama pada lebih dari satu record.", "P2", "Pengelola Jurnal dan Tim IT", [
-            "Migrasi data bermasalah, repository_id berubah, atau data artikel duplikat.",
+          issues.push(issue("duplicate_identifier", "High", "Duplicate OAI identifiers found across multiple records.", "P2", "Journal Manager & IT Team", [
+            "Data migration discrepancy, duplicate submission entries, or modified repository_id.",
           ], [
-            "Periksa apakah ada artikel ganda.",
+            "Verify whether duplicate articles exist in published issues.",
           ], [
-            "Periksa repository_id, struktur identifier OAI, dan duplikasi submission/publication.",
-          ], "Harvester bisa menimpa, mengabaikan, atau salah menduplikasi record."));
+            "Audit repository_id, identifier structure, and duplicate submission records in database.",
+          ], "Harvesters may overwrite, skip, or erroneously duplicate articles."));
         }
 
         return dedupeIssues(issues);
@@ -1585,7 +1581,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
           impactForHarvester: impact,
           actionForJournalManager: managerActions,
           actionForItAdmin: itActions,
-          validationSteps: ["Jalankan ulang pemeriksaan dan pastikan respons OAI-PMH valid."],
+          validationSteps: ["Re-run the audit and confirm a valid OAI-PMH response."],
           owner,
           priority,
         };
@@ -1618,8 +1614,8 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       function classifyHarvestability(score, issues) {
         if (issues.some((item) => item.severity === "Critical") && score < 65) return "High Risk of Harvest Failure";
         if (score >= 85) return "Ready for Harvesting";
-        if (score >= 65) return "Bisa di-harvest, tetapi perlu perbaikan";
-        if (score >= 40) return "Berisiko gagal atau hanya tertarik sebagian";
+        if (score >= 65) return "Harvestable, with Recommended Improvements";
+        if (score >= 40) return "At Risk of Harvest Failure or Partial Data";
         return "High Risk of Harvest Failure";
       }
 
@@ -1672,7 +1668,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
           attempt.reason,
           attempt.responseTimeSeconds ?? "",
           attempt.httpStatus ?? "",
-          attempt.selected ? "Ya" : "Tidak",
+          attempt.selected ? "Yes" : "No",
         ]));
       }
 
@@ -1682,7 +1678,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
           return;
         }
         const info = audit.repositoryInfo;
-        renderTable("repository", ["Field", "Nilai"], [
+        renderTable("repository", ["Field", "Value"], [
           ["repositoryName", info.repositoryName],
           ["baseURL", info.baseURL],
           ["protocolVersion", info.protocolVersion],
@@ -1759,14 +1755,14 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
           item.actionForItAdmin.join("\n"),
           item.validationSteps.join("\n"),
           item.owner,
-        ]), "Rekomendasi Action", `<p>Action recommendations separate editorial tasks from server/IT tasks so that each issue can be addressed by the appropriate team.</p>`);
+        ]), "Action Recommendations", `<p>Action recommendations separate editorial tasks from server/IT tasks so that each issue can be addressed by the appropriate team.</p>`);
       }
 
       function renderTechnical(audit, settings) {
         const rows = audit.requestLog.map((item) => [
           item.requestUrl,
-          item.viaProxy ? "Proxy CORS" : "Browser langsung",
-          item.fromCache ? "Ya" : "Tidak",
+          item.viaProxy ? "CORS Proxy" : "Direct Browser",
+          item.fromCache ? "Yes" : "No",
           item.httpStatus ?? "",
           item.responseTimeSeconds ?? "",
           item.contentType,
@@ -1776,7 +1772,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
         ]);
         const snippets = audit.requestLog
           .filter((item) => item.snippet)
-          .map((item, index) => `<h3>Potongan respons ${index + 1}</h3><pre>${escapeHtml(item.snippet)}</pre>`)
+          .map((item, index) => `<h3>Response Snippet ${index + 1}</h3><pre>${escapeHtml(item.snippet)}</pre>`)
           .join("");
         document.getElementById("technical").innerHTML = `
           <h2>Technical Details</h2>
@@ -1787,7 +1783,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
       function renderTable(targetId, headers, rows, title = "", intro = "") {
         const heading = title ? `<h2>${escapeHtml(title)}</h2>` : "";
-        const content = rows.length ? tableHtml(headers, rows) : `<div class="empty">Data belum tersedia.</div>`;
+        const content = rows.length ? tableHtml(headers, rows) : `<div class="empty">No data available.</div>`;
         document.getElementById(targetId).innerHTML = `${heading}${intro}${content}`;
       }
 
@@ -1834,48 +1830,48 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
       function issueRows() {
         return state.audit.issues.map((item) => ({
-          Prioritas: item.priority,
-          "Tingkat masalah": item.severity,
-          Gejala: item.symptom,
-          "Dugaan penyebab": item.probableCauses.join("; "),
-          "Dampak bagi harvester": item.impactForHarvester,
-          "Action untuk pengelola jurnal": item.actionForJournalManager.join("; "),
-          "Action untuk tim IT": item.actionForItAdmin.join("; "),
-          "Cara validasi": item.validationSteps.join("; "),
-          "Penanggung jawab": item.owner,
+          "Priority": item.priority,
+          "Severity": item.severity,
+          "Symptom": item.symptom,
+          "Probable Causes": item.probableCauses.join("; "),
+          "Impact on Harvesters": item.impactForHarvester,
+          "Action for Journal Managers": item.actionForJournalManager.join("; "),
+          "Action for IT Team": item.actionForItAdmin.join("; "),
+          "Validation Method": item.validationSteps.join("; "),
+          "Owner": item.owner,
         }));
       }
 
       function downloadRecordsCsv() {
-        downloadText("publikasi_oai_pmh.csv", toCsv(recordsRows()), "text/csv;charset=utf-8");
+        downloadText("oai_pmh_publications.csv", toCsv(recordsRows()), "text/csv;charset=utf-8");
       }
 
       function downloadIssuesCsv() {
-        downloadText("rekomendasi_oai_pmh.csv", toCsv(issueRows()), "text/csv;charset=utf-8");
+        downloadText("oai_pmh_recommendations.csv", toCsv(issueRows()), "text/csv;charset=utf-8");
       }
 
       function downloadSummaryMarkdown() {
-        downloadText("ringkasan_oai_pmh.md", summaryMarkdown(), "text/markdown;charset=utf-8");
+        downloadText("oai_pmh_summary.md", summaryMarkdown(), "text/markdown;charset=utf-8");
       }
 
       function downloadSummaryTxt() {
-        downloadText("laporan_oai_pmh.txt", summaryMarkdown().replaceAll("#", ""), "text/plain;charset=utf-8");
+        downloadText("oai_pmh_report.txt", summaryMarkdown().replaceAll("#", ""), "text/plain;charset=utf-8");
       }
 
       function summaryMarkdown() {
         const audit = state.audit;
         return [
-          "# Ringkasan Audit OAI-PMH",
+          "# OAI-PMH Audit Summary",
           "",
-          `- URL input: ${audit.inputUrl}`,
-          `- Endpoint terpilih: ${audit.selectedEndpoint || "-"}`,
-          `- Metadata prefix: ${audit.metadataPrefix}`,
+          `- Input URL: ${audit.inputUrl}`,
+          `- Selected Endpoint: ${audit.selectedEndpoint || "-"}`,
+          `- Metadata Prefix: ${audit.metadataPrefix}`,
           `- Status: ${audit.harvestabilityStatus}`,
-          `- Harvestability score: ${audit.harvestabilityScore}/100`,
-          `- Jumlah record: ${audit.records.length}`,
-          `- Audit timestamp: ${audit.checkedAt}`,
+          `- Harvestability Score: ${audit.harvestabilityScore}/100`,
+          `- Total Records: ${audit.records.length}`,
+          `- Audit Timestamp: ${audit.checkedAt}`,
           "",
-          "## Rekomendasi",
+          "## Recommendations",
           ...audit.issues.map((item) => `- [${item.priority}] ${item.symptom}`),
         ].join("\n");
       }

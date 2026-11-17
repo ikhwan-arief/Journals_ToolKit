@@ -15,6 +15,7 @@ https://ikhwan-arief.github.io/Journals_ToolKit/
 | Aplikasi | URL | Fungsi utama |
 | --- | --- | --- |
 | Validator OAI-PMH Jurnal OJS | `/oai-pmh/` | Validasi endpoint OAI-PMH, metadata publik, dan rekomendasi teknis untuk harvester. |
+| OJS Version Checker | `/ojs-version-checker/` | Pemeriksaan versi OJS, status LTS/EOL, kompatibilitas PHP, jalur upgrade, dan status keaktifan OAI-PMH secara batch (maksimal 10 URL). |
 | DOI XML Repair | `/doi-xml-repair/` | Perbaikan XML Crossref dengan mempertahankan DOI artikel lama, mapping artikel, copy, dan download XML hasil. |
 | Simulasi Penilaian Arjuna 2021 | `/arjuna-2021/` | Simulasi skor total, subtotal manajemen/substansi, peringkat, reset, dan cetak/PDF. |
 | Simulasi Penilaian Arjuna 2026 | `/arjuna-2026/` | Pemeriksaan awal, kelayakan, simulasi skor tata kelola dan mutu artikel berdasarkan Juknis 2026. |

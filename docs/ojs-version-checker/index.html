@@ -1,0 +1,1190 @@
+<!--
+Developed by Ikhwan Arief (ikhwan[at]unand.ac.id).
+Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
+-->
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OJS Version Checker - Journals Toolkit</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23111111'/%3E%3Cpath d='M18 18h28v6H18zm0 11h28v6H18zm0 11h18v6H18z' fill='white'/%3E%3C/svg%3E" />
+    <meta
+      name="description"
+      content="Aplikasi web publik untuk memeriksa versi Open Journal Systems (OJS), status siklus rilis (LTS/EOL), kompatibilitas PHP, rekomendasi jalur upgrade, dan keaktifan endpoint OAI-PMH secara batch (hingga 10 URL)."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/toolkit.css" />
+
+    <style>
+      :root {
+        --line: #e5e7eb;
+        --line-soft: #f1f5f9;
+        --muted: #4b5563;
+        --ink: #111827;
+        --good: #047857;
+        --good-soft: #ecfdf5;
+        --warning: #b45309;
+        --warning-soft: #fffbeb;
+        --danger: #b91c1c;
+        --danger-soft: #fef2f2;
+        --accent-soft: #f0fdf4;
+      }
+
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        line-height: 1.5;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 340px minmax(0, 1fr);
+        min-height: calc(100vh - 65px);
+      }
+
+      aside {
+        border-right: 1px solid var(--line);
+        background: #f8fafc;
+        padding: 36px 28px;
+        box-sizing: border-box;
+      }
+
+      main {
+        padding: 44px clamp(20px, 4vw, 56px);
+        box-sizing: border-box;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(28px, 3.5vw, 42px);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        color: #0f172a;
+      }
+
+      .subtitle {
+        color: var(--muted);
+        font-size: 15px;
+        margin: 0 0 24px;
+        max-width: 860px;
+        line-height: 1.6;
+      }
+
+      .sidebar-block {
+        margin-bottom: 32px;
+      }
+
+      .sidebar-block h2 {
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #64748b;
+        margin: 0 0 14px;
+      }
+
+      .sidebar-block ol {
+        margin: 0;
+        padding-left: 20px;
+        color: #334155;
+      }
+
+      .sidebar-block ol li {
+        font-size: 13.5px;
+        line-height: 1.6;
+        margin-bottom: 12px;
+        color: #334155;
+        word-break: break-word;
+      }
+
+      .sidebar-block ol li:last-child {
+        margin-bottom: 0;
+      }
+
+      .sidebar-block code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 12px;
+        background: #e2e8f0;
+        color: #0f172a;
+        padding: 2px 6px;
+        border-radius: 4px;
+        word-break: break-all;
+        overflow-wrap: anywhere;
+      }
+
+      .reference-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .reference-item {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+        color: #334155;
+      }
+
+      .reference-item .pill-badge {
+        flex-shrink: 0;
+        width: 60px;
+        justify-content: center;
+        text-align: center;
+        font-size: 11px;
+        padding: 3px 0;
+      }
+
+      .panel {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 28px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #0f172a;
+      }
+
+      .helper-text {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 6px;
+        line-height: 1.5;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 140px;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font-size: 13.5px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        line-height: 1.6;
+        resize: vertical;
+        background: #fcfcfd;
+        color: #0f172a;
+        box-sizing: border-box;
+      }
+
+      textarea:focus,
+      input:focus {
+        outline: none;
+        border-color: #2563eb;
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      }
+
+      .form-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-top: 4px;
+      }
+
+      button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #111111;
+        color: #ffffff;
+        border: 1px solid #111111;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      button:hover:not(:disabled) {
+        background: #242424;
+        border-color: #242424;
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      button.secondary {
+        background: #ffffff;
+        color: #1e293b;
+        border-color: var(--line);
+      }
+
+      button.secondary:hover:not(:disabled) {
+        background: #f8fafc;
+        border-color: #cbd5e1;
+      }
+
+      button.btn-small {
+        padding: 4px 10px;
+        font-size: 12px;
+        border-radius: 6px;
+      }
+
+      .pill-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 10px;
+        border-radius: 9999px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      .badge-good {
+        background: #ecfdf5;
+        color: #047857;
+        border: 1px solid #a7f3d0;
+      }
+
+      .badge-warning {
+        background: #fffbeb;
+        color: #b45309;
+        border: 1px solid #fde68a;
+      }
+
+      .badge-danger {
+        background: #fef2f2;
+        color: #b91c1c;
+        border: 1px solid #fecaca;
+      }
+
+      .badge-neutral {
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+      }
+
+      .progress-container {
+        display: none;
+        margin-top: 18px;
+      }
+
+      .progress-bar-bg {
+        background: #f1f5f9;
+        border-radius: 9999px;
+        height: 8px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+      }
+
+      .progress-bar-fill {
+        background: #111111;
+        height: 100%;
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      .progress-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+
+      .table-wrapper {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        margin-top: 14px;
+        background: #ffffff;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 13.5px;
+      }
+
+      th {
+        background: #f8fafc;
+        padding: 12px 14px;
+        font-weight: 600;
+        color: #334155;
+        border-bottom: 1px solid var(--line);
+        white-space: nowrap;
+      }
+
+      td {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: middle;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      tr:hover td {
+        background: #fbfcfe;
+      }
+
+      .journal-cell {
+        max-width: 300px;
+      }
+
+      .journal-name {
+        font-weight: 600;
+        color: #0f172a;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .journal-url {
+        font-size: 12px;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-family: ui-monospace, SFMono-Regular, monospace;
+      }
+
+      .journal-url a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .journal-url a:hover {
+        text-decoration: underline;
+        color: #2563eb;
+      }
+
+      .details-list {
+        display: grid;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .detail-card {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #ffffff;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+      }
+
+      .detail-card-header {
+        padding: 14px 18px;
+        background: #f8fafc;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .detail-card-body {
+        padding: 18px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+      }
+
+      .info-box {
+        background: #f8fafc;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 16px;
+      }
+
+      .info-box h4 {
+        margin: 0 0 10px;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #475569;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .info-box p {
+        margin: 0 0 6px;
+        font-size: 13px;
+        color: #334155;
+        line-height: 1.6;
+      }
+
+      .info-box p:last-child {
+        margin-bottom: 0;
+      }
+
+      .upgrade-path-box {
+        border-left: 4px solid #2563eb;
+        background: #f8fafd;
+      }
+
+      .upgrade-path-box h4 {
+        color: #1e40af;
+      }
+
+      .oai-box-active {
+        border-left: 4px solid var(--good);
+      }
+
+      .oai-box-inactive {
+        border-left: 4px solid var(--danger);
+      }
+
+      .manual-paste-box {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #f1f5f9;
+        border: 1px dashed #cbd5e1;
+      }
+
+      .manual-paste-box textarea {
+        min-height: 70px;
+        font-size: 12px;
+        margin-bottom: 8px;
+        background: #ffffff;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        aside {
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+          padding: 24px 20px;
+        }
+        main {
+          padding: 32px 20px;
+        }
+      }
+
+      @media print {
+        .toolkit-topbar,
+        aside,
+        .form-grid,
+        .form-actions,
+        .progress-container,
+        .btn-print,
+        .btn-copy,
+        .manual-paste-box {
+          display: none !important;
+        }
+        .layout {
+          display: block;
+        }
+        main {
+          padding: 0;
+        }
+        .panel {
+          border: none;
+          box-shadow: none;
+          padding: 0;
+        }
+        .detail-card {
+          break-inside: avoid;
+          margin-bottom: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toolkit-topbar">
+      <div class="toolkit-topbar-inner">
+        <div class="toolkit-brand">
+          <strong>Journals Toolkit</strong>
+          <span>Alat bantu publik untuk pengelola jurnal</span>
+        </div>
+        <nav class="toolkit-nav" aria-label="Navigasi aplikasi">
+          <a href="../">Portal</a>
+          <a href="../oai-pmh/">OAI-PMH</a>
+          <a href="./" aria-current="page">OJS Checker</a>
+          <a href="../doi-xml-repair/">DOI XML Repair</a>
+          <a href="../arjuna-2021/">Arjuna 2021</a>
+          <a href="../arjuna-2026/">Arjuna 2026</a>
+          <a href="../doaj-precheck/">DOAJ Precheck</a>
+          <a href="../evaluasi-diri-jurnal/">Evaluasi Diri</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="layout">
+      <aside>
+        <section class="sidebar-block">
+          <h2>Panduan Penggunaan</h2>
+          <ol>
+            <li>Salin URL jurnal (contoh: <code>https://jurnal.unand.ac.id/index.php/jidt</code>).</li>
+            <li>Tempelkan ke kotak teks. Anda dapat memasukkan <strong>hingga 10 URL</strong> (satu URL per baris).</li>
+            <li>Klik tombol <strong>Periksa Versi OJS & OAI-PMH</strong>.</li>
+            <li>Tinjau status siklus hidup OJS, kompatibilitas versi PHP server, rekomendasi jalur upgrade, serta keaktifan endpoint OAI-PMH.</li>
+            <li>Jika ada URL yang terhalang CORS/WAF kampus, gunakan tombol <strong>Input Manual</strong> pada kartu rincian untuk menempelkan baris generator secara instan.</li>
+          </ol>
+        </section>
+
+        <section class="sidebar-block">
+          <h2>Referensi Siklus PKP</h2>
+          <div class="reference-list">
+            <div class="reference-item">
+              <span class="pill-badge badge-good">LTS</span>
+              <span><strong>OJS 3.3.x</strong> (Dukungan jangka panjang)</span>
+            </div>
+            <div class="reference-item">
+              <span class="pill-badge badge-good">Stable</span>
+              <span><strong>OJS 3.4.x</strong> (Rilis stabil fitur baru)</span>
+            </div>
+            <div class="reference-item">
+              <span class="pill-badge badge-warning">Legacy</span>
+              <span><strong>OJS 3.2.x</strong> (Menjelang EOL)</span>
+            </div>
+            <div class="reference-item">
+              <span class="pill-badge badge-danger">EOL</span>
+              <span><strong>OJS 2.4.x / 3.0 / 3.1</strong> (Rentan)</span>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <main>
+        <h1>OJS Version Checker</h1>
+        <p class="subtitle">
+          Alat diagnostik batch (hingga 10 URL) untuk mendeteksi versi rilis Open Journal Systems (OJS),
+          menilai status siklus hidup (LTS/EOL), kompatibilitas versi PHP server, rekomendasi jalur upgrade resmi,
+          dan memverifikasi apakah endpoint OAI-PMH jurnal aktif untuk pengindeks/harvester.
+        </p>
+
+        <section class="panel">
+          <form id="checkerForm" class="form-grid">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+                <label for="urlList" style="margin-bottom: 0;">Daftar URL Jurnal (Maksimal 10 URL)</label>
+                <span id="urlCountLabel" class="helper-text" style="margin-top: 0;">0 / 10 URL</span>
+              </div>
+              <textarea
+                id="urlList"
+                placeholder="Contoh:&#10;https://jurnal.unand.ac.id/index.php/jidt&#10;https://journal.ui.ac.id/index.php/makara&#10;https://ejournal.undip.ac.id/index.php/jisp"
+                spellcheck="false"
+              ></textarea>
+              <div class="helper-text">
+                Masukkan satu URL per baris. Protokol <code>http://</code> atau <code>https://</code> dapat disertakan.
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button id="btnCheck" type="submit">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Periksa Versi OJS & OAI-PMH
+              </button>
+              <button id="btnExample" class="secondary" type="button">Contoh URL</button>
+              <button id="btnReset" class="secondary" type="reset">Bersihkan</button>
+            </div>
+          </form>
+
+          <div id="progressBox" class="progress-container">
+            <div class="progress-bar-bg">
+              <div id="progressBar" class="progress-bar-fill"></div>
+            </div>
+            <div class="progress-meta">
+              <span id="progressText">Memproses pemeriksaan...</span>
+              <span id="progressRatio">0/0</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Hasil Pemeriksaan -->
+        <section id="resultsSection" class="hidden">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px;">
+            <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0f172a;">Hasil Pemeriksaan Batch</h2>
+            <div style="display: flex; gap: 8px;">
+              <button id="btnCopyMarkdown" class="secondary" type="button" title="Salin ringkasan hasil dalam format Markdown">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Salin Ringkasan
+              </button>
+              <button onclick="window.print()" class="secondary btn-print" type="button" title="Cetak atau simpan sebagai PDF">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                Cetak / Simpan PDF
+              </button>
+            </div>
+          </div>
+
+          <!-- Tabel Ringkasan -->
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 40px; text-align: center;">No</th>
+                  <th>Jurnal & URL</th>
+                  <th>Versi OJS</th>
+                  <th>Status Rilis</th>
+                  <th>PHP Server</th>
+                  <th>Status OAI-PMH</th>
+                  <th style="width: 80px; text-align: center;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="summaryTableBody">
+                <!-- Diisi via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Detail Kartu Per Jurnal -->
+          <h3 style="margin: 32px 0 14px; font-size: 18px; font-weight: 700; color: #0f172a;">Rincian & Rekomendasi Tiap Jurnal</h3>
+          <div id="detailsContainer" class="details-list">
+            <!-- Diisi via JavaScript -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      /**
+       * Developed by Ikhwan Arief (ikhwan[at]unand.ac.id).
+       * Copyright (c) 2026 Ikhwan Arief. Copyright held by the application developer.
+       */
+
+      const OJS_LIFECYCLE_DB = [
+        {
+          pattern: /^3\.4\./,
+          category: "OJS 3.4.x",
+          status: "STABLE",
+          badgeClass: "badge-good",
+          statusLabel: "Stable Release",
+          phpVersion: "PHP 8.1 - 8.2",
+          description: "Rilis stabil generasi modern dengan arsitektur UI berbasis Vue 3 dan manajemen job runner mandiri.",
+          upgradeRecommendation: "Versi OJS saat ini sudah mutakhir. Pastikan selalu menerapkan rilis patch keamanan minor terbaru (cth: 3.4.0-x terbaru) dan memantau kompatibilitas plugin pihak ketiga."
+        },
+        {
+          pattern: /^3\.3\./,
+          category: "OJS 3.3.x (LTS)",
+          status: "LTS",
+          badgeClass: "badge-good",
+          statusLabel: "LTS (Long-Term Support)",
+          phpVersion: "PHP 7.4 - 8.1",
+          description: "Rilis Long-Term Support (LTS) resmi dari PKP. Menjadi standar emas stabilitas dengan dukungan terluas untuk plugin indexing, preservasi, dan Crossref.",
+          upgradeRecommendation: "Sangat stabil dan aman digunakan. Pengelola jurnal disarankan tetap di 3.3 LTS dengan patch minor terbaru (misal: 3.3.0-16+). Rencana migrasi ke OJS 3.4 dapat disiapkan bertahap setelah menguji dependensi tema dan plugin."
+        },
+        {
+          pattern: /^3\.2\./,
+          category: "OJS 3.2.x",
+          status: "LEGACY",
+          badgeClass: "badge-warning",
+          statusLabel: "Legacy / Approaching EOL",
+          phpVersion: "PHP 7.3 - 7.4",
+          description: "Versi transisi OJS 3 yang sudah tidak lagi mendapatkan pembaruan fitur aktif dari PKP.",
+          upgradeRecommendation: "Direkomendasikan untuk segera melakukan upgrade langsung ke OJS 3.3.0-x LTS. Proses upgrade dari 3.2 ke 3.3 relatif mulus dan minim risiko kerusakan skema basis data."
+        },
+        {
+          pattern: /^3\.[01]\./,
+          category: "OJS 3.0.x / 3.1.x",
+          status: "EOL",
+          badgeClass: "badge-danger",
+          statusLabel: "End of Life (Rentan)",
+          phpVersion: "PHP 5.6 - 7.3",
+          description: "Versi awal OJS 3 yang sudah dihentikan total dukungannya dan rentan terhadap berbagai celah keamanan.",
+          upgradeRecommendation: "Jalur Upgrade Bertahap Wajib: Jangan langsung melompat ke 3.4. Lakukan upgrade bertahap: OJS 3.0/3.1 -> OJS 3.2.1-4 -> OJS 3.3 LTS. Perhatikan kompatibilitas versi PHP server pada setiap tahapan migrasi."
+        },
+        {
+          pattern: /^2\./,
+          category: "OJS 2.4.x",
+          status: "CRITICAL_EOL",
+          badgeClass: "badge-danger",
+          statusLabel: "Critical EOL (Sangat Rentan)",
+          phpVersion: "PHP 5.6 - 7.2",
+          description: "Generasi lama OJS 2 yang sudah usang, tidak memenuhi standar modern pengindeks bereputasi (Scopus/DOAJ/Arjuna), dan memiliki risiko keamanan tinggi.",
+          upgradeRecommendation: "Peringatan Wajib: Dilarang keras langsung meng-upgrade ke OJS 3.3 atau 3.4 karena struktur database dan file artikel/galley akan rusak! Gunakan jalur resmi: OJS 2.4.8-x -> Upgrade ke OJS 3.2.1-4 (jalankan php tools/upgrade.php) -> Verifikasi data -> Baru upgrade ke OJS 3.3 LTS."
+        }
+      ];
+
+      const CORS_PROXIES = [
+        (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+        (url) => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+        (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+        (url) => `https://thingproxy.freeboard.io/fetch/${url}`
+      ];
+
+      const urlListEl = document.getElementById("urlList");
+      const urlCountLabel = document.getElementById("urlCountLabel");
+      const checkerForm = document.getElementById("checkerForm");
+      const btnCheck = document.getElementById("btnCheck");
+      const btnExample = document.getElementById("btnExample");
+      const btnReset = document.getElementById("btnReset");
+      const progressBox = document.getElementById("progressBox");
+      const progressBar = document.getElementById("progressBar");
+      const progressText = document.getElementById("progressText");
+      const progressRatio = document.getElementById("progressRatio");
+      const resultsSection = document.getElementById("resultsSection");
+      const summaryTableBody = document.getElementById("summaryTableBody");
+      const detailsContainer = document.getElementById("detailsContainer");
+      const btnCopyMarkdown = document.getElementById("btnCopyMarkdown");
+
+      let currentResults = [];
+
+      function parseUrls(text) {
+        if (!text) return [];
+        const lines = text.split(/\r?\n|,/);
+        const set = new Set();
+        const urls = [];
+        for (let line of lines) {
+          let trimmed = line.trim();
+          if (!trimmed) continue;
+          if (!/^https?:\/\//i.test(trimmed)) {
+            trimmed = "https://" + trimmed;
+          }
+          try {
+            const parsed = new URL(trimmed);
+            const normalized = parsed.origin + parsed.pathname.replace(/\/+$/, "");
+            if (!set.has(normalized)) {
+              set.add(normalized);
+              urls.push(normalized);
+            }
+          } catch (e) {
+            // Abaikan URL tidak valid
+          }
+        }
+        return urls.slice(0, 10);
+      }
+
+      function updateUrlCount() {
+        const urls = parseUrls(urlListEl.value);
+        urlCountLabel.textContent = `${urls.length} / 10 URL`;
+        if (urls.length >= 10) {
+          urlCountLabel.style.color = "var(--warning)";
+        } else {
+          urlCountLabel.style.color = "var(--muted)";
+        }
+      }
+
+      urlListEl.addEventListener("input", updateUrlCount);
+
+      btnExample.addEventListener("click", () => {
+        urlListEl.value = [
+          "https://jurnal.unand.ac.id/index.php/jidt",
+          "https://journal.ui.ac.id/index.php/makara",
+          "https://ejournal.undip.ac.id/index.php/jisp"
+        ].join("\n");
+        updateUrlCount();
+      });
+
+      btnReset.addEventListener("click", () => {
+        setTimeout(updateUrlCount, 50);
+        resultsSection.classList.add("hidden");
+        progressBox.style.display = "none";
+        currentResults = [];
+      });
+
+      async function fetchWithFallback(targetUrl, timeoutMs = 10000) {
+        try {
+          const directController = new AbortController();
+          const timer = setTimeout(() => directController.abort(), 3500);
+          const directResp = await fetch(targetUrl, {
+            signal: directController.signal,
+            headers: { "Accept": "text/html,application/xhtml+xml,application/xml,text/xml" }
+          });
+          clearTimeout(timer);
+          if (directResp.ok) {
+            const text = await directResp.text();
+            if (text && text.trim().length > 0) {
+              return { ok: true, text, via: "Direct" };
+            }
+          }
+        } catch (e) {
+          // Lanjut ke proxy
+        }
+
+        for (const proxyFn of CORS_PROXIES) {
+          try {
+            const proxyUrl = proxyFn(targetUrl);
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), timeoutMs);
+            const resp = await fetch(proxyUrl, {
+              signal: controller.signal
+            });
+            clearTimeout(timer);
+            if (resp.ok) {
+              let text = "";
+              if (proxyUrl.includes("/get?url=")) {
+                const jsonData = await resp.json();
+                text = jsonData && jsonData.contents ? jsonData.contents : "";
+              } else {
+                text = await resp.text();
+              }
+              if (text && text.trim().length > 0) {
+                return { ok: true, text, via: "Proxy" };
+              }
+            }
+          } catch (err) {
+            // coba proxy berikutnya
+          }
+        }
+        return { ok: false, error: "Gagal mengambil halaman (Timeout atau terhalang CORS/WAF)" };
+      }
+
+      function evaluateOjsVersion(versionStr) {
+        if (!versionStr) {
+          return {
+            category: "Tidak Terdeteksi",
+            status: "UNKNOWN",
+            badgeClass: "badge-neutral",
+            statusLabel: "Tidak Terdeteksi",
+            phpVersion: "Tidak diketahui",
+            description: "Nomor versi spesifik belum terdeteksi. Gunakan tombol 'Input Manual HTML / Meta Tag' di bawah jika halaman terhalang proteksi CORS/WAF kampus.",
+            upgradeRecommendation: "Versi OJS belum dapat dipastikan. Jika Anda adalah pengelola jurnal, periksa file versi di server: `php tools/upgrade.php check`."
+          };
+        }
+
+        for (const entry of OJS_LIFECYCLE_DB) {
+          if (entry.pattern.test(versionStr)) {
+            return entry;
+          }
+        }
+
+        return {
+          category: `OJS ${versionStr}`,
+          status: "CUSTOM",
+          badgeClass: "badge-neutral",
+          statusLabel: "Versi Terdeteksi",
+          phpVersion: "Periksa dokumentasi rilis",
+          description: `Versi OJS ${versionStr} berhasil dideteksi.`,
+          upgradeRecommendation: "Pastikan sistem menggunakan patch keamanan terbaru dari PKP."
+        };
+      }
+
+      function extractOjsVersionFromHtml(html) {
+        if (!html) return null;
+
+        const metaMatch = html.match(/<meta\s+name=["']generator["']\s+content=["'](?:PKP\s+)?Open\s+Journal\s+Systems\s+([0-9]+\.[0-9]+(?:\.[0-9]+)?(?:\.[0-9]+|-?[0-9]+)?)/i);
+        if (metaMatch && metaMatch[1]) {
+          return { version: metaMatch[1].trim() };
+        }
+
+        const textMatch = html.match(/(?:Open\s+Journal\s+Systems|OJS)\s+([0-9]+\.[0-9]+\.[0-9]+(?:\.[0-9]+|-?[0-9]+)?)/i);
+        if (textMatch && textMatch[1]) {
+          return { version: textMatch[1].trim() };
+        }
+
+        const altMeta = html.match(/content=["']Open\s+Journal\s+Systems\s+([^"']+)["']/i);
+        if (altMeta && altMeta[1]) {
+          const v = altMeta[1].replace(/[^0-9\.\-]/g, "").trim();
+          if (v) return { version: v };
+        }
+
+        const rawMatch = html.match(/(?:version|v|ojs)\s*[:=]?\s*([23]\.[0-9]+(?:\.[0-9]+)?(?:\.[0-9]+|-?[0-9]+)?)/i);
+        if (rawMatch && rawMatch[1]) {
+          return { version: rawMatch[1].trim() };
+        }
+
+        return null;
+      }
+
+      function extractTitle(html) {
+        if (!html) return "";
+        const m = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+        if (m && m[1]) {
+          return m[1].replace(/\s+/g, " ").trim().replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+        }
+        return "";
+      }
+
+      function deriveEndpoints(baseUrl) {
+        const cleanBase = baseUrl.replace(/\/+$/, "");
+        const aboutUrl = cleanBase + "/about/aboutThisPublishingSystem";
+
+        let oaiUrl = cleanBase + "/oai";
+        if (cleanBase.includes("/index.php/")) {
+          const parts = cleanBase.split("/index.php/");
+          oaiUrl = parts[0] + "/index.php/" + parts[1] + "/oai";
+        }
+
+        return { aboutUrl, oaiUrl };
+      }
+
+      async function checkSingleJournal(url) {
+        const result = {
+          url: url,
+          journalTitle: "",
+          version: null,
+          statusInfo: null,
+          oaiActive: false,
+          oaiEndpoint: "",
+          oaiMessage: "Belum diperiksa",
+          error: null
+        };
+
+        const { aboutUrl, oaiUrl } = deriveEndpoints(url);
+        result.oaiEndpoint = oaiUrl;
+
+        // Tahap 1: Cek Homepage
+        const homeResp = await fetchWithFallback(url);
+        if (homeResp.ok) {
+          result.journalTitle = extractTitle(homeResp.text);
+          const detected = extractOjsVersionFromHtml(homeResp.text);
+          if (detected) {
+            result.version = detected.version;
+          }
+        }
+
+        // Tahap 2: Jika belum ada versi, Cek aboutThisPublishingSystem
+        if (!result.version) {
+          const aboutResp = await fetchWithFallback(aboutUrl);
+          if (aboutResp.ok) {
+            const detected = extractOjsVersionFromHtml(aboutResp.text);
+            if (detected) {
+              result.version = detected.version;
+            }
+          }
+        }
+
+        // Tahap 3: Cek OAI-PMH (?verb=Identify)
+        const oaiIdentifyUrl = `${oaiUrl}?verb=Identify`;
+        const oaiResp = await fetchWithFallback(oaiIdentifyUrl);
+        if (oaiResp.ok) {
+          const xml = oaiResp.text;
+          if (xml.includes("<OAI-PMH") && xml.includes("<Identify>")) {
+            result.oaiActive = true;
+            result.oaiMessage = "Aktif (OAI-PMH 2.0 valid)";
+
+            if (!result.version) {
+              const oaiVer = extractOjsVersionFromHtml(xml);
+              if (oaiVer) {
+                result.version = oaiVer.version;
+              }
+            }
+          } else {
+            result.oaiActive = false;
+            result.oaiMessage = "Endpoint merespons tetapi bukan XML OAI-PMH valid";
+          }
+        } else {
+          result.oaiActive = false;
+          result.oaiMessage = "Tidak aktif atau tidak dapat dijangkau dari peramban";
+        }
+
+        result.statusInfo = evaluateOjsVersion(result.version);
+
+        if (!homeResp.ok && !result.version && !result.oaiActive) {
+          result.error = homeResp.error || "Gagal menghubungi server jurnal";
+        }
+
+        return result;
+      }
+
+      checkerForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const urls = parseUrls(urlListEl.value);
+        if (urls.length === 0) {
+          alert("Silakan masukkan minimal 1 URL website jurnal.");
+          return;
+        }
+
+        btnCheck.disabled = true;
+        progressBox.style.display = "block";
+        progressBar.style.width = "0%";
+        progressText.textContent = "Menyiapkan pemeriksaan...";
+        progressRatio.textContent = `0 / ${urls.length}`;
+        resultsSection.classList.add("hidden");
+        summaryTableBody.innerHTML = "";
+        detailsContainer.innerHTML = "";
+        currentResults = [];
+
+        for (let i = 0; i < urls.length; i++) {
+          const currentUrl = urls[i];
+          progressText.textContent = `Memeriksa (${i + 1}/${urls.length}): ${currentUrl}`;
+          progressBar.style.width = `${Math.round(((i) / urls.length) * 100)}%`;
+
+          const res = await checkSingleJournal(currentUrl);
+          currentResults.push(res);
+
+          progressBar.style.width = `${Math.round(((i + 1) / urls.length) * 100)}%`;
+          progressRatio.textContent = `${i + 1} / ${urls.length}`;
+        }
+
+        progressText.textContent = "Pemeriksaan selesai!";
+        btnCheck.disabled = false;
+        renderResults(currentResults);
+        resultsSection.classList.remove("hidden");
+      });
+
+      function renderResults(results) {
+        summaryTableBody.innerHTML = "";
+        detailsContainer.innerHTML = "";
+
+        results.forEach((res, index) => {
+          const tr = document.createElement("tr");
+          const displayName = res.journalTitle ? res.journalTitle.slice(0, 50) : "Jurnal OJS";
+
+          tr.innerHTML = `
+            <td style="text-align: center; font-weight: 600; color: var(--muted);">${index + 1}</td>
+            <td class="journal-cell">
+              <div class="journal-name" title="${res.journalTitle || res.url}">${displayName}</div>
+              <div class="journal-url"><a href="${res.url}" target="_blank" rel="noopener">${res.url}</a></div>
+            </td>
+            <td>
+              <strong>${res.version ? 'OJS ' + res.version : '<span style="color:var(--muted)">Tidak Terdeteksi</span>'}</strong>
+            </td>
+            <td>
+              <span class="pill-badge ${res.statusInfo.badgeClass}">
+                ${res.statusInfo.statusLabel}
+              </span>
+            </td>
+            <td>
+              <code style="font-size:12px;">${res.statusInfo.phpVersion}</code>
+            </td>
+            <td>
+              ${res.oaiActive
+                ? '<span class="pill-badge badge-good">Aktif</span>'
+                : '<span class="pill-badge badge-danger">Tidak Aktif</span>'}
+            </td>
+            <td style="text-align: center;">
+              <a href="#card-${index}" class="pill-badge badge-neutral" style="text-decoration:none; cursor:pointer;">
+                Detail
+              </a>
+            </td>
+          `;
+          summaryTableBody.appendChild(tr);
+
+          const card = document.createElement("div");
+          card.id = `card-${index}`;
+          card.className = "detail-card";
+
+          card.innerHTML = `
+            <div class="detail-card-header">
+              <div>
+                <span class="pill-badge badge-neutral" style="margin-right: 8px;">#${index + 1}</span>
+                <strong style="font-size: 15px; color: #0f172a;">${res.journalTitle || 'Jurnal OJS'}</strong>
+                <span style="font-size: 13px; color: var(--muted); margin-left: 6px;">(${res.url})</span>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <span class="pill-badge ${res.statusInfo.badgeClass}">
+                  ${res.statusInfo.statusLabel}
+                </span>
+                ${res.oaiActive
+                  ? '<span class="pill-badge badge-good">OAI-PMH Aktif</span>'
+                  : '<span class="pill-badge badge-danger">OAI-PMH Tidak Aktif</span>'}
+              </div>
+            </div>
+            <div class="detail-card-body">
+              <div class="info-box">
+                <h4>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                  Status Versi & PHP
+                </h4>
+                <p><strong>Versi Terdeteksi:</strong> ${res.version ? 'OJS ' + res.version : '<span style="color:var(--danger)">Tidak Terdeteksi Otomatis</span>'}</p>
+                <p><strong>Kompatibilitas PHP:</strong> ${res.statusInfo.phpVersion}</p>
+                <p style="margin-top: 8px;">${res.statusInfo.description}</p>
+                
+                ${!res.version ? `
+                  <div class="manual-paste-box">
+                    <strong style="font-size:12px; color:#1e293b; display:block; margin-bottom:4px;">Fallback Input Manual HTML:</strong>
+                    <p style="font-size:11.5px; color:var(--muted); margin-bottom:6px;">Buka <a href="${res.url}" target="_blank" rel="noopener">website jurnal</a>, tekan <code>Ctrl+U</code> (View Source), lalu salin tag <code>&lt;meta name="generator"...&gt;</code> atau baris versi ke sini:</p>
+                    <textarea id="manualText-${index}" placeholder="Contoh: <meta name='generator' content='Open Journal Systems 3.3.0.14'> atau cukup ketik: 3.3.0.14"></textarea>
+                    <button type="button" class="btn-small" onclick="applyManualHtml(${index})">Analisis Versi</button>
+                  </div>
+                ` : ''}
+              </div>
+
+              <div class="info-box upgrade-path-box">
+                <h4>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                  Rekomendasi Jalur Upgrade
+                </h4>
+                <p>${res.statusInfo.upgradeRecommendation}</p>
+              </div>
+
+              <div class="info-box ${res.oaiActive ? 'oai-box-active' : 'oai-box-inactive'}">
+                <h4>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" r="1"></circle></svg>
+                  Status Endpoint OAI-PMH
+                </h4>
+                <p><strong>Status:</strong> ${res.oaiActive ? '<span style="color:var(--good); font-weight:600;">Aktif & Siap Ditarik Harvester</span>' : '<span style="color:var(--danger); font-weight:600;">Tidak Aktif / Terkendala</span>'}</p>
+                <p><strong>Endpoint Teruji:</strong> <code style="font-size:11.5px;">${res.oaiEndpoint}?verb=Identify</code></p>
+                <p><strong>Keterangan:</strong> ${res.oaiMessage}</p>
+                ${!res.oaiActive ? '<p class="helper-text" style="color:var(--danger); margin-top:6px;">Harvester (SINTA, Garuda, DOAJ, BASE) tidak dapat mengindeks artikel jurnal jika OAI-PMH mati.</p>' : ''}
+              </div>
+            </div>
+          `;
+          detailsContainer.appendChild(card);
+        });
+      }
+
+      window.applyManualHtml = function(index) {
+        const inputEl = document.getElementById(`manualText-${index}`);
+        if (!inputEl || !inputEl.value.trim()) {
+          alert("Silakan tempelkan potongan HTML atau nomor versi OJS terlebih dahulu.");
+          return;
+        }
+
+        const raw = inputEl.value.trim();
+        const detected = extractOjsVersionFromHtml(raw);
+        if (detected && detected.version) {
+          currentResults[index].version = detected.version;
+          currentResults[index].statusInfo = evaluateOjsVersion(detected.version);
+          renderResults(currentResults);
+        } else {
+          alert("Nomor versi OJS tidak dapat dikenali dari teks yang Anda tempelkan. Pastikan menyertakan format angka seperti '3.3.0.14'.");
+        }
+      };
+
+      btnCopyMarkdown.addEventListener("click", () => {
+        if (!currentResults || currentResults.length === 0) return;
+
+        let md = `### Laporan Pemeriksaan Versi OJS & OAI-PMH\n`;
+        md += `Waktu Pemeriksaan: ${new Date().toLocaleString("id-ID")}\n\n`;
+        md += `| No | Nama/URL Jurnal | Versi OJS | Status Rilis | PHP Server | Status OAI-PMH |\n`;
+        md += `|:--:|:----------------|:---------:|:------------:|:----------:|:--------------:|\n`;
+
+        currentResults.forEach((res, i) => {
+          const name = res.journalTitle ? res.journalTitle.replace(/\|/g, "/") : res.url;
+          const ver = res.version ? `OJS ${res.version}` : `Tidak Terdeteksi`;
+          const oai = res.oaiActive ? `Aktif` : `Tidak Aktif`;
+          md += `| ${i + 1} | [${name}](${res.url}) | ${ver} | ${res.statusInfo.statusLabel} | ${res.statusInfo.phpVersion} | ${oai} |\n`;
+        });
+
+        md += `\n#### Rekomendasi Tindak Lanjut:\n`;
+        currentResults.forEach((res, i) => {
+          md += `${i + 1}. **${res.journalTitle || res.url}** (${res.version ? 'OJS ' + res.version : 'OJS Unknown'}):\n`;
+          md += `   - Status: ${res.statusInfo.statusLabel} (Dukungan PHP: ${res.statusInfo.phpVersion})\n`;
+          md += `   - Rekomendasi: ${res.statusInfo.upgradeRecommendation}\n`;
+          md += `   - OAI-PMH: ${res.oaiActive ? 'Aktif' : 'Terkendala/Mati'} (${res.oaiMessage})\n\n`;
+        });
+
+        navigator.clipboard.writeText(md).then(() => {
+          const originalText = btnCopyMarkdown.innerHTML;
+          btnCopyMarkdown.innerHTML = `<span style="color:var(--good); font-weight:600;">Tersalin!</span>`;
+          setTimeout(() => {
+            btnCopyMarkdown.innerHTML = originalText;
+          }, 2000);
+        }).catch(err => {
+          alert("Gagal menyalin: " + err);
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -188,30 +188,10 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
     .workspace {
       display: grid;
-      grid-template-columns: 320px minmax(0, 1fr);
-      gap: 24px;
-      align-items: start;
+      gap: 20px;
     }
 
-    .side {
-      display: grid;
-      gap: 16px;
-    }
-
-    .side-grid {
-      display: contents;
-    }
-
-    .side::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .side::-webkit-scrollbar-thumb {
-      background: var(--toolkit-line, #e2e8f0);
-      border-radius: 999px;
-    }
-
-    .side-panel,
+    .form-panel,
     .question-section,
     .result-block,
     .empty-state {
@@ -221,8 +201,27 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
       box-shadow: var(--shadow);
     }
 
-    .side-panel {
-      padding: 18px;
+    .form-panel {
+      padding: 22px 24px;
+    }
+
+    .form-panel h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .form-panel p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
     }
 
     .field-group {
@@ -240,7 +239,7 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     .field-options {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 12px;
     }
 
     .field-card {
@@ -345,7 +344,8 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     }
 
     .actions {
-      display: grid;
+      display: flex;
+      flex-wrap: wrap;
       gap: 10px;
       margin-top: 16px;
     }
@@ -813,17 +813,6 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     }
 
     @media (max-width: 1080px) {
-      .intro,
-      .workspace {
-        grid-template-columns: 1fr;
-      }
-
-      .side-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
-      }
-
       .timeline,
       .summary-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -831,6 +820,10 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
     }
 
     @media (max-width: 860px) {
+      .identity-grid {
+        grid-template-columns: 1fr;
+      }
+
       .question-row {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -912,7 +905,8 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
       .topbar,
       .intro,
-      .side,
+      .form-panel,
+      .scale-panel,
       #questionMount,
       .message,
       .actions,
@@ -1011,103 +1005,100 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
     <form id="assessmentForm" novalidate>
       <div class="workspace">
-        <aside class="side" aria-label="Evaluation settings panel">
-          <div class="side-grid">
-            <section class="side-panel">
-              <h2>Journal Identity</h2>
-              <p>Journal name is optional and only used for report headings on this page.</p>
-              <div class="input-block">
-                <label for="journalName">Journal name</label>
-                <input class="text-input" id="journalName" name="journalName" type="text" autocomplete="off" placeholder="Example: Journal of Science...">
-              </div>
-              <div class="input-block">
-                <label for="evaluationDate">Evaluation date</label>
-                <input class="text-input" id="evaluationDate" name="evaluationDate" type="date">
-              </div>
-              <fieldset class="field-group">
-                <legend>Subject area / Discipline</legend>
-                <div class="field-options">
-                  <label class="field-card">
-                    <input type="radio" name="field" value="SosHum">
-                    <strong>HSS (SosHum)</strong>
-                    <span>Social sciences, humanities, law, education, arts, and related fields.</span>
-                  </label>
-                  <label class="field-card">
-                    <input type="radio" name="field" value="SainTek">
-                    <strong>STEM (SainTek)</strong>
-                    <span>Science, technology, engineering, medicine/health, agriculture, and related fields.</span>
-                  </label>
-                </div>
-              </fieldset>
-            </section>
-
-            <section class="side-panel">
-              <h2>Completion Status</h2>
-              <p id="fieldHint">Select a subject area to display the questionnaire.</p>
-              <div class="progress-wrap" aria-label="Progres pengisian">
-                <div class="progress-meta">
-                  <span id="progressLabel">0 of 0 answered</span>
-                  <strong id="progressPercent">0%</strong>
-                </div>
-                <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
-              </div>
-              <div class="actions">
-                <button class="btn" type="submit">Calculate Recommendations</button>
-                <button class="btn secondary" type="button" id="copyBtn">Copy Summary</button>
-                <button class="btn secondary" type="button" id="saveBtn">Save Report (.txt)</button>
-                <button class="btn secondary" type="button" id="printBtn">Print / PDF</button>
-                <button class="btn warning" type="reset">Reset</button>
-              </div>
-              <div class="copy-status" id="copyStatus" role="status" aria-live="polite"></div>
-            </section>
+        <section class="form-panel">
+          <h2>Journal Identity</h2>
+          <p>Journal name is optional and only used for report headings on this page.</p>
+          <div class="identity-grid">
+            <div class="input-block">
+              <label for="journalName">Journal name</label>
+              <input class="text-input" id="journalName" name="journalName" type="text" autocomplete="off" placeholder="Example: Journal of Science...">
+            </div>
+            <div class="input-block">
+              <label for="evaluationDate">Evaluation date</label>
+              <input class="text-input" id="evaluationDate" name="evaluationDate" type="date">
+            </div>
           </div>
+          <fieldset class="field-group">
+            <legend>Subject area / Discipline</legend>
+            <div class="field-options">
+              <label class="field-card">
+                <input type="radio" name="field" value="SosHum">
+                <strong>HSS (SosHum)</strong>
+                <span>Social sciences, humanities, law, education, arts, and related fields.</span>
+              </label>
+              <label class="field-card">
+                <input type="radio" name="field" value="SainTek">
+                <strong>STEM (SainTek)</strong>
+                <span>Science, technology, engineering, medicine/health, agriculture, and related fields.</span>
+              </label>
+            </div>
+          </fieldset>
+        </section>
+
+        <aside class="scale-panel" aria-labelledby="scale-title">
+          <h2 id="scale-title">Assessment Scales</h2>
+          <p>Assess based on operational evidence in practice, not merely future plans.</p>
+          <ul class="scale-list">
+            <li><span class="scale-number">0</span><span>Not available or no evidence.</span></li>
+            <li><span class="scale-number">1</span><span>Informal and not yet stable.</span></li>
+            <li><span class="scale-number">2</span><span>Partially documented, but inconsistent.</span></li>
+            <li><span class="scale-number">3</span><span>Consistent practice with clear ownership.</span></li>
+            <li><span class="scale-number">4</span><span>Measured, evaluated, and showing continuous improvement.</span></li>
+          </ul>
         </aside>
 
-        <div class="main-column">
-          <aside class="scale-panel" aria-labelledby="scale-title">
-            <h2 id="scale-title">Assessment Scales</h2>
-            <p>Assess based on operational evidence in practice, not merely future plans.</p>
-            <ul class="scale-list">
-              <li><span class="scale-number">0</span><span>Not available or no evidence.</span></li>
-              <li><span class="scale-number">1</span><span>Informal and not yet stable.</span></li>
-              <li><span class="scale-number">2</span><span>Partially documented, but inconsistent.</span></li>
-              <li><span class="scale-number">3</span><span>Consistent practice with clear ownership.</span></li>
-              <li><span class="scale-number">4</span><span>Measured, evaluated, and showing continuous improvement.</span></li>
-            </ul>
-          </aside>
+        <div class="message" id="message" role="alert"></div>
 
-          <div class="message" id="message" role="alert"></div>
-          <div id="questionMount">
-            <section class="empty-state">
-              <h2>Select the journal's subject area to begin assessing current capacity.</h2>
-              <p>Multidisciplinary journals can select the closest discipline. Questions adapt to the selected area to produce targeted roadmap recommendations.</p>
-            </section>
-          </div>
-
-          <section class="result-block" id="resultBlock" aria-labelledby="resultTitle">
-            <div class="result-hero">
-              <div>
-                <p class="eyebrow">Self-Evaluation Results</p>
-                <h2 id="resultTitle">Journal Roadmap Recommendations</h2>
-                <p id="resultLead">Complete the questionnaire to view your readiness summary and strategic development priorities.</p>
-                <div class="result-actions" aria-label="Output options">
-                  <button class="btn secondary" type="button" id="resultCopyBtn">Copy Summary</button>
-                  <button class="btn secondary" type="button" id="resultSaveBtn">Save Report (.txt)</button>
-                  <button class="btn secondary" type="button" id="resultPrintBtn">Print / PDF</button>
-                  <button class="btn warning" type="reset">Reset</button>
-                </div>
-                <div class="copy-status" id="resultStatus" role="status" aria-live="polite"></div>
-              </div>
-              <div class="score-circle" aria-label="Skor kesiapan">
-                <div>
-                  <strong id="scoreValue">0.0</strong>
-                  <span>out of 4.0</span>
-                </div>
-              </div>
-            </div>
-            <div class="result-content" id="resultContent"></div>
+        <div id="questionMount">
+          <section class="empty-state">
+            <h2>Select the journal's subject area to begin assessing current capacity.</h2>
+            <p>Multidisciplinary journals can select the closest discipline. Questions adapt to the selected area to produce targeted roadmap recommendations.</p>
           </section>
         </div>
+
+        <section class="form-panel">
+          <h2>Completion Status & Actions</h2>
+          <p id="fieldHint">Select a subject area to display the questionnaire.</p>
+          <div class="progress-wrap" aria-label="Progres pengisian">
+            <div class="progress-meta">
+              <span id="progressLabel">0 of 0 answered</span>
+              <strong id="progressPercent">0%</strong>
+            </div>
+            <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+          </div>
+          <div class="actions">
+            <button class="btn" type="submit">Calculate Recommendations</button>
+            <button class="btn secondary" type="button" id="copyBtn">Copy Summary</button>
+            <button class="btn secondary" type="button" id="saveBtn">Save Report (.txt)</button>
+            <button class="btn secondary" type="button" id="printBtn">Print / PDF</button>
+            <button class="btn warning" type="reset">Reset</button>
+          </div>
+          <div class="copy-status" id="copyStatus" role="status" aria-live="polite"></div>
+        </section>
+
+        <section class="result-block" id="resultBlock" aria-labelledby="resultTitle">
+          <div class="result-hero">
+            <div>
+              <p class="eyebrow">Self-Evaluation Results</p>
+              <h2 id="resultTitle">Journal Roadmap Recommendations</h2>
+              <p id="resultLead">Complete the questionnaire to view your readiness summary and strategic development priorities.</p>
+              <div class="result-actions" aria-label="Output options">
+                <button class="btn secondary" type="button" id="resultCopyBtn">Copy Summary</button>
+                <button class="btn secondary" type="button" id="resultSaveBtn">Save Report (.txt)</button>
+                <button class="btn secondary" type="button" id="resultPrintBtn">Print / PDF</button>
+                <button class="btn warning" type="reset">Reset</button>
+              </div>
+              <div class="copy-status" id="resultStatus" role="status" aria-live="polite"></div>
+            </div>
+            <div class="score-circle" aria-label="Skor kesiapan">
+              <div>
+                <strong id="scoreValue">0.0</strong>
+                <span>out of 4.0</span>
+              </div>
+            </div>
+          </div>
+          <div class="result-content" id="resultContent"></div>
+        </section>
       </div>
     </form>
   </main>

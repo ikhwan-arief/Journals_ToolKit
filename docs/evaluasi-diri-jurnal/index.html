@@ -188,16 +188,29 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
     .workspace {
       display: grid;
-      grid-template-columns: minmax(270px, 330px) minmax(0, 1fr);
-      gap: 22px;
+      grid-template-columns: 340px minmax(0, 1fr);
+      gap: 28px;
       align-items: start;
     }
 
     .side {
       position: sticky;
       top: 84px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-right: 4px;
       display: grid;
-      gap: 14px;
+      gap: 16px;
+    }
+
+    .side::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .side::-webkit-scrollbar-thumb {
+      background: var(--toolkit-line, #e2e8f0);
+      border-radius: 999px;
     }
 
     .side-panel,
@@ -802,6 +815,9 @@ All rights reserved. Unauthorized copying or redistribution is prohibited.
 
       .side {
         position: static;
+        max-height: none;
+        overflow-y: visible;
+        padding-right: 0;
       }
 
       .side-grid {
